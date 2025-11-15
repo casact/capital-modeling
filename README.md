@@ -1,5 +1,5 @@
 # Introduction to Capital Modeling and Portfolio Management
-## CAS Monograph Number NN
+## CAS Monograph Number 15
 ## John A. Major and Stephen J. Mildenhall
 
 ![](source/img/cover.png){width=50%}
