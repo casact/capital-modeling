@@ -1,0 +1,214 @@
+# Business operations {#sec-Business-Operations}
+
+*Remember that all models are wrong; the practical question is how wrong do they have to be to not be useful.*\
+*—George E. P. Box*
+
+## General considerations {#sec-BO-General-Considerations}
+
+Modeling the insurance business operations—in terms of cash flows and other accounting concepts—is the most significant part of capital modeling work. It would be impractical to try to explain this in detail here; multiple book volumes would be required. Indeed, much of the actuarial syllabus is devoted to knowledge that could be applied to this effort. Instead, this chapter offers an overview using a simple example and adds pointers into the existing literature.
+
+After you have addressed the broad questions posed in @sec-Getting-Started, you will have to drill down into more specific design issues such as:
+
+-   Will the model be deterministic or stochastic?
+-   What is the planning time horizon: one year versus an ongoing concern?
+-   What is the calculation time horizon: one year versus to ultimate?
+-   What is the time granularity: annual, quarterly, monthly, etc.?
+-   Will it deal with the runoff of current business only, or will it model an ongoing concern?
+-   How will it treat reserve risk?
+-   How will it treat asset risk?
+-   How will it treat investment income (risk-free rate, crediting, capital charge, simplifications from discounting)?
+-   How will multiple related legal entities be reflected in the model?
+-   What is the balance of variables between user-selected inputs (e.g., plan premium) and modeler-selected inputs (e.g., correlation or severity)?
+-   What accounting and regulatory frameworks and constraints are supported (US Statutory, Solvency II, US GAAP, IFRS 17, rating agencies)?
+-   How will the model relate to other corporate systems?
+
+See @CASDFM chapter 4 for more some considerations on these dimensions of functionality; chapter 7 goes into more detail about outputs and reports. Chapter 5 presents a classification of risks:
+
+-   Asset risk (default, market value, liquidity)
+-   Obligation risk (reserve, premium, loss projection, catastrophe, reinsurance, and expense)
+-   Interest rate risk (asset, obligation, and net cash flows)
+-   Mismanagement risk
+
+How deeply each is to be modeled is part of the requirements to be determined. @CASDFM discusses the first three at length, but not the last.
+
+Subsequent sections in this chapter elaborate on some of these issues.
+
+## Units {#sec-BO-Units}
+
+Business operations start with the individual business units. These are the sources of premiums, losses, and some of the expenses. Expect to devote considerable effort to modeling losses; your loss model implementations will live in the Units module.
+
+The design issues at this stage include:
+
+-   Granularity of represented components, i.e., breakdowns by geography, line of business, etc.
+-   Granularity of frequency and severity assumptions.
+-   Inclusion of parameter uncertainty, see @sec-Uncertainty.
+-   Interactions among variables.
+-   Feedback loops, i.e., embedded automatic conditional decisions. For example, future rate changes might be calculated based on emerging loss ratios.
+
+The existence of mismanagement risk (@sec-BO-General-Considerations) suggests that building in feedback loops—"management in a box"—might be too optimistic. We strongly recommend against trying to do this. Adjusting rates to follow inflation is reasonable because this is very likely to happen in reality. Adjusting rates on the basis of a previous random good or bad year is not reasonable because it is highly speculative as to what will happen in reality. Instead, have the model in effect state "if nothing is changed, this is what would likely happen next…."
+
+@Daykin1993 includes the following chapters relevant to the Units submodule:
+
+-   2 - Frequency
+-   3 - Severity
+-   4 - Compound distributions
+-   5 - Simulation
+-   9 - Extended time horizons, including reserves
+-   10 - Premiums and markets
+-   11 - Expenses
+-   12 - Cycles and growth
+
+@Brehm2007 includes:
+
+-   5.1 - Frequency and severity distributions
+-   5.2, 5.3 - Reserves
+-   5.5 - Underwriting cycles
+
+Nearly the entirety of @KPW05 is devoted to selecting, fitting, and applying mathematical models of losses.
+
+If you are modeling reserves, you must accurately represent your own firm's methodology. The literature on setting reserves is enormous, with @friedland2010estimating a good place to start. Seventeen text references on advanced reserving are listed at @CAS2022text7. @Wuthrich2015 is a rich source of information on stochastic reserve models. @CASHBK has a list of about 200 reserving considerations. @ASOP43 is also relevant.
+
+Modeling the correlation between units' loss experience can be particularly tricky. Reshuffling simulated loss outcomes to obtain a desired correlation matrix can be done by the Iman-Conover methods, see @sec-iman-conover.
+
+@Aas2009, @Embrechts2010b, and @Brehm2007 section 3.3 discuss copulas, which are mechanisms for introducing dependency that goes beyond simple correlation. For example, the routine loss bodies of two loss distributions can be uncorrelated while the high-loss tails become correlated.
+
+Another technique for inducing dependence is the use of common causes. If there are underlying phenomena that influence losses in different units, then modeling those first, and the conditional distribution of unit losses second, can induce the desired dependence. This is most commonly seen in catastrophe modeling but can also appear in a technique called timeline simulation [@Brehm2007 section 3.4], where specific events are modeled as occurring at specific points of time.
+
+We now illustrate the workings of the Business Operations module with our InsCo example.
+
+In a real engagement, we would start with historical data on exposures, premiums, and losses. They would be on-leveled to represent the current (or anticipated next accounting year) situation. Probabilistic models would be fit, and a simulated sample of future possible outcomes generated. This work is covered early in the actuarial exam syllabus, and we imagine it has already been done.
+
+InsCo has units $i=1,\dots,m=3$, called A, B, and C. We represent their random experience $X^i$ by a table consisting of 10 outcomes with equal probabilities $p_j=1/10$, $j=1,\dots,n=10$ with components $X_j^i$ and portfolio totals $X_j$. The exact assumptions are detailed in @tbl-dupe-x.
+
+<!--
+
+| **Event** $j$ | **Unit A** $X_j^1$ | **Unit B** $X_j^2$ | **Unit C** $X_j^3$ | **Total** $X_j$ |
+|:-------------:|-------------------:|-------------------:|-------------------:|----------------:|
+|             1 |                 15 |                  7 |                  0 |              22 |
+|             2 |                 15 |                 13 |                  0 |              28 |
+|             3 |                  5 |                 20 |                 11 |              36 |
+|             4 |                  7 |                 33 |                  0 |              40 |
+|             5 |                 13 |                 20 |                  7 |              40 |
+|             6 |                  5 |                 27 |                  8 |              40 |
+|             7 |                 15 |                 16 |                  9 |              40 |
+|             8 |                 26 |                 19 |                 10 |              55 |
+|             9 |                 17 |                  8 |                 40 |              65 |
+|            10 |                 16 |                 20 |                 64 |             100 |
+|          E[X] |               13.4 |               18.3 |               14.9 |            46.6 |
+|     Plan Prem |               13.9 |               18.7 |               19.6 |            52.2 |
+
+-->
+
+```{python}
+#| echo: false
+#| label: setup-020
+%run prefob.py
+%run -i basic_example_script.py
+```
+
+```{python}
+#| echo: false
+#| label: tbl-dupe-x
+#| tbl-cap: "InsCo loss probability mass function by unit with expected loss, CV loss,  and plan premium."
+exhibits['tbl-dupe-x']
+```
+
+There is some correlation among the simulated experience of the units. This correlation might have been imposed by a sampling technique involving copulas, but here we simply present the results. @tbl-dupe-x represents the loss portion of the Unit module. Statisticians would call this table a discrete joint distribution, sample, or empirical distribution. Cat modelers might call it a **probabilistic database**. It shows expected loss for the portfolio is 46.6, plan premium is 52.2, and hence plan profit, or margin, is 5.6.
+
+## Reinsurance {#sec-BO-Reinsurance}
+
+Assumed reinsurance, i.e., selling reinsurance or retrocessional cover to other insurance companies, should be treated as another unit, like homeowners or auto. Ceded reinsurance can be treated in one of two ways.
+
+The simplest way is to treat reinsurance as a negative unit in parallel with the underlying unit. The premiums it receives are booked as negative (because they are really paid), and the losses it pays are booked as negative (because they are really received). For example, say there is the homeowners line of business being protected with catastrophe reinsurance. Then, the homeowners gross premiums and losses are posted to one unit and the reinsurance ceded premiums and ceded losses are posted as negatives to a parallel ceded homeowners unit. The algebraic sum of premiums (respectively, losses) constitute the net homeowners position which is not explicitly represented.
+
+The more complicated way, and that implied by the design presented in @sec-System-Overview, is to have the operation of reinsurance modeled downstream of the units. This is recommended because there are many situations, such as corporate catastrophe covers, which impact multiple units.
+
+In the end, it is simply a computational design choice about where calculations occur. Mathematically, the same gross-to-net transformation is being modeled either way.
+
+The capital modeler may encounter two different types of reinsurance. The first is that purchased by business units. It is often reasonable for the corporate modeler to work with distributions net of this reinsurance, at least initially—business units typically frown on corporate modelers criticizing their reinsurance decisions! The second is reinsurance purchased at the corporate level that covers a number of different business units. Catastrophe reinsurance is typically of this form. Optimizing the purchase of catastrophe reinsurance (and allocating its cost to business units) is a wonderful application of capital models, and corporate purchases should usually be modeled explicitly to facilitate it.
+
+Counterparty credit risk should be handled by representing the probabilistic nature of ceded losses. What is supposed to be received as a reinsurance payout may or may not actually occur. @Brehm2007 chapter 6.1 is devoted to reinsurance receivables as a risk class.
+
+Our InsCo example includes a 35 excess of 65 portfolio stop-loss contract with ceded losses of 35 occurring only in event 10. There is no counterparty risk. This example is discussed in @sec-Reinsurance-decision-making.
+
+## Asset risk and Economic Scenario Generator {#sec-BO-ESG}
+
+While the primary focus of the capital model is on how *insurance* liabilities impact the profitability and solvency of the firm, it may be desirable to represent contingencies on the asset side. First, to model assets as another source of volatility in the firm's financial position, and, second, to model how macroeconomic phenomena impact the insurance liabilities themselves. The key to modeling asset risk is a module that simulates interest rates and returns on various asset classes and possibly unemployment, inflation, and other socioeconomic indices. Such a module is generally referred to as an **Economic Scenario Generator**.
+
+@Brehm2007 chapter 6.2 is devoted to investments. @Daykin1993 chapter 7 deals with inflation and chapter 8 is devoted to investments and asset/liability considerations such as the dynamics of reinvestment. @conning2020ESG provides a comprehensive "basic guide to Economic Scenario Generators, with an emphasis on applications for the property/casualty insurance industry." Also note that the American Academy of Actuaries and the Society of Actuaries (SOA) have joined resources to manage the Economic Scenario Generators used in regulatory reserve and capital calculations [@SOA2024ESG]. We are not using an Economic Scenario Generator in the InsCo example.
+
+## Capital structure {#sec-BO-Capital-Structure}
+
+**Capital structure**, in corporate finance, refers to the division of liabilities corresponding to the sources of funds used to finance the firm. The basic division consists of shareholders' equity, (possibly) preferred stock, various types of debt, and possibly other liabilities. Reinsurance can also be considered part of the capital structure. See @PIR for more on this perspective.
+
+An important aspect of capital structure is its hierarchical nature insofar as there exists a pecking order in which the claimants providing these funds must be repaid in the course of liquidation. Insureds, providing premiums, come first. Common stockholders come last.
+
+For an insurance entity, capital refers to the excess of assets over policyholder liabilities, whereas equity refers to the excess of assets over all other liabilities. Thus, debt can count as capital but not equity. For example, InsCo's assets consist of cash in the amount $a=100$. The corresponding liabilities—the capital structure—consist of unearned premiums, a bond that InsCo had issued in the past and upon which it must pay a 3% annual coupon, and shareholder equity. See @tbl-t0-bal-sheet.
+
+In the analysis presented in this monograph, it is usually sufficient to distinguish premiums $P$ from capital $Q$ (but adhere to @eq-funding). However, it may be desirable to distinguish components of $Q$ in reporting the financial fortunes of the firm. The hierarchy of claimants induces thresholds or benchmarks to distinguish degrees of financial distress or insolvency. This is elaborated upon in @sec-Capital-Adequacy.
+
+## Accounting {#sec-BO-Accounting}
+
+Accounting is the language of business that defines the measurement of success or failure. It has its own vocabulary and grammar. You must have someone well versed in insurance accounting on the model development team. Whatever underlying representation for business cash flows the model uses must be translated into one or more standard accounting frameworks. This is material covered in the Casualty Actuarial Society's Exam 6. A good place to start is the detailed reading by @Odomirok2013a or the earlier short introduction by @Ralph2008.
+
+Accounting is important for several reasons.
+
+First, model output must be readily integrated with the firm's business plan. The plan is the key document orienting the goals of the company. The capital model is intended to express and quantify the possible future variations from the plan that may emerge. In order to be useful and readily communicated to a variety of business actors in the firm, the model output needs to be expressed in the same terms as, and in a comparable format to, the plan. Companies often use their own management accounting conventions, usually slight variations on their reporting or regulatory standards. Therefore, the outputs must hew to the same accounting standards as the plan.
+
+Second, accounting has real-world consequences. Insurers are subject to various types of valuation accounting standards, including:
+
+1.  Statutory or regulatory standards, such as US NAIC, EU Solvency II, APRA.
+2.  Financial reporting standards, such as GAAP and IFRS.
+3.  Rating agency standards, such as Standard and Poor’s and AM Best’s.
+
+Failure to maintain an adequate financial position under any one of these standards could prove ruinous to the firm. This is elaborated on in @PIR, section 8.3.
+
+@CASDFM chapter 7 opines that models should simultaneously represent at least cash (economic), statutory, reporting (GAAP, IFRS17), and tax accounting because "\[t\]his is the only way to reflect the details of the interrelationships among constraints." The model must model cash flows, which form the basis for the other accrual accounting models. In addition to representing external reporting standards, it is advisable to support your entity's management accounting, which is usually a slight variant of its reporting standard.
+
+@fig-Accounting illustrates the relationship between three accounting views. For example, reserves are undiscounted under US GAAP and the market view of loss reserves may differ from management’s.
+
+![Capital, surplus, and equity under market value, GAAP, and statutory accounting views. From @PIR, used by permission.](img/accounting-views.svg){#fig-Accounting width="100%"}
+
+Accounting produces income and balance sheet statements. The InsCo beginning period $t=0$ balance sheet is shown in @tbl-t0-bal-sheet. Recall that the total plan premium is 52.2, received at the beginning of the policy period; expenses are excluded from this model and are assumed to be zero.
+
+| **Assets** |       | **Liabilities**          |      |
+|:-----------|------:|:-------------------------|-----:|
+| Cash       | 100.0 | Unearned premium reserve | 52.2 |
+|            |       | Debt (bond)              | 20.0 |
+|            |       | Shareholder equity       | 27.8 |
+
+: InsCo's starting balance sheet. {#tbl-t0-bal-sheet}
+
+## Pro formas {#sec-BO-Pro-Forma}
+
+**Pro forma financial statements** are hypothetical financial statements about future states of the business. Whatever internal representation the model uses for outcomes, they must be translated into standard fiancial reports. We focus here on InsCo's balance sheet and income statements. Others are possible, including:
+
+-   Cash flow
+-   Sources and uses of funds
+-   Change in equity
+-   Comprehensive income
+-   Various statutory blanks, NAIC annual statement
+
+For our one-period InsCo, the ending period shareholder value, if positive, is released to investors at time $t=1$. For event 4 in @tbl-dupe-x, the income statement and balance sheet prior to paying losses and dividends are shown in @tbl-inc-stmt-4 and @tbl-t1-bal-sheet-4. The balance sheet after payments is obviously $0=0$ because InsCo is a one-period entity.
+
+| **Income** |      | **Expense**           |      |
+|:-----------|-----:|:----------------------|-----:|
+| Premiums   | 52.2 | Loss & LAE            | 40.0 |
+|            |      | Bond coupon           |  0.6 |
+|            |      | Shareholder dividends | 11.6 |
+
+: InsCo income statement, event 4. {#tbl-inc-stmt-4}
+
+| **Assets** |       | **Liabilities**          |      |
+|:-----------|------:|:-------------------------|-----:|
+| Cash       | 100.0 | Unearned premium reserve |  0.0 |
+|            |       | Loss reserves            | 40.0 |
+|            |       | Debt (bond)              | 20.0 |
+|            |       | Accrued interest         |  0.6 |
+|            |       | Shareholder equity       | 39.4 |
+
+: InsCo ending balance sheet, event 4 prior to paying losses. {#tbl-t1-bal-sheet-4}
+
+The Accounting module would produce 10 such pairs of financial statements.
+
+Statutory reporting, done to satisfy regulatory authorities, is a deep and complex subject. Actuaries operating in the US should be familiar with the NAIC procedures manuals that can be found in Appendix V of @COPLFR2023.

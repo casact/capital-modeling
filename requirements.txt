@@ -1,0 +1,10 @@
+matplotlib
+numpy
+pandas
+pyyaml
+nbformat
+nbclient
+jupyter-cache
+pybtex
+aggregate
+greater_tables

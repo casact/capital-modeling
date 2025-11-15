@@ -1,0 +1,237 @@
+# Capital adequacy and sources of risk {#sec-Capital-Adequacy}
+
+*Too much of everything is just enough.*\
+*—Grateful Dead, "I Need a Miracle"*
+
+## Capital adequacy
+
+What quantity of assets is needed to back the liabilities the firm is taking on? The answer depends on who you ask. Insureds want more protection, meaning lower probability of insolvency and therefore higher assets. Regulators, representing the public, are aligned with the insureds. Investors want to minimize their own risk, so they want to invest less capital (for a given expected profit). Rating agencies are concerned with the counterparty (bond) creditworthiness and claims-paying ability of the firm, so they want to see an adequate level of lower-priority (equity, reinsurance) capital. The firm's own management must adjudicate these competing demands in their own minds: on the one hand, they don't want the firm to go under, but on the other hand, they need to deliver an acceptable rate of return to investors. They will have their own view of the ideal level of assets.
+
+Even 100% collateralization of liabilities only theoretically guarantees 100% probability of solvency. In practice, insolvency can be caused by nonmodeled or inadequately modeled operational risks, such as fraud, rogue actors within the organization, management missteps, or bad-faith claim judgments in excess of policy limits. Capital adequacy is all about pegging an amount of assets deemed to be safe enough.
+
+In practice it works like this:
+
+1.  Local regulatory authorities prescribe a minimum amount of *assets* and set reserving and valuation standards, which together imply a minimum *capital* requirement.
+2.  Rating agencies specify amounts that correspond to different rating levels (effectively, grades) given to the firm. Their models are generally based on statutory valuations but with adjustments, for example, for discount in loss reserves. The implied capital levels are usually higher than the regulatory minimums.
+3.  Management decides a target rating level (or in the EU, a ratio of capital to Solvency II–required capital), balancing revenue and profit needs with what they believe their customers will tolerate. For example, personal lines markets are relatively insensitive to ratings, whereas large commercial markets require more highly rated insurers.
+4.  Management—with the help of the capital model—will look at the probabilities of adverse events causing the end-of-period assets to breach the above thresholds. They will then likely consider changing reinsurance, raising capital, or reducing exposure to keep these probabilities in control. In a startup situation, they might require an extra capital buffer, but a going concern rarely raises capital except for specific growth opportunities.
+
+While insurance regulations and laws in the US are created and enforced by the individual states, the National Association of Insurance Commissioners (NAIC) develops model laws, regulations, and standards which most states follow. The NAIC created and maintains the Risk-Based Capital (RBC) framework, which is the primary method regulators use to assess capital adequacy. It specifies minimal capital requirements lest an insurer be put under watch or, worse, taken over by the regulators. @NAIC2024RBC provides background on RBC and links to related content.
+
+Insurers in the European Union are bound by the Solvency II Directive [@EIOPA2009]. This specifies a Solvency Capital Requirement to be calculated either by a standard model or by a firm's internal model. See @IAARiskMargins09, @Floreani2011, and @Meyers2019a.
+
+Rating agencies include S&P Global Ratings, AM Best, Moody's, and Fitch. They are primarily concerned with credit risk, i.e., assigning bonds a letter grade, but they also concern themselves with insurer claims paying ability, so there are two distinct types of rating. Rating agencies have their own models, often factor-based models similar to NAIC's RBC. @Karakuyu2023RBC describe "S&P Global Ratings' methodology and assumptions for analyzing the risk-based capital (RBC) adequacy of insurers and reinsurers." @Jakobsen2020 explain AM Best's Universal BCAR (Best's Capital Adequacy Ratio) model. @Fitch2024IRC "specifies Fitch Ratings’ criteria for assigning new and monitoring existing international scale insurer Financial Strength (IFS) ratings." Readers should consult the agencies’ websites for the most recent models, as these frameworks are periodically revised.
+
+Larger insurance firms, especially publicly traded firms, tend to be organized into multiple legal entities, groups, and subsidiaries. @CASHBK state: "To properly analyze the financial condition of a company with subsidiaries, each subsidiary should be analyzed separately." Also, "understand debt obligations of company and parent company, look through on debt structure to determine if subsidiaries, etc., have sufficient cash flows to meet parent’s obligations." @CASDFM say that either a consolidated model with internal cash flows between entities or entirely separate models (feeding each other) can be developed. Bear in mind that in stressed situations capital can become trapped.
+
+@Brehm2007 chapter 2.3 compares regulatory and rating agency capital adequacy models. @Eling2008 provide an overview and comparison of RBC requirements from the US, the EU, Switzerland, and New Zealand, although it is somewhat dated.
+
+The firm's management will likely attend to a hierarchy of event possibilities (not necessarily distinct or in order):
+
+-   Missed earnings
+-   Spreads widen on bonds; stock price goes down
+-   Market value less than book value
+-   Bond ratings outlook change (watch)
+-   Bond ratings downgrade
+-   Claims paying ratings downgrade
+-   Being placed on regulatory watch
+-   Regulatory supervision, conservatorship or liquidation
+-   Loss of significant shareholder equity
+-   Loss of all shareholder equity
+-   Failure to pay bond interest
+-   Failure to fully redeem a bond
+-   Bankruptcy and reorganization
+
+All these are highly correlated with the size of loss experienced in an accounting period, and all but missed earnings and market effects can be ameliorated by holding more capital.
+
+Consider the InsCo example described in @tbl-CA-loss-levels. If losses exceed 52.2 (premiums), then InsCo's investors will not receive any gain on their investment. This event has a probability of 30%. If losses are 80 or more ($52.2+27.8$ capital), then shareholders will be wiped out (lose all their investment); the probability is 10%. Sixty cents more and bondholders will not receive their promised coupons, and the company defaults and is put to the debt holders. If losses reach 100 (also a 10% chance), then bondholders will be wiped out as well, suffering a 100% loss-given-default. Regulatory intervention thresholds might be defined by intermediate levels of loss and corresponding probabilities. Any of these might be used as VaR levels to define required assets. This is elaborated on in the next section.
+
+| **Event**               | **Loss Level** | **Probability** |
+|:------------------------|---------------:|----------------:|
+| Zero profit             |           52.2 |             30% |
+| Shareholders wiped out  |           80.0 |             10% |
+| Failure to pay coupons  |           80.6 |             10% |
+| Failure to redeem bonds |          100.0 |             10% |
+| 99% average loss (TVaR) |          100.0 |             10% |
+
+: InsCo critical loss levels. {#tbl-CA-loss-levels}
+
+### **Value at Risk** and **Tail** **Value at Risk**
+
+Various different risk measures can be used to calculate required capital. For a thorough discussion, see section 3.6.3 of @PIR. Typically, the goal is to avoid a particular event with specified probability. An exceedance probability measure tells you the probability a firm becomes insolvent at a particular future time given an initial capital level. Inverting that relation determines the capital needed to attain the desired probability of safety. Thus there is a correspondence between risk measures and adequacy measures [@Cherny2009]. Exceedance probability measures are common and lead to one or more **Value at Risk (VaR)** criteria: given a threshold probability, e.g., 99.5%, what size of loss will not be exceeded at that probability level?
+
+VaR has a bit of a problem, however. It is not *subadditive*, which means there are situations where the VaR of the sum of two risks is greater than the sum of the two VaRs. Subadditivity is a good property for a risk measure because it means you manage risk from the bottom up: by managing the risk of each unit to be below its own threshold, you have managed the total risk to be below the sum of the thresholds. There are obvious implications for risk and capacity management. Theoretically, because VaR is not subadditive, it is not a good choice to manage risk at the unit level on up. However, this failure is more an academic quibble than a practical shortcoming. In many real-world situations VaR is subadditive, and it has the added benefits of being easy to understand, estimate, and back-test, and of always existing. In practice VaR is the risk measure of choice for insurance regulators around the world—with the exception of the Swiss.
+
+Academics, the Swiss, and bankers in Basel 3 (also in Switzerland), posit a better alternative is **Tail Value at Risk (TVaR)**. TVaR asks, for a given probability level, what is the average loss in the worst events representing that accumulated probability? Defined in this way, TVaR is subadditive, a plus. On the downside, TVaR does not exist for thick-tailed distributions with no mean. It is also much harder to elicit and back-test than VaR. See @PIR for an elaboration on this.
+
+Another issue with TVaR is its precise definition. Historically, TVaR was called Expected Shortfall (ES) and Conditional Value at Risk (CVaR) by some authors. In addition, there are two subtly different measures called Tail Conditional Expectation (TCE) and Worst Conditional Expectation (WCE). In many cases these are all the same, but in many other realistic (discrete) cases they are not. See chapter 4 of @PIR for a thorough analysis of VaR and TVaR.
+
+In many older texts, TVaR is defined as the average of losses above a specified VaR loss value. This coincides with the TCE definition for continuous random variables but not for discrete or mixed variables, and, in those cases, the resulting measure is not subadditive! More recent literature, led by @McNeil2006, uses the definition we give. Formally,
+$$
+\mathsf{TVaR}_p(X):=\dfrac{1}{1-p}\int_{p}^1 \mathsf{VaR}_s(X)\,ds=
+\dfrac{1}{1-p}\int_{p}^1 F^-(s)\,ds
+$$
+where $F^-(p)$ is the least inverse of the cumulative distribution function. In particular $\mathsf{TVaR}_0(X)=\mathsf E[X]$ and $\mathsf{TVaR}_1(X)$ is defined to be $\sup(X)$, the largest possible outcome.
+
+Here are two simple examples to help demystify subadditivity.
+
+1.  **Discrete example.** Consider a probability space with three outcomes, with probability 0.9, 0.05, and 0.05. Unit 1 has outcomes 0, 0, and 10, and unit 2 has 0, 10, and 0. The total outcomes are 0, 10, and 10. The $p=0.9$ VaRs are 0 for each unit, but it is 10 in total. The corresponding TVaRs are 5 for each unit and 10 in total.
+2.  **Continuous example.** It is a curious fact that the sum of two standard exponential distributions fails to be subadditive at $p=0.7$ (and neighboring $p$), so the failure can also apply for continuous variables. The unit VaRs are $-\log(0.3)=1.204$ and the sum (a gamma with shape 2) has VaR equal to $2.439$, which is greater than $2 \times 1.204 = 2.408$.
+
+Mirroring the broader VaR-TVaR debate, your authors split in favor of VaR and TVaR. Your capital model must, however, employ *some* risk measure criteria to determine the amount of assets necessary to protect the firm against adverse loss experience. It can, of course, also cheat and select a (T)VaR threshold equating to actual capital held.
+
+Our InsCo example uses assets $a=100$, which can be characterized in various ways. One way is to say there is a $\mathsf{TVaR}_{0.99}$ standard for the amount of assets needed. This is input "C" in @sec-System-Overview. The other way says it is $\mathsf{VaR}_1$. Both result in $a=100$, the maximum loss among the events, which is the asset value assumed previously. Notice two points. First, in practice the order of operations flows from accountants determining the amount of capital to modelers describing its adequacy (99% TVaR). Second, that $a=100$ corresponds to full collateralization, and so it means there is no possibility of default. Default is not driving any results in this example! Nor should it in the preponderance of realistic models for well-rated companies. We might have chosen any VaR or TVaR level beyond 90% and obtained the same arithmetical results. We use TVaR to illustrate the algebra involved with a nontrivial asset risk measure.
+
+In addition to specifying the model capital amount, it would be helpful to have some analytical capabilities to explain what drives the results. This is discussed in the next section.
+
+## Risk analysis {#sec-Risk-Analysis}
+
+A main output of the Capital Adequacy module is an assessment of how often there is sufficient capital to avoid various undesirable outcomes. Natural follow-up questions revolve around explaining those results. Having drill-down and diagnostic capabilities is helpful, especially for complex models. These may include:
+
+1.  Statistics of selected variables
+2.  Identification of extreme events
+3.  Explaining what variables drive outputs
+4.  Evaluation of decision rules (e.g., reinsurance)
+5.  Risk/reward analysis
+6.  A battery of what-if questions
+
+A systematic battery of what-if questions—what if trend is 3% higher than plan? What if hurricane frequency is actually 20% higher than the cat model assumptions?—can reveal where assumptions are particularly sensitive.
+
+Even within the plan, there is an opportunity for sophisticated analysis. For example, machine learning could construct a decision tree to characterize simulation events with high losses.
+
+At this point, there is a fork in the analytic road with two divergent paths that surprisingly rejoin to produce the same conclusion. The paths lead along a dynamic marginal impact analysis and a more static risk-adjusted probability analysis. Early work of @Venter2006 saw the two paths, and more technical work of @Delbaen2000a actually knew the paths rejoined. Our work, @PIR connected the dots more explicitly in an actuarial context.
+
+The first form of risk analysis looks at the marginal impact on required assets of changes in the underlying portfolio. While unrealistic, a linear scaling of the unit loss distributions is often used, i.e., assets $a(X)$ become $a((1+\epsilon)X)$. This is unrealistic because, e.g., doubling one's auto exposures homogeneously will not change $X$ into $2X$. While it may approximately double the expected loss, the *shape* of the distribution will change: the standard deviation will less than double [@Mildenhall2017c]. Nonetheless, linear scaling is useful as a directional indicator. We will return to the issue of nonlinear scaling in @sec-portfolio-optimization.
+
+Specifically, the **marginal approach** looks at the **gradient** (slope) of the risk measure: the change resulting from a small change in exposure. If $X=\sum_i X^i$ and $\phi(X)$ is a risk measure, then define
+$$
+\nabla^i\phi(X) = \frac{\partial}{\partial\epsilon}\phi(X+\epsilon X^i)=\lim_{\epsilon \downarrow 0}\frac{\phi(X+\epsilon X^i)-\phi(X)}{\epsilon}.
+$$
+If $\phi$ is continuous and *homogeneous*, that is, $\phi(tX)=t\phi(X)$ for $t>0$, then Euler's homogeneous function theorem tells us that $$
+\sum_i \nabla^i\phi(X) = \phi(X),
+$$ i.e., the marginals consist of an allocation of the original measure [@Mildenhall2004].
+
+In our example, the risk measure is $\phi(X) = \mathsf{TVaR}_{0.99}(X)$. The gradient of this is
+$$
+\nabla^i(\phi(X)) = \dfrac{1}{1-p}\int_{p}^1 \mathsf E[X^i \mid X=\mathsf{VaR}_s(X)]\,ds,
+$$
+often called the **coTVaR**. Those measures on the three units in our example refer again to the worst of the 10 losses, so the answers are 16, 20, and 64, respectively, see the last event in @tbl-CA-loss-levels.
+
+So far, the discussion refers to required *assets*, not *capital*. To calculate capital, we have to subtract premiums (@eq-funding). This is detailed in @tbl-ca-marginal-analysis. Ideally, *required* capital is calculated based on *required* premiums, but at this stage in our calculations we do not have those numbers.
+
+| **Item**                    | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |
+|:----------------------------|-----------:|-----------:|-----------:|--------------:|
+| Required assets coTVaR, $a$ |       16.0 |       20.0 |       64.0 |         100.0 |
+| Expected loss, $L$          |       13.4 |       18.3 |       14.9 |          46.6 |
+| Plan premium                |       13.9 |       18.7 |       19.6 |          52.2 |
+| Required capital (plan)     |        2.1 |        1.3 |       44.4 |          47.8 |
+
+: InsCo marginal analysis. {#tbl-ca-marginal-analysis}
+
+
+
+Note that while TVaR submits to marginal analysis fairly well, VaR needs special handling. Say we were concerned with $\mathsf{VaR}_{0.85}=65$. This occurs solidly in event 9 (@tbl-dupe-x). A straightforward marginal analysis breaks this down to:
+
+| **Unit A** | **Unit B** | **Unit C** | **Portfolio** |
+|-----------:|-----------:|-----------:|--------------:|
+|       17.0 |        8.0 |       40.0 |          65.0 |
+
+: InsCo marginal analysis of $\mathsf{VaR}_{0.85}$. {#tbl-CA-marginal-VaR}
+
+Yet, for both the lower event 8 and higher event 10, line B's contribution is higher. Imagine a more detailed simulation where each event is only worth 1/10,000 probability. Looking at just that specific event, defining the VaR is inviting a good deal of instability. Another run with different random numbers will likely produce materially different results.
+
+There are two ways out of this problem. One is to estimate the conditional expected loss values described in @sec-Complications. The other is to use a more robust replacement for VaR known as **Range Value at Risk** (RVaR) [@Cont2010]. This is the average loss occurring between two probability levels. For example, instead of using $\mathsf{VaR}_{0.99}$, you might use $\mathsf{RVaR}_{0.985,0.995}$.
+
+A sign of problems of the marginal approach is the need to stipulate that epsilon  decreases to zero. When there are ties in the outcome distribution, the risk measure is not actually differentiable! It has a cusp, and depending on whether you increase or decrease volume in a given line, you get different answers. The risk measure is analogous to the absolute value function at zero, where the left and right derivatives are different. (We will see this haunt us in @sec-portfolio-optimization.) To ensure the risk measure is differentiable, and a marginal approach is really valid, it is enough to require that all outcomes of the total distribution be distinct. In that case, for a small enough change in any unit, there is no reordering of the total outcomes and the risk measure is differentiable. We will implement that requirement in the next chapter.
+
+The second form of risk analysis, again following @Venter2006, looks for a set of risk-adjusted probabilities that reproduce the results of the risk measure. With these adjusted probabilities in hand, it is natural to use the risk-adjusted expected value of each unit as an allocation *of risk*. This method is the basis of the *Natural Allocation* described in @PIR and picked up in @sec-Pricing-Allocation to allocate *premium*.
+
+
+<!--
+Here's why it works. When total outcomes are distinct, a small enough change in a unit results in no reordering of total outcomes, and so
+$$
+\begin{aligned}
+\rho(X+\epsilon X)
+&=\mathsf E_q[X+\epsilon X^i] \\
+&=\mathsf E_q[X]+\epsilon\mathsf E_q[X^i] \\
+&=\rho(X) + \epsilon\mathsf E_q[X^i].
+\end{aligned}
+$$
+Therefore $\nabla^i(\phi(X)) = \mathsf E_q[X^i]$!! The two apparently divergent paths have rejoined in a nirvana where these two eminently plausible allocation methodologies agree. But remember, this conclusion depends upon the outcome values of the total distribution being distinct. When the outcomes are not distinct the marginal approach is not defined because it tries to differentiate a non-differentiable function. Historically, this has been address via various unsatisfactory kludges such as insisting that $\epsilon\downarrow 0$, or specifying that volume in such-as-such unit increases or decreases. @PIR offers two alternative solutions: the linear and lifted Natural Allocations. In the former, events with equal total outcomes are collapsed to a single event, thus restoring nirvana. The latter applies when the equal outcomes are caused by a default state where all losses equal the asset level, but where unlimited losses are all distinct. It lifts a unique ordering of events from the distinct unlimited losses.
+-->
+
+## Algorithms
+
+### Algorithm to evaluate expected loss for discrete random variables
+
+The algorithm in this subsection is very basic. We present it to establish an approach to working with discrete random variables that we generalize in subsequent chapters.
+
+We present an algorithm to compute $\mathsf E[X]$ in two ways, based on \begin{equation}\label{eq:ex-two-means}
+\mathsf E[X]=\int_0^\infty xdF(x) = \int_0^\infty S(x)dx.
+\end{equation}
+
+**Algorithm Input:** $X$ is a discrete random variable, taking finitely many values $X_j\ge 0$, and $p_j=\mathsf P(X=x_j)$. \index{algorithm!expected loss}
+
+Follow these steps to evaluate \cref{eq:ex-two-means}.
+
+**Algorithm Steps**
+
+(1) **Pad** the input by adding a zero outcome $X=0$ with probability 0.
+(2) **Group by** $X_j$ and sum the corresponding $p_j$.
+(3) **Sort** events by outcome $X_j$ into ascending order. Relabel events $X_0< X_1 < \dots < X_m$ and probabilities $p_0,\dots, p_m$.
+(4) **Decumulate** probabilities to compute the survival function $S_j:=S(X_j)$ using $S_0=1-p_0$ and $S_j=S_{j-1}-p_j$, $j > 0$.
+(5) **Difference** the outcomes to compute $\Delta X_j=X_{j+1} - X_j$, $j=0,\dots, m-1$.
+(6) **Outcome-probability sum-product:**
+    $$
+    \mathsf E[X] =\int_0^\infty xdF(x)= \sum_{j=1}^m X_j p_j.
+    $$ {#eq-ex-d-one}
+(7) **Survival function sum-product:**
+    $$
+    \mathsf E[X] = \int_0^\infty S(x)dx = \sum_{j=0}^{m-1} S_{j}\Delta X_j.
+    $$ {#eq-ex-d-three}
+
+**Comments**
+
+(a) Step (1) treats 0 as special because the second integral in \cref{eq:ex-two-means} starts at $X=0$. Step (1) allows us to systematically deal with any discrete data. It adds a new outcome row only when the smallest observation is $>0$.
+(b) After Step (3), the $X_j$ are distinct; they are in ascending order, $X_0=0$, and $p_j=\mathsf P(X=X_j)$.
+(c) In Step (4), $S_m=\mathsf P(X>X_m)=0$ since $X_m$ is the maximum value of $X$.
+(d) The forward difference $\Delta X$ computed in Step (5) replaces $dx$ in various formulas. Since it is a forward difference $\Delta X_m$ is undefined. It is also unneeded.
+(e) In step (6), the sum starts at $j=1$ because $X_0=0$. Notice that $\mathsf P(X=X_j)=S_{j-1}-S_j$ is the negative backward difference of $S$.
+(f) Note the index shift between @eq-ex-d-one and @eq-ex-d-three.
+(g) Both @eq-ex-d-one and @eq-ex-d-three are exact evaluations. The approximation occurs when the underlying distribution being modeled is replaced with the discrete sample given by $X$.
+
+### Algorithm to evaluate VaR for a discrete distribution
+
+
+
+**Algorithm input:** $X$ is a discrete random variable, taking $N$ equally likely values $X_j \ge 0$, $j = 0, \dots, N-1$. Probability level $p$.
+
+Follow these steps to determine $\mathsf{VaR}_p(X)$.
+
+**Algorithm steps**
+
+(1) **Sort** outcomes into ascending order $X_0 < \dots < X_{N-1}$.
+
+(2) **Calculate** $n=\lfloor pN\rfloor$, the greatest integer less than or equal to $pN$.
+
+(3) **Return** $\mathsf{VaR}_p(X) := X_{n}$ (since the indexing starts at $0$).
+
+These steps compute the least quantile at level $p$. A $p$ quantile is any value $x$ so that $\mathsf P(X < x) \le p \le \mathsf P(X\le x)$ and $\mathsf{VaR}_p$ is the *smallest* such $x$. If you draw a graph of the distribution function and allow the vertical lines joining jumps to be part of the graph, then this algorithm is just inverting the distribution function by finding the leftmost $x$ at which the graph reaches height $p$, see chapter 4 of @PIR.
+
+### Algorithm to evaluate TVaR for a discrete distribution
+
+**Algorithm input:** $X$ is a discrete random variable, taking $N$ equally likely values $X_j\ge 0$, $j=0,\dots, N-1$. Probability level $p$.
+
+Follow these steps to determine $\mathsf{TVaR}_p(X)$.
+
+**Algorithm steps**
+
+(1) **Sort** outcomes into ascending order $X_0 < \dots < X_{N-1}$.
+(2) **Find** $n$ so that $n \le pN < (n+1)$.
+(3) **If** $n+1=N$, **then** $\mathsf{TVaR}_p(X) := X_{N-1}$ is the largest observation, exit;
+(4) **Else** $n < N-1$ and continue.
+(5) **Compute** $T_1 := X_{n+1} + \cdots + X_{N-1}$.
+(6) **Compute** $T_2 := ((n+1)-pN)x_n$.
+(7) **Compute** $\mathsf{TVaR}_p(X) := (1-p)^{-1}(T_1+T_2)/N$.
+
+These steps compute the average of the largest $N(1-p)$ observations. Step (6) adds a pro-rata portion of the $\lfloor N(1-p)\rfloor$ largest observation when $N(1-p)$ is not an integer.

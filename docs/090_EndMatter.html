@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>10&nbsp; Appendices – Introduction to Capital Modeling and Portfolio Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./references.html" rel="next">
+<link href="./080_Calculations.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-01c78b5cd655e4cd89133cf59d535862.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-44a2bfbc4aea0d0866ad2a0ddca8a790.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="icon" href="./static/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="10&nbsp; Appendices – Introduction to Capital Modeling and Portfolio Management">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:title" content="10&nbsp; Appendices – Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./090_EndMatter.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Capital Modeling and Portfolio Management</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dedication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dedication</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020_BusinessOperations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Business operations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030_CapitalAdequacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Capital adequacy and sources of risk</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040_PricingAndAllocation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050_Applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./060_SelectingSRM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./065_Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Evaluating models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./070_AdvancedTopics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./080_Calculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Calculations with <code>Aggregate</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./090_EndMatter.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this chapter:</h2>
+   
+  <ul>
+  <li><a href="#table-of-symbols" id="toc-table-of-symbols" class="nav-link active" data-scroll-target="#table-of-symbols"><span class="header-section-number">10.1</span> Table of symbols</a></li>
+  <li><a href="#sec-ASOPs" id="toc-sec-ASOPs" class="nav-link" data-scroll-target="#sec-ASOPs"><span class="header-section-number">10.2</span> Actuarial Standards of Practice</a></li>
+  <li><a href="#glossary" id="toc-glossary" class="nav-link" data-scroll-target="#glossary"><span class="header-section-number">10.3</span> Glossary</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-Appendix" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="table-of-symbols" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="table-of-symbols"><span class="header-section-number">10.1</span> Table of symbols</h2>
+<div id="tbl-intro-symbols-alpha" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-intro-symbols-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.1: Symbols used in this monograph.
+</figcaption>
+<div aria-describedby="tbl-intro-symbols-alpha-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 49%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Symbol</strong></th>
+<th style="text-align: left;"><strong>Interpretation</strong></th>
+<th style="text-align: left;"><strong>Reference</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\alpha_k^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> share of layer <span class="math inline">\(k\)</span> expected loss</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\beta_k^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> share of layer <span class="math inline">\(k\)</span> premium</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\delta\)</span></td>
+<td style="text-align: left;">rate of discount, <span class="math inline">\(\delta=\iota/(1+\iota)\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Delta X_k\)</span></td>
+<td style="text-align: left;">layer <span class="math inline">\(k\)</span> limit, <span class="math inline">\(\Delta X_k=X_{k+1}-X_k\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\epsilon\)</span></td>
+<td style="text-align: left;">scaling parameter</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a>, <a href="050_Applications.html#sec-portfolio-optimization" class="quarto-xref"><span>Section 5.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\epsilon_-\)</span></td>
+<td style="text-align: left;">minimum scale</td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\epsilon_+\)</span></td>
+<td style="text-align: left;">maximum scale</td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\iota\)</span></td>
+<td style="text-align: left;">expected return, cost of capital, <span class="math inline">\(\iota = M/Q\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\iota^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> cost of capital</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\iota_k\)</span></td>
+<td style="text-align: left;">layer <span class="math inline">\(k\)</span> cost of capital</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\kappa^i(x)\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> conditional expected loss, <span class="math inline">\(\kappa^i(x) := \mathsf E[X^i|X=x]\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Complications" class="quarto-xref"><span>Section 4.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\nabla^i\phi(X)\)</span></td>
+<td style="text-align: left;">partial derivative with respect to scaling</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\nu\)</span></td>
+<td style="text-align: left;">discount factor, <span class="math inline">\(\nu=1/(1+\iota)\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\Phi(z)\)</span></td>
+<td style="text-align: left;">standard Gaussian cumulative distribution function</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-5-distortions" class="quarto-xref"><span>Section 4.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\rho()\)</span></td>
+<td style="text-align: left;">pricing risk measure</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\theta\)</span></td>
+<td style="text-align: left;">weight parameter for bi-TVaR</td>
+<td style="text-align: left;"><a href="060_SelectingSRM.html#sec-envelope" class="quarto-xref"><span>Section 6.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a\)</span></td>
+<td style="text-align: left;">assets</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(a()\)</span></td>
+<td style="text-align: left;">capital risk measure</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(a^i\)</span></td>
+<td style="text-align: left;">allocation of assets to unit <span class="math inline">\(i\)</span> (industry standard)</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-ISA" class="quarto-xref"><span>Section 4.7</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(g(s)\)</span></td>
+<td style="text-align: left;">distortion function</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(i\)</span></td>
+<td style="text-align: left;">index to portfolio unit</td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(j\)</span></td>
+<td style="text-align: left;">event index, <span class="math inline">\(j=1, \dots, n\)</span></td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(k\)</span></td>
+<td style="text-align: left;">layer index, <span class="math inline">\(k=0,\dots,n-1\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(L\)</span></td>
+<td style="text-align: left;">expected loss</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(L^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> expected loss</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-ISA" class="quarto-xref"><span>Section 4.7</span></a>, <a href="040_PricingAndAllocation.html#sec-pricing-units" class="quarto-xref"><span>Section 4.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(M\)</span></td>
+<td style="text-align: left;">margin, <span class="math inline">\(P=L+M\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#eq-PLM" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, <a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(M^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> margin <span class="math inline">\(M^i = P^i - L^i\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-pricing-units" class="quarto-xref"><span>Section 4.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(m\)</span></td>
+<td style="text-align: left;">number of units</td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(n\)</span></td>
+<td style="text-align: left;">number of events</td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(p_j\)</span></td>
+<td style="text-align: left;">event probability <span class="math inline">\(p_j=\Pr(X=X_j)\)</span></td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P\)</span></td>
+<td style="text-align: left;">premium <span class="math inline">\(P=\rho(X)\)</span></td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P_k\)</span></td>
+<td style="text-align: left;">layer <span class="math inline">\(k\)</span> premium, <span class="math inline">\(P_k = g(S_k)\Delta X_k\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P_P\)</span></td>
+<td style="text-align: left;">plan premium</td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P_R\)</span></td>
+<td style="text-align: left;">required premium</td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(P^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> premium</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-ISA" class="quarto-xref"><span>Section 4.7</span></a>, <a href="040_PricingAndAllocation.html#sec-pricing-units" class="quarto-xref"><span>Section 4.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(q_k\)</span></td>
+<td style="text-align: left;">distorted probability, <span class="math inline">\(q_k = g(S_{k-1}) - g(S_{k})\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Q\)</span></td>
+<td style="text-align: left;">capital <span class="math inline">\(Q=a-P\)</span></td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Q^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> capital</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(Q_k^i\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> capital in layer <span class="math inline">\(k\)</span></td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Q_P\)</span></td>
+<td style="text-align: left;">plan capital, <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(r\)</span></td>
+<td style="text-align: left;">EVA/capital ratio, <span class="math inline">\(r=V/Q_P\)</span></td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(S_k\)</span></td>
+<td style="text-align: left;">layer <span class="math inline">\(k\)</span> attachment probability, <span class="math inline">\(S_k=Pr(X &gt; X_k)\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathsf{TVaR}_{0.99}\)</span></td>
+<td style="text-align: left;">InsCo example capital standard</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(V\)</span></td>
+<td style="text-align: left;">EVA, economic value added, <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-InsCo-opt" class="quarto-xref"><span>Section 5.5.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathsf{VaR}_{0.85}\)</span></td>
+<td style="text-align: left;">example alternative risk measure</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X\)</span></td>
+<td style="text-align: left;">portfolio liability random variable</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_0\)</span></td>
+<td style="text-align: left;">phantom portfolio loss <span class="math inline">\(X_0=0\)</span> with probability <span class="math inline">\(p_0=0\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Complications" class="quarto-xref"><span>Section 4.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_j^i\)</span></td>
+<td style="text-align: left;">loss to unit <span class="math inline">\(i\)</span> in event <span class="math inline">\(j\)</span></td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X_j\)</span></td>
+<td style="text-align: left;">portfolio loss in event <span class="math inline">\(j\)</span></td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X_k\)</span></td>
+<td style="text-align: left;">layer payout threshold (attachment)</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X\wedge a\)</span></td>
+<td style="text-align: left;">portfolio payout to policyholders</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(X^i(a)\)</span></td>
+<td style="text-align: left;">unit <span class="math inline">\(i\)</span> capped losses</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Complications" class="quarto-xref"><span>Section 4.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(X^i\)</span></td>
+<td style="text-align: left;">loss to unit <span class="math inline">\(i\)</span> (random variable)</td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(Z_k\)</span></td>
+<td style="text-align: left;">event weight, likelihood ratio, <span class="math inline">\(Z_k=q_k/p_k\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="sec-ASOPs" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sec-ASOPs"><span class="header-section-number">10.2</span> Actuarial Standards of Practice</h2>
+<p>“The Actuarial Standards Board (ASB) sets standards for appropriate actuarial practice in the United States through the development and promulgation of Actuarial Standards of Practice (ASOPs). These ASOPs describe the procedures an actuary should follow when performing actuarial services and identify what the actuary should disclose when communicating the results of those services.” ASOPs can be found at https://www.actuarialstandardsboard.org/standards-of-practice/</p>
+<div id="tbl-likely-ASOPs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-likely-ASOPs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.2: ASOPs that are relevant to capital modeling.
+</figcaption>
+<div aria-describedby="tbl-likely-ASOPs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 63%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Number</strong></th>
+<th style="text-align: left;"><strong>Title</strong></th>
+<th><strong>Reference</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">7</td>
+<td style="text-align: left;">Analysis of Life, Health, or Property/Casualty Insurer Cash Flows</td>
+<td><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">23</td>
+<td style="text-align: left;">Data Quality</td>
+<td><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">30</td>
+<td style="text-align: left;">Treatment of Profit and Contingency Provisions and the Cost of Capital in Property/Casualty Insurance Ratemaking</td>
+<td><a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">46</td>
+<td style="text-align: left;">Risk Evaluation in Enterprise Risk Management</td>
+<td><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a>, <a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">47</td>
+<td style="text-align: left;">Risk Treatment in Enterprise Risk Management</td>
+<td><a href="010_Introduction.html#sec-Getting-Started" class="quarto-xref"><span>Section 1.3</span></a>, <a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">55</td>
+<td style="text-align: left;">Capital Adequacy Assessment</td>
+<td><a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">56</td>
+<td style="text-align: left;">Modeling</td>
+<td><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">58</td>
+<td style="text-align: left;">Enterprise Risk Management</td>
+<td><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a>, <a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The ASB repealed ASOP Nos. 46 and 47 in December 2024 and replaced them with ASOP No.&nbsp;58, Enterprise Risk Management, to reflect the developments since 2012, to better reflect today’s ERM practices and terminology, and to align with ASOP No.&nbsp;55.</p>
+<div id="tbl-potential-ASOPs" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-potential-ASOPs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;10.3: ASOPs that are potentially relevant to capital modeling.
+</figcaption>
+<div aria-describedby="tbl-potential-ASOPs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 89%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><strong>Number</strong></th>
+<th style="text-align: left;"><strong>Title</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">12</td>
+<td style="text-align: left;">Risk Classification (for All Practice Areas)</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">13</td>
+<td style="text-align: left;">Trending Procedures in Property/Casualty Insurance</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">19</td>
+<td style="text-align: left;">Appraisals of Casualty, Health, and Life Insurance Businesses</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Discounting of Property/Casualty Claim Estimates</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">25</td>
+<td style="text-align: left;">Credibility Procedures</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">29</td>
+<td style="text-align: left;">Expense Provisions for Prospective Property/Casualty Risk Transfer and Risk Retention</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">36</td>
+<td style="text-align: left;">Statements of Actuarial Opinion Regarding Property/Casualty Loss, Loss Adjustment Expense, or Other Reserves</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">38</td>
+<td style="text-align: left;">Catastrophe Modeling (for All Practice Areas)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">39</td>
+<td style="text-align: left;">Treatment of Catastrophe Losses in Property/Casualty Insurance Ratemaking</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">41</td>
+<td style="text-align: left;">Actuarial Communications</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">43</td>
+<td style="text-align: left;">Property/Casualty Unpaid Claim Estimates</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">53</td>
+<td style="text-align: left;">Estimating Future Costs for Prospective Property/Casualty Risk Transfer and Risk Retention</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+</section>
+<section id="glossary" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="glossary"><span class="header-section-number">10.3</span> Glossary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 53%">
+<col style="width: 26%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Term</strong></th>
+<th style="text-align: left;"><strong>Description</strong></th>
+<th style="text-align: left;"><strong>Reference</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Accounting</strong></td>
+<td style="text-align: left;">module that produces financial statements</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Allocation</strong></td>
+<td style="text-align: left;">module that distributes portfolio premium to units</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>BCAR</strong></td>
+<td style="text-align: left;">Best’s Capital Adequacy Ratio</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Bi-TVaR</strong></td>
+<td style="text-align: left;">convex combination of TVaRs</td>
+<td style="text-align: left;"><a href="060_SelectingSRM.html" class="quarto-xref"><span>Chapter 6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Business Operations</strong></td>
+<td style="text-align: left;">module that deals with loss experience</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Capital</strong></td>
+<td style="text-align: left;">owner-provided funds</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-What-Into" class="quarto-xref"><span>Section 1.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Capital Adequacy</strong></td>
+<td style="text-align: left;">module dealing with risk and capital sufficiency</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Capital risk measure</strong></td>
+<td style="text-align: left;">rule relating liabilities to required assets</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Capital structure</strong></td>
+<td style="text-align: left;">mix of liabilities funding total assets</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a>, <a href="020_BusinessOperations.html#sec-BO-Capital-Structure" class="quarto-xref"><span>Section 2.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Charter</strong></td>
+<td style="text-align: left;">formal document setting out the rationale</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Structure-Monograph" class="quarto-xref"><span>Section 1.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Co-TVaR</strong></td>
+<td style="text-align: left;">conditional TVaR, Natural Allocation of TVaR</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>co-XTVaR</strong></td>
+<td style="text-align: left;">Conditional XTVaR</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-ISA" class="quarto-xref"><span>Section 4.7</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Comonotonic</strong></td>
+<td style="text-align: left;">Random variables <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are comonotonic if they are nondecreasing functions of a third r.v.</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Comonotonic additive</strong></td>
+<td style="text-align: left;">Property of a risk measure <span class="math inline">\(\rho\)</span>: If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are comonotonic, then <span class="math inline">\(\rho(X+Y)=\rho(X)+\rho(Y)\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Constant cost of capital (CCoC)</strong></td>
+<td style="text-align: left;">assumption that all layers require the same return</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Distortion function</strong></td>
+<td style="text-align: left;">translates attachment probability to rate on line</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Distorted expectation</strong></td>
+<td style="text-align: left;">expectation calculated with distorted probabilities <span class="math inline">\(q\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-pricing-units" class="quarto-xref"><span>Section 4.5</span></a>, <a href="040_PricingAndAllocation.html#sec-pricing-events" class="quarto-xref"><span>Section 4.8</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Distorted expected loss share</strong></td>
+<td style="text-align: left;">a unit’s share of a layer’s distorted expected loss, <span class="math inline">\(\beta_k^i\)</span></td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Distorted probability</strong></td>
+<td style="text-align: left;">after applying a distortion function, <span class="math inline">\(q\)</span> replaces <span class="math inline">\(p\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Economic Scenario Generator</strong></td>
+<td style="text-align: left;">module to generate socioeconomic outcomes</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a>, <a href="020_BusinessOperations.html#sec-BO-ESG" class="quarto-xref"><span>Section 2.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Economic value added (EVA)</strong></td>
+<td style="text-align: left;">Profits beyond what is necessary for investors</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Equal Priority</strong></td>
+<td style="text-align: left;">Rule for distributing funds among claimants</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Complications" class="quarto-xref"><span>Section 4.3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Expected loss share</strong></td>
+<td style="text-align: left;">a unit’s share of a layer expected loss, <span class="math inline">\(\alpha_k^i\)</span></td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Funding equation</strong></td>
+<td style="text-align: left;">states that assets are the sum of premiums and investor capital, <span class="math inline">\(a=P+Q\)</span></td>
+<td style="text-align: left;"><a href="010_Introduction.html#eq-funding" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>, <a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Gradient</strong></td>
+<td style="text-align: left;">derivative with respect to several variables</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>InsCo</strong></td>
+<td style="text-align: left;">hypothetical insurer used as a simple example</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Insureds</strong></td>
+<td style="text-align: left;">customers of InsCo, who pay premiums</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Investors</strong></td>
+<td style="text-align: left;">owners of InsCo, who supply capital</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Law invariance</strong></td>
+<td style="text-align: left;">risk measure depends only on distribution</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Layer</strong></td>
+<td style="text-align: left;">segment of assets between two levels of portfolio loss</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Layer funding equation</strong></td>
+<td style="text-align: left;">states that layer assets are the sum of premiums and investor capital, <span class="math inline">\(\Delta X_k=P_k+Q_k\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#eq-layer-funding" class="quarto-xref">Equation&nbsp;<span>4.4</span></a>, <a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Likelihood ratio</strong></td>
+<td style="text-align: left;">ratio of distorted to original probabilities</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-pricing-events" class="quarto-xref"><span>Section 4.8</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Margin</strong></td>
+<td style="text-align: left;">difference between premium and expected loss, <span class="math inline">\(M=P-L\)</span></td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#eq-PLM" class="quarto-xref">Equation&nbsp;<span>4.1</span></a>, <a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Marginal approach</strong></td>
+<td style="text-align: left;">examine the effect of a small change; look at first derivative</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Model</strong></td>
+<td style="text-align: left;">simplified representation of reality, usually mathematical</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-What-Into" class="quarto-xref"><span>Section 1.1</span></a>, <a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Natural Allocation (NA)</strong></td>
+<td style="text-align: left;">decomposition of portfolio premium into distorted expectation of unit losses</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-pricing-units" class="quarto-xref"><span>Section 4.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Natural Allocation of capital</strong></td>
+<td style="text-align: left;">allocation of capital consistent with allocation of premium, <span class="math inline">\(Q_k^i\)</span></td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Allocating-Capital" class="quarto-xref"><span>Section 8.3</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Normal copula</strong></td>
+<td style="text-align: left;">multivariate uniform distribution based on the normal</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-IC-NC" class="quarto-xref"><span>Section 8.2.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Objectivity</strong></td>
+<td style="text-align: left;">synonym for law invariance</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Parameter uncertainty</strong></td>
+<td style="text-align: left;">lack of knowledge about parameters of a process, sometimes modeled as a distribution</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Uncertainty" class="quarto-xref"><span>Section 8.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pricing</strong></td>
+<td style="text-align: left;">module assigns technical premium to the portfolio <!--# Was "tech." properly expanded? --></td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Pricing &amp; Allocation</strong></td>
+<td style="text-align: left;">module that assigns technical premiums to units</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Pricing risk measure</strong></td>
+<td style="text-align: left;">rule that relates liabilities to technical premiums</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Pro forma</strong></td>
+<td style="text-align: left;">hypothetical financial statement</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a> , <a href="020_BusinessOperations.html#sec-BO-Pro-Forma" class="quarto-xref"><span>Section 2.7</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Proxy model</strong></td>
+<td style="text-align: left;">simpler model of another model</td>
+<td style="text-align: left;"><a href="050_Applications.html#sec-portfolio-optimization" class="quarto-xref"><span>Section 5.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Probabilistic database</strong></td>
+<td style="text-align: left;">stored sample of random outcomes</td>
+<td style="text-align: left;"><a href="020_BusinessOperations.html#sec-BO-Units" class="quarto-xref"><span>Section 2.2</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Process risk</strong></td>
+<td style="text-align: left;">randomness in outcomes from a well defined and parameterized stochastic process</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Uncertainty" class="quarto-xref"><span>Section 8.1</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Reinsurance</strong></td>
+<td style="text-align: left;">module that deals with risk transfer</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Risk appetite</strong></td>
+<td style="text-align: left;">compensation/price limit for taking on risk</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Risk tolerance</strong></td>
+<td style="text-align: left;">limit of risk the firm is willing to take on</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>RVaR</strong></td>
+<td style="text-align: left;">Range Value at Risk, window version of VaR</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html#sec-Risk-Analysis" class="quarto-xref"><span>Section 3.2</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Quantity of Interest</strong></td>
+<td style="text-align: left;">target metric, statistic, etc., of a simulation exercise</td>
+<td style="text-align: left;"><a href="070_AdvancedTopics.html#sec-Uncertainty" class="quarto-xref"><span>Section 8.1</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Spectral risk measure (SRM)</strong></td>
+<td style="text-align: left;">risk measure determined by a distortion function</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>State price</strong></td>
+<td style="text-align: left;">A contract that pays $1 in a particular state of the world</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-pricing-events" class="quarto-xref"><span>Section 4.8</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Tranche</strong></td>
+<td style="text-align: left;">synonym for layer</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-Pricing-layers" class="quarto-xref"><span>Section 4.4</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Unit</strong></td>
+<td style="text-align: left;">portion of portfolio, e.g., line of business</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Value at Risk (VaR)</strong></td>
+<td style="text-align: left;">risk measure, quantile of a distribution</td>
+<td style="text-align: left;"><a href="010_Introduction.html#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Tail Value at Risk (TVaR)</strong></td>
+<td style="text-align: left;">average of losses in a specified tail probability; also CVaR, TCE</td>
+<td style="text-align: left;"><a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Excess TVaR (XTVaR)</strong></td>
+<td style="text-align: left;">TVaR minus expected losses</td>
+<td style="text-align: left;"><a href="040_PricingAndAllocation.html#sec-ISA" class="quarto-xref"><span>Section 4.7</span></a></td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cmm\.mynl\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./080_Calculations.html" class="pagination-link" aria-label="Calculations with `Aggregate`">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Calculations with <code>Aggregate</code></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./references.html" class="pagination-link" aria-label="Bibliography">
+        <span class="nav-page-text">Bibliography</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="an">appendix:</span><span class="co"> true</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="fu"># Appendices {#sec-Appendix}</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="fu">## Table of symbols</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>\footnotesize</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-12"><a href="#cb1-12"></a>| **Symbol**             | **Interpretation**                                                      | **Reference**                                   |</span>
+<span id="cb1-13"><a href="#cb1-13"></a>+:=======================+:========================================================================+:================================================+</span>
+<span id="cb1-14"><a href="#cb1-14"></a>| $\alpha_k^i$           | unit $i$ share of layer $k$ expected loss                               | @sec-Allocating-Capital                         |</span>
+<span id="cb1-15"><a href="#cb1-15"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-16"><a href="#cb1-16"></a>| $\beta_k^i$            | unit $i$ share of layer $k$ premium                                     | @sec-Allocating-Capital                         |</span>
+<span id="cb1-17"><a href="#cb1-17"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-18"><a href="#cb1-18"></a>| $\delta$               | rate of discount, $\delta=\iota/(1+\iota)$                              | @sec-Pricing                                    |</span>
+<span id="cb1-19"><a href="#cb1-19"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-20"><a href="#cb1-20"></a>| $\Delta X_k$           | layer $k$ limit, $\Delta X_k=X_{k+1}-X_k$                               | @sec-Pricing-layers                             |</span>
+<span id="cb1-21"><a href="#cb1-21"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-22"><a href="#cb1-22"></a>| $\epsilon$             | scaling parameter                                                       | @sec-Risk-Analysis, @sec-portfolio-optimization |</span>
+<span id="cb1-23"><a href="#cb1-23"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-24"><a href="#cb1-24"></a>| $\epsilon_-$           | minimum scale                                                           | @sec-InsCo-opt                                  |</span>
+<span id="cb1-25"><a href="#cb1-25"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-26"><a href="#cb1-26"></a>| $\epsilon_+$           | maximum scale                                                           | @sec-InsCo-opt                                  |</span>
+<span id="cb1-27"><a href="#cb1-27"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-28"><a href="#cb1-28"></a>| $\iota$                | expected return, cost of capital, $\iota = M/Q$                         | @sec-Pricing                                    |</span>
+<span id="cb1-29"><a href="#cb1-29"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-30"><a href="#cb1-30"></a>| $\iota^i$              | unit $i$ cost of capital                                                | @sec-Allocating-Capital                         |</span>
+<span id="cb1-31"><a href="#cb1-31"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-32"><a href="#cb1-32"></a>| $\iota_k$              | layer $k$ cost of capital                                               | @sec-Allocating-Capital                         |</span>
+<span id="cb1-33"><a href="#cb1-33"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-34"><a href="#cb1-34"></a>| $\kappa^i(x)$          | unit $i$ conditional expected loss, $\kappa^i(x) := \mathsf E<span class="co">[</span><span class="ot">X^i|X=x</span><span class="co">]</span>$ | @sec-Complications                              |</span>
+<span id="cb1-35"><a href="#cb1-35"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-36"><a href="#cb1-36"></a>| $\nabla^i\phi(X)$      | partial derivative with respect to scaling                              | @sec-Risk-Analysis                              |</span>
+<span id="cb1-37"><a href="#cb1-37"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-38"><a href="#cb1-38"></a>| $\nu$                  | discount factor, $\nu=1/(1+\iota)$                                      | @sec-Pricing                                    |</span>
+<span id="cb1-39"><a href="#cb1-39"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-40"><a href="#cb1-40"></a>| $\Phi(z)$              | standard Gaussian cumulative distribution function                      | @sec-5-distortions                              |</span>
+<span id="cb1-41"><a href="#cb1-41"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-42"><a href="#cb1-42"></a>| $\rho()$               | pricing risk measure                                                    | @sec-Intro-Insco                                |</span>
+<span id="cb1-43"><a href="#cb1-43"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-44"><a href="#cb1-44"></a>| $\theta$               | weight parameter for bi-TVaR                                            | @sec-envelope                                   |</span>
+<span id="cb1-45"><a href="#cb1-45"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-46"><a href="#cb1-46"></a>| $a$                    | assets                                                                  | @sec-Intro-Insco                                |</span>
+<span id="cb1-47"><a href="#cb1-47"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-48"><a href="#cb1-48"></a>| $a()$                  | capital risk measure                                                    | @sec-Intro-Insco                                |</span>
+<span id="cb1-49"><a href="#cb1-49"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-50"><a href="#cb1-50"></a>| $a^i$                  | allocation of assets to unit $i$ (industry standard)                    | @sec-ISA                                        |</span>
+<span id="cb1-51"><a href="#cb1-51"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-52"><a href="#cb1-52"></a>| $g(s)$                 | distortion function                                                     | @sec-Pricing-layers                             |</span>
+<span id="cb1-53"><a href="#cb1-53"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-54"><a href="#cb1-54"></a>| $i$                    | index to portfolio unit                                                 | @sec-BO-Units                                   |</span>
+<span id="cb1-55"><a href="#cb1-55"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-56"><a href="#cb1-56"></a>| $j$                    | event index, $j=1, \dots, n$                                            | @sec-BO-Units                                   |</span>
+<span id="cb1-57"><a href="#cb1-57"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-58"><a href="#cb1-58"></a>| $k$                    | layer index, $k=0,\dots,n-1$                                            | @sec-Pricing-layers                             |</span>
+<span id="cb1-59"><a href="#cb1-59"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-60"><a href="#cb1-60"></a>| $L$                    | expected loss                                                           | @sec-Pricing                                    |</span>
+<span id="cb1-61"><a href="#cb1-61"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-62"><a href="#cb1-62"></a>| $L^i$                  | unit $i$ expected loss                                                  | @sec-ISA, @sec-pricing-units                    |</span>
+<span id="cb1-63"><a href="#cb1-63"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-64"><a href="#cb1-64"></a>| $M$                    | margin, $P=L+M$                                                         | @eq-PLM, @sec-Pricing                           |</span>
+<span id="cb1-65"><a href="#cb1-65"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-66"><a href="#cb1-66"></a>| $M^i$                  | unit $i$ margin $M^i = P^i - L^i$                                       | @sec-pricing-units                              |</span>
+<span id="cb1-67"><a href="#cb1-67"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-68"><a href="#cb1-68"></a>| $m$                    | number of units                                                         | @sec-BO-Units                                   |</span>
+<span id="cb1-69"><a href="#cb1-69"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-70"><a href="#cb1-70"></a>| $n$                    | number of events                                                        | @sec-BO-Units                                   |</span>
+<span id="cb1-71"><a href="#cb1-71"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-72"><a href="#cb1-72"></a>| $p_j$                  | event probability $p_j=\Pr(X=X_j)$                                      | @sec-BO-Units                                   |</span>
+<span id="cb1-73"><a href="#cb1-73"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-74"><a href="#cb1-74"></a>| $P$                    | premium $P=\rho(X)$                                                     | @sec-Intro-Insco                                |</span>
+<span id="cb1-75"><a href="#cb1-75"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-76"><a href="#cb1-76"></a>| $P_k$                  | layer $k$ premium, $P_k = g(S_k)\Delta X_k$                             | @sec-Pricing-layers                             |</span>
+<span id="cb1-77"><a href="#cb1-77"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-78"><a href="#cb1-78"></a>| $P_P$                  | plan premium                                                            | @sec-InsCo-opt                                  |</span>
+<span id="cb1-79"><a href="#cb1-79"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-80"><a href="#cb1-80"></a>| $P_R$                  | required premium                                                        | @sec-InsCo-opt                                  |</span>
+<span id="cb1-81"><a href="#cb1-81"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-82"><a href="#cb1-82"></a>| $P^i$                  | unit $i$ premium                                                        | @sec-ISA, @sec-pricing-units                    |</span>
+<span id="cb1-83"><a href="#cb1-83"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-84"><a href="#cb1-84"></a>| $q_k$                  | distorted probability, $q_k = g(S_{k-1}) - g(S_{k})$                    | @sec-Pricing-layers                             |</span>
+<span id="cb1-85"><a href="#cb1-85"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-86"><a href="#cb1-86"></a>| $Q$                    | capital $Q=a-P$                                                         | @sec-Intro-Insco                                |</span>
+<span id="cb1-87"><a href="#cb1-87"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-88"><a href="#cb1-88"></a>| $Q^i$                  | unit $i$ capital                                                        | @sec-Allocating-Capital                         |</span>
+<span id="cb1-89"><a href="#cb1-89"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-90"><a href="#cb1-90"></a>| $Q_k^i$                | unit $i$ capital in layer $k$                                           | @sec-Allocating-Capital                         |</span>
+<span id="cb1-91"><a href="#cb1-91"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-92"><a href="#cb1-92"></a>| $Q_P$                  | plan capital, $Q_P=a-P_P$                                               | @sec-InsCo-opt                                  |</span>
+<span id="cb1-93"><a href="#cb1-93"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-94"><a href="#cb1-94"></a>| $r$                    | EVA/capital ratio, $r=V/Q_P$                                            | @sec-InsCo-opt                                  |</span>
+<span id="cb1-95"><a href="#cb1-95"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-96"><a href="#cb1-96"></a>| $S_k$                  | layer $k$ attachment probability, $S_k=Pr(X &gt; X_k)$                     | @sec-Pricing-layers                             |</span>
+<span id="cb1-97"><a href="#cb1-97"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-98"><a href="#cb1-98"></a>| $\mathsf{TVaR}_{0.99}$ | InsCo example capital standard                                          | @sec-Risk-Analysis                              |</span>
+<span id="cb1-99"><a href="#cb1-99"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-100"><a href="#cb1-100"></a>| $V$                    | EVA, economic value added, $V=P_P-P_R$                                  | @sec-InsCo-opt                                  |</span>
+<span id="cb1-101"><a href="#cb1-101"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-102"><a href="#cb1-102"></a>| $\mathsf{VaR}_{0.85}$  | example alternative risk measure                                        | @sec-Risk-Analysis                              |</span>
+<span id="cb1-103"><a href="#cb1-103"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-104"><a href="#cb1-104"></a>| $X$                    | portfolio liability random variable                                     | @sec-Intro-Insco                                |</span>
+<span id="cb1-105"><a href="#cb1-105"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-106"><a href="#cb1-106"></a>| $X_0$                  | phantom portfolio loss $X_0=0$ with probability $p_0=0$                 | @sec-Complications                              |</span>
+<span id="cb1-107"><a href="#cb1-107"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-108"><a href="#cb1-108"></a>| $X_j^i$                | loss to unit $i$ in event $j$                                           | @sec-BO-Units                                   |</span>
+<span id="cb1-109"><a href="#cb1-109"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-110"><a href="#cb1-110"></a>| $X_j$                  | portfolio loss in event $j$                                             | @sec-BO-Units                                   |</span>
+<span id="cb1-111"><a href="#cb1-111"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-112"><a href="#cb1-112"></a>| $X_k$                  | layer payout threshold (attachment)                                     | @sec-Pricing-layers                             |</span>
+<span id="cb1-113"><a href="#cb1-113"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-114"><a href="#cb1-114"></a>| $X\wedge a$            | portfolio payout to policyholders                                       | @sec-Intro-Insco                                |</span>
+<span id="cb1-115"><a href="#cb1-115"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-116"><a href="#cb1-116"></a>| $X^i(a)$               | unit $i$ capped losses                                                  | @sec-Complications                              |</span>
+<span id="cb1-117"><a href="#cb1-117"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-118"><a href="#cb1-118"></a>| $X^i$                  | loss to unit $i$ (random variable)                                      | @sec-BO-Units                                   |</span>
+<span id="cb1-119"><a href="#cb1-119"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-120"><a href="#cb1-120"></a>| $Z_k$                  | event weight, likelihood ratio, $Z_k=q_k/p_k$                           | @sec-Pricing-layers                             |</span>
+<span id="cb1-121"><a href="#cb1-121"></a>+------------------------+-------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-122"><a href="#cb1-122"></a></span>
+<span id="cb1-123"><a href="#cb1-123"></a>: Symbols used in this monograph. {#tbl-intro-symbols-alpha}</span>
+<span id="cb1-124"><a href="#cb1-124"></a></span>
+<span id="cb1-125"><a href="#cb1-125"></a>\normalsize</span>
+<span id="cb1-126"><a href="#cb1-126"></a></span>
+<span id="cb1-127"><a href="#cb1-127"></a>\clearpage</span>
+<span id="cb1-128"><a href="#cb1-128"></a></span>
+<span id="cb1-129"><a href="#cb1-129"></a><span class="fu">## Actuarial Standards of Practice {#sec-ASOPs}</span></span>
+<span id="cb1-130"><a href="#cb1-130"></a></span>
+<span id="cb1-131"><a href="#cb1-131"></a>"The Actuarial Standards Board (ASB) sets standards for appropriate actuarial practice in the United States through the development and promulgation of Actuarial Standards of Practice (ASOPs). These ASOPs describe the procedures an actuary should follow when performing actuarial services and identify what the actuary should disclose when communicating the results of those services." ASOPs can be found at https://www.actuarialstandardsboard.org/standards-of-practice/</span>
+<span id="cb1-132"><a href="#cb1-132"></a></span>
+<span id="cb1-133"><a href="#cb1-133"></a>\footnotesize</span>
+<span id="cb1-134"><a href="#cb1-134"></a></span>
+<span id="cb1-135"><a href="#cb1-135"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-136"><a href="#cb1-136"></a>| **Number**  | **Title**                                                                                                        | **Reference**                                   |</span>
+<span id="cb1-137"><a href="#cb1-137"></a>+:===========:+:=================================================================================================================+=================================================+</span>
+<span id="cb1-138"><a href="#cb1-138"></a>| 7           | Analysis of Life, Health, or Property/Casualty Insurer Cash Flows                                                | @sec-Business-Operations                        |</span>
+<span id="cb1-139"><a href="#cb1-139"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-140"><a href="#cb1-140"></a>| 23          | Data Quality                                                                                                     | @sec-Business-Operations                        |</span>
+<span id="cb1-141"><a href="#cb1-141"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-142"><a href="#cb1-142"></a>| 30          | Treatment of Profit and Contingency Provisions and the Cost of Capital in Property/Casualty Insurance Ratemaking | @sec-Pricing-Allocation                         |</span>
+<span id="cb1-143"><a href="#cb1-143"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-144"><a href="#cb1-144"></a>| 46          | Risk Evaluation in Enterprise Risk Management                                                                    | @sec-Business-Operations, @sec-Capital-Adequacy |</span>
+<span id="cb1-145"><a href="#cb1-145"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-146"><a href="#cb1-146"></a>| 47          | Risk Treatment in Enterprise Risk Management                                                                     | @sec-Getting-Started, @sec-Risk-Analysis        |</span>
+<span id="cb1-147"><a href="#cb1-147"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-148"><a href="#cb1-148"></a>| 55          | Capital Adequacy Assessment                                                                                      | @sec-Capital-Adequacy                           |</span>
+<span id="cb1-149"><a href="#cb1-149"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-150"><a href="#cb1-150"></a>| 56          | Modeling                                                                                                         | @sec-Business-Operations                        |</span>
+<span id="cb1-151"><a href="#cb1-151"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-152"><a href="#cb1-152"></a>| 58          | Enterprise Risk Management                                                                                       | @sec-Business-Operations, @sec-Capital-Adequacy |</span>
+<span id="cb1-153"><a href="#cb1-153"></a>+-------------+------------------------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-154"><a href="#cb1-154"></a></span>
+<span id="cb1-155"><a href="#cb1-155"></a>: ASOPs that are relevant to capital modeling. {#tbl-likely-ASOPs}</span>
+<span id="cb1-156"><a href="#cb1-156"></a></span>
+<span id="cb1-157"><a href="#cb1-157"></a>\normalsize</span>
+<span id="cb1-158"><a href="#cb1-158"></a></span>
+<span id="cb1-159"><a href="#cb1-159"></a>The ASB repealed ASOP Nos. 46 and 47 in December 2024 and replaced them with ASOP No. 58, Enterprise Risk Management, to reflect the developments since 2012, to better reflect today’s ERM practices and terminology, and to align with ASOP No. 55.</span>
+<span id="cb1-160"><a href="#cb1-160"></a></span>
+<span id="cb1-161"><a href="#cb1-161"></a>\footnotesize</span>
+<span id="cb1-162"><a href="#cb1-162"></a></span>
+<span id="cb1-163"><a href="#cb1-163"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-164"><a href="#cb1-164"></a>| **Number** | **Title**                                                                                                    |</span>
+<span id="cb1-165"><a href="#cb1-165"></a>+:==========:+:=============================================================================================================+</span>
+<span id="cb1-166"><a href="#cb1-166"></a>| 12         | Risk Classification (for All Practice Areas)                                                                 |</span>
+<span id="cb1-167"><a href="#cb1-167"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-168"><a href="#cb1-168"></a>| 13         | Trending Procedures in Property/Casualty Insurance                                                           |</span>
+<span id="cb1-169"><a href="#cb1-169"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-170"><a href="#cb1-170"></a>| 19         | Appraisals of Casualty, Health, and Life Insurance Businesses                                                |</span>
+<span id="cb1-171"><a href="#cb1-171"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-172"><a href="#cb1-172"></a>| 20         | Discounting of Property/Casualty Claim Estimates                                                             |</span>
+<span id="cb1-173"><a href="#cb1-173"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-174"><a href="#cb1-174"></a>| 25         | Credibility Procedures                                                                                       |</span>
+<span id="cb1-175"><a href="#cb1-175"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-176"><a href="#cb1-176"></a>| 29         | Expense Provisions for Prospective Property/Casualty Risk Transfer and Risk Retention                        |</span>
+<span id="cb1-177"><a href="#cb1-177"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-178"><a href="#cb1-178"></a>| 36         | Statements of Actuarial Opinion Regarding Property/Casualty Loss, Loss Adjustment Expense, or Other Reserves |</span>
+<span id="cb1-179"><a href="#cb1-179"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-180"><a href="#cb1-180"></a>| 38         | Catastrophe Modeling (for All Practice Areas)                                                                |</span>
+<span id="cb1-181"><a href="#cb1-181"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-182"><a href="#cb1-182"></a>| 39         | Treatment of Catastrophe Losses in Property/Casualty Insurance Ratemaking                                    |</span>
+<span id="cb1-183"><a href="#cb1-183"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-184"><a href="#cb1-184"></a>| 41         | Actuarial Communications                                                                                     |</span>
+<span id="cb1-185"><a href="#cb1-185"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-186"><a href="#cb1-186"></a>| 43         | Property/Casualty Unpaid Claim Estimates                                                                     |</span>
+<span id="cb1-187"><a href="#cb1-187"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-188"><a href="#cb1-188"></a>| 53         | Estimating Future Costs for Prospective Property/Casualty Risk Transfer and Risk Retention                   |</span>
+<span id="cb1-189"><a href="#cb1-189"></a>+------------+--------------------------------------------------------------------------------------------------------------+</span>
+<span id="cb1-190"><a href="#cb1-190"></a></span>
+<span id="cb1-191"><a href="#cb1-191"></a>: ASOPs that are potentially relevant to capital modeling. {#tbl-potential-ASOPs}</span>
+<span id="cb1-192"><a href="#cb1-192"></a></span>
+<span id="cb1-193"><a href="#cb1-193"></a>\normalsize</span>
+<span id="cb1-194"><a href="#cb1-194"></a></span>
+<span id="cb1-195"><a href="#cb1-195"></a>\clearpage </span>
+<span id="cb1-196"><a href="#cb1-196"></a></span>
+<span id="cb1-197"><a href="#cb1-197"></a><span class="fu">## Glossary</span></span>
+<span id="cb1-198"><a href="#cb1-198"></a></span>
+<span id="cb1-199"><a href="#cb1-199"></a>\footnotesize</span>
+<span id="cb1-200"><a href="#cb1-200"></a></span>
+<span id="cb1-201"><a href="#cb1-201"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-202"><a href="#cb1-202"></a>| **Term**                            | **Description**                                                                                     | **Reference**                                   |</span>
+<span id="cb1-203"><a href="#cb1-203"></a>+:====================================+:====================================================================================================+:================================================+</span>
+<span id="cb1-204"><a href="#cb1-204"></a>| **Accounting**                      | module that produces financial statements                                                           | @sec-System-Overview                            |</span>
+<span id="cb1-205"><a href="#cb1-205"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-206"><a href="#cb1-206"></a>| **Allocation**                      | module that distributes portfolio premium to units                                                  | @sec-System-Overview                            |</span>
+<span id="cb1-207"><a href="#cb1-207"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-208"><a href="#cb1-208"></a>| **BCAR**                            | Best's Capital Adequacy Ratio                                                                       | @sec-System-Overview                            |</span>
+<span id="cb1-209"><a href="#cb1-209"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-210"><a href="#cb1-210"></a>| **Bi-TVaR**                         | convex combination of TVaRs                                                                         | @sec-Selecting-Calibrating                      |</span>
+<span id="cb1-211"><a href="#cb1-211"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-212"><a href="#cb1-212"></a>| **Business Operations**             | module that deals with loss experience                                                              | @sec-System-Overview                            |</span>
+<span id="cb1-213"><a href="#cb1-213"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-214"><a href="#cb1-214"></a>| **Capital**                         | owner-provided funds                                                                                | @sec-What-Into                                  |</span>
+<span id="cb1-215"><a href="#cb1-215"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-216"><a href="#cb1-216"></a>| **Capital Adequacy**                | module dealing with risk and capital sufficiency                                                    | @sec-System-Overview                            |</span>
+<span id="cb1-217"><a href="#cb1-217"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-218"><a href="#cb1-218"></a>| **Capital risk measure**            | rule relating liabilities to required assets                                                        | @sec-Intro-Insco                                |</span>
+<span id="cb1-219"><a href="#cb1-219"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-220"><a href="#cb1-220"></a>| **Capital structure**               | mix of liabilities funding total assets                                                             | @sec-System-Overview, @sec-BO-Capital-Structure |</span>
+<span id="cb1-221"><a href="#cb1-221"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-222"><a href="#cb1-222"></a>| **Charter**                         | formal document setting out the rationale                                                           | @sec-Structure-Monograph                        |</span>
+<span id="cb1-223"><a href="#cb1-223"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-224"><a href="#cb1-224"></a>| **Co-TVaR**                         | conditional TVaR, Natural Allocation of TVaR                                                        | @sec-Risk-Analysis                              |</span>
+<span id="cb1-225"><a href="#cb1-225"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-226"><a href="#cb1-226"></a>| **co-XTVaR**                        | Conditional XTVaR                                                                                   | @sec-ISA                                        |</span>
+<span id="cb1-227"><a href="#cb1-227"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-228"><a href="#cb1-228"></a>| **Comonotonic**                     | Random variables $X$ and $Y$ are comonotonic if they are nondecreasing functions of a third r.v.    | @sec-Pricing-Allocation                         |</span>
+<span id="cb1-229"><a href="#cb1-229"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-230"><a href="#cb1-230"></a>| **Comonotonic additive**            | Property of a risk measure $\rho$: If $X$ and $Y$ are comonotonic, then $\rho(X+Y)=\rho(X)+\rho(Y)$ | @sec-Pricing-Allocation                         |</span>
+<span id="cb1-231"><a href="#cb1-231"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-232"><a href="#cb1-232"></a>| **Constant cost of capital (CCoC)** | assumption that all layers require the same return                                                  | @sec-Pricing-layers                             |</span>
+<span id="cb1-233"><a href="#cb1-233"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-234"><a href="#cb1-234"></a>| **Distortion function**             | translates attachment probability to rate on line                                                   | @sec-Pricing-layers                             |</span>
+<span id="cb1-235"><a href="#cb1-235"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-236"><a href="#cb1-236"></a>| **Distorted expectation**           | expectation calculated with distorted probabilities $q$                                             | @sec-pricing-units, @sec-pricing-events         |</span>
+<span id="cb1-237"><a href="#cb1-237"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-238"><a href="#cb1-238"></a>| **Distorted expected loss share**   | a unit's share of a layer's distorted expected loss, $\beta_k^i$                                    | @sec-Allocating-Capital                         |</span>
+<span id="cb1-239"><a href="#cb1-239"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-240"><a href="#cb1-240"></a>| **Distorted probability**           | after applying a distortion function, $q$ replaces $p$                                              | @sec-Pricing-layers                             |</span>
+<span id="cb1-241"><a href="#cb1-241"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-242"><a href="#cb1-242"></a>| **Economic Scenario Generator**     | module to generate socioeconomic outcomes                                                           | @sec-System-Overview, @sec-BO-ESG               |</span>
+<span id="cb1-243"><a href="#cb1-243"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-244"><a href="#cb1-244"></a>| **Economic value added (EVA)**      | Profits beyond what is necessary for investors                                                      | @sec-Pricing                                    |</span>
+<span id="cb1-245"><a href="#cb1-245"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-246"><a href="#cb1-246"></a>| **Equal Priority**                  | Rule for distributing funds among claimants                                                         | @sec-Complications                              |</span>
+<span id="cb1-247"><a href="#cb1-247"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-248"><a href="#cb1-248"></a>| **Expected loss share**             | a unit's share of a layer expected loss, $\alpha_k^i$                                               | @sec-Allocating-Capital                         |</span>
+<span id="cb1-249"><a href="#cb1-249"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-250"><a href="#cb1-250"></a>| **Funding equation**                | states that assets are the sum of premiums and investor capital, $a=P+Q$                            | @eq-funding, @sec-Intro-Insco                   |</span>
+<span id="cb1-251"><a href="#cb1-251"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-252"><a href="#cb1-252"></a>| **Gradient**                        | derivative with respect to several variables                                                        | @sec-Risk-Analysis                              |</span>
+<span id="cb1-253"><a href="#cb1-253"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-254"><a href="#cb1-254"></a>| **InsCo**                           | hypothetical insurer used as a simple example                                                       | @sec-Intro-Insco                                |</span>
+<span id="cb1-255"><a href="#cb1-255"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-256"><a href="#cb1-256"></a>| **Insureds**                        | customers of InsCo, who pay premiums                                                                | @sec-Intro-Insco                                |</span>
+<span id="cb1-257"><a href="#cb1-257"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-258"><a href="#cb1-258"></a>| **Investors**                       | owners of InsCo, who supply capital                                                                 | @sec-Intro-Insco                                |</span>
+<span id="cb1-259"><a href="#cb1-259"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-260"><a href="#cb1-260"></a>| **Law invariance**                  | risk measure depends only on distribution                                                           | @sec-Pricing-layers                             |</span>
+<span id="cb1-261"><a href="#cb1-261"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-262"><a href="#cb1-262"></a>| **Layer**                           | segment of assets between two levels of portfolio loss                                              | @sec-Pricing-layers                             |</span>
+<span id="cb1-263"><a href="#cb1-263"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-264"><a href="#cb1-264"></a>| **Layer funding equation**          | states that layer assets are the sum of premiums and investor capital, $\Delta X_k=P_k+Q_k$         | @eq-layer-funding, @sec-Pricing-layers          |</span>
+<span id="cb1-265"><a href="#cb1-265"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-266"><a href="#cb1-266"></a>| **Likelihood ratio**                | ratio of distorted to original probabilities                                                        | @sec-pricing-events                             |</span>
+<span id="cb1-267"><a href="#cb1-267"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-268"><a href="#cb1-268"></a>| **Margin**                          | difference between premium and expected loss, $M=P-L$                                               | @eq-PLM, @sec-Pricing                           |</span>
+<span id="cb1-269"><a href="#cb1-269"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-270"><a href="#cb1-270"></a>| **Marginal approach**               | examine the effect of a small change; look at first derivative                                      | @sec-Risk-Analysis                              |</span>
+<span id="cb1-271"><a href="#cb1-271"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-272"><a href="#cb1-272"></a>| **Model**                           | simplified representation of reality, usually mathematical                                          | @sec-What-Into, @sec-System-Overview            |</span>
+<span id="cb1-273"><a href="#cb1-273"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-274"><a href="#cb1-274"></a>| **Natural Allocation (NA)**         | decomposition of portfolio premium into distorted expectation of unit losses                        | @sec-pricing-units                              |</span>
+<span id="cb1-275"><a href="#cb1-275"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-276"><a href="#cb1-276"></a>| **Natural Allocation of capital**   | allocation of capital consistent with allocation of premium, $Q_k^i$                                | @sec-Allocating-Capital                         |</span>
+<span id="cb1-277"><a href="#cb1-277"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-278"><a href="#cb1-278"></a>| **Normal copula**                   | multivariate uniform distribution based on the normal                                               | @sec-IC-NC                                      |</span>
+<span id="cb1-279"><a href="#cb1-279"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-280"><a href="#cb1-280"></a>| **Objectivity**                     | synonym for law invariance                                                                          | @sec-Pricing-layers                             |</span>
+<span id="cb1-281"><a href="#cb1-281"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-282"><a href="#cb1-282"></a>| **Parameter uncertainty**           | lack of knowledge about parameters of a process, sometimes modeled as a distribution                | @sec-Uncertainty                                |</span>
+<span id="cb1-283"><a href="#cb1-283"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-284"><a href="#cb1-284"></a>| **Pricing**                         | module assigns technical premium to the portfolio <span class="co">&lt;!--# Was "tech." properly expanded? --&gt;</span>          | @sec-System-Overview                            |</span>
+<span id="cb1-285"><a href="#cb1-285"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-286"><a href="#cb1-286"></a>| **Pricing &amp; Allocation**            | module that assigns technical premiums to units                                                     | @sec-System-Overview                            |</span>
+<span id="cb1-287"><a href="#cb1-287"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-288"><a href="#cb1-288"></a>| **Pricing risk measure**            | rule that relates liabilities to technical premiums                                                 | @sec-Intro-Insco                                |</span>
+<span id="cb1-289"><a href="#cb1-289"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-290"><a href="#cb1-290"></a>| **Pro forma**                       | hypothetical financial statement                                                                    | @sec-System-Overview , @sec-BO-Pro-Forma        |</span>
+<span id="cb1-291"><a href="#cb1-291"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-292"><a href="#cb1-292"></a>| **Proxy model**                     | simpler model of another model                                                                      | @sec-portfolio-optimization                     |</span>
+<span id="cb1-293"><a href="#cb1-293"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-294"><a href="#cb1-294"></a>| **Probabilistic database**          | stored sample of random outcomes                                                                    | @sec-BO-Units                                   |</span>
+<span id="cb1-295"><a href="#cb1-295"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-296"><a href="#cb1-296"></a>| **Process risk**                    | randomness in outcomes from a well defined and parameterized stochastic process                     | @sec-Uncertainty                                |</span>
+<span id="cb1-297"><a href="#cb1-297"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-298"><a href="#cb1-298"></a>| **Reinsurance**                     | module that deals with risk transfer                                                                | @sec-System-Overview                            |</span>
+<span id="cb1-299"><a href="#cb1-299"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-300"><a href="#cb1-300"></a>| **Risk appetite**                   | compensation/price limit for taking on risk                                                         | @sec-System-Overview                            |</span>
+<span id="cb1-301"><a href="#cb1-301"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-302"><a href="#cb1-302"></a>| **Risk tolerance**                  | limit of risk the firm is willing to take on                                                        | @sec-System-Overview                            |</span>
+<span id="cb1-303"><a href="#cb1-303"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-304"><a href="#cb1-304"></a>| **RVaR**                            | Range Value at Risk, window version of VaR                                                          | @sec-Risk-Analysis                              |</span>
+<span id="cb1-305"><a href="#cb1-305"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-306"><a href="#cb1-306"></a>| **Quantity of Interest**            | target metric, statistic, etc., of a simulation exercise                                            | @sec-Uncertainty                                |</span>
+<span id="cb1-307"><a href="#cb1-307"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-308"><a href="#cb1-308"></a>| **Spectral risk measure (SRM)**     | risk measure determined by a distortion function                                                    | @sec-Pricing-layers                             |</span>
+<span id="cb1-309"><a href="#cb1-309"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-310"><a href="#cb1-310"></a>| **State price**                     | A contract that pays \$1 in a particular state of the world                                         | @sec-pricing-events                             |</span>
+<span id="cb1-311"><a href="#cb1-311"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-312"><a href="#cb1-312"></a>| **Tranche**                         | synonym for layer                                                                                   | @sec-Pricing-layers                             |</span>
+<span id="cb1-313"><a href="#cb1-313"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-314"><a href="#cb1-314"></a>| **Unit**                            | portion of portfolio, e.g., line of business                                                        | @sec-System-Overview                            |</span>
+<span id="cb1-315"><a href="#cb1-315"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-316"><a href="#cb1-316"></a>| **Value at Risk (VaR)**             | risk measure, quantile of a distribution                                                            | @sec-System-Overview                            |</span>
+<span id="cb1-317"><a href="#cb1-317"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-318"><a href="#cb1-318"></a>| **Tail Value at Risk (TVaR)**       | average of losses in a specified tail probability; also CVaR, TCE                                   | @sec-Capital-Adequacy                           |</span>
+<span id="cb1-319"><a href="#cb1-319"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-320"><a href="#cb1-320"></a>| **Excess TVaR (XTVaR)**             | TVaR minus expected losses                                                                          | @sec-ISA                                        |</span>
+<span id="cb1-321"><a href="#cb1-321"></a>+-------------------------------------+-----------------------------------------------------------------------------------------------------+-------------------------------------------------+</span>
+<span id="cb1-322"><a href="#cb1-322"></a></span>
+<span id="cb1-323"><a href="#cb1-323"></a>\normalsize</span>
+<span id="cb1-324"><a href="#cb1-324"></a></span>
+<span id="cb1-325"><a href="#cb1-325"></a>\clearpage</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DRAFT - do not redistribute</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

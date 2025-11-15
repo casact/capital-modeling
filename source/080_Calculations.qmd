@@ -1,0 +1,488 @@
+---
+format:
+  pdf: default
+  html: default
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.4
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+```{python}
+#| echo: false
+#| label: spacer
+pass
+```
+
+# Calculations with `Aggregate` {#sec-Calcs-with-Aggregate}
+
+*Example calculations using Python and R.*
+
+This chapter reproduces many of the exhibits from the main text using Python and the `aggregate` package. It also describes how to extend to more realistic examples. Throughout, we have included only terse subsets of code so the reader can focus on the results and the output. Instructions for obtaining the full code are provided below.
+
+## `Aggregate` and Python
+
+`aggregate` is a Python package that can be used to build approximations to compound (aggregate) probability distributions quickly and accurately, and to solve insurance, risk management, and actuarial problems using realistic models that reflect underlying frequency and severity. It delivers the speed and accuracy of parametric distributions to situations that usually require simulation, making it as easy to work with an aggregate (compound) probability distribution as the lognormal. `aggregate` includes an expressive language called DecL to describe aggregate distributions.
+
+The `aggregate` package is available on [PyPi](https://pypi.org/project/aggregate/), the source code is on GitHub at <https://github.com/mynl/aggregate>, and there is extensive [documentation](https://aggregate.readthedocs.io/en/latest/). The `Aggregate` class and DecL lanaguage are described in @Mildenhall2024. There is also an extensive series of videos introducing various capabilities available on [YouTube](https://www.youtube.com/playlist?list=PLQQxycbewjqMDmw0hfZdB6Rzm60Qcq3Ao).
+
+## `Aggregate` and R
+
+Python packages can be used in R via the reticulate library. Python and R code can also be mixed in RMarkdown (now Quarto) files. This [short video](https://www.youtube.com/watch?v=jA9rVMHVqI0) explains how to use `aggregate` from R.
+
+## Reproducing the code examples {#sec-setup-code}
+
+To reproduce the Python code examples, you must set up your environment and then install `aggregate` using
+
+``` python
+pip install aggregate
+```
+
+The formatting of the examples relies on `greater_tables`, which can be installed in the same way. The installation process will also install several standard packages, such as `numpy` and `pandas`, that it depends on. If you get an error message about other missing packages, you can install them with `pip`. All the code in the monograph runs on `aggregate` version 0.24.0 and should run on any later version. If you have an older version installed, you can updated it with `pip install -U aggregate`.
+
+Once `aggregate` is installed, start by importing basic libraries. The next code block shows the relevant `aggregate` function. The class `GT` from `greater_tables` is used to format DataFrames consistently.
+
+``` python
+from aggregate import (
+    Portfolio,                  # creates multi-unit portfolios
+    make_ceder_netter,          # models reinsurance
+    Distortion                  # creates a Distortion function
+)
+from greater_tables import GT   # consistent table format
+```
+
+```{python}
+#| echo: false
+#| label: lstx-setup-code
+%run prefob.py
+
+# column ordering to match remainder of Monograph
+jam_order = ['L', 'a', 'Q', 'P', 'M', 'COC']
+```
+
+\medskip
+
+**Online resources.** Complete code samples can be extracted from the online version of the monograph, available at <https://cmm.mynl.com/>. Each code block has a small copy icon in the upper right-hand corner. The code blocks on each page can all be shown or hidden using the `</>Code` control at the top of the page. To download the original qmd file, use the View Source option under the same control. Alternatively, the entire Quarto (previously RMarkdown) source can be downloaded from GitHub at https://github.com/mynl/CapitalModeling (CAS TO INSERT OWN LINK).
+
+## Reproducing the discrete example {#sec-sde}
+
+### Input data and setup
+
+The InsCo example running through this monograph is based on the 10 events shown in @tbl-10-sims, which reproduces @tbl-dupe-x, and adds the mean and CV. For reference, here is the code to create the underlying dataframe.
+
+```{python}
+#| echo: true
+#| label: lstx-loss-sample
+loss_sample = pd.DataFrame(
+    {
+        'A': [ 5,  7, 15, 15, 13,  5, 15, 26, 17, 16],
+        'B': [20, 33, 13,  7, 20, 27, 16, 19,  8, 20],
+        'C': [11,  0,  0,  0,  7,  8,  9, 10, 40, 64],
+    }
+)
+loss_sample['total'] = loss_sample.sum(axis=1)
+loss_sample['p_total'] = 1/10
+print(loss_sample)
+```
+
+```{python}
+#| echo: false
+#| label: tbl-10-sims
+#| tbl-cap: The 10 equally likely simulations underlying the basic examples.
+loss_sample = pd.DataFrame(
+    {
+        'A': [ 5,  7, 15, 15, 13,  5, 15, 26, 17, 16],
+        'B': [20, 33, 13,  7, 20, 27, 16, 19,  8, 20],
+        'C': [11,  0,  0,  0,  7,  8,  9, 10, 40, 64],
+        'p_total': 1/10
+    }
+)
+loss_sample['total'] = loss_sample.iloc[:, :3].sum(1)
+
+# add mean and CV
+wgs = loss_sample.copy()
+wgs_ = wgs.copy().drop(columns='p_total')
+wgs_['total'] = wgs.drop(columns='p_total').sum(1)
+wgs2 = wgs_.copy()
+wgs2.loc['EX', :] = wgs_.mean(0)
+wgs2.loc['EX2', :] = (wgs_**2).mean(0)
+wgs2.loc['Var', :] = wgs2.loc['EX2', :] - wgs2.loc['EX', :]**2
+wgs2.loc['CV', :] = wgs2.loc['Var', :]**.5 / wgs2.loc['EX', :]
+wgs2 = wgs2.drop(index = ['EX2', 'Var'])
+fGT(wgs2)
+```
+
+Now we create an `aggregate` `Portfolio` class instance based on the `loss_sample` simulation output. The next block shows how to do this, using the `Portfolio.create_from_sample` method. `TMA1` is a label, and `loss_sample` is the dataframe created previously. The other arguments specify working with unit-sized buckets `bs=1` appropriate for our integer losses and to use $256=2^8$ buckets, `log2=8`.
+
+```{python}
+#| echo: true
+#| label: lstx-create-port
+wport = Portfolio.create_from_sample('TMA1', loss_sample, bs=1, log2=8)
+```
+
+The next line of code displays @tbl-wport, which shows summary output from the object `wport` by accessing its `describe` attribute. The summary includes the mean, CV, and skewness. The model and estimated (`Est`) columns are identical because we specified the distribution directly; no simulation or Fast Fourier Transform-based numerical methods are employed.
+
+```{python}
+#| echo: true
+#| label: tbl-wport
+#| tbl-cap: Summary statistics for the base example.
+fGT(wport.describe.drop(columns=['Err E[X]', 'Err CV(X)']))
+```
+
+Next, we need to calibrate distortion functions to achieve the desired pricing. The example uses full capitalization throughout (assets equal the maximum loss), which is equivalent to a 100% percentile level (see @tbl-quantiles) and assumes the cost of capital is 15%. The code runs the calibration by calling `wport.calibrate_distortions` with arguments for the capital percentile level `Ps` and cost of capital `COCs`. The arguments are passed as lists because the routine can be used to solve for several percentile levels and costs simultaneously. @tbl-9-1 shows the resulting parameters, which match those in @tbl-the5dists.
+
+```{python}
+#| echo: true
+#| label: lstx-9-1
+# calibrate to 15% return at p=100% capital standard
+wport.calibrate_distortions(Ps=[1], COCs=[.15]);
+```
+
+```{python}
+#| echo: false
+#| label: tbl-9-1
+#| tbl-cap: "Distortion functions calibrated to 15% return on full capital."
+fGT(wport.distortion_df[['P', 'param', 'error']].droplevel([0, 1], 0))
+```
+
+@fig-distortion-functions shows the resulting distortion $g$ functions (top) and the probability adjustment $Z=q/p$ (bottom). The red star indicates a probability mass at $p=1$.
+
+```{python}
+#| echo: false
+#| label: fig-distortion-functions
+#| fig-cap: Distortion functions (top row) and distortion probability adjustment functions (bottom row).
+
+fig, axs = plt.subplots(2, 5, figsize=(5*1.25, 2*1.25), constrained_layout=True,
+                        sharey=False, sharex=False)
+axi0 = iter(axs[0])
+axi1 = iter(axs[1])
+xs = np.linspace(0, 1, 101)
+for (k, v), ax1, ax in zip(wport.dists.items(), axi0, axi1):
+    if k == 'ccoc':
+        ax.plot([0,1], [1/1.15]*2)
+        ax.plot(1, 2, 'r*')
+    else:
+        ax.plot(xs, v.g_prime(xs[::-1]))
+    ax.plot([0, 1], [1,1], lw=.5, c='k')
+    ax.set(ylim=[-0.05, 2.5])
+    if ax is axs[1][0]:
+        ax.set(ylabel='Z', xlabel='Percentile')
+
+    ax1.plot(xs, v.g(xs))
+    ax1.plot([0, 1], [0, 1], 'k', lw=.25)
+    k = f'{k}({v.shape:.3f})'
+    ax1.set(title=k, ylim=[-0.025, 1.025])
+    if ax1 is axs[0][0]:
+        ax1.set(xlabel='Exceedance prob, s',
+                ylabel='g(s)',
+                aspect='equal')
+```
+
+For technical reasons (discussed in @sec-Complications as well as chapter 14.1.5 in @PIR, see especially Figure 14.2), we must summarize the 10 events by distinct totals. Routine code produces @tbl-5-1, reproducing @tbl-abc-x.
+
+```{python}
+#| echo: false
+#| label: tbl-5-1
+#| tbl-cap: Assumptions for portfolio, summarized by distinct totals.
+bit = loss_sample.copy()
+bit['Total'] = bit[['A','B','C']].sum(axis=1)
+bit = bit.sort_values('Total')
+bit2 = bit.groupby('Total').apply(
+        # [[]].values -> column vector to broadcast correctly
+        lambda grp: (grp[['A', 'B', 'C']] *
+                    grp[['p_total']].values).sum() / grp['p_total'].sum()
+        )
+bit2['p'] = bit.groupby('Total').apply(lambda grp: grp[['p_total']].sum())
+bit2 = bit2.reset_index(drop=True)
+bit2.loc['EX'] = bit.mean(0)
+bit2.loc['EX', 'p'] = 1
+bit2.loc['Plan'] = [13.9, 18.7, 19.6, 1]
+bit2['Total'] = bit2[['A','B','C']].sum(1)
+fGT(bit2)
+```
+
+The examples describe a VaR- or TVaR-based capital standard (see @tbl-CA-loss-levels), but for this example it works out to the the same as a fully capitalized 100% standard, as shown by the values in @tbl-quantiles. The `wport` methods `q` and `tvar` compute quantiles and TVaRs for each unit and the total.
+
+```{python}
+#| echo: false
+#| label: tbl-quantiles
+#| tbl-cap: Quantiles (VaR) and TVaR at different probability levels.
+ps = [.8, .85, .9, 1]
+fGT(pd.DataFrame({'p': ps, 'Quantile': wport.q(ps),
+                 'TVaR': wport.tvar(ps)}).set_index('p'))
+```
+
+### Premiums by distortion
+
+@tbl-isa-alloc shows premium assuming a CCoC distortion with a 15% return applied using a 100% capital standard. The premium `P` row shows what @PIR calls the linear NA premium. @tbl-ccoc-na reproduces this exhibit, confirming an equal 15% returns across all allocated capital. The code illustrates the power of `aggregate`. The first line creates a CCoC distortion using the `Distortion` class; note the argument is risk discount $\delta$. The second line uses the `price` method to compute the linear allocation, which it returns in a structure with various diagnostic information, including @tbl-ccoc-na.
+
+```{python}
+#| echo: true
+#| label: lstx-ccoc-na-0
+ccoc = Distortion.ccoc(.15 / 1.15)
+pricing_info = wport.price(1, ccoc, allocation='linear')
+```
+
+```{python}
+#| echo: false
+#| label: tbl-ccoc-na
+#| tbl-cap: Industry standard approach pricing using the CCoC distortion.
+# best to drop the multi-index columns
+fGT(pricing_info.df[jam_order].T.droplevel(0, 1),
+    aligners={c: 'r' for c in jam_order})
+```
+
+@tbl-x-collapsed, @tbl-ccoc-1 and @tbl-ccoc-qx compute $\rho(X)$ for $\rho$ the CCoC SRM, using the $\rho(X)=\int g(S(x))\,dx$ (second table) and $\rho(X)=\int xg'(S(x))f(x)\,dx$ (third) representations. The numbers needed for these calculations are shown in @tbl-gs-calcs, where $q=g'(S(x))f(x)$. These are extracted from the dataframe `wport.density_df,` which contains the probability mass, density, and survival functions for the portfolio, among other facts. The last row carries out the calculations and confirms the two methods give the same result, the total under $gS$ using the former representation and under $q$ using the latter representation.
+
+```{python}
+#| echo: false
+#| label: tbl-gs-calcs
+#| tbl-cap: "Industry standard approach pricing: raw ingredients and computed means."
+bit = wport.density_df.query('p_total > 0')[['p_total', 'F', 'S']]
+bit['gS'] = ccoc.g(bit.S)
+bit['q'] = -np.diff(bit.gS, prepend=1)
+bit['ΔX'] = np.diff(bit.index, append=100)
+bit.index.name = 'loss'
+eq = (bit.index * bit.q).sum()
+gsdx = (bit.gS.iloc[:-1] * np.diff(bit.index)).sum() + bit.index[0]
+bit.loc['$\\rho(X)$'] = ''
+bit.loc['$\\rho(X)$', 'q'] = eq
+bit.loc['$\\rho(X)$', 'gS'] = gsdx
+
+fGT(bit, aligners={c:'r' for c in bit.columns})
+```
+
+
+
+@tbl-all-distortion-pricing shows the results for the other standard distortions. The calculations match those of the Wang in @tbl-all-distortion-pricing-3. All of the calibrated distortions are carried in the dictionary `wport.dists`. These tables also include the NA of capital (a process we do not recommend, but that is described in @sec-Allocating-Capital). The `Q` row matches the calculation of allocated capital shown in @tbl-q-alloc.
+
+```{python}
+#| echo: false
+#| label: tbl-all-distortion-pricing
+#| tbl-cap: Pricing by distortion by unit.
+#| layout-ncol: 1
+#| tbl-subcap: [CCoC, PH, Wang, Dual, TVaR]
+
+for k, g in wport.dists.items():
+    display(fGT(
+        wport.price(1, g, allocation='lifted').df[jam_order].T.droplevel(0, 1)))
+```
+
+### Reinsurance analysis
+
+@sec-Applications analyzes a possible 35 xs 65 aggregate stop loss reinsurance contract. The setup to analyze this contract, using a separate `Portfolio` object, is shown next. The first two lines apply reinsurance; `[1, 35, 65]` specifies 100% of the 35 xs 65 layer, and `c` and `n` are functions mapping gross to ceded and net. The last line creates a new `Portfolio` object from the net and ceded aggregate losses.
+
+```{python}
+#| echo: true
+#| label: lstx-setup-re
+loss_sample_re = loss_sample.copy()
+c, n = make_ceder_netter([(1, 35, 65)])
+loss_sample_re['Net'] = n(loss_sample_re.total)
+loss_sample_re['Ceded'] = c(loss_sample_re.total)
+loss_sample_re = loss_sample_re[['Net', 'Ceded', 'p_total']]
+
+# build Portfolio object with Net, Ceded units
+wport_re = Portfolio.create_from_sample('WGS3',
+            loss_sample_re[['Net', 'Ceded', 'p_total']], bs=1, log2=8)
+```
+
+@tbl-re-object shows the standard summary statistics.
+
+```{python}
+#| echo: false
+#| label: tbl-re-object
+#| tbl-cap: "Summary statistics created by the reinsurance Portfolio object."
+fGT(wport_re.describe.drop(columns=['Err E[X]', 'Err CV(X)']))
+```
+
+```{python}
+#| echo: false
+#| label: tbl-all-distortioun-re-pricing
+#| tbl-cap: Pricing by distortion for ceded, net, and total (gross).
+#| layout-ncol: 1
+#| tbl-subcap: [CCoC, PH, Wang, Dual, TVaR]
+
+for k, g in wport.dists.items():
+    display(fGT(wport_re.price(1, g, allocation='lifted').df[jam_order].T.droplevel(0, 1)))
+```
+
+\clearpage
+
+## A more realistic example {#sec-realistic}
+
+In this section, we create a series of exhibits analogous to those in @sec-sde for an example with more realistic assumptions. It is included to show how `aggregate` can be used to solve real-world problems, hopefully motivating you to explore it further. The analysis steps are:
+
+1.  Create realistic by-unit frequency and severity distributions using Fast Fourier Transforms with independent units.
+2.  Sample the unit distributions with correlation induced by Iman-Conover, @sec-iman-conover.
+3.  Build a `Portfolio` from the correlated sample.
+4.  Calibrate distortions and compute unit pricing for each distortion.
+5.  Apply by-unit, per-occurrence reinsurance and examine pricing impact.
+
+The `aggregate` DecL programming language makes it easy to specify frequency-severity compound distributions. In the code chunk below, the four lines inside the `build` statement are the DecL program. The triple quotes are Python shorthand for entering a multiline string. The first program line, beginning `agg Auto`, creates a distribution with an expected loss of 5000 (think: losses in 000s), severity from the 5000 xs 0 layer of a lognormal variable with a mean of 50 and a CV of 2, and gamma mixed-Poisson frequency with a mixing parameter (CV) of 0.2. The other two lines are analogous. The `build` statement runs the DecL program and creates a `Portfolio` object with relevant compound distributions by unit. It also sums the unit distributions as though they were independent---we will introduce some correlation later.
+
+```{python}
+#| echo: true
+#| label: lstx-univariates-0
+from aggregate import build
+port = build("""
+port Units
+    agg Auto 5000 loss  5000 xs 0 sev lognorm 50 cv  2 mixed gamma 0.2
+    agg GL   3000 loss  2500 xs 0 sev lognorm 75 cv  3 mixed gamma 0.3
+    agg WC   7000 loss 25000 xs 0 sev lognorm  5 cv 10 mixed gamma 0.25
+""")
+```
+
+@tbl-univariates-1 shows the by-unit frequency and severity statistics and the total statistics assuming the units are independent. The deviation between the Fast Fourier Transform-generated compound distributions and the requested specifications are negligible. @fig-univariates plots the unit and total densities on a nominal and log scale. The effect of WC driving the tail, via thicker severity and higher occurrence limit, is clear on the log plot.
+
+```{python}
+#| echo: false
+#| label: tbl-univariates-1
+#| tbl-cap: "Unit frequency, severity and compound assumptions, and portfolio total, showing requested and model achieved and key statistics."
+fGT(port.describe.drop(columns=['Err E[X]', 'Err CV(X)']).fillna(0))
+```
+
+```{python}
+#| echo: false
+#| label: fig-univariates
+#| fig-cap: By-unit loss densities (left) and logdensities (right).
+
+fig, axs = plt.subplots(1, 2, figsize=(6, 2.5), constrained_layout=True)
+ax0, ax1 = axs.flat
+
+bit = port.density_df[[f'p_{i}' for i in port.unit_names_ex]]
+bit.plot(ax=ax0)
+ax0.set(title='Loss density by unit', xlim=[0, port.q(0.999)], xlabel='Loss',
+       ylabel='Density')
+
+
+bit = port.density_df[[f'p_{i}' for i in port.unit_names_ex]]
+bit.plot(ax=ax1)
+ax1.legend().set(visible=False)
+ax1.set(title='Loss log-density by unit',
+        xlim=[0, port.q(0.999999)], xlabel='Loss',
+        yscale='log', ylabel='Log density',
+        ylim=[1e-15, 1e-3]);
+```
+
+Next, we sample from the unit distributions and shuffle using Iman-Conover to achieve the desired correlation shown in @tbl-correl. This matrix comes from a separate analysis. The revised statistics (note higher total CV), quantiles, and achieved correlation are shown in @tbl-stats-sample and @tbl-correl-sample.
+
+```{python}
+#| echo: false
+#| label: tbl-correl
+#| tbl-cap: "Desired correlation matrix, as input to Iman-Conover."
+desired_corr = np.array([[1.,    .5,   .4],
+                        [.5,    1.,   .1],
+                        [.4,    .1,   1.]])
+fGT(pd.DataFrame(desired_corr, index=port.unit_names, columns=port.unit_names))
+```
+
+```{python}
+#| echo: false
+#| label: tbl-stats-sample
+#| tbl-cap: 'Key statistics from sample with Iman-Conover induced correlation.'
+sample = port.sample(1000, desired_correlation=desired_corr)
+sample['total'] = sample.sum(1)
+st = sample.describe()
+st.loc['CV'] = st.loc['std'] / st.loc['mean']
+display(fGT(st))
+```
+
+```{python}
+#| echo: false
+#| label: tbl-correl-sample
+#| tbl-cap: 'Achived between-unit correlation.'
+
+lin = sample.corr()
+rk = sample.corr('spearman')
+mask = np.tril(np.ones(rk.shape), k=-1)==1
+fGT(lin.where(~mask, other=0) + rk.where(mask, other=0))
+```
+
+@tbl-univariates-corr shows the output of using the correlated sample to build a `Portfolio` object. This uses the samples directly, proxying the aggregate loss as a compound with degenerate frequency distribution identically equal to one and severity equal to the desired distribution. Hence the frequency rows show expectation one with zero CV.
+
+```{python}
+#| echo: false
+#| label: tbl-univariates-corr
+#| tbl-cap: "Portfolio statistics reflecting the correlation achieved by the Iman-Conover sample."
+port_corr = Portfolio.create_from_sample('UnitsCorr', sample,
+            bs=port.bs, log2=port.log2)
+fGT(port_corr.describe.drop(columns=['Err E[X]', 'Err CV(X)']))
+```
+
+@tbl-param-d shows the parameters for distortions calibrated to achieve an overall 15% return at a 99.5% capital standard. @fig-distortion-functions-sample plots the distortions and probability adjustment functions, compare this with @fig-distortion-functions. These distortions are slightly more risk averse (higher parameters except PH, driving higher indicated prices).
+
+```{python}
+#| echo: false
+#| label: tbl-param-d
+#| tbl-cap: "Distortion parameters for to target total return at the regulatory capital standard."
+reg_p = 0.995  # regulatory capital standard
+wacc = 0.15    # computed total weighted average cost of capital
+port_corr.calibrate_distortions(Ps=[reg_p], COCs=[wacc])
+fGT(port_corr.distortion_df[['P', 'param', 'error']].droplevel([0, 1], 0))
+```
+
+```{python}
+#| echo: false
+#| label: fig-distortion-functions-sample
+#| fig-cap: Distortion functions and distortion probability adjustment functions.
+
+fig, axs = plt.subplots(2, 5, figsize=(5*1.25, 2*1.25),
+                        constrained_layout=True,
+                        sharey=False, sharex=False)
+axi0 = iter(axs[0])
+axi1 = iter(axs[1])
+xs = np.linspace(0, 1, 101)
+for (k, v), ax1, ax in zip(port_corr.dists.items(), axi0, axi1):
+    if k == 'ccoc':
+        ax.plot([0,1], [1/(1 + wacc)]*2)
+        ax.plot(1, 2, 'r*')
+    else:
+        ax.plot(xs, v.g_prime(xs[::-1]))
+    ax.plot([0, 1], [1,1], lw=.5, c='k')
+    ax.set(ylim=[-0.05, 2.5], xlabel='Percentile')
+    if ax is axs[0]:
+        ax.set(ylabel='Weight adjustment')
+
+    ax1.plot(xs, v.g(xs))
+    ax1.plot([0, 1], [0, 1], 'k', lw=.25)
+    k = f'{k}({v.shape:.3f})'
+    ax1.set(title=k, ylim=[-0.025, 1.025])
+    if ax1 is axs[0][0]:
+        ax1.set(xlabel='Exceedance prob, s',
+                ylabel='g(s)',
+                aspect='equal')
+```
+
+@tbl-all-distortion-realistic-pricing compares the indicated pricing by unit and distortion. It is computed using exactly the same method described for the simple discrete example. The calculations are easy enough that they can be performed in a spreadsheet, but that is not recommended unless you are very patient. @tbl-loss-ratios shows just the implied loss ratios. The total loss ratios are all the same because the distortions are all calibrated to the same overall total premium. Since WC has the heaviest tail, it gets the lowest target loss ratio under CCoC, which is the most tail-risk averse. In fact, CCoC is so tail-risk averse that GL (which offers some diversification because of the correlation structure) gets a target over 100%. This is typical CCoC behavior---cat is really expensive; everything else is cheaper. The reason is clear when you remember CCoC pricing is just a weighted average of the mean and the max. The other distortions are more reasonable. TVaR and dual are quite similar and focus more on volatility risk. Since all three lines are similarly volatile, it is no surprise their target loss ratios are also similar under this view.
+
+This analysis---and indeed the whole monograph---has ignored several important elements: expenses, taxes, and the time value of money. Expenses are relatively easy to incorporate: acquisition expenses are typically amortized over the policy term, administration expenses span the policy term and claim payout period, and claim expenses can be bundled with losses. Taxes, however, are a Byzantine labyrinth requiring careful modeling at the level of legal entity and country. Their treatment is up to each insurer, and it's hard to offer even vague general guidance. Finally, time value of money brings real conceptual and computational difficulty (as opposed to the man-made complexity of taxes). It is the quantum gravity of insurance pricing. For some early thoughts, see the forthcoming monograph Pricing Multi-Period Insurance Risk by your intrepid second author. 
+
+```{python}
+#| echo: false
+#| label: tbl-all-distortion-realistic-pricing
+#| tbl-cap: Pricing by distortion.
+#| layout-ncol: 1
+#| tbl-subcap: [CCoC, PH, Wang, Dual, TVaR]
+
+for k, g in port_corr.dists.items():
+    display(fGT(
+        port_corr.price(reg_p, g, allocation='lifted').df[jam_order].T.droplevel(0, 1)
+    ))
+```
+
+```{python}
+#| echo: false
+#| label: tbl-loss-ratios
+#| tbl-cap: "Implied loss ratio by unit by pricing by distortion (extract from previous tables)."
+ansd = port_corr.analyze_distortions(p=reg_p, efficient=True, add_comps=False)
+bit = ansd.comp_df.xs('LR', 0, 1)
+bit = bit.iloc[[0, 2, 4, 1, 3]]
+fGT(bit, ratio_cols=['Auto', 'GL', 'WC', 'total'])
+```

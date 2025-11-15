@@ -1,0 +1,27 @@
+---
+title-block-banner: img/cover-wide.png
+title-block-banner-color: "white"
+---
+
+# Preface {.unnumbered}
+
+Writing a monograph on capital modeling is a humbling experience. Capital Modeling, also known as Dynamic Financial Analysis (DFA), Enterprise Risk Analysis, or Internal Risk Modeling is at least 120 years old. It began in 1903, when Swedish actuary Filip Lundberg introduced the stochastic compound-Poisson risk model to describe how an insurer's surplus evolves over time. The literature is vast, thousands of pages across hundreds of books and articles. How can one condense that all down to a comprehensive how-to manual? The answer is, one cannot, and we do not try. Instead, we attempt to sketch out what needs to happen, and provide sufficient references to the existing literature so that the reader can obtain whatever detail is needed.
+
+Where we have introduced some innovation is at the very end of the process---capital allocation, or, more properly, the allocation of cost of capital. Here, we explore in detail the (unfortunate) consequences of assuming a fixed cost of capital rate and offer a TVaR-based generalization in its place: Spectral Risk Measures, also known as Distortion Risk Measures, and their Natural Allocation. Yet we cannot claim originality here, either, as we are leaning heavily on another decades-long vein of actuarial research.
+
+With allocation, we deliberately adopt a single-period perspective. We do not address the time required for claims to develop to ultimate, nor do we treat the insurer as a going concern. The first omission aligns with most regulatory capital models, which focus on one-year changes in reserves and new accident year loss bookings. They account for reserve risk, but not the full run-off risk. The second reflects our desire to avoid getting bogged down in what David Babbel (discussion in @Reitano1997) calls the "quagmire of equity valuation"---a topic one of us has written about already and the other chooses to avoid.
+
+It is perhaps a fitting irony that the quantification of risk is riddled with uncertainty. Capital modeling is part science, part dark art---and its real value often isn’t the final number, but the insight gained along the way. While some may chase the best estimate, models are most useful when they show a range of outcomes and the assumptions behind them. Some inputs are squishy, like risk appetite, and it's often easier to rule out wrong answers than pin down the right one. Think of capital modeling less as a calculator and more as a compass: it won't give you the answer, but it helps you head in the right direction.
+
+We draw heavily from our book @PIR. You do not need the book to implement the mechanics presented in this monograph; we wrote it to stand alone. However, it is a good source for the whys and wherefores, and advanced topics.
+
+Finally, capital modeling is a participation sport not a spectator sport. We recommend strongly that you open your favorite spreadsheet or software tool and reproduce the simple examples. Generally, as the models become more realistic they scale up in terms of number of rows and columns but not in terms of conceptual complexity. Both authors have used the basic methods outlined on 10,000+ simulated events with 100+ units and obtained satisfactory results---though this should not be attempted in a spreadsheet unless you are exceedingly patient. We apologize that straightforward spreadsheet concepts, such as the sum product of two columns or a weighted average, become intimidating mathematical formulas, but since we want to be explicit, we need to present the formulas and there's no sidestepping this. The reader will find it helpful to see through the formulas to their simple spreadsheet form, best done hands-on. Lastly, this paragraph should not be taken as an endorsement of spreadsheets. You should learn to program!
+
+
+\clearpage
+
+# About the Authors {.unnumbered}
+
+Stephen J. Mildenhall has extensive general insurance experience, having worked in primary and reinsurance pricing, broking, and education since 1992. He is a Fellow of the Casualty Actuarial Society, an Associate of the Society of Actuaries, and holds a PhD degree in mathematics from the University of Chicago.
+
+John A. Major has served as a research leader and data scientist in diverse insurance contexts, contributing to the state of the art in areas such as claim fraud detection, insurance-linked securities, terrorism risk, and catastrophe modeling. Since 2004, much of his attention has focused on the shareholder value of risk transformation. His publications in over a dozen books and journals have been cited in hundreds of scholarly articles. He is an Associate of the Society of Actuaries and holds a Master's degree in mathematics from Harvard University.

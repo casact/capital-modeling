@@ -1,0 +1,219 @@
+# Selecting and calibrating an SRM {#sec-Selecting-Calibrating}
+
+*Assume we have a can opener.*\
+*- Unknown*
+
+In @sec-Introduction, we saw that the overall portfolio profitability target---whether stated as total premium, margin, or return on capital---is typically given as an input. In @sec-Pricing-Allocation, we saw the crucial importance of the distortion function in determining how that profit requirement is distributed to portfolio units. This chapter discusses how to develop a suitable distortion function.
+
+## The envelope of possibilities and the five representatives {#sec-envelope}
+
+TVaR is an SRM. The distortion function corresponding to $\mathsf{TVaR}_p$ goes linearly from $g(0)=0$ to $g(1-p)=1$ and then stays at 1 for $s>1-p$, see @fig-the5dists. A weighted combination of SRMs with positive weights summing to one (i.e., a convex combination) is also an SRM. In particular, we call such a weighted sum of two TVaRs a **bi-TVaR**.
+
+**Exercise**: Derive an explicit expression for the distortion function associated with the bi-TVaR $\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}$.
+
+For any portfolio (i.e., loss random variable) $X$, there are two extreme values at which SRMs can price it. At one extreme, $\mathsf{TVaR}_0(X)=\mathsf E[X]$ is the minimum possible price; at the other $\mathsf{TVaR}_1(X)=\max(X)$ is the maximum.
+
+**Exercise**: Prove that for any price $P$ between $\mathsf E[X]$ and $\max(X)$, there are infinitely many SRMS $\rho$ with $\rho(X)=P$.
+
+**Solution**: Because $\mathsf{TVaR}_p(X)$ is continuous in $p$, the intermediate value theorem implies that there is a $p^\star$ with $\mathsf{TVaR}_{p^\star}(X)=P$. Similarly, because $\rho_\theta(X) \equiv \theta\mathsf{TVaR}_{0}+(1-\theta)\mathsf{TVaR}_{1}$ is continuous in $\theta$, there is a $\theta^\star$ with $\rho_{\theta^\star}(X)=P$. The first is a TVaR and the second is a bi-TVaR, so they are distinct. Any convex combination of the two---and there are infinitely many of them---will also price $X$ as $P$. \qed
+
+There are more than that, however. The same logic applies to any bi-TVaR $\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}$ with $p_0 < p^\star < p_1$; there is a $\theta^\star$ pricing it at $P$. There are infinitely many of those. Combinations of those also work. Combinations of those combinations also work. If we pass to the limit and construct infinite combinations, we get SRMs with smooth curves for distortion functions like the Wang transform.
+
+So there are many, many SRMs $\rho$ that have $\rho(X)=P$. But applied to a particular unit (via NA), they are unlikely to all give the same price to the unit. It would be useful to be able to explore the limits of high and low unit prices consistent with the given portfolio price. @PIR gives an in-depth theoretical explanation, with section 11.2 detailing the construction. Fortunately, the five representative distortions introduced in @sec-5-distortions do a good job of spanning the space of possibilities from body- (volatility-)centric to tail- (extreme risk-)centric and so in this monograph, we will consider only them.
+
+A warning, however: unless one distortion $g$ dominates another $h$ in the sense that $g(s) \ge h(s)$ for all $s$ with strict inequality for some $s$, then there are risks $X$ and $Y$ such that $\rho_g(X)>\rho_g(Y)$ and $\rho_h(X)<\rho_h(Y)$, i.e., $g$ and $h$ disagree about the relative price (riskiness) of $X$ and $Y$. That is, it is not generally possible to put distortion functions in an unambiguous order by implied price across all risks.
+
+**Exercise.** Verify that CCoC in @tbl-the5qs is the bi-TVaR between $\mathsf{TVaR}_1$ and $\mathsf{TVaR}_0$ with $\theta=0.87$.
+
+**Solution.** @tbl-bi-tvar shows the $q$ values corresponding to $\mathsf{TVaR}_0=\mathsf E[X]$ and $\mathsf{TVaR}_1=\max(X)$. The first consists of $q=p$, and the second consists of $q=1$ for the top event only, zero elsewhere.
+
+
+<!--
+
+|  $k$|  $p$  | **TVaR 0**| **TVaR 1**| **Blend**|
+|:----|:-----:|:-------:|:-------:|:-------:|
+|0    |   0   |    0    |   0   | 0.0000  |
+|1    | 0.1   |  0.1    |   0   | 0.0870  |
+|2    | 0.1   |  0.1    |   0   | 0.0870  |
+|3    | 0.1   |  0.1    |   0   | 0.0870  |
+|4    | 0.4   |  0.4    |   0   | 0.3478  |
+|5    | 0.1   |  0.1    |   0   | 0.0870  |
+|6    | 0.1   |  0.1    |   0   | 0.0870  |
+|7    | 0.1   |  0.1    |  1.0  | 0.2174  |
+
+Table: $q$ values for $\mathsf{TVaR}_0=E[X]$, $\mathsf{TVaR}_1=\max(X)$ and the $\theta=0.87$ blend.
+
+
+-->
+
+
+```{python}
+#| echo: false
+#| label: tbl-bi-tvar
+#| tbl-cap: "$q$ values for $\\mathsf{TVaR}_0=\\mathsf E[X]$, $\\mathsf{TVaR}_1=\\max(X)$ and the $\\theta=0.87$ blend."
+%run prefob.py
+%run -i basic_example_script.py
+exhibits['tbl-bi-tvar']
+```
+
+The final column, a $1:0.15$ blend of the previous two, matches the CCoC column in @tbl-the5qs. \qed
+
+## Required premium by distortion
+
+@tbl-3units shows required premiums and loss ratios for each unit, by distortion function. Remember, *required* here means required to meet the internally specified 15% return on capital hurdle. Also shown are plan premiums and loss ratios.
+
+```{python}
+#| echo: false
+#| label: tbl-3units
+#| tbl-cap: "Example units with pricing by distortion."
+exhibits['tbl-3units']
+```
+
+<!--
+
+|  $k$|  $p$  | **Unit A**| **Unit B**|  **Unit C**  | **Portfolio**|
+|:---------|:-----:|:-------:|:-------:|:-------:|:-------:|
+|0    |   0   |  0 |  0 |  0 |   0 |
+|1    | 0.1   | 15 |  7 |  0 |  22 |
+|2    | 0.1   | 15 | 13 |  0 |  28 |
+|3    | 0.1   |  5 | 20 | 11 |  36 |
+|4    | 0.4   | 10 | 24 |  6 |  40 |
+|5    | 0.1   | 26 | 19 | 10 |  55 |
+|6    | 0.1   | 17 |  8 | 40 |  65 |
+|7    | 0.1   | 16 | 20 | 64 | 100 |
+|     |       |    |    |    |      |
+|Plan Premium          | | 13.900 | 18.700 | 19.600 | 52.200 |
+|$\rho_{\mathsf{TVaR}}$| | 13.783 | 20.412 | 19.371 | 53.565 |
+|$\rho_{\mathsf{Dual}}$| | 14.127 | 19.117 | 20.322 | 53.565 |
+|$\rho_{\mathsf{Wang}}$| | 14.109 | 18.637 | 20.819 | 53.565 |
+|$\rho_{\mathsf{PH}}$  | | 14.060 | 18.349 | 21.156 | 53.565 |
+|$\rho_{\mathsf{CCoC}}$| | 13.739 | 18.522 | 21.304 | 53.565 |
+|$L=\mathsf E[X]$      | | 13.400 | 18.300 | 14.900 | 46.600 |
+|Plan Loss Ratio       | | 96.40%| 97.86%| 76.02%| 89.27%|
+|$LR_{\mathsf{TVaR}}$  | | 97.22%| 89.66%| 76.92%| 87.00%|
+|$LR_{\mathsf{Dual}}$  | | 94.86%| 95.73%| 73.32%| 87.00%|
+|$LR_{\mathsf{Wang}}$  | | 94.97%| 98.19%| 71.57%| 87.00%|
+|$LR_{\mathsf{PH}}$    | | 95.31%| 99.73%| 70.43%| 87.00%|
+|$LR_{\mathsf{CCoC}}$  | | 97.53%| 98.80%| 69.94%| 87.00%|
+
+Table: Example units with pricing by distortion.
+
+
+-->
+
+Relative to model benchmarks, the entire portfolio is underpriced by $53.565-52.2=1.365$. But which units need to do better, and by how much?
+
+<!--
+|**Unit**|**Plan LR**| **Lowest LR**|**Highest LR**|**Cheapest Distortion**|
+|:----------|:-------:|:-------:|:-------:|:----------|
+| Unit A    |0.96403  | 0.94856 | 0.97532 |CCoC |
+| Unit B    |0.97861  | 0.89655 | 0.99731 |PH   |
+| Unit C    |0.76020  | 0.69939 | 0.76919 |TVaR |
+
+Table: Range of implied loss ratios and cheapest distortion by unit.
+
+![Range of implied loss ratios across distortions, and plan loss ratio (triangle) by unit.](img/plt35bars.png){width=75% #fig-35bars}
+
+@fig-35barsM converts from loss ratios to margin dollars.
+
+\pagebreak
+
+![Range of implied margins across distortions, and plan margin (triangle) by unit.](img/plt35barsMargin.png){width=75% #fig-35barsM}
+
+
+-->
+
+```{python}
+#| echo: false
+#| label: tbl-bestlr
+#| tbl-cap: "Range of implied loss ratios and cheapest distortion by unit."
+exhibits['tbl-bestlr']
+```
+
+@tbl-bestlr shows the plan loss ratio, the range of target loss ratios generated by the five distortions, and which distortion suggests the lowest premium for each unit. A higher required loss ratio implies a lower margin and premium. Unit management may regard a lower premium as better because it makes it easier to sell policies in the marketplace. The table shows that for each unit there is at least one distortion whose pricing it can meet, because the plan loss ratio is no greater than the distortion indicated loss ratio. For example, Unit B's management would be happy to target the PH-indicated 0.997 loss ratio instead of the current plan's 0.979. However, there is no single distortion whose pricing all units can meet. How should the modeler proceed? A monograph with two authors can offer two paths.
+
+Before discussing the two paths, it is worthwhile reflecting on how a market distortion emerges. Insurance is fundamentally risk sharing. The market consists of individuals with different endowments, owning different risks, and understood to have their own risk appetites. Each individual can cede risk into the pool and assume risk from it as a shareholder or mutual company owner. Typically there are more of the former than the latter. We assume appetites for insurable, diversifiable risk are given by distortion risk measures. The appetite for investment risk, with its systematic components, may be different. The efficient insurance market solution is for everyone to pool their risks together, for maximal diversification benefit, and then to layer out the total risk to the individual offering the cheapest price for it in each layer. This corresponds to looking at the minimum of the individual distortion functions. @fig-the5dists could correspond to a market of five individuals. In it, the TVaR individual assumes large risks (above about the 75th percentile, lower left) and CCoC the rest. TVaR is risk neutral in the tail, and equity financing is well known to be an effective solution for nicely diversifiable risk. This theoretical model is described in a famous paper @Jouini2008b. There are many steps between a simple model and reality, but it is a good picture to bear in mind for the rest of this chapter. Readers who work for brokers may be happy to learn the model implies an important role for them matching risk to its cheapest financing. Finally, notice the model implies the risk appetite that matters is that of *investors*, not management---despite management often talking about "their risk appetite."
+
+## Zeroing in on a distortion function
+
+Path 1 holds there is a *best* distortion function that should be discoverable by the modeler. On this path, the modeler must avoid excessive naval gazing. Present the facts, being the range of indications from @tbl-3units with relevant commentary, but recognize the decision is for unit and corporate management to negotiate. As always, @tbl-3units hides many details and assumptions. What is the historical performance of each unit compared to prior plans? The growth prospects? The quality of the data and certainty in the simulations? Again, present facts and avoid selling against your model.
+
+In an ideal world, we choose our distortion based on first principles and recommend each unit meets the target specified by that principle. A core principle of modern finance and accounting is to calibrate models to market observables where possible. Is the distortion consistent with cat bond pricing for extreme events? What about InsCo's capital structure? A discussion with the finance department might be in order, to ask: What is the structure of the capital supporting the business and what are the costs of the various components of capital? For example, InsCo may have a Baa-rated corporate bond with initial annual default probability between 1.5% and 2% and a valuation equating to a risk-neutral default probability between 2.5% and 4%. These correspond to the exceedance probability $s$ and distorted probability $g(s)$, respectively, of a distortion function. Which calibrated distortions are consistent with these findings? A quick analysis reveals that the Dual and Wang distortions are the most likely candidates, with TVaR coming in a distant third place.
+
+<!--
+
+JOHN: I really don't like this stuff. It is classic actuarial "well you could do this that and the other" with no theoretic basis. All readers should be able to make up similar things on their own. They don't need us to tell them.
+
+Some of the units would, no doubt, rather share the burden equally, whatever that means.
+
+For example, if all units could lower their plan loss ratio by 2.24 percentage points, then the portfolio as a whole would have a plan loss ratio consistent with the 15% return target.  Similarly, if each unit could increase its plan profit margin by 24%, this would also meet the 15% target.  These two sharing principles have very different implications for each unit, so a process of negotiation and compromise would be necessary to choose how that burden would be shared. Equal sharing also is not really fair to some units that are stellar performers (judged by historical or market comparisons) whereas others are not, leading to material cross-subsidies. Cross-subsidies would also continue from year to year if the same approach were used.
+
+@tbl-margin-error highlights this by measuring by how much the plan margin must increase to meet the indicated margin.  For example, referring to @tbl-3units, Unit B has a plan premium of 18.7 compared to a required 19.117 under the Dual distortion. $19.117-18.7=0.417$ is the amount by which premium, and therefore margin, must increase.  Plan margin is $18.7-18.3=0.4$, therefore plan margin must increase by $0.417/0.4=1.0425$ or 104%.
+
+This is calculated as
+$$
+(1/\mathsf{LR_{dist}}-1)/(1/\mathsf{LR_{plan}})-1.
+$$
+
+\footnotesize
+
+|**Distortion**  | **Unit A**| **Unit B**| **Unit C**  | **Variance**|
+|:---------------|------:|--------:|--------:|--------:|
+|TVaR     |-23%|428%|  -5% |4.349|
+|Dual     | 45%|104%|  15% |0.136|
+|Wang     | 42%|-16%|  26% |0.059|
+|PH       | 32%|-88%|  33% |0.321|
+|CCoC     |-32%|-45%|  36% |0.126|
+|Equal LR | 66%|110%|  13% |0.157|
+|Equal Margin| 24%|24%|24%| 0.000|
+
+
+Table: Percent error in margin by distortion by unit. {#tbl-margin-error}
+
+\normalsize
+
+The Wang distortion has the lowest variance of unit relative margin adjustments among the distortions.  It requires increased margin from Unit A and Unit C but not from Unit B.  The CCoC distortion has the next lowest variance; however, it achieves this by putting _all_ of the required extra margin on Unit C.  The Dual distortion is in third place, with extra margin required of all units.  However, for the Dual, Unit B has to more than double its margin.  The Dual is the closest to equalizing loss ratios as seen by comparing to the Equal LR results.  Equalizing relative margin, of course, provides zero variance, but does not resemble any of the distortions.
+
+![Distortion functions overlaid with target statistics from InsCo's previous bond debt.](img/pltFinBox.png){width=75% #fig-FinBox}
+
+Referring to @tbl-3units, we see that the Unit C's plan margin is an order of magnitude larger than that of the other units.  After consulting with senior management, we decide that something between Dual and Wang, best equalizing the percent margin increase in Unit A and Unit B, is the target.
+
+
+**Exercise.**  What distortion function $(1-\theta)\mathsf{Wang}+\theta\mathsf{Dual}$ will accomplish that?  Round $\theta$ to the nearest 0.01.  What are the resulting target premiums, margins, loss ratios, and percent margin change for each unit?
+
+**Solution.**
+\begin{align}
+(1-\theta)(42)+\theta(45)&=(1-\theta)(-16)+\theta(104) \\
+\theta(104+16-45+42) &=42+16 \\
+\implies \theta&=\frac{58}{117} = 0.4957 \rightarrow 0.5
+\end{align}
+
+The solution is an equal blend of Wang and Dual.  The resulting financial targets are shown in @tbl-50-50-wang-dual.
+
+\footnotesize
+
+|**Metric**  | **Non-Cat(A)**| **Non-Cat(B)**| **Cat**  |
+|:---------------|------:|--------:|--------:|--------:|--------:|
+|Target premium |14.118 |18.877 |20.570|
+|Margin         |0.7180 |0.5772 |5.6701|
+|Loss ratio     |0.9491 |0.9696 |0.7245|
+|Margin change  | 43.5% | 44.0% | 20.5%|
+
+Table: Results of 50-50 blend of Wang and Dual. {#tbl-50-50-wang-dual}
+
+\normalsize
+\qed
+
+So a principles-based approach is to be preferred, if only the principle could be found.  The approach we recommend is to use negotiation and compromise to _choose the principle and then stick with it_ in subsequent years.
+
+-->
+
+## Embracing the range
+
+Path 2 holds that searching for a single best distortion is an unanswerable metaphysical quest, but it suggests there is much to learn from the range of indications. While no choice is correct, some are logically inconsistent and should be avoided.
+
+The choice of a distortion corresponds to a statement of risk appetite. The ordering CCoC, PH, Wang, Dual, and TVaR we use to show the five representative distortions ranks them from most concerned about tail (extreme VaR) losses to most concerned about attritional (near plan) losses. The CCoC, driven by the maximum loss is obviously the most tail-centric. Conversely, TVaR is the most attritional loss averse. This ranking corresponds to the heights of the distortion functions plotted in @fig-the5dists; remember that left on the horizontal axis is extreme losses. How does management talk about risk, for example, in quarterly analyst calls for stock companies? Often, their statements reveal they understand their investors are more concerned with attritional volatility. After a large catastrophe event, the market expects all players to have large losses, whereas a miss on attritional volatility suggests management is not pricing correctly and can cause disquiet among investors. Managements prodded by their investors to be more concerned with volatility typically find targets driven by TVaR or the Dual distortion to better align with their intuitions.
+
+The range of implications across different distortions turns out to overlap with the range of the reinsurance pricing cycle, so these are not just academic considerations. For example, in @tbl-all-distortioun-re-pricing, the model recommended maximum buy-price for reinsurance is 7.6 (a 46% loss ratio or higher) under CCoC but only 4.8 (73% loss ratio) under TVaR. Over a market cycle the loss ratio for catastrophe reinsurance can vary substantially, and whereas a CCoC view may recommend a buy in all markets, TVaR could be more circumspect. The authors have both worked with managements who have expressed exactly these concerns and who have disliked a CCoC-driven, industry-standard approach analysis as a consequence.
+
+Knowing the range of indications means you can determine whether a plan loss ratio is consistent with some risk appetite (it is within the range). For our simple model, @tbl-bestlr shows they all are, but that is not always the case. A unit with plan outside the range can be criticized because it is inconsistent with *any* risk appetite; it should be investigated accordingly. A plan far outside the range needs especial scrutiny.

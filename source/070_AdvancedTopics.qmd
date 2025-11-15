@@ -1,0 +1,698 @@
+---
+format:
+  pdf: default
+  html: default
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.4
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+```{python}
+#| echo: false
+#| label: spacer
+pass
+```
+
+# Advanced topics {#sec-Advanced-Topics}
+
+## Dealing with uncertainty {#sec-Uncertainty}
+
+*In this world, nothing is certain except death and taxes.*\
+*- Benjamin Franklin, letter to  Jean-Baptiste Leroy*
+
+The purpose of simulation is to estimate certain **quantities of interest** or **QoI**. A QoI is typically a quantile or other function (e.g., mean, risk measure) of the sample outcomes that the simulation created. Since it is being estimated from a sample, it cannot be measured with perfect accuracy because of sampling error. The more simulated samples are created, the more accurate the estimate can be. However, there is another reason that the estimate will not be accurate.
+
+**Parameter uncertainty** here is to be distinguished from **process risk**. For example, when you simulate the outcome from a random variable with a lognormal distribution with particular parameters, you are modeling process risk. When you aren't sure what the parameter values should be, you are suffering from parameter uncertainty. The uncertainty around input parameters will propagate to uncertainty about the QoI. For example, it is well known that ignoring parameter uncertainty often systematically biases estimated quantiles downward. See @Jewson2025 for an approach to adjust for this bias.
+
+Parameter uncertainty arises from *nonsampling error*. There are many potential sources of this in a capital model. Data used to build the model could have erroneous entries, or it might not be of an appropriate vintage or refer to a population that is sufficiently relevant to the modeling task. In building the model, perhaps not all relevant factors have been taken into account. This is not an exhaustive list!
+
+In addition, some parameters vary over time. A data snapshot taken to estimate parameters may be inappropriate to modeling the same phenomenon at a later date.
+
+Parameter uncertainty will likely permeate your modeling efforts, especially if you are trying to make a model that can replicate historical experience. There are several ways to deal with uncertainty:
+
+1.  **Ignore it.** Use a best estimate of parameter values and let it go at that. While this may be acceptable for early versions of the model, it is not recommended for the long term. At the very least you must disclose that there is some uncertainty as to the QoI values and what the business risks of that are. "The answer is $A$, but there is some uncertainty."
+2.  **Report it.** Statistical analysis of data will usually give some indication of the range (e.g., variance) of parameter values consistent with a chosen model for the data. If you want to push your luck, that insight can be turned into a distributional model for the parameters. Rerun your model with carefully chosen exemplars or a sample from the putative distribution of those random parameters. Report the range or the resulting distribution of the QoI. "The answer is $A \pm \epsilon$."
+3.  **Absorb it.** Classical (frequentist) statistics has prediction intervals to accommodate uncertainty in the parameters; Bayesian theory provides a formal framework for treating parameter uncertainty as another species of process risk. Essentially, this means treating the random parameter as mixing the distribution of QoI, creating what Bayesians call a predictive distribution; see @bolstad2016introduction or @geisser2017predictive. This is explained in an actuarial context in @Kreps1997; however, @Major1999a finds reasons to doubt it is always the right approach. Prediction intervals are bigger than classically estimated intervals. The QoI is likely to be sensitive to the upper tail, which moves up. "The answer is $A+\delta$."
+4.  **Isolate it.** Find a credible worst-case to offer as an example of what can go wrong. This is the approach covered in @Hansen2008 and @Major2015. Again, this is likely to increase a risk-sensitive QoI. "The answer is $A$, but it could be as bad as $A+\gamma$."
+
+For a general treatment, see @smith2024uncertainty.
+
+## The Iman-Conover method {#sec-iman-conover}
+
+*Correlation is not causation, but you can cause some correlation.*
+
+The Iman-Conover method is an easy way to induce correlation between marginal distributions. Here is the idea. Given samples of $n$ values from $r$ known marginal distributions $X_1,\dots,X_r$ and a desired $r\times r$ (linear) correlation matrix $\Sigma$ between them, reorder the $i$th sample to have the same rank order as the $i$th column of a reference distribution of size $n\times r$ with linear correlation $\Sigma$. The reordered output will then have the same rank correlation as the reference, and since linear correlation and rank correlation are typically close, it will have close to the desired correlation structure. What makes the Iman-Conover method work so effectively is the existence of easy algorithms to determine samples from reference distributions with prescribed correlation structures.
+
+The Iman-Conover method is very powerful, quick, and easy to use. However, it is not magic, and it is constrained by mathematical reality. For given pairs of distributions there is often an upper bound on the *linear* correlation between them, so if you ask for very high correlation you may be disappointed. You should go back and ask yourself why you think the linear correlation is so high.
+
+Iman-Conover is usually used to induce a desired linear correlation. There other measures, such as rank correlation and Kendall's tau, that could be used [@Mildenhall2005a] and the user should reflect on which is most appropriate to their application. If your target is rank correlation, Iman-Conover will give you an exact match.
+
+The [`aggregate` documentation](https://aggregate.readthedocs.io/en/latest/5_technical_guides/5_x_iman_conover.html#algorithm) provides a detailed description of the algorithm, including discussion of using different reference distributions (called scores) in place of the normal, and a comparison with the normal copula method.
+
+### Loss or loss ratio?
+
+Are you modeling correlation of *loss ratios* or correlation of *losses*? It is a surprising empirical fact that the former is often greater than the latter, leading to the conclusion that correlation in *underwriting results* is driven by correlation in *premium* more than loss, see @MildenhallCR2022. These findings highlight a stark property-casualty split. Property tends to be loss-volatility driven, with loss correlation caused (and explained) by geographic proximity. Casualty tends to be premium-volatility driven, with loss ratio correlation caused by (account) underwriting and the underwriting cycle.
+
+### Example 1: A simple example {#sec-example-1}
+
+This section presents a simple example applying Iman-Conover to realistic distributions, using the `aggregate` library. It shows how easy it is to use Iman-Conover in modern programming languages. Another example, with more the details, appears in the [`aggregate` documentation](https://aggregate.readthedocs.io/en/latest/5_technical_guides/5_x_iman_conover.html#simple-example-of-iman-conover). See @sec-setup-code for instructions to set up your Python environment to replicate the code samples. The full source code to replicate the examples is available on the [Monograph website](https://cmm.mynl.com).
+
+The example works with $r=3$ different marginals: Auto, general liability (GL), and Property. Losses are simulated using frequency-severity aggregate distributions with a lognormal severity and per occurrence limits. Frequency is a gamma-mixed Poisson (negative binomial) with varying CVs. See @Mildenhall2023a for a description of the `aggregate` DecL language, used to specify these portfolios.
+
+```
+port ICExample
+    agg Auto      5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma 0.2
+    agg GL        2000 loss  5000 xs 0 sev lognorm  50 cv 5 mixed gamma 0.3
+    agg Property  7000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma 0.1
+```
+
+This example uses only 1,000 simulations, but the software can easily handle 100,000 or more. The slowest part of the Iman-Conover algorithm is creating the scores. These are cached, so subsequent runs are very fast, even if the desired correlation matrix changes.
+
+```{python}
+#| echo: false
+#| label: lstx-ic-setup
+
+# code-cap: Setup code for the Iman-Conover example.
+%run prefob.py
+from pandas.plotting import scatter_matrix
+
+# number of simulations, adjust as needed
+n = 1000
+port = build('''
+port ICExample
+    agg Auto      5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma 0.2
+    agg GL        2000 loss  5000 xs 0 sev lognorm  50 cv 5 mixed gamma 0.3
+    agg Property  7000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma 0.1
+''')
+
+df = port.sample(n, desired_correlation=None, keep_total=False)
+```
+
+@tbl-samples-agg shows summary statistics and the first few samples of the underlying multivariate distribution, and @fig-marginals shows histograms of each marginal and scatterplots. By construction, the units are approximately independent.
+
+```{python}
+#| echo: false
+#| label: tbl-samples-agg
+#| tbl-cap: Set up and summary statistics of sample for Iman-Conover example using 1,000 samples.
+#| layout-ncol: 1
+#| tbl-subcap: [Summary statistics., First 10 samples.]
+
+dfd = df.describe()
+dfd.loc['cv', :] = dfd.loc['std'] / dfd.loc['mean']
+#display(dfd.style.format(precision=0, thousands=','))
+#display(df.head(10).style.format(precision=0, thousands=','))
+display(fGT(dfd))
+fGT(df.head(10))
+```
+
+```{python}
+#| echo: false
+#| label: fig-marginals
+#| fig-cap: Uncorrelated marginals input to IC method. Diagonal shows univariate histograms.
+#| fig-format: png
+
+scatter_matrix(df, grid=False,
+    figsize=(6, 6), diagonal='hist',
+    hist_kwds={'density': True, 'bins': 25, 'lw': .25, 'ec': 'w'},
+    s=3, marker='.');
+```
+
+In addition to marginal distributions, Iman-Conover requires a target desired correlation matrix as input. This is produced by a separate analysis, and here we assume it is given by @tbl-desired-corr. Remember, a correlation matrix must be symmetric (easy to check) and positive definite (harder). Matrices computed from statistical analysis may fail to be positive definite if they are not computed from a multivariate sample. Iman-Conover fails if given a nonpositive definite matrix.
+
+```{python}
+#| echo: false
+#| label: tbl-desired-corr
+#| tbl-cap: Target correlation matrix.
+
+desired = np.matrix([[1, -.3, 0],
+                     [-.3, 1, .8],
+                     [0, .8, 1]])
+line_names = df.columns
+desired_df = pd.DataFrame(desired,
+                          index=line_names,
+                          columns=line_names)
+# desired_df.style.format(precision=3)
+fGT(desired_df)
+```
+
+The Iman-Conover method is implemented in `aggregate` by the function `iman_conover`, so the transformation is simply
+
+``` python
+df2 = iman_conover(df, desired)
+```
+
+where `desired` is the desired correlation matrix. @tbl-ic shows the achieved linear and rank correlation, and the absolute and relative errors. Finally, @fig-marginals-2 provides a scatter plot of the shuffled inputs, making the correlation evident. It is possible to obtain a correlated sample from a `Portfolio` object by passing in a correlation matrix: the code below extracts a sample and automatically applies Iman-Conover.
+
+``` python
+df = port.sample(n, desired_correlation=desired, keep_total=False)
+```
+
+```{python}
+#| echo: false
+#| label: tbl-ic
+#| tbl-cap: Achieved correlation matrix and output errors with Iman-Conover method.
+#| layout-ncol: 1
+#| tbl-subcap: [Linear correlation, Rank correlation, Absolute error, Relative error]
+df2 = iman_conover(df, desired)
+achieved = df2.corr()
+display(fGT(achieved))
+display(fGT(df2.corr(method='spearman')))
+
+err = achieved - desired_df
+rel_err = err / desired_df
+display(fGT(err.abs()))
+fGT(rel_err, max_table_inch_width=12)
+```
+
+```{python}
+#| echo: false
+#| label: fig-marginals-2
+#| fig-cap: Correlated marginals output by the Iman-Conover method. Diagonal shows unchanged univariate histograms, but the scatterplots clearly show the introduction of correlation.
+#| fig-format: png
+
+scatter_matrix(df2, grid=False,
+    figsize=(6, 6), diagonal='hist',
+    hist_kwds={'density': True, 'bins': 25, 'lw': .25, 'ec': 'w'},
+    s=3, marker='.');
+```
+
+\clearpage
+
+### Different reference distributions
+
+The Iman-Conover algorithm relies on a sample from a multivariate reference distribution called scores. A straightforward method to compute a reference is to use the Choleski decomposition method applied to certain independent scores (samples with mean zero and standard deviation one). The standard algorithm uses standard normal scores. However, nothing prevents the use of other distributions for the scores, provided they are suitably normalized to have mean zero and standard deviation one. Several other families of multivariate distributions could be used, such as elliptically contoured distributions (which include the normal and $t$ as a special cases) and the multivariate Laplace distribution. These are all easy to simulate.
+
+The `aggregate` implementation provides $t$-distribution scores. It includes an argument `dof`. By default `dof=0` resulting in a normal reference. A `dof>0` is interpreted as degrees of freedom, and the reference becomes a $t$-distribution. @fig-t-ref reruns @sec-example-1 using a $t$ reference with 2 degrees of freedom, a very extreme choice. It results in more tail correlation, evident in the pinched scatterplots. Be warned, however, that this modeling flexibility definitely falls into the "just because you can, doesn't mean you should" category!
+
+```{python}
+#| echo: false
+#| label: fig-t-ref
+#| fig-cap: Correlated marginals using a $t$-distribution with 2 degrees of freedom.
+#| fig-format: png
+
+df3 = iman_conover(df, desired, dof=2)
+
+scatter_matrix(df3, grid=False,
+    figsize=(6, 6), diagonal='hist',
+    hist_kwds={'density': True, 'bins': 25, 'lw': .25, 'ec': 'w'},
+    s=3, marker='.');
+```
+
+### Copulas as reference distributions
+
+The reader may be wondering about using a copula as a reference score. Alas, most copulas are only bivariate. Multivariate copulas, aside from those related to elliptical or Laplace distributions already mentioned, are Archimedian, which means they have a single parameter and cannot be calibrated to a desired correlation matrix.
+
+See the [`aggregate` documentation](https://aggregate.readthedocs.io/en/latest/5_technical_guides/5_x_working_with_samples.html#alternative-scores) and @Mildenhall2005a for more details.
+
+### Iman-Conover compared with the normal copula method {#sec-IC-NC}
+
+The normal copula method is described in @WangS1998. Given a set of risks $(X_1,\dots,X_k)$ with marginal cumulative distribution functions $F_i$ and Kendall's tau $\tau_{ij}=\tau(X_i,X_j)$ or rank correlation coefficients $r(X_i,X_j)$, it works as follows. Assume that $(Z_1,\dots,Z_k)$ have a multivariate normal joint probability density function given by
+$$
+f(z_1,\dots,z_k)=\frac{1}{\sqrt{(2\pi)^k|\Sigma|}}\exp(-\mathsf{z}'\Sigma^{-1}\mathsf{z}/2),
+$$
+$\mathsf{z}=(z_1,\dots,z_k)$, with correlation coefficients $\Sigma_{ij}=\rho_{ij}=\rho(Z_i,Z_j)$. Let $H(z_1,\dots,z_k)$ be their joint cumulative distribution function. Then
+$$
+C(u_1,\dots,u_k)=H(\Phi^{-1}(u_1),\dots,\Phi^{-1}(u_k))
+$$
+defines a multivariate uniform cumulative distribution function called the **normal copula**. Using $H$, the set of variables
+$$
+X_1=F_1^{-1}(\Phi(Z_1)),\dots,X_k=F_1^{-1}(\Phi(Z_k))
+$$ {#eq-ncm}
+have a joint cumulative function
+$$
+F_{X_1,\dots,X_k}(x_1,\dots,x_k)=H(\Phi^{-1}(F_x(u_1)),\dots,
+\Phi^{-1}(F_k(u_k))
+$$
+with marginal cumulative distribution functions $F_1,\dots,F_k$. The multivariate variables $(X_1,\dots,X_k)$ have Kendall's tau
+$$
+\tau(X_i,X_j)=\tau(Z_i,Z_j)=\frac{2}{\pi}\arcsin(\rho_{ij})
+$$
+and Spearman's rank correlation coefficients
+$$
+\text{rkCorr}(X_i,X_j)=\text{rkCorr}(Z_i,Z_j)=\frac{6}{\pi}\arcsin(\rho_{ij}/2)
+$$
+so $\rho$ can be adjusted to achieve the desired correlation.
+
+In the normal copula method, we simulate from $H$ and then invert using @eq-ncm. In the Iman-Conover method with normal scores we produce a sample from $H$ such that $\Phi(z_i)$ are equally spaced between zero and one and then, rather than invert the distribution functions, we make the $j$th order statistic from the input sample correspond to $\Phi(z)=j/(n+1)$ where the input has $n$ observations. Because the $j$th order statistic of a sample of $n$ observations from a distribution $F$ approximates $F^{-1}(j/(n+1))$, we see the normal copula and Iman-Conover methods are doing essentially the same thing.
+
+While the normal copula method and the Iman-Conover method are confusingly similar, there are some important differences to bear in mind. Comparing and contrasting the two methods should help clarify how the two algorithms are different.
+
+1.  @WangS1998 shows the normal copula method corresponds to the Iman-Conover method when the latter is computed using normal scores and the Choleski trick.
+2.  The Iman-Conover method works on a given sample of marginal distributions. The normal copula method generates the sample by inverting the distribution function of each marginal as part of the simulation process.
+3.  Through the use of scores, the Iman-Conover method relies on a sample of normal variables. The normal copula method could use a similar method, or it could sample randomly from the base normals. Conversely, a sample could be used in the Iman-Conover method.
+4.  Only the Iman-Conover method has an adjustment to ensure that the reference multivariate distribution has exactly the required correlation structure.
+5.  Iman-Conover method samples have rank correlation exactly equal to a sample from a reference distribution with the correct linear correlation. Normal copula samples have approximately correct linear and rank correlations.
+6.  An Iman-Conover method sample must be taken in its entirety to be used correctly. The number of output points is fixed by the number of input points, and the sample is computed in its entirety in one step. Some Iman-Conover tools produce output, which is in a particular order. Thus, if you sample the $n$th observation from multiple simulations, or take the first $n$ samples, you will not get a random sample from the desired distribution. However, if you select random rows from multiple simulations (or, equivalently, if you randomly permute the rows' output prior to selecting the $n$th) then you will obtain the desired random sample. It is important to be aware of these issues before using canned software routines.
+7.  The normal copula method produces simulations one at a time, and at each iteration the resulting sample is a sample from the required multivariate distribution. That is, output from the algorithm can be partitioned and used in pieces.
+
+In summary, remember that these differences can have material, practical consequences, and it is important not to misuse Iman-Conover method samples.
+
+\clearpage
+
+### Block Iman-Conover (BIC)
+
+The Iman-Conover method can lead you into a state of sin: the sin of thinking you can reliably estimate a $100 \times 100$ correlation matrix (or larger). You can't; don't try---it's all noise. Look at the distribution of eigenvalues to see; start by computing the SVD and compare your distribution with that of a random matrix. However, you might be able to say something about the correlation of chunks of your book. Generally (going back to premium is riskier than loss), lines that are underwritten together have correlated loss ratios, and properties that are nearby have correlated losses. The Block Iman-Conover (BIC) method is a way to use this information without fabricating large correlation matrices.
+
+#### Description of BIC {#sec-bic}
+
+BIC is best explained through an example. You underwrite auto liability, GL, and property in four regions: North, East, South, and West. Based on reliable studies, you have a sense of the loss (ratio) correlation between each line overall (a $3 \times 3$ matrix, with three parameters), and, separately, between the total regional results (a $4 \times 4$ matrix, with six parameters). The BIC produces a multivariate sample across all 12 line and region units that incorporates what you know, but using just these nine parameters rather than requiring 66 parameters (for a $12 \times 12$ matrix). Here's how it works. Pick a number of simulations $n$, then:
+
+1.  Produce four $n \times 3$ matrices with results by line for each region, $R_1$, $R_2$, $R_3$, $R_4$.
+2.  Apply Iman-Conover to each $R_i$ separately using your $3\times 3$ between-line correlation matrix, to produce $\tilde R_i$.
+3.  Sum across simulations in each $\tilde R_i$ to get total regional losses and assemble these into a $n\times 4$ matrix $T$.
+4.  Apply Iman-Conover to $T$ using your $4\times 4$ between-region correlation matrix, and capture the ranking.
+5.  Reorder each $\tilde R_i$ *by-row* according to the ranking in Step 4 to obtain $\tilde{\tilde R_i}$.
+6.  Assemble $\tilde{\tilde R_i}$ together into a $n\times 12$ multivariate sample $X$.
+
+The result of this algorithm has the correct by-line correlation within each region---because in step 5 rows are moved, which preserves their within-group correlation---and the correct correlation of total by region, from step 4.
+
+The `aggregate` package implements BIC as `block_iman_conover`. It takes arguments:
+
+-   `unit_losses`: a list of samples, in our example the four blocks $R_i$ of losses by line within a region.
+-   `intra_unit_corrs`: a list of correlation matrices within (intra) each region.
+-   `inter_unit_corr`: the between (inter) unit correlation matrix.
+
+The regions can have different numbers of lines, and the intra-correlation matrices can vary across regions. In the example below, we just use four regions with three lines, and we assume the intra-region by-line correlations are all the same.
+
+### Example 2: Multistate, multiline correlation
+
+Example 2 implements the case described in @sec-bic: four regions each with three lines, and reliably estimated correlation matrices between lines and between regions. The next block shows the specification of the regional loss distributions in DecL.
+
+``` python
+port North
+    agg Auto_North  4000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_North    2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Prop_North  2000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+
+port East
+    agg Auto_East     3000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_East       1000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_East 3000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+
+port West
+    agg Auto_West     5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_West       2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_West 2000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+
+port South
+    agg Auto_South   5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_South     2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Prop_South   7000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+```
+
+The losses by line are simulated using frequency-severity aggregate distributions with a lognormal severity and per occurrence limits. Frequency is a gamma-mixed Poisson (negative binomial) with varying CVs. See @Mildenhall2023a for a description of the `aggregate` DecL language, used to specify these portfolios. The South region portfolio was previously used to illustrate the standard Iman-Conover method in @sec-example-1.
+
+```{python}
+#| echo: false
+#| label: lstx-bic-setup
+#| code-cap: Setup `Portfolio` objects for BIC example.
+
+from aggregate import build, random_corr_matrix, block_iman_conover, set_seed
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pandas.plotting import scatter_matrix
+from IPython.display import display
+
+region_N = build('''
+port North
+    agg Auto_North     4000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_North       2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_North 2000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+''')
+
+region_E = build('''
+port East
+    agg Auto_East     3000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_East       1000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_East 3000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+''')
+
+region_W = build('''
+port West
+    agg Auto_West     5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_West       2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_West 2000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+''')
+
+region_S = build('''
+port South
+    agg Auto_South     5000 loss  2000 xs 0 sev lognorm  30 cv 2 mixed gamma .2
+    agg GL_South       2000 loss  5000 xs 0 sev lognorm  50 cv 4 mixed gamma .3
+    agg Property_South 7000 loss 10000 xs 0 sev lognorm 100 cv 5 mixed gamma .1
+''')
+
+portfolio = [region_N, region_E, region_S, region_W]
+```
+
+@tbl-bic-stats shows the expected losses, modeling error, CV, and 99th percentile of total loss by region. Model error means the difference between the output of the Fast Fourier Transform algorithm and the requested input mean losses. As you can see, the two are almost identical. The CVs vary reflecting volume and mix of business between regions.
+
+```{python}
+#| echo: false
+#| label: tbl-bic-stats
+#| tbl-cap: Expected losses, CV, and 99th percentile loss by region.
+
+bit = pd.DataFrame(
+    {'Region': [i.name for i in portfolio],
+     'Expected loss': [i.agg_m for i in portfolio],
+     'Model Error': [i.est_m / i.agg_m - 1 for i in portfolio],
+     'CV': [i.agg_cv for i in portfolio],
+     '99th percentile': [i.q(0.99) for i in portfolio]})
+bit = bit.set_index('Region')
+fGT(bit)
+```
+
+Next, we sample $n=1000$ losses from each region with the intraregion correlation. In this case, all the intraregion by-line correlations are the same, but the method allows them to vary.
+
+```{python}
+#| echo: false
+#| label: lstx-bic-loss-corr
+#| code-cap: Sample marginals and specify within (intra) and between (inter) regional correlation matrices.
+
+n = 1000
+set_seed(42)
+region_losses = [region.sample(n, desired_correlation=None,
+                    keep_total=False).to_numpy() for region in portfolio]
+
+cm = np.array([[1, .6, .2],
+               [.6, 1, .4],
+               [.2, .4, 1]])
+intra_region_correl = [cm] * 4
+
+# N E S W
+inter_region_correl = np.array(
+       [[1.        , 0.7       , 0.2       , 0.        ],
+        [0.7       , 1.        , 0.4       , 0.2       ],
+        [0.2       , 0.4       , 1.        , 0.8       ],
+        [0.        , 0.2       , 0.8       , 1.        ]])
+```
+
+```{python}
+#| echo: false
+#| label: lstx-bic-run
+#| code-cap: Call `block_iman_conver` routine and assemble output dataframes.
+
+ans = block_iman_conover(region_losses, intra_region_correl, inter_region_correl, True)
+total_df = pd.DataFrame(ans.totals.T, columns=[i.name for i in portfolio])
+unit_df = pd.DataFrame(ans.combined, columns=[j for i in portfolio for j in i.unit_names])
+```
+
+The BIC is then run using:
+
+``` python
+ans = block_iman_conover(region_losses, intra_region_correl, inter_region_correl, True)
+```
+
+The three panels of @tbl-bic-inter-corr (respectively, @tbl-bic-intra-corr) show the target and achieved inter-region (respectively, intraregion) correlation and the error (difference). The achieved results are very close to those desired.
+
+```{python}
+#| echo: false
+#| label: tbl-bic-inter-corr
+#| tbl-cap: Target and achieved inter-region correlations.
+#| layout-ncol: 1
+#| tbl-subcap: [Target inter-region correlation, Achieved inter-region correlation, Difference]
+
+total_corr = total_df.corr()
+target_corr = pd.DataFrame(inter_region_correl,
+                            index=total_corr.index,
+                            columns=total_corr.index)
+#target_intra_corr = pd.DataFrame(cm,
+#                            index=['Auto', 'GL', 'Property'],
+#                            columns=['Auto', 'GL', 'Property'])
+#display(fGT(target_intra_corr))
+display(fGT(target_corr))
+display(fGT(total_corr))
+display(fGT((target_corr - total_corr)))
+```
+
+```{python}
+#| echo: false
+#| label: tbl-bic-intra-corr
+#| tbl-cap: Achieved (a-d) and target (e) intra-region correlation.
+#| layout-ncol: 1
+#| tbl-subcap: [North, East, South, West, Target]
+
+def renamer(x):
+    """Shorten unit/region name"""
+    x = x.replace('Auto', 'AL').replace('Property', 'Pr').\
+    replace('_North', ' N').replace('_East', ' E').\
+    replace('_South', ' S').replace('_West', ' W')
+    x = '-'.join(x.split(' ')[::-1])
+    return x
+
+for r in ['North', 'East', 'South', 'West']:
+    _ = unit_df.filter(regex=f'.*_{r}').corr().rename(columns=renamer, index=renamer)
+    display(fGT(_))
+
+target_corr = pd.DataFrame(intra_region_correl[0], index=_.index, columns=_.index)
+display(fGT(target_corr))
+```
+
+@tbl-bic-all-corr shows the overall correlation matrix at the line-region level (12 x 12 matrix), and @fig-bic-intra-corr shows an image plot of the same matrix. The underlying block structure is clear from the image.
+
+```{python}
+#| echo: false
+#| label: tbl-bic-all-corr
+#| tbl-cap: Achieved correlation across lines and regions.
+
+nGT(unit_df.corr().rename(columns=renamer, index=renamer),
+    tikz_scale=0.65, max_table_inch_width=12)
+```
+
+```{python}
+#| echo: false
+#| label: fig-bic-intra-corr
+#| fig-cap: Image plot of achieved intra-region correlation. The block structure is clearly evident.
+
+fig, ax = plt.subplots(1, 1, figsize=(4.0, 4.0), constrained_layout=True, squeeze=True)
+
+cm = unit_df.corr()
+cm = cm.replace(1, np.nan)
+i = ax.imshow(cm, origin='lower')
+plt.colorbar(i, shrink=.5)
+
+# Get the column names from your dataframe
+labels = [' - '.join(i.split('_')[::-1]) for i in unit_df.columns]
+
+# Set the ticks and labels
+ax.set_xticks(range(len(labels)))
+ax.set_yticks(range(len(labels)))
+ax.set_xticklabels(labels)
+ax.set_yticklabels(labels)
+plt.xticks(rotation=45, ha='right');
+```
+
+\clearpage
+
+### Theoretical derivation of the Iman-Conover method
+
+Suppose that $\mathsf{M}$ is an $n$ element sample from an $r$ dimensional multivariate distribution, so $\mathsf{M}$ is an $n\times r$ matrix. Assume that the columns of $\mathsf{M}$ are uncorrelated, have mean zero, and have a standard deviation of one. Let $\mathsf{M}'$ denote the transpose of $\mathsf{M}$. These assumptions imply that the correlation matrix of the sample $\mathsf{M}$ can be computed as $n^{-1}\mathsf{M}'\mathsf{M}$, and because the columns are independent, $n^{-1}\mathsf{M}'\mathsf{M}=\mathsf{id}$. (There is no need to scale the covariance matrix by the row and column standard deviations because they are all one. In general $n^{-1}\mathsf{M}'\mathsf{M}$ is the covariance matrix of $\mathsf{M}$.)
+
+Let $\mathsf{S}$ be a correlation matrix, i.e., $\mathsf{S}$ is a positive semidefinite symmetric matrix with ones on the diagonal and all elements $\le 1$ in absolute value. In order to rule out linearly dependent variables, assume $\mathsf{S}$ is positive definite. These assumptions ensure $\mathsf{S}$ has a Choleski decomposition
+$$
+\mathsf{S}=\mathsf{C}'\mathsf{C}
+$$
+for some upper triangular matrix $\mathsf{C}$, see @Golub2013bk or @Press1992a. Set $\mathsf{T}=\mathsf{M}\mathsf{C}$. The columns of $\mathsf{T}$ still have mean zero, because they are linear combinations of the columns of $\mathsf{M}$, which have zero mean by assumption. It is less obvious, but still true, that the columns of $\mathsf{T}$ still have standard deviation one. To see why, remember that the covariance matrix of $\mathsf{T}$ is
+$$
+n^{-1}\mathsf{T}'\mathsf{T}=n^{-1}\mathsf{C}'\mathsf{M}'\mathsf{M}\mathsf{C}=\mathsf{C}'\mathsf{C}=\mathsf{S},
+$$ {#eq-coolA}
+since $n^{-1}\mathsf{M}'\mathsf{M}=\mathsf{id}$ is the identity by assumption. Now $\mathsf{S}$ also is actually the correlation matrix because the diagonal is scaled to standard deviation one, so the covariance and correlation matrices coincide. The process of converting $\mathsf{M}$, which is easy to simulate, into $\mathsf{T}$, which has the desired correlation structure $\mathsf{S}$, is the theoretical basis of the Iman-Conover method.
+
+It is important to note that estimates of correlation matrices, depending on how they are constructed, need not have the mathematical properties of a correlation matrix. Therefore, when trying to use an estimate of a correlation matrix in an algorithm, such as the Iman-Conover, which actually requires a proper correlation matrix as input, it may be necessary to check the input matrix does have the correct mathematical properties.
+
+Next, we discuss how to make $n\times r$ matrices $\mathsf{M}$, with independent, mean zero columns. The basic idea is to take $n$ numbers $a_1,\dots,a_n$ with $\sum_i a_i=0$ and $n^{-1}\sum_i a_i^2=1$, use them to form one $n\times 1$ column of $\mathsf{M}$, and then to copy it $r$ times. Finally, randomly permute the entries in each column to make them independent as columns of random variables. Iman and Conover call these $a_i$ scores. They discuss several possible definitions for scores, including scaled versions of $a_i=i$ (ranks) and $a_i$ uniformly distributed. They note that the shape of the output multivariate distribution depends on the scores. All of the examples in their paper use normal scores.
+
+Given that the scores will be based on normal random variables, we can either simulate $n$ random standard normal variables and then shift and rescale to ensure mean zero and standard deviation one, or we can use a systematic sample from the standard normal, $a_i=\Phi^{-1}(i/(n+1))$. By construction, the systematic sample has mean zero, which is an advantage. Also, by symmetry, using the systematic sample halves the number of calls to $\Phi^{-1}$. For these two reasons we prefer it in the algorithm below.
+
+The correlation matrix of $\mathsf{M}$, constructed by randomly permuting the scores in each column, will only be approximately equal to $\mathsf{id}$ because of random simulation error. In order to correct for the slight error which could be introduced, Iman and Conover use another adjustment in their algorithm. Let $\mathsf{EE}=n^{-1}\mathsf{M}'\mathsf{M}$ be the actual correlation matrix of $\mathsf{M}$, and let $\mathsf{EE}=\mathsf{F}'\mathsf{F}$ be the Choleski decomposition of $\mathsf{EE}$, and define $\mathsf{T}=\mathsf{M}\mathsf{F}^{-1}\mathsf{C}$. The columns of $\mathsf{T}$ have mean zero, and the covariance matrix of $\mathsf{T}$ is
+$$
+\begin{aligned}
+n^{-1}\mathsf{T}'\mathsf{T} &= n^{-1}\mathsf{C}'\mathsf{F}'^{-1}\mathsf{M}'\mathsf{M}\mathsf{F}^{-1}\mathsf{C} \notag  \\
+&= \mathsf{C}'\mathsf{F}'^{-1}\mathsf{EE}\mathsf{F}^{-1}\mathsf{C} \notag   \\
+&= \mathsf{C}'\mathsf{F}'^{-1}\mathsf{F}'\mathsf{F}\mathsf{F}^{-1}\mathsf{C} \notag  \\
+&= \mathsf{C}' \mathsf{C} \notag  \\
+&= \mathsf{S}
+\end{aligned}
+$$
+and hence $\mathsf{T}$ has correlation matrix exactly equal to $\mathsf{S}$, as desired. If $\mathsf{EE}$ is singular, then the column shuffle needs to be repeated.
+
+Now that the reference distribution $\mathsf{T}$ with exact correlation structure $\mathsf{S}$ is in hand, all that remains to complete the Iman-Conover method is to reorder each column of the input distribution $\mathsf{X}$ to have the same rank order as the corresponding column of $\mathsf{T}$.
+
+## Allocating capital, if you must {#sec-Allocating-Capital}
+
+*Within each layer, we can allocate its expected losses and premiums to the various portfolio units. Having done so, capital allocation to units follows.*
+
+**Admonition.** We can't emphasize strongly enough that you **should not allocate capital**. Different layers of capital do not have the same cost (think: equity, junk debt, government bonds), therefore you do not know the appropriate target return on your allocated capital. Without that, you can't say if a projected return is good or bad. Allocate margin, not capital!
+
+Warnings about smoking don't work either. We know your CFO, senior management, and investors discuss allocating underwriting capacity in the language of allocating capital, and we previously admonished you to speak the language of your customers. This section describes two methods you can use to translate allocated margins into allocated capital.
+
+The first method is obvious: simply assume all capital earns the weighted average cost of capital and allocate capital by dividing allocated margin by the weighted average cost of capital. This will result in an additive allocation of capital. This has the advantage of being simple to implement, but the disadvantage is that it obscures---nay, denies!---the fact that different segments of capital earn different returns.
+
+The second method has a more theoretically sound basis. It applies the principles discussed in @sec-Pricing-Allocation to obtain an allocation of capital $Q$ and unit-specific rates of return $\iota^i$ consistent with the SRM approach.
+
+Layer $k$ is $\Delta X_k$ dollars wide but is triggered by any portfolio loss $X > X_k$. We propose that the expectation of that loss be allocated to units by equal priority, that is, in proportion to the expected losses of the units *in those triggering events*. We may define the layer-$k$ **expected loss share** to unit $i$ as
+$$
+\alpha_k^i := \mathsf E_p\left[\frac{X^i}{X}\mid X > X_k\right].
+$$
+In particular, this means
+$$
+\alpha_k^i S_k = \mathsf E_p\left[\frac{X^i}{X}1_{\mid X > X_k}\right] = \sum_{j>k}\frac{X_j^i}{X_j}p_j.
+$$ {#eq-alpha-k-i}
+The $\alpha^i$ sum to one across the units because (conditional) expectations are linear. The expected loss to layer $k$, $S_k\Delta X_k$, can thus be partitioned into $\alpha_k^i S_k\Delta X_k$ across the various units. The total portfolio loss, $\mathsf E[X]$, is allocated to unit $i$ as
+$$
+\mathsf E[X^i] = \sum_j \alpha_j^i S_j\Delta X_j.
+$$ {#eq-alpha-k-ii}
+
+**Exercise.** Prove @eq-alpha-k-ii, given @eq-alpha-k-i.
+
+**Solution.**
+$$
+\begin{aligned}
+\sum_j \alpha_j^i S_j\Delta X_j &= \sum_{k=0}^{n-1} \left(\sum_{j=k+1}^{n}\frac{X_j^i}{X_j} p_j  \right)(X_{k+1}-X_k) \\
+&=\sum_{j=1}^n \frac{X_j^i}{X_j} p_j\sum_{k=0}^{j-1} (X_{k+1}-X_{k}) \\
+&=\sum_{j=1}^n \frac{X_j^i}{X_j} p_j X_j \\
+&=\sum_{j=1}^n X_j^i p_j \\
+&= \mathsf E[X^i]
+\end{aligned}
+$$
+noting $X_0=X_0^i=0$. \qed
+
+What about premium? We propose that the premium associated with layer $k$ be allocated to units in proportion to the *distorted* expected losses of the units in those triggering events. This leads to the definition of the **distorted expected loss share**
+$$
+\beta_k^i := \mathsf E_q\left[\frac{X^i}{X}\mid X > X_k\right]
+$$
+In particular, this means
+$$
+\beta_k^i g(S_k) = \sum_{j>k}\frac{X_j^i}{X_j}q_j = \sum_{j>k}\frac{X_j^i Z_j}{X_j}p_j.
+$$
+where, recall, $Z_j=q_j/p_j$ is the event weight.
+
+The premium to layer $k$, given by $P_k = g(S_k)\Delta X_k$, is partitioned to the units as $\beta_k^i g(S_k)\Delta X_k$. The total premium is therefore allocated to the units as
+$$
+\mathsf E[X^i Z(X)] = \sum_j \beta_j^i g(S_j)\Delta X_j
+$$
+being the total premium to unit $i$.
+
+**Exercise.** Prove the previous equality.
+
+**Solution.** The same steps as the preceding exercise. \qed
+
+Since margin is the difference between premium and expected loss (@eq-PLM), we immediately have the allocation of unit $i$'s margin
+$$
+M^i = \sum_j (\beta_j^i g(S_j) - \alpha_j^i S_j)\Delta X_j.
+$$ {#eq-M-i2}
+
+**Exercise.** Use @eq-M-i with @eq-P-i and @eq-L-i to derive a simple equation for $M^i$ and then prove it is the equivalent of @eq-M-i2. \qed
+
+Recall that the layer $k$ cost of capital is
+$$
+\iota_k := \frac{M_k}{Q_k} = \frac{P_k - S_k\Delta X_k}{\Delta X_k-P_k} = \frac{g(S_k) - S_k}{1- g(S_k)}.
+$$
+Here, we lean on the assumption of law invariance (see @sec-Pricing-layers). We claim that for a law invariant pricing approach, the layer cost of capital must be the *same for all units*. Law invariance implies the risk measure is only concerned with the attachment probability of the layer and not with the cause of loss within the layer. If $\iota$ *within a layer* varied by unit, then the allocation could not be law invariant. This crucial observation underlies the following logic.
+
+Because cost of capital equals margin over capital, and seeing as both margin and cost of capital are known by layer and by unit, with the latter constant across units, we can compute unit capital by layer $Q_k^i$ via
+
+\begin{equation}
+\iota_k: = \frac{M_k}{Q_k} = \frac{M_k^i}{Q_k^i}\implies Q_k^i = \frac{M_k^i}{\iota_k}.
+\end{equation} Substituting the details gives the following definition for the **NA of capital** in layer $k$ to unit $i$:
+$$
+Q_k^i = \frac{\beta_k^i g(S_k) -  \alpha_k^i S_k}{g(S_k)- S_k} (1-g(S_k))\Delta X_k.
+$$ {#eq-Q-ki}
+
+In words, taking @eq-Q-ki and dividing numerator and denominator by capital in the layer shows
+$$
+Q_k^i = \frac{\text{Margin for unit in layer}}{\text{Total margin in layer}}\times \text{Capital in layer} = \frac{\text{Margin for unit in layer}}{\text{Layer cost of capital}}.
+$$
+The NA is the same as method 1 (divide by weighted average cost of capital) but **applied separately for each layer** of capital!
+
+**Exercise.** Derive @eq-Q-ki. \qed
+
+Since $1-g(S_k)$ is the proportion of of layer $k$'s limit devoted to capital, this says the proportion of capital allocated to unit $i$ is given by the nicely symmetric expression
+$$
+\frac{\beta_k^i g(S_k) -  \alpha_k^i S_k}{g(S_k)- S_k}
+$$ {#eq-q-formula}
+To determine total capital by unit, we sum across layers
+$$
+Q^i := \sum_j Q_j^i.
+$$
+Finally, we can determine the average cost of capital for unit $i$ \begin{equation}
+\iota^i = \frac{M^i}{Q^i}.
+\end{equation}
+
+This is illustrated for our example in @tbl-alpha, @tbl-beta, and @tbl-q-alloc. In the last table, the columns are calculated as $M^i=\beta^i g(S)-\alpha^i S$, $\iota=(g-S)/(1-g)$, $Q^i=M^i/\iota$, and the low row $M$ (respectively, $Q$) show sum products with $\Delta X$. 
+
+```{python}
+#| echo: false
+#| label: tbl-alpha
+#| tbl-cap: "Calculation of loss shares by layer. The row $L$ shows sum products with $\\Delta X$."
+%run -i basic_example_script.py
+%run -i 070_script.py
+ex070['tbl-alpha']
+```
+
+```{python}
+#| echo: false
+#| label: tbl-beta
+#| tbl-cap: "Calculation of premium shares by layer. The row $P$ shows sum products with $\\Delta X$."
+ex070['tbl-beta']
+```
+
+```{python}
+#| echo: false
+#| label: tbl-q-alloc
+#| tbl-cap: "Allocation of capital."
+ex070['tbl-q-alloc']
+```
+
+Observe that $(\sum_i \iota^i Q^i)/Q$ is 15%, the weighted cost of capital over all units is 15%, as assumed.
+
+Notice that the first layer $k=0$ has undefined cost of capital $\iota$; since $S_0=1$, we have $g(S_0)=1$, $P_0=\Delta X_0$, and $M_0=Q_0=0$. Nonetheless, we have nonzero unit margins $M_0^i$ summing to zero.
+
+The smallest portfolio loss equals 22, meaning the first layer is entirely funded by loss payments and requires no capital in aggregate. However, there are cross-subsidies between the units within the layer. Were the three units to purchase insurance from an insurance company with only \$22 of assets, it would benefit the most volatile line, because it would capture an outsized proportion of the available assets in the case it had a large loss. The margins reflect these cross-subsidies. However because the layer is fully funded by losses, there is no capital and hence no aggregate margin, which is why the allocated margins sum to zero.
+
+Although the cost of capital *within* each layer is the same for all units, the margin, the proportion of limit that is capital, and the proportion of that capital attributable to each unit, all vary across layers. Therefore, *average cost of capital generally varies by unit*. @tbl-wang-isa-alloc shows the difference in results between the natural Wang allocation and the CCoC approaches done previously. (The natural CCoC is equivalent to the industry standard approach.) The story is complex. While both noncatastrophe lines receive more margin and more capital under the Wang allocation, it is not proportional; their rates of return are not only lower than the 15% benchmark, but they are markedly different.
+
+```{python}
+#| echo: false
+#| label: tbl-wang-isa-alloc
+#| tbl-cap: "Comparison of Wang SRM and CCoC natural capital allocations."
+ex070['tbl-wang-isa-alloc']
+```
+
+For a typical distortion other than CCoC, in line with @tbl-margin-return, we find:
+
+-   Lower layers of assets, below the expected losses, have a high cost of capital but, offsetting this, they are mostly funded by premium and require little supporting investor capital, resulting in high leverage.
+-   Higher layers of assets have a lower cost of capital but higher capital content: they are funded by capital to a greater degree.
+-   Low volatility units by definition tend to have losses close to their expected value, regardless of the value of total losses, and so consume relatively more of the expensive, lower layer capital and a smaller proportion of cheaper, higher asset layers. Offsetting this, there is more capital in higher layers than lower ones.
+-   High volatility units tend to have a larger proportion of total losses when the portfolio total loss is large, and so they consume a greater proportion of cheaper, higher layer capital.
+
+We see all of these phenomena in the example.
+
+With price, quantity, and proportion all variable the overall effect of the NA of capital is hard to predict. Since price, amount, and use are all correlated, it is never adequate to assume that the unit average cost of capital is the portfolio average cost of capital. This is the fundamental flaw in the industry standard approach, which uses the same cost of capital for all capital layers (see @sec-ISA). The SRM-based method outlined here produces varying cost of capital by unit in a defensible manner---given a choice of distortion function. How to make that choice was discussed in @sec-Selecting-Calibrating.
+
+## Comparions with Bodoff's layer capital allocation
+
+Readers may have guessed that the NA is closely related to Bodoff's layer capital allocation [@Bodoff2007]. This section will explain how they are correct and show the connections, similarities, and differences between the two approaches. Bodoff's approach uses $\alpha^i$, which describes how loss in each layer is shared between the units, and applies it to *all* assets in the layer. Since $\sum_i \alpha^1 = 1$ we get a decomposition
+$$
+a = \int_0^a 1\,dx = \sum_i \int_0^a \alpha^i(x)\,dx.
+$$
+Thus, $a^i=\int_0^a \alpha^i(x)\,dx$ is a reasonable allocation of assets. However, to determine a premium $a^i$ needs to be split into amounts $P^i + Q^i$ funded by policyholder premium and investor capital. For example, we could fall back to CCoC, resulting in a layer premium
+$$
+(\alpha^i(x) S(x) + \delta \alpha^i(x) (1 - S(x)))  + \nu \delta \alpha^i(x) (1 - S(x))
+$$
+where the first parenthetic term is expected loss (@eq-alpha-k-i) plus a margin $\delta$ times the unfunded liability (@tbl-pentagon, P3), and the second term is investor capital (@tbl-pentagon, Q). This reproduces distortion CCoC pricing. Picking other distortions, which allow for the unfunded liability to be split differently than losses, produces a range of other answers. Bodoff's paper is very insightful, but it falls short by not fully describing a premium allocation: further assumptions are still needed to convert allocated assets into allocated premiums. @tbl-bodoff shows Bodoff's asset allocation in the last four right-hand columns.
+
+```{python}
+#| echo: false
+#| label: tbl-bodoff
+#| tbl-cap: "Bodoff's asset allocations, $\\alpha^i\\Delta X$."
+ex070['tbl-bodoff']
+```

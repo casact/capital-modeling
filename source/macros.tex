@@ -1,0 +1,156 @@
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{rotating}
+
+\def\TVaR{\mathsf{TVaR}}
+\def\cov{\mathsf{cov}}
+\newcommand{\E}{\mathsf{E}}  % New command for \E
+\renewcommand{\Pr}{\mathsf{P}}  % Redefine \Pr
+\newcommand{\esssup}{\operatorname{ess\,sup}}
+
+\newtheorem{definition}{Definition}
+
+
+%==============================
+% tikz and related
+%==============================
+\usepackage{amsmath}
+\usepackage{amssymb}         % If needed
+
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{tikz}
+\usepackage{color}
+
+\usetikzlibrary{arrows,calc,positioning,shadows.blur,decorations.pathreplacing}
+\usetikzlibrary{automata}
+\usetikzlibrary{fit}
+\usetikzlibrary{snakes}
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.markings,decorations.text, decorations.pathmorphing,decorations.shapes}
+\usetikzlibrary{decorations.fractals,decorations.footprints}
+\usetikzlibrary{graphs}
+\usetikzlibrary{matrix}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{mindmap, shadows}
+\usetikzlibrary{backgrounds}
+\usetikzlibrary{cd}
+
+\newcommand{\grtspacer}{\vphantom{lp}}
+\newcommand{\I}{\vphantom{lp}}
+
+
+%==============================
+% Float placement customization
+%==============================
+\usepackage{float} % Required for \floatplacement and [H] (force here)
+
+% Default float placement preferences:
+% These set global default positions for all floats of the given type.
+
+\floatplacement{table}{h}   % Try to place tables "here" by default
+\floatplacement{figure}{t}  % Try to place figures at the top of the page
+
+% Notes on float specifiers:
+%   h  = here (if LaTeX thinks it fits)
+%   t  = top of page
+%   b  = bottom of page
+%   p  = on a separate float-only page
+%   H  = exactly here (requires \usepackage{float})
+
+% You can still override per float:
+% \begin{table}[htbp]   % Try here, then top, bottom, float page
+% \begin{figure}[H]     % Force placement exactly here
+
+
+%==============================
+% Listing formats
+%==============================
+% Suppress Quarto's default codelisting environment definition
+% This prevents conflicts with listings package's captioning
+
+% \makeatletter
+% \@ifundefined{newfloat}{\@namedef{newfloat}{#1}}{\@namedef{newfloat}#1}
+% \makeatother
+
+% \makeatletter
+% \def\newfloat#1[#2]#3#4{%
+%   \newenvironment{#1}{\relax}{\relax}%
+% }
+% \makeatother
+% \usepackage{codelisting}
+
+\usepackage{caption}
+
+% Choose one of the following font packages:
+% \usepackage{beramono} % Example: Bera Mono
+% \usepackage{inconsolata} % Example: Inconsolata
+% \usepackage{FiraMono}    % Example: Fira Mono (requires specific font setup)
+\usepackage{sourcecodepro} % Example: Source Code Pro
+
+\usepackage{xcolor} % Often needed for more robust color definitions, ensure it's loaded
+\usepackage{listings}
+
+\definecolor{lightgray}{rgb}{0.96,0.96,0.96} % Define the color
+
+\definecolor{backgroundlightgray}{rgb}{0.96,0.96,0.96} % Very light background
+\definecolor{keywordcolor}{rgb}{0.0, 0.0, 0.5}       % Dark Blue for keywords
+\definecolor{stringcolor}{rgb}{0.6, 0.0, 0.0}        % Dark Red/Maroon for strings
+\definecolor{commentcolor}{rgb}{0.35, 0.35, 0.35}    % Medium-Dark Grey for comments
+
+% size: \tiny, \scriptsize, \footnotesize, \small, \normalsize
+\lstset{
+    basicstyle=\footnotesize\ttfamily,
+    % basicstyle=\scriptsize\ttfamily,
+    keywordstyle=\color{keywordcolor},
+    stringstyle=\color{stringcolor},
+    commentstyle=\color{commentcolor},
+    breaklines=true,
+    showstringspaces=false,
+    frame=single,
+    framerule=0pt,
+    framesep=5pt,
+    backgroundcolor=\color{backgroundlightgray},
+}
+
+
+% \lstset{
+%     % Uses footnotesize and typewriter font
+%     basicstyle=\scriptsize\ttfamily,
+%     % Add other listings options here if needed, e.g.,
+%     % numbers=left,
+%     % numberstyle=\tiny,
+%     keywordstyle=\color{blue},
+%     stringstyle=\color{red},
+%     commentstyle=\color{green},
+%     breaklines=true,
+%     showstringspaces=false,
+%     frame=none,
+%     backgroundcolor=\color{lightgray}, % Apply it here
+%     % captionpos=b, % bottom captions
+%     frame=single,      % Create a frame (even if invisible)
+%     framerule=0pt,     % Make the frame invisible
+%     framesep=5pt,      % Padding around the content inside the frame
+%     % Or more granular control:
+%     % xleftmargin=5pt,
+%     % xrightmargin=5pt,
+%     % xtopmargin=5pt,
+%     % xbottommargin=5pt,
+% }
+
+
+
+%% VERSION 2 solution from Gemini
+% macros.tex
+% \usepackage{minted} % Good practice if you use \setminted
+% \setminted{
+%     fontsize=\footnotesize, % This controls the font size of the echoed code
+%     frame=none,             % This removes the frame/box
+%     % Other minted options you might want:
+%     % linenumbers,
+%     % breaklines=true,
+%     % bgcolor=white, % If you want a background color
+% }

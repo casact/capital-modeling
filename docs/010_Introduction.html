@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>1&nbsp; Introduction – Introduction to Capital Modeling and Portfolio Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./020_BusinessOperations.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-01c78b5cd655e4cd89133cf59d535862.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-44a2bfbc4aea0d0866ad2a0ddca8a790.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<link rel="icon" href="./static/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="1&nbsp; Introduction – Introduction to Capital Modeling and Portfolio Management">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://cmm.mynl.com/img/Block3_diag.png">
+<meta property="og:site_name" content="Introduction to Capital Modeling and Portfolio Management">
+<meta property="og:image:height" content="3000">
+<meta property="og:image:width" content="5100">
+<meta name="twitter:title" content="1&nbsp; Introduction – Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://cmm.mynl.com/img/Block3_diag.png">
+<meta name="twitter:image-height" content="3000">
+<meta name="twitter:image-width" content="5100">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./010_Introduction.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Capital Modeling and Portfolio Management</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dedication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dedication</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010_Introduction.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020_BusinessOperations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Business operations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030_CapitalAdequacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Capital adequacy and sources of risk</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040_PricingAndAllocation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050_Applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./060_SelectingSRM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./065_Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Evaluating models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./070_AdvancedTopics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./080_Calculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Calculations with <code>Aggregate</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./090_EndMatter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this chapter:</h2>
+   
+  <ul>
+  <li><a href="#sec-What-Into" id="toc-sec-What-Into" class="nav-link active" data-scroll-target="#sec-What-Into"><span class="header-section-number">1.1</span> What are you getting yourself into?</a></li>
+  <li><a href="#sec-Structure-Monograph" id="toc-sec-Structure-Monograph" class="nav-link" data-scroll-target="#sec-Structure-Monograph"><span class="header-section-number">1.2</span> Structure of the monograph</a></li>
+  <li><a href="#sec-Getting-Started" id="toc-sec-Getting-Started" class="nav-link" data-scroll-target="#sec-Getting-Started"><span class="header-section-number">1.3</span> Getting started</a>
+  <ul class="collapse">
+  <li><a href="#sec-Charter" id="toc-sec-Charter" class="nav-link" data-scroll-target="#sec-Charter"><span class="header-section-number">1.3.1</span> The charter</a></li>
+  <li><a href="#sec-Organizational-Factors" id="toc-sec-Organizational-Factors" class="nav-link" data-scroll-target="#sec-Organizational-Factors"><span class="header-section-number">1.3.2</span> Organizational factors</a></li>
+  </ul></li>
+  <li><a href="#sec-clarifying-remarks" id="toc-sec-clarifying-remarks" class="nav-link" data-scroll-target="#sec-clarifying-remarks"><span class="header-section-number">1.4</span> Clarifying remarks</a>
+  <ul class="collapse">
+  <li><a href="#pricing-ratemaking-and-costing" id="toc-pricing-ratemaking-and-costing" class="nav-link" data-scroll-target="#pricing-ratemaking-and-costing"><span class="header-section-number">1.4.1</span> Pricing, ratemaking, and costing</a></li>
+  <li><a href="#margins-and-returns" id="toc-margins-and-returns" class="nav-link" data-scroll-target="#margins-and-returns"><span class="header-section-number">1.4.2</span> Margins and returns</a></li>
+  <li><a href="#expected-plan-actual-and-other-flavors" id="toc-expected-plan-actual-and-other-flavors" class="nav-link" data-scroll-target="#expected-plan-actual-and-other-flavors"><span class="header-section-number">1.4.3</span> Expected, plan, actual, and other flavors</a></li>
+  <li><a href="#sec-parts-of-a-model" id="toc-sec-parts-of-a-model" class="nav-link" data-scroll-target="#sec-parts-of-a-model"><span class="header-section-number">1.4.4</span> Parts of a model</a></li>
+  </ul></li>
+  <li><a href="#sec-System-Overview" id="toc-sec-System-Overview" class="nav-link" data-scroll-target="#sec-System-Overview"><span class="header-section-number">1.5</span> System overview</a></li>
+  <li><a href="#sec-Intro-Insco" id="toc-sec-Intro-Insco" class="nav-link" data-scroll-target="#sec-Intro-Insco"><span class="header-section-number">1.6</span> Introduction to InsCo</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-Introduction" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-What-Into" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="sec-What-Into"><span class="header-section-number">1.1</span> What are you getting yourself into?</h2>
+<p>Congratulations! You have been tasked with developing a capital modeling system! But what does this mean? Maybe you were lucky enough to be handed a detailed specification of what this capital model is supposed to do and who is going to make use of its outputs and how those outputs will affect business operations. Or perhaps not.</p>
+<p>But what is a capital modeling system? What is it for? And how do you build one?</p>
+<p>Actuarial standards define <strong>capital</strong> as “The funds…over and above those funds backing the liabilities,” where “funds backing the liabilities” are amounts booked to support incurred liabilities (loss reserves) or future liabilities (unearned premiums), <span class="citation" data-cites="ASOP30">Actuarial Standards Board (<a href="references.html#ref-ASOP30" role="doc-biblioref">2011</a>)</span>. Capital is then a cushion in excess of those amounts. This definition highlights that capital is an accounting concept whose value will vary with the accounting standard. Since the distinction between capital and reserves is blurry, it is often more productive to focus on all available assets. Pricing then splits assets between policyholder-provided premium and reserves and owner-provided capital.</p>
+<p>The modeling standard <span class="citation" data-cites="ASOP56">(<a href="references.html#ref-ASOP56" role="doc-biblioref">Actuarial Standards Board 2019</a>)</span> defines a <strong>model</strong> as “A simplified representation of relationships among real-world variables, entities, or events using statistical, financial, economic, mathematical, non-quantitative, or scientific concepts and equations.” A key word here is <em>simplified</em>; as <span class="citation" data-cites="gabaix2008seven">Gabaix and Laibson (<a href="references.html#ref-gabaix2008seven" role="doc-biblioref">2008</a>)</span> points out, “[a] perfect replica of the earth would reproduce every contour, but such a representation would be impractical.” Capital modelers should take to heart the admonition attributed to Einstein to make things “as simple as possible, but no simpler.” Any increment of complexity should materially improve the utility of your model. Modelers face many pressures to build granular, complex models but receive no countervailing rewards for accuracy and practicality.</p>
+<p>Today, computers are ubiquitous in modeling, and this monograph will focus exclusively on quantitative models embedded in computer systems.</p>
+<p>A capital modeling system may be expected to support:</p>
+<ul>
+<li>risk identification and analysis,</li>
+<li>product pricing (ratemaking),</li>
+<li>rating and underwriting,</li>
+<li>reinsurance decisions,</li>
+<li>business unit performance assessment,</li>
+<li>portfolio optimization,</li>
+<li>valuation of a potential spinoff or acquisition,</li>
+<li>regulatory compliance,</li>
+<li>rating agency discussions, and</li>
+<li>strategic planning.</li>
+</ul>
+<p>We will assume in this monograph that your goal is, ultimately, a comprehensive system that can support all of the above activities. Of course, as you build it, you will need to prioritize interim goals and use cases, but directionally this is where we assume you are heading. For modelers in the US, questions of pricing are more important than questions of capital adequacy, as the latter constraints tend to be externally imposed. In the EU, however, an internal model may be called on to determine capital adequacy. There, regulators issue extensive guidance on model building that obviously trump any conflicting advice we offer.</p>
+<!-- JOHN: hummmmmmmmmmm -->
+<p>The system’s core modeling function is to <em>mirror and tie into the plan.</em> It is first a system to support and enhance the existing planning process and second to <em>quantify risk around the plan</em>. Support for the other listed tasks stems from this capability to represent risk.</p>
+</section>
+<section id="sec-Structure-Monograph" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="sec-Structure-Monograph"><span class="header-section-number">1.2</span> Structure of the monograph</h2>
+<p>The remainder of the Introduction helps you with <strong>Getting started</strong>, addressing high-level goals and operational issues to get you off the ground in <a href="#sec-Getting-Started" class="quarto-xref"><span>Section 1.3</span></a>, making some <strong>Clarifying remarks</strong> in <a href="#sec-clarifying-remarks" class="quarto-xref"><span>Section 1.4</span></a>, providing a <strong>System overview</strong> in <a href="#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a> that outlines a generic capital modeling system and which forms the basis for subsequent discussions of functionality, and in <a href="#sec-Intro-Insco" class="quarto-xref"><span>Section 1.6</span></a>, <strong>Introduction to InsCo</strong>, presenting a highly simplified example which is used throughout for illustration.</p>
+<p>The rest of the monograph is structured as follows:</p>
+<ul>
+<li><a href="#sec-Introduction" class="quarto-xref"><span>Chapter 1</span></a> <strong>Introduction</strong> is this chapter.</li>
+<li><a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a> <strong>Business operations</strong> discusses the largest module in the capital modeling system. This is where the financial fortunes of the firm are simulated. Building or acquiring and implementing this module will absorb most of your resources. This function is also where decades of training, experience, and literature can be brought to bear. In this chapter we will provide further pointers into that literature.</li>
+<li><a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a> <strong>Capital adequacy and sources of risk</strong> discusses the second module, which is smaller and easier to implement. It depends on the outputs from Business Operations and reflects well-understood principles of risk measurement. Basic risk measurement as well as regulatory aspects are discussed in this chapter. We also discuss risk analysis applications. The simple example continues. At the end of the chapter, algorithms for computing expected value, quantiles (VaR), and TVaR on discrete distributions are presented.</li>
+<li><a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a> <strong>Pricing and allocation</strong> is where we introduce new ways of thinking, specifically Spectral Risk Measures (SRMs) and the Natural Allocation thereof. In this chapter, InsCo is treated with a complete pricing and allocation exercise. Along the way, we discuss the industry standard approach to capital allocation and why it is problematic. At the end of the chapter, algorithms for computing SRMs and the Natural Allocation on discrete distributions are presented.</li>
+<li><a href="050_Applications.html" class="quarto-xref"><span>Chapter 5</span></a> <strong>Applications of pricing and allocation</strong> use the outputs of the Capital Adequacy and Pricing and Allocation modules in performance assessment, new business pricing, reinsurance decision-making, portfolio optimization, and mergers and acquisitions.</li>
+<li><a href="060_SelectingSRM.html" class="quarto-xref"><span>Chapter 6</span></a> <strong>Selecting and calibrating an SRM</strong> <!--# Defined SRM as spectral risk measure above. OK? --> discusses how choice of an SRM impacts the various portfolio components and presents an approach to finding an acceptable solution. It also discusses how to leverage the range of consistent outcomes and understand their implications on risk appetite.</li>
+<li><a href="065_Evaluation.html" class="quarto-xref"><span>Chapter 7</span></a> <strong>Evaluating models</strong> discusses how to evaluate your own model, third-party models, and modeling platforms.</li>
+<li><a href="070_AdvancedTopics.html" class="quarto-xref"><span>Chapter 8</span></a> <strong>Advanced topics</strong> deals with uncertainty and allocating capital (if you must) and a clever technique to implement correlation.</li>
+<li><a href="080_Calculations.html" class="quarto-xref"><span>Chapter 9</span></a> <!-- ref does not exist --> <strong>Calculations with Aggregate</strong> shows how to use the open-source <code>aggregate</code> package to work the examples in this monograph.</li>
+<li><a href="090_EndMatter.html" class="quarto-xref"><span>Chapter 10</span></a> <!--# Please remove chapter number from heading, change to Appendices, per style. -->The <strong>Appendices</strong> include a table of symbols, list of relevant Actuarial Sandards of Practice, and a glossary.</li>
+</ul>
+</section>
+<section id="sec-Getting-Started" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="sec-Getting-Started"><span class="header-section-number">1.3</span> Getting started</h2>
+<section id="sec-Charter" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="sec-Charter"><span class="header-section-number">1.3.1</span> The charter</h3>
+<p>The maxim, “If you build it, they will use it” does not apply to capital models. Successful models are built in response to business needs, with high-level direction set by a senior business leader. A <strong>charter</strong> can be a valuable tool in crystallizing that direction. You should have some more-or-less formal document answering design questions such as:</p>
+<ul>
+<li>Why are we building a capital modeling system?
+<ul>
+<li>Is this driven by regulatory concerns, dissatisfaction with the current planning process, or something else?</li>
+</ul></li>
+<li>What types of decisions will it support?
+<ul>
+<li>See examples in <a href="#sec-What-Into" class="quarto-xref"><span>Section 1.1</span></a>.</li>
+</ul></li>
+<li>Who is going to use this model?
+<ul>
+<li>Who is going to run it, hands on?</li>
+<li>How often will it run (daily, weekly, monthly, etc.)?</li>
+<li>Who is going to be in a position to set inputs or pose queries?</li>
+<li>Who is going to receive reports?</li>
+<li>What is the users’ level of sophistication, in terms of what they are likely to ask and what sort of output or report they are willing and able to absorb?</li>
+<li>Is the model intended for senior staff to be reviewing outputs or junior staff to be integrating outputs with their own workflow? This may differ across functional units.</li>
+</ul></li>
+<li>When will the outputs be used?
+<ul>
+<li>During the planning process, presumably, but probably other times as well.</li>
+</ul></li>
+<li>Whose business processes will be affected by the system?</li>
+<li>How will outputs be integrated into planning and underwriting?</li>
+<li>How will we know if we are successful?
+<ul>
+<li>Define metrics such as use and impact.</li>
+<li>What stakeholders need to be in agreement to make the system successful?</li>
+</ul></li>
+</ul>
+<p>Ideally, this document will bear a cover memo endorsed by some sufficiently high-ranking executive. At the very least, it must be widely exposed to senior management and key stakeholders (typically Lines of Business) via road shows.</p>
+<p>How will you know if you are successful? Mainly, by seeing your model get used, i.e., “fully embedded into the risk strategy and operational processes of the insurer” <span class="citation" data-cites="IAIS2008">(<a href="references.html#ref-IAIS2008" role="doc-biblioref">IAIS 2008</a>)</span>. This means, among other things:</p>
+<ol type="1">
+<li>Management has an overall understanding of what your model does, in terms of input versus output.</li>
+<li>The model is used in the planning cycle; results are regularly discussed and reviewed.</li>
+<li>Decisions that affect the firm’s risk profile usually refer to model results.</li>
+<li>Decision-makers ask when the next set of outputs will be ready.</li>
+</ol>
+<p>The European Insurance and Occupational Pension Authority (<span class="citation" data-cites="EIOPA2009">EIOPA (<a href="references.html#ref-EIOPA2009" role="doc-biblioref">2009</a>)</span>, title I, chapter VI, section 4, article 120; <span class="citation" data-cites="EIOPA2015">EIOPA (<a href="references.html#ref-EIOPA2015" role="doc-biblioref">2015</a>)</span> title I, chapter 6) elaborates on these points in the context of the use test.</p>
+</section>
+<section id="sec-Organizational-Factors" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-Organizational-Factors"><span class="header-section-number">1.3.2</span> Organizational factors</h3>
+<p>Your project plan needs to address organizational issues. What resources will be available for initial development, ongoing maintenance, and operations? What actuarial and programming staff will need to be involved? What data are required? What funds are needed to purchase software? What hardware is needed?</p>
+<p>Don Mango addresses organizational and human factors related to implementing an internal risk model (IRM) in <span class="citation" data-cites="Brehm2007">Brehm et al. (<a href="references.html#ref-Brehm2007" role="doc-biblioref">2007</a>)</span>, sec 3.1. He covers the following areas:</p>
+<ol type="1">
+<li><strong>Startup staffing:</strong> This step includes considering the organizational chart, business functions represented, resource commitments, roles, and responsibilities. He recommends that system implementation is “the establishment of a new competency” and calls for the transfer of full-time employees or even adding new hires. Control of inputs and outputs of the model needs to be taken as seriously as general ledger or reserving systems.</li>
+<li><strong>Purpose and scope:</strong> He suggests initially to cover only the prospective underwriting year and to quantify variation around that plan; later, expand the scope to include reserves, assets, and operational risks with more formal probability distributions. <!--# Edits to this bullet as meant? --></li>
+<li><strong>Parameter development:</strong> Data quality issues will require expert judgment from underwriting, claims, planning, and actuarial staff. “Develop a systematic way to capture expert risk opinion.” Correlation is as important as it is problematic. <!--# Can you further define the relevance of this statement: "Correlation is as important as it is problematic"?  --></li>
+<li><strong>Software:</strong> Evaluate available software solutions, and decide whether to build or buy. This decision depends on the strength and skills of the modeling team.</li>
+<li><strong>Validation testing:</strong> This will occur over time and requires significant planning. Reach out to affected parties and make sure they understand what validation does and how it works.</li>
+<li><strong>Rollout:</strong> Early in the process, secure top management backing for prioritization, communications and training, and pilot testing.</li>
+<li><strong>Integration and maintenance:</strong> Of course, he recommends mandatory inclusion of model reports as part of decision support in the planning cycle. Make major updates no more frequently than semiannually. Maintain centralized control of inputs and outputs.</li>
+</ol>
+<p><span class="citation" data-cites="CASDFM">Emma et al. (<a href="references.html#ref-CASDFM" role="doc-biblioref">2000</a>)</span> Chapter 6 discusses dangers and pitfalls. We can recast that advice as things to do:</p>
+<ol type="1">
+<li>Make sure to get sufficient senior management support.
+<ul>
+<li>Get a charter!</li>
+<li>Make sure the effort is going to support a real business use.</li>
+</ul></li>
+<li>Attend to communication between the team and key stakeholders.
+<ul>
+<li>The model design may be quite technical. Make sure stakeholders understand enough about the model to be informed on what it can and cannot do, as well as what is required to develop and maintain it. <!--# Edits to this bullet OK? --></li>
+<li>Use the same language as stakeholders. This is especially important when talking to professionals like accountants.</li>
+<li>Allocate enough time to communication.</li>
+</ul></li>
+<li>Make sure model results can be integrated into planning.
+<ul>
+<li>Results must reconcile to plan.</li>
+<li>Results must emerge in time to be used in the planning process.</li>
+</ul></li>
+</ol>
+<p>Planning the development of a capital modeling system is very much like planning any other significant software system. Treat it with the same level of care.</p>
+</section>
+</section>
+<section id="sec-clarifying-remarks" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-clarifying-remarks"><span class="header-section-number">1.4</span> Clarifying remarks</h2>
+<section id="pricing-ratemaking-and-costing" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="pricing-ratemaking-and-costing"><span class="header-section-number">1.4.1</span> Pricing, ratemaking, and costing</h3>
+<p>Throughout the monograph we talk about <em>pricing</em>, using phrases like the “required price” to mean a model indicated price. For actuaries working outside highly regulated lines, we believe our terminology is standard and immediately comprehensible. However, actuaries working in regulated lines may be sensitive to the distinction between costing, ratemaking, and pricing. Cost estimates consider only loss-related differences between insureds. Ratemaking allows behavioral differences to creep into premiums, considering price elasticity and propensity to shop in determining a profit maximizing rate, i.e., allowing price optimization. Finally, price is usually reserved for a market determined sold rate. Acceptable prices may include corporate strategic objectives aside from considerations of the insured’s risk. We do not explicitly consider price optimization or other strategic pricing objectives and are therefore really engaged in costing, but we find the word “pricing” preferable and trust that no confusion will arise.</p>
+</section>
+<section id="margins-and-returns" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="margins-and-returns"><span class="header-section-number">1.4.2</span> Margins and returns</h3>
+<p>Much actuarial ink has been spilled on the distinction between <em>margins</em> and <em>returns</em> <span class="citation" data-cites="McClenahan1999">(<a href="references.html#ref-McClenahan1999" role="doc-biblioref">McClenahan 1999</a>)</span>. The situation is straightforward. Insureds care about premiums and hence margins to premium. Investors care about capital and hence the return on capital. Insurers and regulators care about both. Capital is a cost for an insurer, hence they speak of the <em>cost</em> of capital. Investors purchase the securities (equity, bonds) insurers use to finance capital, and they are interested in the <em>return</em> on their investment. Cost of capital is almost always <em>ex ante</em> and expected; return on investment can be expected or <em>ex post</em> and actual. The rate regulator focuses on premium margins and the embedded cost of capital, whereas the solvency regulator monitors actual returns and the risks taken to achieve them.</p>
+<p>Premium leverage forms the bridge between premium and capital. The comparison in <a href="#tbl-margin-return" class="quarto-xref">Table&nbsp;<span>1.1</span></a> helps illustrate this bridge. It contrasts the typical economics of an attritional, low-risk unit with those of a high-risk, catastrophe exposed one. The value column is particularly important: it clarifies a common point of confusion. Attritional insurance is typically inexpensive in the sense it is written at a <em>high</em> loss ratio. It is also written at <em>high</em> leverage, often producing a <em>high</em> equity-like return on capital. Conversely, catastrophe risk is expensive and written at a <em>low</em> loss ratio. It is difficult to pool efficiently and as a consequence is written at <em>low</em> leverage, resulting in <em>low</em> debt-like returns, as seen in the catastrophe bond market. This can seem paradoxical: business that is <em>more</em> risky from an insurance perspective yields a <em>lower</em> return on capital, and vice versa. The paradox is resolved by recognizing the difference between risk to the <em>insurer</em> and risk to the <em>investor</em>. Capital supporting attritional risk faces a roughly 50% chance of short-term loss, whereas capital supporting pure catastrophe risk has very a low probability of loss. The loss-given-default characteristics also differ substantially. Last, it might seem we should use margin in this table to measure expense rather than loss ratio. We don’t because margin is negatively correlated with loss ratio, so using margin would break the clean high/high/high vs.&nbsp;low/low/low symmetry of the table. <!--# Made some edits to Table 1.1, feel free to reject if it affects formatting. --></p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-margin-return" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-margin-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.1: Comparison of loss ratio, leverage and return for attritional and catastrophe type units.
+</figcaption>
+<div aria-describedby="tbl-margin-return-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="greater-table">
+<style>
+    #TT5WJQS4FTVJA  {
+    border-collapse: collapse;
+    font-family: "Roboto", "Open Sans Condensed", "Arial", 'Segoe UI', sans-serif;
+    font-size: 1.0em;
+    width: auto;
+    
+    margin: 10px auto;
+    border: none;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    
+    
+    #TT5WJQS4FTVJA caption {
+        padding: 4px 10px 2px 10px;
+        font-size: 1.1em;
+        text-align: center;
+        font-weight: normal;
+        caption-side: top;
+    }
+    #TT5WJQS4FTVJA thead {
+        
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        font-size: 1.0em;
+        }
+    #TT5WJQS4FTVJA tbody {
+        
+        border-bottom: 1px solid #000;
+        }
+    #TT5WJQS4FTVJA th  {
+        vertical-align: bottom;
+        padding: 4px 10px 4px 10px;
+    }
+    #TT5WJQS4FTVJA td {
+        
+        padding: 2px 10px 2px 10px;
+        vertical-align: top;
+    }
+    
+    #TT5WJQS4FTVJA .grt-hrule-0 {
+        border-top: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-hrule-1 {
+        border-top: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-hrule-2 {
+        border-top: 0.0px solid #000;
+    }
+    
+    #TT5WJQS4FTVJA .grt-bhrule-0 {
+        border-bottom: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-bhrule-1 {
+        border-bottom: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-vrule-index {
+        border-left: 1px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-vrule-0 {
+        border-left: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-vrule-1 {
+        border-left: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-vrule-2 {
+        border-left: 0.0px solid #000;
+    }
+    #TT5WJQS4FTVJA .grt-left {
+        text-align: left;
+    }
+    #TT5WJQS4FTVJA .grt-center {
+        text-align: center;
+    }
+    #TT5WJQS4FTVJA .grt-right {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+    #TT5WJQS4FTVJA .grt-head {
+        font-family: "Times New Roman", 'Courier New';
+        font-size: 1.0em;
+    }
+    #TT5WJQS4FTVJA .grt-bold {
+        font-weight: bold;
+    }
+
+</style>
+
+<table id="TT5WJQS4FTVJA" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="grt-left" data-quarto-table-cell-role="th">Unit Type</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Measure</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Value</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Qualitative</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Quantitative</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="grt-c-0 grt-left">Attritional</td>
+<td class="grt-c-1 grt-left grt-vrule-0">Loss ratio (%)</td>
+<td class="grt-c-2 grt-left grt-vrule-0">High</td>
+<td class="grt-c-3 grt-left grt-vrule-0">Cheap insurance</td>
+<td class="grt-c-4 grt-left grt-vrule-0">90s</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left"></td>
+<td class="grt-c-1 grt-left grt-vrule-0">Leverage</td>
+<td class="grt-c-2 grt-left grt-vrule-0">High</td>
+<td class="grt-c-3 grt-left grt-vrule-0">Efficient pooling</td>
+<td class="grt-c-4 grt-left grt-vrule-0">2:1</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left"></td>
+<td class="grt-c-1 grt-left grt-vrule-0">Return (%)</td>
+<td class="grt-c-2 grt-left grt-vrule-0">High</td>
+<td class="grt-c-3 grt-left grt-vrule-0">High returns</td>
+<td class="grt-c-4 grt-left grt-vrule-0">Teens to 20s</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left"></td>
+<td class="grt-c-1 grt-left grt-vrule-0"></td>
+<td class="grt-c-2 grt-left grt-vrule-0"></td>
+<td class="grt-c-3 grt-left grt-vrule-0"></td>
+<td class="grt-c-4 grt-left grt-vrule-0"></td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left">Catastrophe</td>
+<td class="grt-c-1 grt-left grt-vrule-0">Loss ratio (%)</td>
+<td class="grt-c-2 grt-left grt-vrule-0">Low</td>
+<td class="grt-c-3 grt-left grt-vrule-0">Expensive insurance</td>
+<td class="grt-c-4 grt-left grt-vrule-0">30s</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left"></td>
+<td class="grt-c-1 grt-left grt-vrule-0">Leverage</td>
+<td class="grt-c-2 grt-left grt-vrule-0">Low</td>
+<td class="grt-c-3 grt-left grt-vrule-0">Inefficient pooling</td>
+<td class="grt-c-4 grt-left grt-vrule-0">1:5</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left"></td>
+<td class="grt-c-1 grt-left grt-vrule-0">Return (%)</td>
+<td class="grt-c-2 grt-left grt-vrule-0">Low</td>
+<td class="grt-c-3 grt-left grt-vrule-0">Low returns</td>
+<td class="grt-c-4 grt-left grt-vrule-0">Single digit</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="expected-plan-actual-and-other-flavors" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="expected-plan-actual-and-other-flavors"><span class="header-section-number">1.4.3</span> Expected, plan, actual, and other flavors</h3>
+<p>When we talk about pricing, terms like “loss” and “margin” usually mean <em>expected</em> loss or margin. It is helpful to distinguish several different pricing viewpoints <span class="citation" data-cites="Robbin1992">(<a href="references.html#ref-Robbin1992" role="doc-biblioref">Robbin 1992</a>)</span>. A premium or rate can be:</p>
+<ol type="1">
+<li><strong>Filed:</strong> incorporated into filed rates in a regulated line.</li>
+<li><strong>Required or Target:</strong> premium required to hit a (corporate) pricing target.</li>
+<li><strong>Plan:</strong> reflects adjusted targets actually embedded in a plan.</li>
+<li><strong>Indicated:</strong> produced by an actuarial pricing model or process.</li>
+<li><strong>Priced:</strong> produced by an actuarial-underwriting process.</li>
+<li><strong>Quoted:</strong> actually released into the market as a bindable rate.</li>
+<li><strong>Sold:</strong> the premium actually sold in a transaction.</li>
+<li><strong>Market:</strong> an estimate of sold rates.</li>
+</ol>
+<p>The same terms can be applied to margins. These terms are almost always meant prospectively and are <em>ex ante</em>. In addition, for margins there is the important</p>
+<ol start="8" type="1">
+<li><strong>Actual:</strong> achieved margin reflecting developed ultimate loss experience. <!--# Should this actually be numbered 9? --></li>
+</ol>
+<p>Actual is obviously after the fact or <em>ex post</em>.</p>
+<p>Our pricing discussions primarily focus on setting some flavor of required premium in the context of a corporate or business unit plan. We often use the term “required” as a synonym for “target” or “indicated,” i.e., a price computed by a model in order to meet some specified objective.</p>
+</section>
+<section id="sec-parts-of-a-model" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="sec-parts-of-a-model"><span class="header-section-number">1.4.4</span> Parts of a model</h3>
+<p>Before describing what should be in a model, some distinctions should be kept in mind. There are various <em>levels</em> to modeling, starting from the computer infrastructure and extending all the way up to the application being run by the end-user. <a href="#tbl-model-parts" class="quarto-xref">Table&nbsp;<span>1.2</span></a> lays out these levels and associated concepts.</p>
+<div id="tbl-model-parts" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-model-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1.2: Model components from hardware to output.
+</figcaption>
+<div aria-describedby="tbl-model-parts-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 27%">
+<col style="width: 72%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Concept</strong></th>
+<th style="text-align: left;"><strong>Examples</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Levels include</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Computer hardware</td>
+<td style="text-align: left;">Mac, PC, server, workstation, cloud (AWS, Databricks)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Operating system and</td>
+<td style="text-align: left;">macOS, Windows, Linux</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">system utilities</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Programming language</td>
+<td style="text-align: left;">Python, R, Java, Visual BASIC, C++</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Modeling platform</td>
+<td style="text-align: left;">Excel, ReMetrica, IGLOO, MetaRisk, Oasis,</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">your own custom “empty” spreadsheet or function library</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Model</td>
+<td style="text-align: left;">Spreadsheet</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Rating agency capital models, Solvency II standard calculation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Specific peril cat model, e.g., vendor US Hurricane model</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Models include</strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Modeling techniques</td>
+<td style="text-align: left;">Simulation, calculation</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Structural parameters</td>
+<td style="text-align: left;">Protected cells, e.g., unit loss volatility and correlations</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cat model damage curve</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Business parameters</td>
+<td style="text-align: left;">User input cells, e.g, unit plan premium and loss ratios</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">Cat model property portfolio</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Raw outputs</td>
+<td style="text-align: left;">Cat model event or yearly loss tables, event timeline database</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Output exhibits</td>
+<td style="text-align: left;">Probable maximal loss table, summary statistics, pro forma financials</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Structural parameters are changed infrequently. Business parameters are changed frequently, especially during planning when it is standard to run many different iterations.</p>
+</section>
+</section>
+<section id="sec-System-Overview" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sec-System-Overview"><span class="header-section-number">1.5</span> System overview</h2>
+<p>There is considerable variation in how a capital modeling system could be designed and implemented. In this section we provide a conceptual template to follow.</p>
+<div id="fig-3Modules" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-3Modules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/Block3_diag.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;1.1: Three modules of a capital modeling system."><img src="img/Block3_diag.png" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-3Modules-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Three modules of a capital modeling system.
+</figcaption>
+</figure>
+</div>
+<p>We can mentally decompose a capital modeling system into three components shown in <a href="#fig-3Modules" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>. By far, the biggest and most complex module represents the stochastic business of an insurer. This is labeled <strong>Business Operations</strong> in the diagram. A capital modeling system must represent some or all of the firm’s portfolio of insurance liabilities.</p>
+<p>There is a wide range of sophistication possible to this representation, depending on the particulars of the purpose for which the system is to serve. The core concept is the loss which the portfolio might incur. This loss, being <em>a priori</em> uncertain, is a random variable. It might be represented by a distribution of losses or by a set of loss scenarios, which we will call events. The output could include just the losses, or it could include a complete set of financial statements—balance sheet, income statement, and cash flows—all of which ultimately depend on the losses. If the latter, there are numerous accounting standards that could be followed. These possibilities are discussed in <a href="020_BusinessOperations.html" class="quarto-xref"><span>Chapter 2</span></a>.</p>
+<p>Output from the Business Operations module feeds into the much simpler <strong>Capital Adequacy</strong> and <strong>Pricing &amp; Allocation</strong> modules. This is signified by the solid arrows. Dotted arrows signify that these two modules, in turn, affect business operations in the real world and hence, indirectly, the Business Operations module. Indeed, the real-world effect of these modules is the <em>raison d’être</em> of the entire capital modeling system.</p>
+<p><a href="#fig-block-diagram-1" class="quarto-xref">Figure&nbsp;<span>1.2</span></a> expands the Business Operations module.</p>
+<div id="fig-block-diagram-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-block-diagram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/System_Diagram_x1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;1.2: Internal structure of Business Operations module."><img src="img/System_Diagram_x1.jpg" class="img-fluid figure-img" style="width:50.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-block-diagram-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.2: Internal structure of Business Operations module.
+</figcaption>
+</figure>
+</div>
+<p>Starting at the left of the diagram is the <strong>Units</strong> module, with inputs labeled <strong>U</strong>. We use the term “unit” to refer to a component of the portfolio. A unit can be a single policy or a group of policies defined by line of business, geography, branch, business unit, or other characteristics. A unit can also represent the segmentation between ceded and assumed reinsurance.</p>
+<p>The output of Units is a representation of <em>experience</em>, which means paid loss, at the very least, but could also include a time series of loss developments, reserves, etc. Input parameters are things like exposure and possibly shape parameters for loss distributions.</p>
+<p>These loss outputs are likely to be correlated (not independent) across the units either by common economic or social factors or enforced correlation via copulas, Iman-Conover sampling (<a href="070_AdvancedTopics.html#sec-iman-conover" class="quarto-xref"><span>Section 8.2</span></a>), etc.</p>
+<p>If investment experience is included as one (or more than one) unit, then input from the <strong>Economic Scenario Generator</strong> (labeled ESG) will be important. This is an optional module which represents external economic factors such as interest rates, returns on various asset classes, rates of monetary inflation, unemployment, etc.</p>
+<p>The <strong>Reinsurance</strong> module, with inputs labeled <strong>R</strong>, modifies the gross experience of the units. This includes all outward (ceded) reinsurance. Any inward (assumed) reinsurance would be represented among the units. The output, net experience, includes the effect of any retrocession.</p>
+<p><strong>Accounting</strong> translates experience realizations into <strong>pro formas</strong>, i.e., financial statements. This output from the Accounting module is a core element of the system. Multiple occurrences of pro formas, generated on the fly or possibly stored in a database, are used in stochastic simulation, whereas single occurrences are used for analyzing specific events. The level of detail here must match the specification of the units.</p>
+<p>The system is likely to include the input labeled <strong>Capital Structure</strong>. This specifies, at the very least, the total amount of assets available to pay claims. It may also specify details of noninsurance liabilities, such as bonds, preferred stock, and equity issued by the firm. The Economic Scenario Generator may have some influence on the outward cash flows—which reduce assets—from preferred and common stock dividends. The Accounting module would take into account the fact that losses in excess of total assets lead to <em>insolvency</em> and haircuts in claim payments. If there is no capital structure information at all, asset limitations are ignored and assets are in effect assumed to be infinite.</p>
+<div id="fig-block-diagram" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/System_Diagram.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;1.3: Full detail of the capital modeling system."><img src="img/System_Diagram.jpg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-block-diagram-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.3: Full detail of the capital modeling system.
+</figcaption>
+</figure>
+</div>
+<p><a href="#fig-block-diagram" class="quarto-xref">Figure&nbsp;<span>1.3</span></a> expands the picture by bringing in the remaining modules.</p>
+<p>The <strong>Capital Adequacy</strong> module, with inputs labeled <strong>C</strong>, operates on the pro formas and determines the minimal amount of assets to satisfy requirements from regulators, rating agencies, and the risk committee of the firm’s board of directors. Such determinations could include a simple Value at Risk (<strong>VaR</strong>) calculation or more complex Best’s Capital Adequacy Ratio (<strong>BCAR</strong>) calculation. The module also includes risk reports—analysis of what is driving the need for assets. The input parameters can be regarded as the firm’s <strong>risk tolerance</strong>, specifying what level of risk is acceptable for a given amount of capital or vice versa. Outputs feed back into the real world and implicitly affect the capital structure, hence the dotted line. This is discussed in more detail in <a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a>.</p>
+<p>The <strong>Pricing</strong> module has two separately identified inputs. First, the <strong>Profit Target</strong> specifies the desired overall profitability of the portfolio as a whole. This could be posed as an aggregate premium, margin, loss ratio, or return on capital; these are equivalent specifications discussed in <a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a>. The second input, labeled <strong>P</strong>, specifies more esoteric properties such as the <em>shape</em> of the distortion function underlying an SRM—also discussed in <a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a>. The two inputs can be interpreted as specifying the firm’s <strong>risk appetite</strong>.</p>
+<p><strong>Allocation</strong> takes the required portfolio premium as given and allocates the premium (equivalently margin, loss ratio) to the individual units. This information, presumably, has real-world impacts on the units via performance management, risk management, underwriting actions, etc. Impact is represented by the dotted arrows to Units.</p>
+</section>
+<section id="sec-Intro-Insco" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="sec-Intro-Insco"><span class="header-section-number">1.6</span> Introduction to InsCo</h2>
+<p><em>InsCo is our one-period simplified model of insurance company operations.</em></p>
+<p>We will use an extremely simple toy example to illustrate the operation of the system presented in <a href="#sec-System-Overview" class="quarto-xref"><span>Section 1.5</span></a>. It deliberately abstracts away from much of the complexity, detail, and nuance of the real world. Readers should be able to reproduce the example easily in a spreadsheet.</p>
+<p>A more complex and realistic example can be found in <a href="080_Calculations.html#sec-realistic" class="quarto-xref"><span>Section 9.5</span></a>, and more in <span class="citation" data-cites="PIR">Mildenhall and Major (<a href="references.html#ref-PIR" role="doc-biblioref">2022</a>)</span>. Those, as well as this simple example and even more complex portfolios, can all be analyzed with <code>aggregate</code>, an open-source Python library <span class="citation" data-cites="Aggregate">Mildenhall (<a href="references.html#ref-Mildenhall2024" role="doc-biblioref">2024</a>)</span> that “builds approximations to compound (aggregate) probability distributions quickly and accurately.” Because <code>aggregate</code> uses Fast Fourier Transforms, it “delivers the speed and accuracy of parametric distributions to situations that usually require simulation” and is therefore much faster than simulation. All the analytical techniques discussed in this monograph can be implemented in <code>aggregate</code>.</p>
+<p><strong>InsCo</strong> is a limited liability company that intermediates between insureds and investors. InsCo’s customers are <strong>insureds</strong> (policyholders) who are subject to risks they wish to insure. Insureds who use insurance for risk transfer or financing are sensitive to insurer quality and possible default because it correlates with their own misfortune.</p>
+<p>Insurance legal entities serve two principal purposes. First, they provide statutory insurance such as mandatory automobile liability. Second, they allow insureds to pool together and benefit from diversification without requiring onerous bilateral contracts. They do this through insolvency rules, which provide the framework under which unrelated insureds interact in the unlikely event of an insolvency.</p>
+<p>InsCo comes into existence at time <span class="math inline">\(t=0\)</span> and lasts for one period. InsCo has no initial liabilities. At <span class="math inline">\(t=0\)</span>, it writes one or more single-period insurance contracts and collects premiums from its insureds.</p>
+<p>When InsCo writes a policy, it collects premium at <span class="math inline">\(t=0\)</span> and earns it over the period. We assume all other transactions occur at the end of the period. Therefore all the premium is earned and available to pay claims at <span class="math inline">\(t=1\)</span>. If InsCo’s ending assets <span class="math inline">\(a\)</span> are insufficient to pay the claims, then it defaults.</p>
+<p>InsCo has promised to pay policyholders claims under various contingencies, with the aggregate promise represented by the random variable <span class="math inline">\(X\ge 0\)</span>. If <span class="math inline">\(X&gt;a\)</span>, then only <span class="math inline">\(a\)</span> gets paid out, i.e., the actual payments are the minimum of <span class="math inline">\(X\)</span> and <span class="math inline">\(a\)</span>, which we write as <span class="math inline">\(X\wedge a\)</span>. We assume the probability distribution of <span class="math inline">\(X\)</span> is known.</p>
+<p>InsCo is owned by <strong>investors</strong> who provide risk-bearing capital. Investors are also risk averse. The market structure is displayed in <a href="#fig-market" class="quarto-xref">Figure&nbsp;<span>1.4</span></a>.</p>
+<div id="fig-market" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/ins-ins-inv-reg.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;1.4: InsCo, insureds, regulators, and investors: roles and cash flows."><img src="img/ins-ins-inv-reg.svg" class="img-fluid figure-img" style="width:100.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-market-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.4: InsCo, insureds, regulators, and investors: roles and cash flows.
+</figcaption>
+</figure>
+</div>
+<p>At time <span class="math inline">\(t=0\)</span>, while collecting premiums, InsCo also raises capital from investors by selling them its uncertain <span class="math inline">\(t=1\)</span> residual value. That is, at time <span class="math inline">\(t=1\)</span>, InsCo pays any claims due in the amount of <span class="math inline">\(X \wedge a\)</span> and pays any residual value <span class="math inline">\((X-a)^+\)</span>, if it exists, to its investors as return of capital plus a dividend or investment return. If InsCo’s ending assets are insufficient to pay the claims, <span class="math inline">\(X&gt;a\)</span>, then it defaults. Investors have limited liability: they may lose their original investment but owe nothing more.</p>
+<p>Premiums cover expected losses and loss adjustment expenses, as well as the cost of capital including frictional capital costs. All other expenses are outside our model.</p>
+<p>Symbolically, at time <span class="math inline">\(t=0\)</span>, InsCo collects premiums <span class="math inline">\(P\)</span> from policyholders and capital <span class="math inline">\(Q\)</span> from investors. These are the only sources of funds and comprise the total assets via the <strong>funding equation</strong>: <span id="eq-funding"><span class="math display">\[
+a = P+Q.
+\tag{1.1}\]</span></span> Two important questions arise from InsCo’s promises to pay.</p>
+<ol type="1">
+<li>Are there sufficient assets to honor those promises?</li>
+<li>Are investors being adequately compensated for taking on those risks?</li>
+</ol>
+<p>Crucially, we need to talk about not one but <em>two</em> different risk measures to answer these questions.</p>
+<p>Question 1 concerns risk tolerance and is answered by the Capital Adequacy module. It determines the assets necessary to back an existing or hypothetical portfolio at a given level of risk. This exercise can also be reverse engineered: given existing or hypothetical assets, what constraints on business does the risk tolerance entail? Alternatively, given business and capital, what is the implied risk tolerance?</p>
+<p>Assets <span class="math inline">\(a\)</span> and liabilities <span class="math inline">\(X\)</span> are related by some rule driven by a combination of regulatory authorities, rating agencies, and InsCo’s own internal risk management policies, representing a risk tolerance. Such a rule we call a <strong>capital risk measure</strong>, and we may write <span class="math inline">\(a\)</span> as a functional <span class="math inline">\(a(X)\)</span>. Value at Risk (VaR) or Tail Value at Risk (TVaR) at some high confidence level, such as 99.5% or 1 in 200 years, are both popular, but other possible measures exist, see <a href="030_CapitalAdequacy.html" class="quarto-xref"><span>Chapter 3</span></a>. As a first approximation, we may take it that <span class="math inline">\(a\)</span> is sufficient to avoid insolvency altogether, i.e., in all events, all claims are paid.</p>
+<p>Question 2, answered by the Pricing module, concerns how that asset amount <span class="math inline">\(a\)</span> is to be split between premium <span class="math inline">\(P\)</span> and capital <span class="math inline">\(Q\)</span> (<a href="#eq-funding" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>); this is quite different from determining <span class="math inline">\(a\)</span>. It is about risk pricing or risk appetite. We must determine the expected margin insureds need to pay in total to make it worthwhile for investors to bear the portfolio’s risk. Such a rule we call a <strong>pricing risk measure</strong>, and we may write premium as a functional <span class="math inline">\(P = \rho(X)\)</span>.</p>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-ASOP30" class="csl-entry" role="listitem">
+Actuarial Standards Board. 2011. <span>“<span class="nocase">Treatment of Profit and Contingency Provisions and the Cost of Capital in Property / Casualty Insurance Ratemaking</span>.”</span> <em>Actuarial Standard of Practice No. 30</em>.
+</div>
+<div id="ref-ASOP56" class="csl-entry" role="listitem">
+Actuarial Standards Board. 2019. <span>“<span>Modeling</span>.”</span> <em>Actuarial Standard of Practice No. 56</em>, no. 56.
+</div>
+<div id="ref-Brehm2007" class="csl-entry" role="listitem">
+Brehm, Paul J, Spencer M Gluck, Kreps Rodney E, et al. 2007. <span>“Enterprise Risk Analysis for Property &amp; Liability Insurance Companies.”</span> <em>Guy Carpenter &amp; Company, LLC</em>.
+</div>
+<div id="ref-EIOPA2009" class="csl-entry" role="listitem">
+EIOPA. 2009. <em><span>Directive 138/2009/EC (Solvency II Directive)</span></em>.
+</div>
+<div id="ref-EIOPA2015" class="csl-entry" role="listitem">
+EIOPA. 2015. <em><span>Delegated Regulation (EU) 2015/35</span></em>.
+</div>
+<div id="ref-CASDFM" class="csl-entry" role="listitem">
+Emma, Charles C et al. 2000. <em>Dynamic Financial Models of Property-Casualty Insurers</em>. Casualty Actuarial Society. <a href="https://www.casact.org/sites/default/files/database/forum_00wforum_00wf317.pdf">https://www.casact.org/sites/default/files/database/forum_00wforum_00wf317.pdf</a>.
+</div>
+<div id="ref-gabaix2008seven" class="csl-entry" role="listitem">
+Gabaix, Xavier, and David I Laibson. 2008. <em>The Seven Properties of Good Models</em>.
+</div>
+<div id="ref-IAIS2008" class="csl-entry" role="listitem">
+IAIS. 2008. <em><span class="nocase">Standard on the Use of Internal Models for Regulatory Capital Purposes</span></em>. no. July.
+</div>
+<div id="ref-McClenahan1999" class="csl-entry" role="listitem">
+McClenahan, Charles L. 1999. <span>“<span>Insurance Profitability</span>.”</span> <em>Actuarial Considerations Regarding Risk and Return</em>, 113–24.
+</div>
+<div id="ref-Mildenhall2024" class="csl-entry" role="listitem">
+Mildenhall, Stephen J. 2024. <span>“<span class="nocase">Aggregate: fast, accurate, and flexible approximation of compound probability distributions</span>.”</span> <em>Annals of Actuarial Science</em>, 1–40. <a href="https://doi.org/10.1017/S1748499524000216">https://doi.org/10.1017/S1748499524000216</a>.
+</div>
+<div id="ref-Aggregate" class="csl-entry" role="listitem">
+Mildenhall, Stephen J. n.d. <em>Aggregate Software Documentation</em>.
+</div>
+<div id="ref-PIR" class="csl-entry" role="listitem">
+Mildenhall, Stephen J, and John A Major. 2022. <em>Pricing Insurance Risk: Theory and Practice</em>. John Wiley &amp; Sons, Inc.
+</div>
+<div id="ref-Robbin1992" class="csl-entry" role="listitem">
+Robbin, Ira. 1992. <em><span>The Underwriting Profit Provision</span></em>.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cmm\.mynl\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./020_BusinessOperations.html" class="pagination-link" aria-label="Business operations">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Business operations</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># Introduction {#sec-Introduction}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu">## What are you getting yourself into? {#sec-What-Into}</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>Congratulations! You have been tasked with developing a capital modeling system! But what does this mean? Maybe you were lucky enough to be handed a detailed specification of what this capital model is supposed to do and who is going to make use of its outputs and how those outputs will affect business operations. Or perhaps not.</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>But what is a capital modeling system? What is it for? And how do you build one?</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>Actuarial standards define **capital** as "The funds…over and above those funds backing the liabilities," where "funds backing the liabilities" are amounts booked to support incurred liabilities (loss reserves) or future liabilities (unearned premiums), @ASOP30. Capital is then a cushion in excess of those amounts. This definition highlights that capital is an accounting concept whose value will vary with the accounting standard. Since the distinction between capital and reserves is blurry, it is often more productive to focus on all available assets. Pricing then splits assets between policyholder-provided premium and reserves and owner-provided capital.</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>The modeling standard <span class="co">[</span><span class="ot">@ASOP56</span><span class="co">]</span> defines a **model** as "A simplified representation of relationships among real-world variables, entities, or events using statistical, financial, economic, mathematical, non-quantitative, or scientific concepts and equations." A key word here is *simplified*; as @gabaix2008seven points out, "<span class="sc">\[</span>a<span class="sc">\]</span> perfect replica of the earth would reproduce every contour, but such a representation would be impractical." Capital modelers should take to heart the admonition attributed to Einstein to make things "as simple as possible, but no simpler." Any increment of complexity should materially improve the utility of your model. Modelers face many pressures to build granular, complex models but receive no countervailing rewards for accuracy and practicality.</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>Today, computers are ubiquitous in modeling, and this monograph will focus exclusively on quantitative models embedded in computer systems.</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>A capital modeling system may be expected to support:</span>
+<span id="cb1-16"><a href="#cb1-16"></a></span>
+<span id="cb1-17"><a href="#cb1-17"></a><span class="ss">-   </span>risk identification and analysis,</span>
+<span id="cb1-18"><a href="#cb1-18"></a><span class="ss">-   </span>product pricing (ratemaking),</span>
+<span id="cb1-19"><a href="#cb1-19"></a><span class="ss">-   </span>rating and underwriting,</span>
+<span id="cb1-20"><a href="#cb1-20"></a><span class="ss">-   </span>reinsurance decisions,</span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="ss">-   </span>business unit performance assessment,</span>
+<span id="cb1-22"><a href="#cb1-22"></a><span class="ss">-   </span>portfolio optimization,</span>
+<span id="cb1-23"><a href="#cb1-23"></a><span class="ss">-   </span>valuation of a potential spinoff or acquisition,</span>
+<span id="cb1-24"><a href="#cb1-24"></a><span class="ss">-   </span>regulatory compliance,</span>
+<span id="cb1-25"><a href="#cb1-25"></a><span class="ss">-   </span>rating agency discussions, and</span>
+<span id="cb1-26"><a href="#cb1-26"></a><span class="ss">-   </span>strategic planning.</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a>We will assume in this monograph that your goal is, ultimately, a comprehensive system that can support all of the above activities. Of course, as you build it, you will need to prioritize interim goals and use cases, but directionally this is where we assume you are heading. For modelers in the US, questions of pricing are more important than questions of capital adequacy, as the latter constraints tend to be externally imposed. In the EU, however, an internal model may be called on to determine capital adequacy. There, regulators issue extensive guidance on model building that obviously trump any conflicting advice we offer.</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a><span class="co">&lt;!-- JOHN: hummmmmmmmmmm --&gt;</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a></span>
+<span id="cb1-32"><a href="#cb1-32"></a>The system's core modeling function is to *mirror and tie into the plan.* It is first a system to support and enhance the existing planning process and second to *quantify risk around the plan*. Support for the other listed tasks stems from this capability to represent risk.</span>
+<span id="cb1-33"><a href="#cb1-33"></a></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="fu">## Structure of the monograph {#sec-Structure-Monograph}</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a></span>
+<span id="cb1-36"><a href="#cb1-36"></a>The remainder of the Introduction helps you with **Getting started**, addressing high-level goals and operational issues to get you off the ground in @sec-Getting-Started, making some **Clarifying remarks** in @sec-clarifying-remarks, providing a **System overview** in @sec-System-Overview that outlines a generic capital modeling system and which forms the basis for subsequent discussions of functionality, and in @sec-Intro-Insco, **Introduction to InsCo**, presenting a highly simplified example which is used throughout for illustration.</span>
+<span id="cb1-37"><a href="#cb1-37"></a></span>
+<span id="cb1-38"><a href="#cb1-38"></a>The rest of the monograph is structured as follows:</span>
+<span id="cb1-39"><a href="#cb1-39"></a></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="ss">-   </span>@sec-Introduction **Introduction** is this chapter.</span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="ss">-   </span>@sec-Business-Operations **Business operations** discusses the largest module in the capital modeling system. This is where the financial fortunes of the firm are simulated. Building or acquiring and implementing this module will absorb most of your resources. This function is also where decades of training, experience, and literature can be brought to bear. In this chapter we will provide further pointers into that literature.</span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="ss">-   </span>@sec-Capital-Adequacy **Capital adequacy and sources of risk** discusses the second module, which is smaller and easier to implement. It depends on the outputs from Business Operations and reflects well-understood principles of risk measurement. Basic risk measurement as well as regulatory aspects are discussed in this chapter. We also discuss risk analysis applications. The simple example continues. At the end of the chapter, algorithms for computing expected value, quantiles (VaR), and TVaR on discrete distributions are presented.</span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="ss">-   </span>@sec-Pricing-Allocation **Pricing and allocation** is where we introduce new ways of thinking, specifically Spectral Risk Measures (SRMs) and the Natural Allocation thereof. In this chapter, InsCo is treated with a complete pricing and allocation exercise. Along the way, we discuss the industry standard approach to capital allocation and why it is problematic. At the end of the chapter, algorithms for computing SRMs and the Natural Allocation on discrete distributions are presented.</span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="ss">-   </span>@sec-Applications **Applications of pricing and allocation** use the outputs of the Capital Adequacy and Pricing and Allocation modules in performance assessment, new business pricing, reinsurance decision-making, portfolio optimization, and mergers and acquisitions.</span>
+<span id="cb1-45"><a href="#cb1-45"></a><span class="ss">-   </span>@sec-Selecting-Calibrating **Selecting and calibrating an SRM** <span class="co">&lt;!--# Defined SRM as spectral risk measure above. OK? --&gt;</span> discusses how choice of an SRM impacts the various portfolio components and presents an approach to finding an acceptable solution. It also discusses how to leverage the range of consistent outcomes and understand their implications on risk appetite.</span>
+<span id="cb1-46"><a href="#cb1-46"></a><span class="ss">-   </span>@sec-Evaluation **Evaluating models** discusses how to evaluate your own model, third-party models, and modeling platforms.</span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="ss">-   </span>@sec-Advanced-Topics **Advanced topics** deals with uncertainty and allocating capital (if you must) and a clever technique to implement correlation.</span>
+<span id="cb1-48"><a href="#cb1-48"></a><span class="ss">-   </span>@sec-Calcs-with-Aggregate <span class="co">&lt;!-- ref does not exist --&gt;</span> **Calculations with Aggregate** shows how to use the open-source <span class="in">`aggregate`</span> package to work the examples in this monograph.</span>
+<span id="cb1-49"><a href="#cb1-49"></a><span class="ss">-   </span>@sec-Appendix <span class="co">&lt;!--# Please remove chapter number from heading, change to Appendices, per style. --&gt;</span>The **Appendices** include a table of symbols, list of relevant Actuarial Sandards of Practice, and a glossary.</span>
+<span id="cb1-50"><a href="#cb1-50"></a></span>
+<span id="cb1-51"><a href="#cb1-51"></a><span class="fu">## Getting started {#sec-Getting-Started}</span></span>
+<span id="cb1-52"><a href="#cb1-52"></a></span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="fu">### The charter {#sec-Charter}</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a></span>
+<span id="cb1-55"><a href="#cb1-55"></a>The maxim, "If you build it, they will use it" does not apply to capital models. Successful models are built in response to business needs, with high-level direction set by a senior business leader. A **charter** can be a valuable tool in crystallizing that direction. You should have some more-or-less formal document answering design questions such as:</span>
+<span id="cb1-56"><a href="#cb1-56"></a></span>
+<span id="cb1-57"><a href="#cb1-57"></a><span class="ss">-   </span>Why are we building a capital modeling system?</span>
+<span id="cb1-58"><a href="#cb1-58"></a><span class="ss">    -   </span>Is this driven by regulatory concerns, dissatisfaction with the current planning process, or something else?</span>
+<span id="cb1-59"><a href="#cb1-59"></a><span class="ss">-   </span>What types of decisions will it support?</span>
+<span id="cb1-60"><a href="#cb1-60"></a><span class="ss">    -   </span>See examples in @sec-What-Into.</span>
+<span id="cb1-61"><a href="#cb1-61"></a><span class="ss">-   </span>Who is going to use this model?</span>
+<span id="cb1-62"><a href="#cb1-62"></a><span class="ss">    -   </span>Who is going to run it, hands on?</span>
+<span id="cb1-63"><a href="#cb1-63"></a><span class="ss">    -   </span>How often will it run (daily, weekly, monthly, etc.)?</span>
+<span id="cb1-64"><a href="#cb1-64"></a><span class="ss">    -   </span>Who is going to be in a position to set inputs or pose queries?</span>
+<span id="cb1-65"><a href="#cb1-65"></a><span class="ss">    -   </span>Who is going to receive reports?</span>
+<span id="cb1-66"><a href="#cb1-66"></a><span class="ss">    -   </span>What is the users' level of sophistication, in terms of what they are likely to ask and what sort of output or report they are willing and able to absorb?</span>
+<span id="cb1-67"><a href="#cb1-67"></a><span class="ss">    -   </span>Is the model intended for senior staff to be reviewing outputs or junior staff to be integrating outputs with their own workflow? This may differ across functional units.</span>
+<span id="cb1-68"><a href="#cb1-68"></a><span class="ss">-   </span>When will the outputs be used?</span>
+<span id="cb1-69"><a href="#cb1-69"></a><span class="ss">    -   </span>During the planning process, presumably, but probably other times as well.</span>
+<span id="cb1-70"><a href="#cb1-70"></a><span class="ss">-   </span>Whose business processes will be affected by the system?</span>
+<span id="cb1-71"><a href="#cb1-71"></a><span class="ss">-   </span>How will outputs be integrated into planning and underwriting?</span>
+<span id="cb1-72"><a href="#cb1-72"></a><span class="ss">-   </span>How will we know if we are successful?</span>
+<span id="cb1-73"><a href="#cb1-73"></a><span class="ss">    -   </span>Define metrics such as use and impact.</span>
+<span id="cb1-74"><a href="#cb1-74"></a><span class="ss">    -   </span>What stakeholders need to be in agreement to make the system successful?</span>
+<span id="cb1-75"><a href="#cb1-75"></a></span>
+<span id="cb1-76"><a href="#cb1-76"></a>Ideally, this document will bear a cover memo endorsed by some sufficiently high-ranking executive. At the very least, it must be widely exposed to senior management and key stakeholders (typically Lines of Business) via road shows.</span>
+<span id="cb1-77"><a href="#cb1-77"></a></span>
+<span id="cb1-78"><a href="#cb1-78"></a>How will you know if you are successful? Mainly, by seeing your model get used, i.e., "fully embedded into the risk strategy and operational processes of the insurer" <span class="co">[</span><span class="ot">@IAIS2008</span><span class="co">]</span>. This means, among other things:</span>
+<span id="cb1-79"><a href="#cb1-79"></a></span>
+<span id="cb1-80"><a href="#cb1-80"></a><span class="ss">1.  </span>Management has an overall understanding of what your model does, in terms of input versus output.</span>
+<span id="cb1-81"><a href="#cb1-81"></a><span class="ss">2.  </span>The model is used in the planning cycle; results are regularly discussed and reviewed.</span>
+<span id="cb1-82"><a href="#cb1-82"></a><span class="ss">3.  </span>Decisions that affect the firm's risk profile usually refer to model results.</span>
+<span id="cb1-83"><a href="#cb1-83"></a><span class="ss">4.  </span>Decision-makers ask when the next set of outputs will be ready.</span>
+<span id="cb1-84"><a href="#cb1-84"></a></span>
+<span id="cb1-85"><a href="#cb1-85"></a>The European Insurance and Occupational Pension Authority (@EIOPA2009, title I, chapter VI, section 4, article 120; @EIOPA2015 title I, chapter 6) elaborates on these points in the context of the use test.</span>
+<span id="cb1-86"><a href="#cb1-86"></a></span>
+<span id="cb1-87"><a href="#cb1-87"></a><span class="fu">### Organizational factors {#sec-Organizational-Factors}</span></span>
+<span id="cb1-88"><a href="#cb1-88"></a></span>
+<span id="cb1-89"><a href="#cb1-89"></a>Your project plan needs to address organizational issues. What resources will be available for initial development, ongoing maintenance, and operations? What actuarial and programming staff will need to be involved? What data are required? What funds are needed to purchase software? What hardware is needed?</span>
+<span id="cb1-90"><a href="#cb1-90"></a></span>
+<span id="cb1-91"><a href="#cb1-91"></a>Don Mango addresses organizational and human factors related to implementing an internal risk model (IRM) in @Brehm2007, sec 3.1. He covers the following areas:</span>
+<span id="cb1-92"><a href="#cb1-92"></a></span>
+<span id="cb1-93"><a href="#cb1-93"></a><span class="ss">1.  </span>**Startup staffing:** This step includes considering the organizational chart, business functions represented, resource commitments, roles, and responsibilities. He recommends that system implementation is "the establishment of a new competency" and calls for the transfer of full-time employees or even adding new hires. Control of inputs and outputs of the model needs to be taken as seriously as general ledger or reserving systems.</span>
+<span id="cb1-94"><a href="#cb1-94"></a><span class="ss">2.  </span>**Purpose and scope:** He suggests initially to cover only the prospective underwriting year and to quantify variation around that plan; later, expand the scope to include reserves, assets, and operational risks with more formal probability distributions. <span class="co">&lt;!--# Edits to this bullet as meant? --&gt;</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a><span class="ss">3.  </span>**Parameter development:** Data quality issues will require expert judgment from underwriting, claims, planning, and actuarial staff. "Develop a systematic way to capture expert risk opinion." Correlation is as important as it is problematic. <span class="co">&lt;!--# Can you further define the relevance of this statement: "Correlation is as important as it is problematic"?  --&gt;</span></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="ss">4.  </span>**Software:** Evaluate available software solutions, and decide whether to build or buy. This decision depends on the strength and skills of the modeling team.</span>
+<span id="cb1-97"><a href="#cb1-97"></a><span class="ss">5.  </span>**Validation testing:** This will occur over time and requires significant planning. Reach out to affected parties and make sure they understand what validation does and how it works.</span>
+<span id="cb1-98"><a href="#cb1-98"></a><span class="ss">6.  </span>**Rollout:** Early in the process, secure top management backing for prioritization, communications and training, and pilot testing.</span>
+<span id="cb1-99"><a href="#cb1-99"></a><span class="ss">7.  </span>**Integration and maintenance:** Of course, he recommends mandatory inclusion of model reports as part of decision support in the planning cycle. Make major updates no more frequently than semiannually. Maintain centralized control of inputs and outputs.</span>
+<span id="cb1-100"><a href="#cb1-100"></a></span>
+<span id="cb1-101"><a href="#cb1-101"></a>@CASDFM Chapter 6 discusses dangers and pitfalls. We can recast that advice as things to do:</span>
+<span id="cb1-102"><a href="#cb1-102"></a></span>
+<span id="cb1-103"><a href="#cb1-103"></a><span class="ss">1.  </span>Make sure to get sufficient senior management support.</span>
+<span id="cb1-104"><a href="#cb1-104"></a><span class="ss">    -   </span>Get a charter!</span>
+<span id="cb1-105"><a href="#cb1-105"></a><span class="ss">    -   </span>Make sure the effort is going to support a real business use.</span>
+<span id="cb1-106"><a href="#cb1-106"></a><span class="ss">2.  </span>Attend to communication between the team and key stakeholders.</span>
+<span id="cb1-107"><a href="#cb1-107"></a><span class="ss">    -   </span>The model design may be quite technical. Make sure stakeholders understand enough about the model to be informed on what it can and cannot do, as well as what is required to develop and maintain it. <span class="co">&lt;!--# Edits to this bullet OK? --&gt;</span></span>
+<span id="cb1-108"><a href="#cb1-108"></a><span class="ss">    -   </span>Use the same language as stakeholders. This is especially important when talking to professionals like accountants.</span>
+<span id="cb1-109"><a href="#cb1-109"></a><span class="ss">    -   </span>Allocate enough time to communication.</span>
+<span id="cb1-110"><a href="#cb1-110"></a><span class="ss">3.  </span>Make sure model results can be integrated into planning.</span>
+<span id="cb1-111"><a href="#cb1-111"></a><span class="ss">    -   </span>Results must reconcile to plan.</span>
+<span id="cb1-112"><a href="#cb1-112"></a><span class="ss">    -   </span>Results must emerge in time to be used in the planning process.</span>
+<span id="cb1-113"><a href="#cb1-113"></a></span>
+<span id="cb1-114"><a href="#cb1-114"></a>Planning the development of a capital modeling system is very much like planning any other significant software system. Treat it with the same level of care.</span>
+<span id="cb1-115"><a href="#cb1-115"></a></span>
+<span id="cb1-116"><a href="#cb1-116"></a><span class="fu">## Clarifying remarks {#sec-clarifying-remarks}</span></span>
+<span id="cb1-117"><a href="#cb1-117"></a></span>
+<span id="cb1-118"><a href="#cb1-118"></a><span class="fu">### Pricing, ratemaking, and costing</span></span>
+<span id="cb1-119"><a href="#cb1-119"></a></span>
+<span id="cb1-120"><a href="#cb1-120"></a>Throughout the monograph we talk about *pricing*, using phrases like the "required price" to mean a model indicated price. For actuaries working outside highly regulated lines, we believe our terminology is standard and immediately comprehensible. However, actuaries working in regulated lines may be sensitive to the distinction between costing, ratemaking, and pricing. Cost estimates consider only loss-related differences between insureds. Ratemaking allows behavioral differences to creep into premiums, considering price elasticity and propensity to shop in determining a profit maximizing rate, i.e., allowing price optimization. Finally, price is usually reserved for a market determined sold rate. Acceptable prices may include corporate strategic objectives aside from considerations of the insured's risk. We do not explicitly consider price optimization or other strategic pricing objectives and are therefore really engaged in costing, but we find the word "pricing" preferable and trust that no confusion will arise.</span>
+<span id="cb1-121"><a href="#cb1-121"></a></span>
+<span id="cb1-122"><a href="#cb1-122"></a><span class="fu">### Margins and returns</span></span>
+<span id="cb1-123"><a href="#cb1-123"></a></span>
+<span id="cb1-124"><a href="#cb1-124"></a>Much actuarial ink has been spilled on the distinction between *margins* and *returns* [@McClenahan1999]. The situation is straightforward. Insureds care about premiums and hence margins to premium. Investors care about capital and hence the return on capital. Insurers and regulators care about both. Capital is a cost for an insurer, hence they speak of the *cost* of capital. Investors purchase the securities (equity, bonds) insurers use to finance capital, and they are interested in the *return* on their investment. Cost of capital is almost always *ex ante* and expected; return on investment can be expected or *ex post* and actual. The rate regulator focuses on premium margins and the embedded cost of capital, whereas the solvency regulator monitors actual returns and the risks taken to achieve them.</span>
+<span id="cb1-125"><a href="#cb1-125"></a></span>
+<span id="cb1-126"><a href="#cb1-126"></a>Premium leverage forms the bridge between premium and capital. The comparison in @tbl-margin-return helps illustrate this bridge. It contrasts the typical economics of an attritional, low-risk unit with those of a high-risk, catastrophe exposed one. The value column is particularly important: it clarifies a common point of confusion. Attritional insurance is typically inexpensive in the sense it is written at a *high* loss ratio. It is also written at *high* leverage, often producing a *high* equity-like return on capital. Conversely, catastrophe risk is expensive and written at a *low* loss ratio. It is difficult to pool efficiently and as a consequence is written at *low* leverage, resulting in *low* debt-like returns, as seen in the catastrophe bond market. This can seem paradoxical: business that is *more* risky from an insurance perspective yields a *lower* return on capital, and vice versa. The paradox is resolved by recognizing the difference between risk to the *insurer* and risk to the *investor*. Capital supporting attritional risk faces a roughly 50% chance of short-term loss, whereas capital supporting pure catastrophe risk has very a low probability of loss. The loss-given-default characteristics also differ substantially. Last, it might seem we should use margin in this table to measure expense rather than loss ratio. We don't because margin is negatively correlated with loss ratio, so using margin would break the clean high/high/high vs. low/low/low symmetry of the table. <span class="co">&lt;!--# Made some edits to Table 1.1, feel free to reject if it affects formatting. --&gt;</span></span>
+<span id="cb1-127"><a href="#cb1-127"></a></span>
+<span id="cb1-130"><a href="#cb1-130"></a><span class="in">```{python}</span></span>
+<span id="cb1-131"><a href="#cb1-131"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-132"><a href="#cb1-132"></a><span class="co">#| label: setup-run-basic-scripts</span></span>
+<span id="cb1-133"><a href="#cb1-133"></a><span class="op">%</span>run prefob.py</span>
+<span id="cb1-134"><a href="#cb1-134"></a><span class="in">```</span></span>
+<span id="cb1-135"><a href="#cb1-135"></a></span>
+<span id="cb1-138"><a href="#cb1-138"></a><span class="in">```{python}</span></span>
+<span id="cb1-139"><a href="#cb1-139"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-140"><a href="#cb1-140"></a><span class="co">#| label: tbl-margin-return</span></span>
+<span id="cb1-141"><a href="#cb1-141"></a><span class="co">#| tbl-cap: "Comparison of loss ratio, leverage and return for attritional and catastrophe type units."</span></span>
+<span id="cb1-142"><a href="#cb1-142"></a>fGT(<span class="vs">r'''</span></span>
+<span id="cb1-143"><a href="#cb1-143"></a></span>
+<span id="cb1-144"><a href="#cb1-144"></a><span class="vs">| Unit Type   | Measure        | Value | Qualitative         | Quantitative |</span></span>
+<span id="cb1-145"><a href="#cb1-145"></a><span class="vs">|:------------|:---------------|:------|:--------------------|:-------------|</span></span>
+<span id="cb1-146"><a href="#cb1-146"></a><span class="vs">| Attritional | Loss ratio (%) | High  | Cheap insurance     | 90s          |</span></span>
+<span id="cb1-147"><a href="#cb1-147"></a><span class="vs">|             | Leverage       | High  | Efficient pooling   | 2:1          |</span></span>
+<span id="cb1-148"><a href="#cb1-148"></a><span class="vs">|             | Return (%)     | High  | High returns        | Teens to 20s |</span></span>
+<span id="cb1-149"><a href="#cb1-149"></a><span class="vs">|             |                |       |                     |              |</span></span>
+<span id="cb1-150"><a href="#cb1-150"></a><span class="vs">| Catastrophe | Loss ratio (%) | Low   | Expensive insurance | 30s          |</span></span>
+<span id="cb1-151"><a href="#cb1-151"></a><span class="vs">|             | Leverage       | Low   | Inefficient pooling | 1:5          |</span></span>
+<span id="cb1-152"><a href="#cb1-152"></a><span class="vs">|             | Return (%)     | Low   | Low returns         | Single digit |</span></span>
+<span id="cb1-153"><a href="#cb1-153"></a></span>
+<span id="cb1-154"><a href="#cb1-154"></a><span class="vs">'''</span>)</span>
+<span id="cb1-155"><a href="#cb1-155"></a><span class="in">```</span></span>
+<span id="cb1-156"><a href="#cb1-156"></a></span>
+<span id="cb1-157"><a href="#cb1-157"></a><span class="fu">### Expected, plan, actual, and other flavors</span></span>
+<span id="cb1-158"><a href="#cb1-158"></a></span>
+<span id="cb1-159"><a href="#cb1-159"></a>When we talk about pricing, terms like "loss" and "margin" usually mean *expected* loss or margin. It is helpful to distinguish several different pricing viewpoints <span class="co">[</span><span class="ot">@Robbin1992</span><span class="co">]</span>. A premium or rate can be:</span>
+<span id="cb1-160"><a href="#cb1-160"></a></span>
+<span id="cb1-161"><a href="#cb1-161"></a><span class="ss">1.  </span>**Filed:** incorporated into filed rates in a regulated line.</span>
+<span id="cb1-162"><a href="#cb1-162"></a><span class="ss">2.  </span>**Required or Target:** premium required to hit a (corporate) pricing target.</span>
+<span id="cb1-163"><a href="#cb1-163"></a><span class="ss">3.  </span>**Plan:** reflects adjusted targets actually embedded in a plan.</span>
+<span id="cb1-164"><a href="#cb1-164"></a><span class="ss">4.  </span>**Indicated:** produced by an actuarial pricing model or process.</span>
+<span id="cb1-165"><a href="#cb1-165"></a><span class="ss">5.  </span>**Priced:** produced by an actuarial-underwriting process.</span>
+<span id="cb1-166"><a href="#cb1-166"></a><span class="ss">6.  </span>**Quoted:** actually released into the market as a bindable rate.</span>
+<span id="cb1-167"><a href="#cb1-167"></a><span class="ss">7.  </span>**Sold:** the premium actually sold in a transaction.</span>
+<span id="cb1-168"><a href="#cb1-168"></a><span class="ss">8.  </span>**Market:** an estimate of sold rates.</span>
+<span id="cb1-169"><a href="#cb1-169"></a></span>
+<span id="cb1-170"><a href="#cb1-170"></a>The same terms can be applied to margins. These terms are almost always meant prospectively and are *ex ante*. In addition, for margins there is the important</span>
+<span id="cb1-171"><a href="#cb1-171"></a></span>
+<span id="cb1-172"><a href="#cb1-172"></a><span class="ss">8.  </span>**Actual:** achieved margin reflecting developed ultimate loss experience. <span class="co">&lt;!--# Should this actually be numbered 9? --&gt;</span></span>
+<span id="cb1-173"><a href="#cb1-173"></a></span>
+<span id="cb1-174"><a href="#cb1-174"></a>Actual is obviously after the fact or *ex post*.</span>
+<span id="cb1-175"><a href="#cb1-175"></a></span>
+<span id="cb1-176"><a href="#cb1-176"></a>Our pricing discussions primarily focus on setting some flavor of required premium in the context of a corporate or business unit plan. We often use the term "required" as a synonym for "target" or "indicated," i.e., a price computed by a model in order to meet some specified objective.</span>
+<span id="cb1-177"><a href="#cb1-177"></a></span>
+<span id="cb1-178"><a href="#cb1-178"></a><span class="fu">### Parts of a model {#sec-parts-of-a-model}</span></span>
+<span id="cb1-179"><a href="#cb1-179"></a></span>
+<span id="cb1-180"><a href="#cb1-180"></a>Before describing what should be in a model, some distinctions should be kept in mind. There are various *levels* to modeling, starting from the computer infrastructure and extending all the way up to the application being run by the end-user. @tbl-model-parts lays out these levels and associated concepts.</span>
+<span id="cb1-181"><a href="#cb1-181"></a></span>
+<span id="cb1-182"><a href="#cb1-182"></a>| **Concept**           | **Examples**                                                 |</span>
+<span id="cb1-183"><a href="#cb1-183"></a>|:----------------------|:-------------------------------------------------------------|</span>
+<span id="cb1-184"><a href="#cb1-184"></a>| **Levels include**    |                                                              |</span>
+<span id="cb1-185"><a href="#cb1-185"></a>| Computer hardware     | Mac, PC, server, workstation, cloud (AWS, Databricks)        |</span>
+<span id="cb1-186"><a href="#cb1-186"></a>|                       |                                                              |</span>
+<span id="cb1-187"><a href="#cb1-187"></a>| Operating system and  | macOS, Windows, Linux                                        |</span>
+<span id="cb1-188"><a href="#cb1-188"></a>| system utilities      |                                                              |</span>
+<span id="cb1-189"><a href="#cb1-189"></a>|                       |                                                              |</span>
+<span id="cb1-190"><a href="#cb1-190"></a>| Programming language  | Python, R, Java, Visual BASIC, C++                           |</span>
+<span id="cb1-191"><a href="#cb1-191"></a>|                       |                                                              |</span>
+<span id="cb1-192"><a href="#cb1-192"></a>| Modeling platform     | Excel, ReMetrica, IGLOO, MetaRisk, Oasis,                    |</span>
+<span id="cb1-193"><a href="#cb1-193"></a>|                       | your own custom "empty" spreadsheet or function library      |</span>
+<span id="cb1-194"><a href="#cb1-194"></a>|                       |                                                              |</span>
+<span id="cb1-195"><a href="#cb1-195"></a>| Model                 | Spreadsheet                                                  |</span>
+<span id="cb1-196"><a href="#cb1-196"></a>|                       | Rating agency capital models, Solvency II standard calculation                       |</span>
+<span id="cb1-197"><a href="#cb1-197"></a>|                       | Specific peril cat model, e.g., vendor US Hurricane model    |</span>
+<span id="cb1-198"><a href="#cb1-198"></a>|                       |                                                              |</span>
+<span id="cb1-199"><a href="#cb1-199"></a>| **Models include**    |                                                              |</span>
+<span id="cb1-200"><a href="#cb1-200"></a>| Modeling techniques   | Simulation, calculation                                      |</span>
+<span id="cb1-201"><a href="#cb1-201"></a>|                       |                                                              |</span>
+<span id="cb1-202"><a href="#cb1-202"></a>| Structural parameters | Protected cells, e.g., unit loss volatility and correlations |</span>
+<span id="cb1-203"><a href="#cb1-203"></a>|                       | Cat model damage curve                                       |</span>
+<span id="cb1-204"><a href="#cb1-204"></a>|                       |                                                              |</span>
+<span id="cb1-205"><a href="#cb1-205"></a>| Business parameters   | User input cells, e.g, unit plan premium and loss ratios     |</span>
+<span id="cb1-206"><a href="#cb1-206"></a>|                       | Cat model property portfolio                                 |</span>
+<span id="cb1-207"><a href="#cb1-207"></a>|                       |                                                              |</span>
+<span id="cb1-208"><a href="#cb1-208"></a>| Raw outputs           | Cat model event or yearly loss tables, event timeline database                |</span>
+<span id="cb1-209"><a href="#cb1-209"></a>|                       |                                                              |</span>
+<span id="cb1-210"><a href="#cb1-210"></a>| Output exhibits       | Probable maximal loss table, summary statistics, pro forma financials          |</span>
+<span id="cb1-211"><a href="#cb1-211"></a></span>
+<span id="cb1-212"><a href="#cb1-212"></a>: Model components from hardware to output. {#tbl-model-parts}</span>
+<span id="cb1-213"><a href="#cb1-213"></a></span>
+<span id="cb1-214"><a href="#cb1-214"></a>Structural parameters are changed infrequently. Business parameters are changed frequently, especially during planning when it is standard to run many different iterations.</span>
+<span id="cb1-215"><a href="#cb1-215"></a></span>
+<span id="cb1-216"><a href="#cb1-216"></a><span class="fu">## System overview {#sec-System-Overview}</span></span>
+<span id="cb1-217"><a href="#cb1-217"></a></span>
+<span id="cb1-218"><a href="#cb1-218"></a>There is considerable variation in how a capital modeling system could be designed and implemented. In this section we provide a conceptual template to follow.</span>
+<span id="cb1-219"><a href="#cb1-219"></a></span>
+<span id="cb1-220"><a href="#cb1-220"></a><span class="al">![Three modules of a capital modeling system.](img/Block3_diag.png)</span>{#fig-3Modules width="50%"}</span>
+<span id="cb1-221"><a href="#cb1-221"></a></span>
+<span id="cb1-222"><a href="#cb1-222"></a>We can mentally decompose a capital modeling system into three components shown in @fig-3Modules. By far, the biggest and most complex module represents the stochastic business of an insurer. This is labeled **Business Operations** in the diagram. A capital modeling system must represent some or all of the firm’s portfolio of insurance liabilities.</span>
+<span id="cb1-223"><a href="#cb1-223"></a></span>
+<span id="cb1-224"><a href="#cb1-224"></a>There is a wide range of sophistication possible to this representation, depending on the particulars of the purpose for which the system is to serve. The core concept is the loss which the portfolio might incur. This loss, being *a priori* uncertain, is a random variable. It might be represented by a distribution of losses or by a set of loss scenarios, which we will call events. The output could include just the losses, or it could include a complete set of financial statements—balance sheet, income statement, and cash flows—all of which ultimately depend on the losses. If the latter, there are numerous accounting standards that could be followed. These possibilities are discussed in @sec-Business-Operations.</span>
+<span id="cb1-225"><a href="#cb1-225"></a></span>
+<span id="cb1-226"><a href="#cb1-226"></a>Output from the Business Operations module feeds into the much simpler **Capital Adequacy** and **Pricing &amp; Allocation** modules. This is signified by the solid arrows. Dotted arrows signify that these two modules, in turn, affect business operations in the real world and hence, indirectly, the Business Operations module. Indeed, the real-world effect of these modules is the *raison d'être* of the entire capital modeling system.</span>
+<span id="cb1-227"><a href="#cb1-227"></a></span>
+<span id="cb1-228"><a href="#cb1-228"></a>@fig-block-diagram-1 expands the Business Operations module.</span>
+<span id="cb1-229"><a href="#cb1-229"></a></span>
+<span id="cb1-230"><a href="#cb1-230"></a><span class="al">![Internal structure of Business Operations module.](img/System_Diagram_x1.jpg)</span>{#fig-block-diagram-1 width="50%"}</span>
+<span id="cb1-231"><a href="#cb1-231"></a></span>
+<span id="cb1-232"><a href="#cb1-232"></a>Starting at the left of the diagram is the **Units** module, with inputs labeled **U**. We use the term "unit" to refer to a component of the portfolio. A unit can be a single policy or a group of policies defined by line of business, geography, branch, business unit, or other characteristics. A unit can also represent the segmentation between ceded and assumed reinsurance.</span>
+<span id="cb1-233"><a href="#cb1-233"></a></span>
+<span id="cb1-234"><a href="#cb1-234"></a>The output of Units is a representation of *experience*, which means paid loss, at the very least, but could also include a time series of loss developments, reserves, etc. Input parameters are things like exposure and possibly shape parameters for loss distributions.</span>
+<span id="cb1-235"><a href="#cb1-235"></a></span>
+<span id="cb1-236"><a href="#cb1-236"></a>These loss outputs are likely to be correlated (not independent) across the units either by common economic or social factors or enforced correlation via copulas, Iman-Conover sampling (@sec-iman-conover), etc.</span>
+<span id="cb1-237"><a href="#cb1-237"></a></span>
+<span id="cb1-238"><a href="#cb1-238"></a>If investment experience is included as one (or more than one) unit, then input from the **Economic Scenario Generator** (labeled ESG) will be important. This is an optional module which represents external economic factors such as interest rates, returns on various asset classes, rates of monetary inflation, unemployment, etc.</span>
+<span id="cb1-239"><a href="#cb1-239"></a></span>
+<span id="cb1-240"><a href="#cb1-240"></a>The **Reinsurance** module, with inputs labeled **R**, modifies the gross experience of the units. This includes all outward (ceded) reinsurance. Any inward (assumed) reinsurance would be represented among the units. The output, net experience, includes the effect of any retrocession.</span>
+<span id="cb1-241"><a href="#cb1-241"></a></span>
+<span id="cb1-242"><a href="#cb1-242"></a>**Accounting** translates experience realizations into **pro formas**, i.e., financial statements. This output from the Accounting module is a core element of the system. Multiple occurrences of pro formas, generated on the fly or possibly stored in a database, are used in stochastic simulation, whereas single occurrences are used for analyzing specific events. The level of detail here must match the specification of the units.</span>
+<span id="cb1-243"><a href="#cb1-243"></a></span>
+<span id="cb1-244"><a href="#cb1-244"></a>The system is likely to include the input labeled **Capital Structure**. This specifies, at the very least, the total amount of assets available to pay claims. It may also specify details of noninsurance liabilities, such as bonds, preferred stock, and equity issued by the firm. The Economic Scenario Generator may have some influence on the outward cash flows—which reduce assets—from preferred and common stock dividends. The Accounting module would take into account the fact that losses in excess of total assets lead to *insolvency* and haircuts in claim payments. If there is no capital structure information at all, asset limitations are ignored and assets are in effect assumed to be infinite.</span>
+<span id="cb1-245"><a href="#cb1-245"></a></span>
+<span id="cb1-246"><a href="#cb1-246"></a><span class="al">![Full detail of the capital modeling system.](img/System_Diagram.jpg)</span>{#fig-block-diagram width="75%"}</span>
+<span id="cb1-247"><a href="#cb1-247"></a></span>
+<span id="cb1-248"><a href="#cb1-248"></a>@fig-block-diagram expands the picture by bringing in the remaining modules.</span>
+<span id="cb1-249"><a href="#cb1-249"></a></span>
+<span id="cb1-250"><a href="#cb1-250"></a>The **Capital Adequacy** module, with inputs labeled **C**, operates on the pro formas and determines the minimal amount of assets to satisfy requirements from regulators, rating agencies, and the risk committee of the firm's board of directors. Such determinations could include a simple Value at Risk (**VaR**) calculation or more complex Best's Capital Adequacy Ratio (**BCAR**) calculation. The module also includes risk reports—analysis of what is driving the need for assets. The input parameters can be regarded as the firm's **risk tolerance**, specifying what level of risk is acceptable for a given amount of capital or vice versa. Outputs feed back into the real world and implicitly affect the capital structure, hence the dotted line. This is discussed in more detail in @sec-Capital-Adequacy.</span>
+<span id="cb1-251"><a href="#cb1-251"></a></span>
+<span id="cb1-252"><a href="#cb1-252"></a>The **Pricing** module has two separately identified inputs. First, the **Profit Target** specifies the desired overall profitability of the portfolio as a whole. This could be posed as an aggregate premium, margin, loss ratio, or return on capital; these are equivalent specifications discussed in @sec-Pricing-Allocation. The second input, labeled **P**, specifies more esoteric properties such as the *shape* of the distortion function underlying an SRM—also discussed in @sec-Pricing-Allocation. The two inputs can be interpreted as specifying the firm's **risk appetite**.</span>
+<span id="cb1-253"><a href="#cb1-253"></a></span>
+<span id="cb1-254"><a href="#cb1-254"></a>**Allocation** takes the required portfolio premium as given and allocates the premium (equivalently margin, loss ratio) to the individual units. This information, presumably, has real-world impacts on the units via performance management, risk management, underwriting actions, etc. Impact is represented by the dotted arrows to Units.</span>
+<span id="cb1-255"><a href="#cb1-255"></a></span>
+<span id="cb1-256"><a href="#cb1-256"></a><span class="fu">## Introduction to InsCo {#sec-Intro-Insco}</span></span>
+<span id="cb1-257"><a href="#cb1-257"></a></span>
+<span id="cb1-258"><a href="#cb1-258"></a>*InsCo is our one-period simplified model of insurance company operations.*</span>
+<span id="cb1-259"><a href="#cb1-259"></a></span>
+<span id="cb1-260"><a href="#cb1-260"></a>We will use an extremely simple toy example to illustrate the operation of the system presented in @sec-System-Overview. It deliberately abstracts away from much of the complexity, detail, and nuance of the real world. Readers should be able to reproduce the example easily in a spreadsheet.</span>
+<span id="cb1-261"><a href="#cb1-261"></a></span>
+<span id="cb1-262"><a href="#cb1-262"></a>A more complex and realistic example can be found in @sec-realistic, and more in @PIR. Those, as well as this simple example and even more complex portfolios, can all be analyzed with <span class="in">`aggregate`</span>, an open-source Python library <span class="co">[</span><span class="ot">@Aggregate, @Mildenhall2024</span><span class="co">]</span> that "builds approximations to compound (aggregate) probability distributions quickly and accurately." Because <span class="in">`aggregate`</span> uses Fast Fourier Transforms, it "delivers the speed and accuracy of parametric distributions to situations that usually require simulation" and is therefore much faster than simulation. All the analytical techniques discussed in this monograph can be implemented in <span class="in">`aggregate`</span>.</span>
+<span id="cb1-263"><a href="#cb1-263"></a></span>
+<span id="cb1-264"><a href="#cb1-264"></a>**InsCo** is a limited liability company that intermediates between insureds and investors. InsCo's customers are **insureds** (policyholders) who are subject to risks they wish to insure. Insureds who use insurance for risk transfer or financing are sensitive to insurer quality and possible default because it correlates with their own misfortune.</span>
+<span id="cb1-265"><a href="#cb1-265"></a></span>
+<span id="cb1-266"><a href="#cb1-266"></a>Insurance legal entities serve two principal purposes. First, they provide statutory insurance such as mandatory automobile liability. Second, they allow insureds to pool together and benefit from diversification without requiring onerous bilateral contracts. They do this through insolvency rules, which provide the framework under which unrelated insureds interact in the unlikely event of an insolvency.</span>
+<span id="cb1-267"><a href="#cb1-267"></a></span>
+<span id="cb1-268"><a href="#cb1-268"></a>InsCo comes into existence at time $t=0$ and lasts for one period. InsCo has no initial liabilities. At $t=0$, it writes one or more single-period insurance contracts and collects premiums from its insureds.</span>
+<span id="cb1-269"><a href="#cb1-269"></a></span>
+<span id="cb1-270"><a href="#cb1-270"></a>When InsCo writes a policy, it collects premium at $t=0$ and earns it over the period. We assume all other transactions occur at the end of the period. Therefore all the premium is earned and available to pay claims at $t=1$. If InsCo's ending assets $a$ are insufficient to pay the claims, then it defaults.</span>
+<span id="cb1-271"><a href="#cb1-271"></a></span>
+<span id="cb1-272"><a href="#cb1-272"></a>InsCo has promised to pay policyholders claims under various contingencies, with the aggregate promise represented by the random variable $X\ge 0$. If $X&gt;a$, then only $a$ gets paid out, i.e., the actual payments are the minimum of $X$ and $a$, which we write as $X\wedge a$. We assume the probability distribution of $X$ is known.</span>
+<span id="cb1-273"><a href="#cb1-273"></a></span>
+<span id="cb1-274"><a href="#cb1-274"></a>InsCo is owned by **investors** who provide risk-bearing capital. Investors are also risk averse. The market structure is displayed in @fig-market.</span>
+<span id="cb1-275"><a href="#cb1-275"></a></span>
+<span id="cb1-276"><a href="#cb1-276"></a><span class="al">![InsCo, insureds, regulators, and investors: roles and cash flows.](img/ins-ins-inv-reg.svg)</span>{#fig-market width="100%"}</span>
+<span id="cb1-277"><a href="#cb1-277"></a></span>
+<span id="cb1-278"><a href="#cb1-278"></a>At time $t=0$, while collecting premiums, InsCo also raises capital from investors by selling them its uncertain $t=1$ residual value. That is, at time $t=1$, InsCo pays any claims due in the amount of $X \wedge a$ and pays any residual value $(X-a)^+$, if it exists, to its investors as return of capital plus a dividend or investment return. If InsCo's ending assets are insufficient to pay the claims, $X&gt;a$, then it defaults. Investors have limited liability: they may lose their original investment but owe nothing more.</span>
+<span id="cb1-279"><a href="#cb1-279"></a></span>
+<span id="cb1-280"><a href="#cb1-280"></a>Premiums cover expected losses and loss adjustment expenses, as well as the cost of capital including frictional capital costs. All other expenses are outside our model.</span>
+<span id="cb1-281"><a href="#cb1-281"></a></span>
+<span id="cb1-282"><a href="#cb1-282"></a>Symbolically, at time $t=0$, InsCo collects premiums $P$ from policyholders and capital $Q$ from investors. These are the only sources of funds and comprise the total assets via the **funding equation**:</span>
+<span id="cb1-283"><a href="#cb1-283"></a>$$</span>
+<span id="cb1-284"><a href="#cb1-284"></a>a = P+Q.</span>
+<span id="cb1-285"><a href="#cb1-285"></a>$$ {#eq-funding}</span>
+<span id="cb1-286"><a href="#cb1-286"></a>Two important questions arise from InsCo's promises to pay.</span>
+<span id="cb1-287"><a href="#cb1-287"></a></span>
+<span id="cb1-288"><a href="#cb1-288"></a><span class="ss">1.  </span>Are there sufficient assets to honor those promises?</span>
+<span id="cb1-289"><a href="#cb1-289"></a><span class="ss">2.  </span>Are investors being adequately compensated for taking on those risks?</span>
+<span id="cb1-290"><a href="#cb1-290"></a></span>
+<span id="cb1-291"><a href="#cb1-291"></a>Crucially, we need to talk about not one but *two* different risk measures to answer these questions.</span>
+<span id="cb1-292"><a href="#cb1-292"></a></span>
+<span id="cb1-293"><a href="#cb1-293"></a>Question 1 concerns risk tolerance and is answered by the Capital Adequacy module. It determines the assets necessary to back an existing or hypothetical portfolio at a given level of risk. This exercise can also be reverse engineered: given existing or hypothetical assets, what constraints on business does the risk tolerance entail? Alternatively, given business and capital, what is the implied risk tolerance?</span>
+<span id="cb1-294"><a href="#cb1-294"></a></span>
+<span id="cb1-295"><a href="#cb1-295"></a>Assets $a$ and liabilities $X$ are related by some rule driven by a combination of regulatory authorities, rating agencies, and InsCo's own internal risk management policies, representing a risk tolerance. Such a rule we call a **capital risk measure**, and we may write $a$ as a functional $a(X)$. Value at Risk (VaR) or Tail Value at Risk (TVaR) at some high confidence level, such as 99.5% or 1 in 200 years, are both popular, but other possible measures exist, see @sec-Capital-Adequacy. As a first approximation, we may take it that $a$ is sufficient to avoid insolvency altogether, i.e., in all events, all claims are paid.</span>
+<span id="cb1-296"><a href="#cb1-296"></a></span>
+<span id="cb1-297"><a href="#cb1-297"></a>Question 2, answered by the Pricing module, concerns how that asset amount $a$ is to be split between premium $P$ and capital $Q$ (@eq-funding); this is quite different from determining $a$. It is about risk pricing or risk appetite. We must determine the expected margin insureds need to pay in total to make it worthwhile for investors to bear the portfolio's risk. Such a rule we call a **pricing risk measure**, and we may write premium as a functional $P = \rho(X)$.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DRAFT - do not redistribute</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

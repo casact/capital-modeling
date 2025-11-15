@@ -1,0 +1,80 @@
+# Evaluating models {#sec-Evaluation}
+
+*The trouble with most of us is that we would rather be ruined by praise than saved by criticism.*\
+*- Norman Vincent Peale*
+
+This chapter encompasses three distinct tasks:
+
+1.  Evaluating your particular capital model.
+2.  Evaluating a third-party model, e.g., regulatory or rating agency model.
+3.  Evaluating a modeling platform you might use to build your own model.
+
+## Evaluating your model {#sec-eval-own-model}
+
+There are several phases to evaluating your own model.
+
+First, does it meet its design specifications in terms of features and functionality? You will refer back to the requirements document you prepared per @sec-Getting-Started. (You *did* prepare a formal document, didn't you?) This serves as a checklist as you review the features of your model.
+
+Second, like any software development project, you need to run a battery of tests to verify it is behaving---especially calculating---correctly. If you built the model from the ground up, you might have created tests concurrently with module development. Use those, and add some more.
+
+Third is validation: does the model produce realistic results? Whereas the first two phases apply to all the modules listed in @sec-System-Overview, the third applies only to the Business Operations module. Validation might consist of expert judgment---but beware echo-chamber effects. Ideally, however, you have access to historical data that can be used to run the model as if it had existed in times past. Then, its outputs can be compared with what really did come to pass. Components of validation include:
+
+1.  **Best Estimates:** With inputs corresponding to the plan, do central values (means or medians) of key variables (cash flows and derived accounting values) calibrate to the plan? Do the output distributions seem reasonable?
+2.  **Variability:** Do basic statistics (coefficient of variation, skewness, quantiles, etc.) of outputs seem reasonable? Are you getting what you expect? Are they consistent with historical (your own or industry) experience?
+3.  **Back testing:** If historical replays are possible, compute where the historical values lie in terms of percentiles of the output distributions, i.e., $p$ values. The $p$ values should reasonably be draws from uniform distributions. They should not cluster together at the low or high end---this indicates bias. They should not clump together in the middle---this indicates that historical variation is low compared to the model. Nor should they create a void in the middle---this indicates too much variation. Be careful not to overthink this, however. With only a handful of observations, only egregiously bad results can be considered statistically significant.
+4.  **Repeat:** As the model gets used, repeat back testing regularly (quarterly or annually). Build a growing library of $p$ values to demonstrate that model ranges are wide enough and symmetrical.
+
+## Evaluating third-party models {#sec-eval-3rd-party}
+
+Third-party models, if they include Business Operations simulation, should be evaluated---to the extent possible---in the manner described in @sec-eval-own-model.
+
+Some third-party models, like minimum capital requirements created and used by regulators and rating agencies, do not simulate business outcomes but rather proceed directly from business characteristics as input to required capital as output. You may want to use such a model in one of several ways:
+
+1.  It is your only model; all you want to know is required capital. Unfortunately, this may not give you a clear path to allocating cost of capital and required premiums. However, it is a start if you have no capital model at all. Apply the non-Business Operations evaluation steps outlined in @sec-eval-own-model.
+2.  You intend to run it in parallel with your own model and compare results. Evaluate as in the previous bullet.
+3.  You intend to integrate it with your own model. This can mean several things.
+    a.  Integrated reporting but otherwise separate calculations can be treated as previously but with additional testing to ensure the reporting is working correctly.
+    b.  If the third-party model is to function as the Capital Adequacy module, then careful testing and review is needed to determine whether its outputs will be consistent with the workings of the Business Operations and Pricing and Allocation modules. For example, if a change to the portfolio moves the 95% and 99% loss quantiles upwards but the required capital goes down, then you might rethink the wisdom of relying solely on the third-party model. If it has capital allocation functionality, is it implementing something like CCoC? Can it be modified to perform an NA, or can that part be bypassed in favor of a different Pricing and Allocation module?
+
+Some companies manage to (or are at least acutely aware of) their binding rating agency's or regulator's view of capital. You may be asked the point of an internal model, given this binding view. The answer should go back to the charter for the internal model---after all, it is not a surprise that an external model is binding. What additional value was anticipated from an internal model *before you started building?* Reconsider why you are building an internal model if you cannot answer this question ahead of time.
+
+## Evaluating modeling platforms {#sec-eval-platform}
+
+Model building *platforms* range from programming languages with integrated development environments to heavily graphical user interface-based wiring diagram applications. What they have in common is that they are not ready-to-run models. How they differ is the extent to which they offer prefabricated computational modules and the support they offer for translating specifications into a model. Some programming languages, like R or Python, have many open-source libraries available to the public for free.
+
+The first question to be addressed is: can the platform be used to build the model you have specified in @sec-Getting-Started? The second, trickier question, is: how difficult will that be? Of course, budget limitations need also be taken into account. However, you *may* find a trade-off between direct expense to acquire the platform and labor expense to build the model with it.
+
+Here are some items to consider when evaluating a modeling platform:
+
+1.  **Modeling**
+    a.  What accounting bases are supported for financial computations?
+    b.  How can loss payout patterns be modeled?
+    c.  How can assets be modeled (e.g., sweep accounts with proportionate investment strategies)?
+    d.  How can dependency be modeled (e.g., Iman-Conover shuffling, copulas, other)?
+    e.  What options are available for defining required capital?
+    f.  What options are available for defining and allocating required margins?
+2.  **Parameters**
+    a.  What parameters are explicitly variable and which are implicit and "hard-coded"?
+    b.  How are parameters stored? Can they easily be changed from one run to another?
+    c.  Is there an explicit provision for uncertainty in parameterization? (See also @sec-Uncertainty.)
+3.  **Input and output**
+    a.  What formats/databases are supported for data input? Report output? Simulation details?
+    b.  What are the report generation options?
+    c.  What tabular output options are there?
+    d.  What graphical output options are there?
+4.  **Integration**
+    a.  How is integration with Excel handled?
+    b.  Is integration with a separate Economic Scenario Generator possible?
+    c.  How is integration with commercial catastrophe models handled?
+5.  **Running**
+    a.  Are automatic multi-assumption model runs supported?
+    b.  Is there scripting? In what language?
+6.  **System issues**
+    a.  How are version control and model security handled?
+    b.  What are the hardware requirements (one PC, cluster, cloud)?
+    c.  Is there a front-end app or web interface?
+    d.  Is there an Application Programming Interface (API)?
+7.  **Track record**
+    a.  Are there models in production used for the London market, Solvency II, and Swiss Solvency Test?
+    b.  What is the typical size of a client model (lines, year, assets, etc.) and what is the corresponding simulation run time?
+

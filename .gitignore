@@ -1,0 +1,67 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build artifacts (setuptools/pip)
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# Packaging metadata (pip-tools, uv, etc.)
+pip-wheel-metadata/
+pip-tools-metadata/
+uv.lock
+pip-selfcheck.json
+
+# Jupyter
+.ipynb_checkpoints/
+
+# pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+.cache/            # coverage + pytest plugins may write here
+
+# Editors / IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Test artifacts
+pytestdebug.log
+test-results/
+
+# Project structure based on standardpiproject.com
+# (ignore local builds, metadata, and private scratch)
+src/<yourpkgname>/*.so          # compiled extensions if any
+src/<yourpkgname>/__pycache__/
+scratch/
+local_data/
+
+# jupyter related
+source/.jupyter_cache
+
+# quarto related
+source/.quarto/
+source/site_libs/
+source/index_files/
+
+# t6ocs
+tocs/*.log
+tocs/*.aux
+tocs/*.tex

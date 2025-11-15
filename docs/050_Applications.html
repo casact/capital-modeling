@@ -1,0 +1,2434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>5&nbsp; Applications of pricing and allocation – Introduction to Capital Modeling and Portfolio Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./060_SelectingSRM.html" rel="next">
+<link href="./040_PricingAndAllocation.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-01c78b5cd655e4cd89133cf59d535862.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-44a2bfbc4aea0d0866ad2a0ddca8a790.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="icon" href="./static/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="5&nbsp; Applications of pricing and allocation – Introduction to Capital Modeling and Portfolio Management">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://cmm.mynl.com/img/plt-nb-1.jpg">
+<meta property="og:site_name" content="Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:title" content="5&nbsp; Applications of pricing and allocation – Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://cmm.mynl.com/img/plt-nb-1.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./050_Applications.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Capital Modeling and Portfolio Management</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dedication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dedication</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020_BusinessOperations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Business operations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030_CapitalAdequacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Capital adequacy and sources of risk</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040_PricingAndAllocation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050_Applications.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./060_SelectingSRM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./065_Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Evaluating models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./070_AdvancedTopics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./080_Calculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Calculations with <code>Aggregate</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./090_EndMatter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this chapter:</h2>
+   
+  <ul>
+  <li><a href="#sec-Performance-Assessment" id="toc-sec-Performance-Assessment" class="nav-link active" data-scroll-target="#sec-Performance-Assessment"><span class="header-section-number">5.1</span> Performance assessment</a></li>
+  <li><a href="#sec-Reinsurance-decision-making" id="toc-sec-Reinsurance-decision-making" class="nav-link" data-scroll-target="#sec-Reinsurance-decision-making"><span class="header-section-number">5.2</span> Reinsurance decision-making</a></li>
+  <li><a href="#new-business-pricing" id="toc-new-business-pricing" class="nav-link" data-scroll-target="#new-business-pricing"><span class="header-section-number">5.3</span> New business pricing</a></li>
+  <li><a href="#mergers-and-acquisitions" id="toc-mergers-and-acquisitions" class="nav-link" data-scroll-target="#mergers-and-acquisitions"><span class="header-section-number">5.4</span> Mergers and acquisitions</a></li>
+  <li><a href="#sec-portfolio-optimization" id="toc-sec-portfolio-optimization" class="nav-link" data-scroll-target="#sec-portfolio-optimization"><span class="header-section-number">5.5</span> Portfolio optimization</a>
+  <ul class="collapse">
+  <li><a href="#theory" id="toc-theory" class="nav-link" data-scroll-target="#theory"><span class="header-section-number">5.5.1</span> Theory</a></li>
+  <li><a href="#sec-InsCo-opt" id="toc-sec-InsCo-opt" class="nav-link" data-scroll-target="#sec-InsCo-opt"><span class="header-section-number">5.5.2</span> InsCo optimization</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.5.3</span> Summary</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-Applications" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- file: "050 Applications" -->
+<!-- Risk analysis is an outgrowth of capital adequacy. -->
+<p><em>Performance assessment, new business pricing, and reinsurance decision-making are all essentially the same exercise as price allocation. Mergers and acquisitions, and portfolio optimization, must be approached differently.</em></p>
+<p><a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a> summarizes the events affecting InsCo’s three units of business as well as an available 35 excess of 65 stop loss reinsurance cover. This has ceded losses of zero in events 0 through 6 and 35 in event 7. It has an expected payout of 3.5 (loss on line 10%) and ceded premium of 6.5 (rate on line 18.6%). The expected net profit to the reinsurer is 3.0.</p>
+<p>In the last three rows of the table we see the expected loss, the plan premium, and the required premium as calculated by a Wang transform calibrated to achieve a 15% return on capital for the (gross) portfolio.</p>
+<div id="tbl-events-with-RI" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-events-with-RI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.1: Events with unit losses and statistics.
+</figcaption>
+<div aria-describedby="tbl-events-with-RI-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Gross</strong></th>
+<th style="text-align: right;"><strong>35 xs 65</strong></th>
+<th style="text-align: right;"><strong>Net</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">36</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">26</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">55</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">65</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">35</td>
+<td style="text-align: right;">65</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathsf E[X]\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">13.400</td>
+<td style="text-align: right;">18.300</td>
+<td style="text-align: right;">14.900</td>
+<td style="text-align: right;">46.600</td>
+<td style="text-align: right;">3.500</td>
+<td style="text-align: right;">43.100</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">13.900</td>
+<td style="text-align: right;">18.700</td>
+<td style="text-align: right;">19.600</td>
+<td style="text-align: right;">52.200</td>
+<td style="text-align: right;">6.500</td>
+<td style="text-align: right;">45.700</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\rho_{Wang}\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">14.109</td>
+<td style="text-align: right;">18.637</td>
+<td style="text-align: right;">20.819</td>
+<td style="text-align: right;">53.565</td>
+<td style="text-align: right;">6.087</td>
+<td style="text-align: right;">47.478</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<section id="sec-Performance-Assessment" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-Performance-Assessment"><span class="header-section-number">5.1</span> Performance assessment</h2>
+<p><em>Which units are performing at a satisfactory level?</em></p>
+<p>Performance assessment is a multiattribute question, involving:</p>
+<ul>
+<li>recent and prospective growth</li>
+<li>expense control</li>
+<li>employee turnover</li>
+<li>customer retention</li>
+<li>competitive standing</li>
+<li>product and operational innovation</li>
+</ul>
+<p>and other qualities. However, a key factor is profitability. The first question is always: Is this unit meeting a profit benchmark?</p>
+<p>Recall we have a 15% return benchmark for the (gross) portfolio as a whole. <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a> shows that additional premium of <span class="math inline">\(53.565-52.2=1.365\)</span> is required to meet this threshold. This is true independent of the choice of distortion function—it is a direct consequence of the 15% return on capital requirement. Here we assume a calibrated Wang transform is used to allocate the portfolio requirement down to the units.</p>
+<p><a href="#tbl-prem-requirement" class="quarto-xref">Table&nbsp;<span>5.2</span></a> shows that of the three units, only Unit B has a plan premium that exceeds the allocated target premium, and there, only by 0.063. Unit A has a deficit of 0.209, and Unit C has most of the portfolio deficit at 1.219. Putting these shortfalls in perspective, Unit C still has the highest gap measured in loss ratio (4.45%), but Unit A needs to increase its plan margin by the greatest factor (41.8%)</p>
+<div id="tbl-prem-requirement" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-prem-requirement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.2: Plan premium relative to target required premium.
+</figcaption>
+<div aria-describedby="tbl-prem-requirement-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Metric</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Gross</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Plan Premium</td>
+<td style="text-align: right;">13.900</td>
+<td style="text-align: right;">18.700</td>
+<td style="text-align: right;">19.600</td>
+<td style="text-align: right;">52.200</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(\rho_{Wang}\)</span></td>
+<td style="text-align: right;">14.109</td>
+<td style="text-align: right;">18.637</td>
+<td style="text-align: right;">20.819</td>
+<td style="text-align: right;">53.565</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(\mathsf E[X]\)</span></td>
+<td style="text-align: right;">13.400</td>
+<td style="text-align: right;">18.300</td>
+<td style="text-align: right;">14.900</td>
+<td style="text-align: right;">46.600</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan margin</td>
+<td style="text-align: right;">0.500</td>
+<td style="text-align: right;">0.400</td>
+<td style="text-align: right;">4.700</td>
+<td style="text-align: right;">5.600</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Excess margin</td>
+<td style="text-align: right;">-0.209</td>
+<td style="text-align: right;">0.063</td>
+<td style="text-align: right;">-1.219</td>
+<td style="text-align: right;">-1.365</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">% of plan</td>
+<td style="text-align: right;">-41.8%</td>
+<td style="text-align: right;">15.6%</td>
+<td style="text-align: right;">-25.9%</td>
+<td style="text-align: right;">-24.4%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Excess LR</td>
+<td style="text-align: right;">-1.43%</td>
+<td style="text-align: right;">0.33%</td>
+<td style="text-align: right;">-4.45%</td>
+<td style="text-align: right;">-2.28%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Note this analysis depends heavily on the fact that we have chosen the Wang transform to drive our SRM allocation. What if a different distortion function were used? And how do we decide which one to use? These questions are addressed in <a href="070_AdvancedTopics.html" class="quarto-xref"><span>Chapter 8</span></a>.</p>
+</section>
+<section id="sec-Reinsurance-decision-making" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-Reinsurance-decision-making"><span class="header-section-number">5.2</span> Reinsurance decision-making</h2>
+<p>Reinsurance serves as loss protection and a source of loss-bearing capital. <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a> shows a 35 excess of 65 portfolio stop loss contract. We assume this is aggregate cover, so questions of reinstatement do not apply. Per-occurrence cover would need to be analyzed to see its impact on aggregate results.</p>
+<p>Should this cover be purchased?</p>
+<p>Reinsurance decisions must weigh several factors, including impact on capital requirements and underwriting constraints, counterparty credit risk, and price. First let us consider capital requirements.</p>
+<p>Previously, we assumed a <span class="math inline">\(\mathsf{TVaR}_{0.99}\)</span> standard for required assets. For the gross portfolio, this led to <span class="math inline">\(a=100\)</span>, full collateral in this example. For the net portfolio, it would lead to <span class="math inline">\(a=65\)</span> if full credit were to be allowed or if the same standard were applied to net losses.</p>
+<p><strong>Exercise.</strong> Apply the rate of return-driven pricing formula (<a href="040_PricingAndAllocation.html#eq-P-nuL" class="quarto-xref">Equation&nbsp;<span>4.2</span></a>) to derive the required premium for the net portfolio based on a 15% required return. What might you conclude about the price of the reinsurance cover?</p>
+<p><strong>Solution.</strong> <span class="math display">\[
+P = \nu L + \delta a = (0.86956)(43.1) + (0.13043)(65) = 45.956
+\]</span> where <span class="math inline">\(L=43.1\)</span> is the net expected loss per <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a>, and <span class="math inline">\(a=65\)</span> is the required asset conditional on having stop loss reinsurance. For comparison, recall from the end of <a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a> that <span class="math inline">\(P(gross) = 0.86956\cdot46.6+0.13043\cdot100=53.565\)</span> (consistent with plugging in values from the Gross column of <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a>). This represents savings of 7.609, which is the maximum that InsCo should be willing to cede for the cover. Since the cover costs 6.5 (<a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a>), we might conclude that the price of the cover is advantageously low and it should be purchased (unless a better deal were available). </p>
+<p>Unfortunately, this line of thinking relies on the familiar CCoC assumption. The risk profile has changed between the gross and net portfolio, so there is no basis for assuming that the same rate of return is required. An alternative approach is to use the loss protection interpretation and view reinsurance as a source of capital. This is elaborated upon in <span class="citation" data-cites="PIR">Mildenhall and Major (<a href="references.html#ref-PIR" role="doc-biblioref">2022</a>)</span>.</p>
+<p>Applying the same Wang transformation allocation to the reinsurance cash flows, <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a> shows a target required premium of 6.087, which is 0.413 <em>lower</em> than the actual 6.5 ceded premium. We conclude the cover should <em>not</em> be purchased.</p>
+<p><strong>Exercise.</strong> Using the Wang allocation and assuming <span class="math inline">\(a=65\)</span>, compute the return on capital for the net portfolio. Explain why the result is in this direction.</p>
+<p><strong>Solution.</strong> <span class="math display">\[
+\iota = \frac{M}{Q} = \frac{P-L}{a-P} = \frac{47.478-43.1}{65-47.478} = \frac{4.378}{17.522} = 25\%.
+\]</span> All investment tranches <span class="math inline">\((Q_j^{Net},M_j^{Net})=(Q_j^{Gross},M_j^{Gross})\)</span>, <span class="math inline">\(j=1,\dots,5\)</span> are identical, but the last tranche <span class="math inline">\(j=6\)</span> has <span class="math inline">\(\Delta X_j^{Net}=0 &lt; \Delta X_j^{Gross}\)</span>. Relative to gross, the net WACC is therefore skewed to the lower tranches, which have higher exceedance probabilities and therefore higher required returns. </p>
+</section>
+<section id="new-business-pricing" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="new-business-pricing"><span class="header-section-number">5.3</span> New business pricing</h2>
+<p>While underwriting involves many factors other than pricing, such as exposure guidelines and physical and financial standards reflecting moral hazard, etc., pricing is a key task in the onboarding of new business.</p>
+<p>At first glance, this seems equivalent to the performance assessment task: calculating a required premium as a distorted loss expectation. It would seem there is not much to add to this discussion. Typically, however, proposed new business is not run through the full capital model directly because that would be inefficient in terms of computing resources and timeliness. Rather, a simplified or surrogate version of the capital model is used to extract key loss statistics.</p>
+<p>Let’s say for example we have a (relatively) simple cat model through which the portfolio has been run—once, and the results stored—and through which a new business prospect has just been run. Non-cat losses are represented by an independent lognormal variable calibrated on exposure characteristics. The resulting scatter plot is shown in <a href="#fig-newby-scatterplot-1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>.</p>
+<div id="fig-newby-scatterplot-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newby-scatterplot-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/plt-nb-1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figure&nbsp;5.1: Simulated losses from a surrogate model applied to the gross portfolio and a new business prospect."><img src="img/plt-nb-1.jpg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newby-scatterplot-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Simulated losses from a surrogate model applied to the gross portfolio and a new business prospect.
+</figcaption>
+</figure>
+</div>
+<p>The problem is to translate these results into a form suitable for SRM allocation pricing. One could use the calibrated Wang transform to sort these results by the portfolio loss and calculate distorted probabilities, but we have no guarantee that the surrogate model accurately reproduces the distribution of portfolio losses that the capital model uses. The solution is to extract the conditional expected new business losses for each portfolio loss in <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a>. (See the discussion of <span class="math inline">\(\kappa^i(X_k)\)</span> in <a href="040_PricingAndAllocation.html#sec-Complications" class="quarto-xref"><span>Section 4.3</span></a>).</p>
+<p>This extraction can be done via local regression (LOWESS, LOESS, kernel smoothing; <span class="citation" data-cites="Friedman2008">Friedman et al. (<a href="references.html#ref-Friedman2008" role="doc-biblioref">2008</a>)</span>). <a href="#fig-newby-scatterplot-2" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> shows the scatter plot of <a href="#fig-newby-scatterplot-1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a> with an estimate of the conditional mean loss curve and the specific event points. This leads to the augmented loss (<a href="#tbl-events-with-NB" class="quarto-xref">Table&nbsp;<span>5.3</span></a>).</p>
+<div id="fig-newby-scatterplot-2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-newby-scatterplot-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/plt-nb-2.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figure&nbsp;5.2: Estimating conditional expected losses using locally weighted regression (LOWESS)."><img src="img/plt-nb-2.jpg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-newby-scatterplot-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Estimating conditional expected losses using locally weighted regression (LOWESS).
+</figcaption>
+</figure>
+</div>
+<div id="tbl-events-with-NB" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-events-with-NB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.3: Events with new business conditional expected losses.
+</figcaption>
+<div aria-describedby="tbl-events-with-NB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 9%">
+<col style="width: 14%">
+<col style="width: 20%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span></th>
+<th style="text-align: right;"><strong>Gross</strong></th>
+<th style="text-align: right;"><strong>New Business</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">0</td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: center;">0.0000</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.00000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.0522</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">0.02028</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">2</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.0660</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">0.01965</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">3</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.0748</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">0.01849</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">4</td>
+<td style="text-align: center;">0.4</td>
+<td style="text-align: center;">0.3791</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.01855</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1190</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">0.02402</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1350</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">0.02910</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7</td>
+<td style="text-align: center;">0.1</td>
+<td style="text-align: center;">0.1739</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">0.06339</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(L=\mathsf E[X]\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;">46.600</td>
+<td style="text-align: right;">0.02491</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(P=\rho_{\mathsf{Wang}}(X)\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;">53.565</td>
+<td style="text-align: right;">0.02858</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(M=P-L\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: right;">6.965</td>
+<td style="text-align: right;">0.00367</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>Exercise.</strong> Why is it reasonable to treat a small new business addition as if it were a unit within the portfolio, using the SRM allocation to calculate a reservation price?</p>
+<p><strong>Solution</strong>. Because it would have little or no impact on the sort order of portfolio losses. The distorted event probabilities <span class="math inline">\(q\)</span> are functions of the distorted exceedance probabilities <span class="math inline">\(g(S)\)</span>, which are in turn functions of exceedance <span class="math inline">\(S\)</span>, which in turn is crucially dependent on the sort order of portfolio event losses. In the simple example, adding the new business losses <span class="math inline">\(X^{n}\)</span> to portfolio losses <span class="math inline">\(X\)</span> did not change the sort order of <span class="math inline">\(X+X^{n}\)</span> compared to <span class="math inline">\(X\)</span>. In general, with a realistically fine-grained simulation, there may indeed be changes in the sort order, but they will be small and not be material to the results. </p>
+</section>
+<section id="mergers-and-acquisitions" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="mergers-and-acquisitions"><span class="header-section-number">5.4</span> Mergers and acquisitions</h2>
+<p>What do you need to consider in a merger or acquisition? In general, there are quite a few considerations, such as strategic fit, financial performance of the target company, cultural compatibility, synergies and cost savings, regulatory compliance, tax implications, valuation for the target company, and risk management.</p>
+<p>While the finance department will no doubt have an opinion on valuation, the capital modeling team could also be tasked with an analysis of how the risk profile of the new portfolio fits with the existing portfolio. The same principles discussed previously still apply, but with a twist. Whereas it was reasonable to treat a new business policy as if it were already a (relatively small) unit within the portfolio, a sizeable acquisition requires a different approach.</p>
+<p>Say instead of the loss distribution portrayed in <a href="#fig-newby-scatterplot-1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, we had an acquisition opportunity with losses scaled up nearly 2,000 times larger on the <span class="math inline">\(y\)</span>-axis at every point, having a mean loss of 48.35. We will focus on losses, with the acquired premiums to be compared to the required premium we will calculate.</p>
+<p>Rather than the conditional mean loss of the acquired business (hereinafter <span class="math inline">\(X^a\)</span>), we need the entire conditional distribution (or at least a representative sample). There are several technical approaches to this, such as quantile regression <span class="citation" data-cites="koenker2001quantile">(<a href="references.html#ref-koenker2001quantile" role="doc-biblioref">Koenker and Hallock 2001</a>)</span> or kernel smoothing <span class="citation" data-cites="wand1994kernel">(<a href="references.html#ref-wand1994kernel" role="doc-biblioref">Wand and Jones 1994</a>)</span>. For our example, we will take what is possibly the simplest nontrivial approach.</p>
+<ol type="1">
+<li>Calculate the conditional mean <span class="math inline">\(\bar{X^a} = \mathsf E[X^a|X]\)</span> via LOWESS at every <span class="math inline">\(X\)</span> point in the scaled-up equivalent to <a href="#fig-newby-scatterplot-1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>, just as we did to obtain <a href="#fig-newby-scatterplot-2" class="quarto-xref">Figure&nbsp;<span>5.2</span></a>.</li>
+<li>At each such <span class="math inline">\(X\)</span> point, compute the squared difference between <span class="math inline">\(X^a\)</span> and <span class="math inline">\(\bar{X^a}\)</span>.</li>
+<li>Use LOWESS again to compute the conditional mean square deviation, i.e.&nbsp;the variance, and its square root, the conditional standard deviation, <span class="math inline">\(\sigma_a\)</span>.</li>
+<li>Inspired by Gauss-Hermite quadrature <span class="citation" data-cites="kovvali2022theory">(<a href="references.html#ref-kovvali2022theory" role="doc-biblioref">Kovvali 2022</a>)</span>, we compute <span class="math inline">\(\bar{X^a}\)</span> plus or minus one standard deviation. This is depicted in <a href="#fig-acq-scatterplot-1" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>.</li>
+<li>Duplicate each row in <a href="#tbl-events-with-RI" class="quarto-xref">Table&nbsp;<span>5.1</span></a>, inserting a new column for loss <span class="math inline">\(X^a\)</span> consisting of those <span class="math inline">\(\bar X^a \pm \sigma_a\)</span> points. Rescale each probability by half.</li>
+<li>Insert a new column for merger losses <span class="math inline">\(X^m=X+X^a\)</span>. Sort on <span class="math inline">\(X^m\)</span>.</li>
+<li>Compute <span class="math inline">\(S\)</span>, <span class="math inline">\(g(S)\)</span>, and <span class="math inline">\(q\)</span> as before, based on the same Wang transform SRM. This is shown in <a href="#tbl-events-with-AB" class="quarto-xref">Table&nbsp;<span>5.4</span></a>.</li>
+</ol>
+<div id="fig-acq-scatterplot-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-acq-scatterplot-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/plt-ab-1.jpg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figure&nbsp;5.3: Representing the conditional loss distribution using locally weighted regression (LOWESS): mean plus or minus one standard deviation."><img src="img/plt-ab-1.jpg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-acq-scatterplot-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Representing the conditional loss distribution using locally weighted regression (LOWESS): mean plus or minus one standard deviation.
+</figcaption>
+</figure>
+</div>
+<div id="tbl-events-with-AB" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-events-with-AB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.4: Events with acquired business Gauss-Hermite two-point sampled conditional losses.
+</figcaption>
+<div aria-describedby="tbl-events-with-AB-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"><span class="math inline">\(k\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(X\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(X^a\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(X^m\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(S\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(g(S)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">29.37</td>
+<td style="text-align: right;">51.37</td>
+<td style="text-align: right;">0.95</td>
+<td style="text-align: right;">0.9766</td>
+<td style="text-align: right;">0.0234</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">25.47</td>
+<td style="text-align: right;">53.47</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0.9478</td>
+<td style="text-align: right;">0.0287</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">21.55</td>
+<td style="text-align: right;">57.55</td>
+<td style="text-align: right;">0.85</td>
+<td style="text-align: right;">0.9161</td>
+<td style="text-align: right;">0.0318</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">22.74</td>
+<td style="text-align: right;">62.74</td>
+<td style="text-align: right;">0.65</td>
+<td style="text-align: right;">0.7667</td>
+<td style="text-align: right;">0.1494</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">49.35</td>
+<td style="text-align: right;">71.35</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.7244</td>
+<td style="text-align: right;">0.0423</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">50.79</td>
+<td style="text-align: right;">78.79</td>
+<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.6802</td>
+<td style="text-align: right;">0.0442</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">30.83</td>
+<td style="text-align: right;">85.83</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.6341</td>
+<td style="text-align: right;">0.0461</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">36</td>
+<td style="text-align: right;">50.22</td>
+<td style="text-align: right;">86.22</td>
+<td style="text-align: right;">0.45</td>
+<td style="text-align: right;">0.5859</td>
+<td style="text-align: right;">0.0482</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">49.27</td>
+<td style="text-align: right;">89.27</td>
+<td style="text-align: right;">0.25</td>
+<td style="text-align: right;">0.3700</td>
+<td style="text-align: right;">0.2159</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">29.89</td>
+<td style="text-align: right;">94.89</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.3089</td>
+<td style="text-align: right;">0.0611</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">55</td>
+<td style="text-align: right;">62.38</td>
+<td style="text-align: right;">117.38</td>
+<td style="text-align: right;">0.15</td>
+<td style="text-align: right;">0.2439</td>
+<td style="text-align: right;">0.0650</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">47.73</td>
+<td style="text-align: right;">147.73</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0.1739</td>
+<td style="text-align: right;">0.0700</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">83.06</td>
+<td style="text-align: right;">148.06</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">0.0964</td>
+<td style="text-align: right;">0.0775</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">0.05</td>
+<td style="text-align: right;">100</td>
+<td style="text-align: right;">198.30</td>
+<td style="text-align: right;">298.30</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0964</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;"><span class="math inline">\(L=\mathsf E[X]\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">46.60</td>
+<td style="text-align: right;">48.35</td>
+<td style="text-align: right;">94.95</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\(P=\rho_{\mathsf{Wang}}(X)\)</span></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;">52.74</td>
+<td style="text-align: right;">59.09</td>
+<td style="text-align: right;">111.83</td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The required premium split between our original portfolio <span class="math inline">\(X\)</span> (52.74) and the acquired <span class="math inline">\(X^a\)</span> (59.09) is irrelevant to this analysis! Recall the original portfolio required premium was 53.57. What is important is the difference between the new merger portfolio premium 111.83 and the original premium of 53.57, i.e., 58.26. This is what InsCo would require for premium from the new business to secure enough margin to satisfy investors.</p>
+<p><strong>Exercise.</strong> Explain the capital situation. What increment of assets is needed with the newly acquired business? What capital? What is the total return on capital for the combined business? Return on incremental capital? Explain why this is not the 15% return originally specified.</p>
+<p><strong>Solution.</strong> Using a 95% TVaR criterion, total assets of 298.30 are needed for the combined portfolio, which is an increase of 198.30 over the original 100. With required premium of 111.83, this corresponds to capital of 186.46 for the combined portfolio, an increase of 140.03 over the original 46.43 (<span class="math inline">\(=100 - 53.57\)</span>) capital. Margin on the combined portfolio is 16.88, for a return of 9.06%. The margin has gone up by 9.92, corresponding to a return of 7.08% on incremental capital. More capital is backing more remote probability losses, requiring less margin and therefore lower returns on capital.</p>
+</section>
+<section id="sec-portfolio-optimization" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="sec-portfolio-optimization"><span class="header-section-number">5.5</span> Portfolio optimization</h2>
+<p><em>If this is the best of possible worlds,</em><br>
+<em>what then are the others?</em><br>
+<em>- Voltaire,</em> “Candide”</p>
+<section id="theory" class="level3" data-number="5.5.1">
+<h3 data-number="5.5.1" class="anchored" data-anchor-id="theory"><span class="header-section-number">5.5.1</span> Theory</h3>
+<p>Portfolio management is an inverse problem to pricing. Rather than taking the portfolio as given and determining appropriate pricing, the problem becomes to take the pricing as given and determine the best (or at least a better) composition of the portfolio. This task is typically complicated, however, by constraints such as volume or risk measures.</p>
+<p>The textbook approach to optimization (e.g., <span class="citation" data-cites="PZGK2024book">Postek et al. (<a href="references.html#ref-PZGK2024book" role="doc-biblioref">2024b</a>)</span>, available online at <span class="citation" data-cites="PZGK2024online">Postek et al. (<a href="references.html#ref-PZGK2024online" role="doc-biblioref">2024a</a>)</span>) starts with an objective function <span class="math inline">\(f(x)\)</span> where <span class="math inline">\(x\)</span> is typically a vector parameter. The problem is to find the value of <span class="math inline">\(x\)</span> that maximizes (or minimizes) <span class="math inline">\(f(x)\)</span>. This is often complicated by the existence of multiple constraint functions <span class="math inline">\(h_j(x)\)</span> requiring <span class="math inline">\(h_j(x) \le 0\)</span> for <span class="math inline">\(j=1,\dots,n\)</span> and <span class="math inline">\(h_j(x) = 0\)</span> for <span class="math inline">\(j=n+1,\dots,m\)</span>.</p>
+<p>What should be our objective function? It is tempting to think it should be margin, the difference between plan premium and expected loss. However, if our revelations in <a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a> taught us anything, it is that modifying the portfolio will modify the risk and that being properly rewarded for risk goes beyond expected loss. We need to compare the (rescaled) plan premium to the (rescaled) required premium from the pricing functional.</p>
+<p>We found at the end of <a href="040_PricingAndAllocation.html#sec-Pricing" class="quarto-xref"><span>Section 4.1</span></a> that InsCo’s economic value added (EVA) is <span class="math inline">\(-1.6\)</span>. Our goal will be to make EVA as large (positive) as possible, or at the very least make it less negative.</p>
+<p>For portfolio optimization, the particulars will likely look like:</p>
+<ul>
+<li>Objective function is economic value added.</li>
+<li>The parameters are scale factors, one for each unit.</li>
+<li>The primary constraint is to stay at the current capital.</li>
+<li>Secondary constraints are limits on growing or shrinking each unit.</li>
+</ul>
+<p>Scale factors determine the volume of each unit. The current portfolio includes the random variable <span class="math inline">\(X^i\)</span> representing the losses from unit <span class="math inline">\(i\)</span>. We now introduce the random variable <span class="math inline">\(X^i(\epsilon)\)</span> to represent its losses if the unit volume has changed by the factor <span class="math inline">\(1+\epsilon\)</span>. The original portfolio loss variable is <span class="math inline">\(X=\sum_i X^i(0)\)</span> in this notation. If unit <span class="math inline">\(i\)</span> were to grow, say, 5%, its loss random variable would be represented as <span class="math inline">\(X^i(0.05)\)</span>.</p>
+<p>Let the portfolio loss random variable be <span class="math inline">\(X(\epsilon^1,\dots)=\sum_i X^i(\epsilon^i)\)</span> and denote the corresponding required assets by <span class="math inline">\(a(\epsilon^1,\dots)\)</span>. For any particular <span class="math inline">\(\epsilon\)</span> values, the capital model can compute these.</p>
+<p>For the InsCo example, we will assume the constraints are <span class="math inline">\(-0.5 \le \epsilon \le 0.5\)</span>.</p>
+<p>If unit losses scaled linearly, as they do in stock portfolios, then we would have <span class="math inline">\(X^i(\epsilon)=(1+\epsilon) X^i(0)\)</span>. Unfortunately, this is usually not the case with insurance, although catastrophe cover in a limited geographic area comes close. However, a properly defined scale factor will give us scaling in planned premium.</p>
+<p>There is a second source of nonlinearity here. As units grow or shrink, so do their losses in each event. Because the computation of the pricing SRM (and probably the capital measure as well) depends on the ordering of portfolio losses, that ordering may change, and so the measure will vary nonlinearly with the scale factors. For small changes in scale (i.e.&nbsp;<span class="math inline">\(\epsilon\)</span> close to 0), this reordering may not happen or may not make a material difference. Our approach <em>will</em> take this into account.</p>
+<p>The primary capital constraint listed above needs elaboration. As the portfolio composition shifts, the asset requirement (specified by the capital risk measure <span class="math inline">\(a(X)\)</span>) will change. So will the total plan premium. We interpret the constraint to mean that the portion of assets not supplied by premium, <span class="math inline">\(Q=a-P\)</span> (<a href="010_Introduction.html#eq-funding" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>), be maintained at the current level. The constraint might have been simply not to exceed the current level, but we don’t want to “leave money on the table” in the sense of holding more capital than we are currently using to support risk. So the constraint is an equality. In some other application, there could be a target capital different than the current level. Our approach is easily adaptable to that.</p>
+<p>In a real application, there might be other constraints. For example, we might not want total portfolio margin to go down. We will keep the example here relatively simple.</p>
+<p>If EVA and required assets scaled linearly, then the above would be a linear programming (LP) problem that could be solved with readily-available linear programming codes. Locally, that is to say with <span class="math inline">\(\epsilon\)</span> close to zero, this should be a good approximation. However, we want to handle bigger steps correctly, so we need a nonlinear optimization strategy. The Nelder-Mead Simplex algorithm is generally applicable, but its performance may suffer in comparison to methods that use first derivatives such as the conjugate gradient algorithm by Polak and Ribiere and the quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shanno. <!--# Would it be of value to add references for these algorithms? --> Other methods, such as the Newton conjugate gradient algorithm, use both first and second derivatives.</p>
+<p>In Python, these and other methods are available in <code>scipy.optimize</code>. In R, the same holds for <code>nloptr</code>. Some of these implementations rely on FORTRAN codes written half a century ago!</p>
+<p>If we treat losses as scaling linearly, then we can make use of first derivatives in our solution method. First derivatives are almost automatically provided when the objective—portfolio EVA—is evaluated. Second derivatives are impractical to compute here. If we do not wish to treat losses as scaling linearly, then we have a few options:</p>
+<ol type="1">
+<li>Use a method like Nelder-Mead that does not require derivatives.</li>
+<li>Compute derivatives numerically by evaluating the objective at nearby points. This could be computationally inefficient.</li>
+<li>Use a <strong>proxy model</strong>—a simpler version of the complete model that approximates it—to provide derivatives. This is essentially what we are doing when we assume linear scaling, but a more accurate nonlinear proxy might be available.</li>
+</ol>
+<p>The overall solution strategy here is stepwise hill climbing:</p>
+<ol type="1">
+<li>Identify promising directions for scale changes.</li>
+<li>Select new scale parameters satisfying the capital and scale constraints.</li>
+<li>Rerun the model at the new scales.</li>
+<li>Repeat until EVA improvement seems impossible.</li>
+</ol>
+<p>With linear scaling, the important thing to remember is that allocated quantities (premium, assets, capital) are the same as marginal quantities. If a unit is scaled up by 1% (<span class="math inline">\(\epsilon=0.01\)</span>), say, then the allocated quantity will go up by 1%.</p>
+</section>
+<section id="sec-InsCo-opt" class="level3" data-number="5.5.2">
+<h3 data-number="5.5.2" class="anchored" data-anchor-id="sec-InsCo-opt"><span class="header-section-number">5.5.2</span> InsCo optimization</h3>
+<p>The input data for InsCo is provided in <a href="#tbl-opt-marginals" class="quarto-xref">Table&nbsp;<span>5.5</span></a>.</p>
+<div id="tbl-opt-marginals" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-marginals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.5: InsCo marginal EVA and capital.
+</figcaption>
+<div aria-describedby="tbl-opt-marginals-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Quantity</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Plan premium <span class="math inline">\(P_P\)</span></td>
+<td style="text-align: right;">13.9000</td>
+<td style="text-align: right;">18.7000</td>
+<td style="text-align: right;">19.6000</td>
+<td style="text-align: right;">52.2000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Required prem <span class="math inline">\(P_R\)</span></td>
+<td style="text-align: right;">14.1092</td>
+<td style="text-align: right;">18.6375</td>
+<td style="text-align: right;">20.8186</td>
+<td style="text-align: right;">53.5652</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EVA <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: right;">-0.2092</td>
+<td style="text-align: right;">0.0625</td>
+<td style="text-align: right;">-1.2186</td>
+<td style="text-align: right;">-1.3652</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Required assets <span class="math inline">\(a\)</span></td>
+<td style="text-align: right;">16.0000</td>
+<td style="text-align: right;">20.0000</td>
+<td style="text-align: right;">64.0000</td>
+<td style="text-align: right;">100.0000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plan capital <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: right;">2.1000</td>
+<td style="text-align: right;">1.3000</td>
+<td style="text-align: right;">44.4000</td>
+<td style="text-align: right;">47.8000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EVA/capital ratio <span class="math inline">\(r=V/Q_P\)</span></td>
+<td style="text-align: right;">-0.0996</td>
+<td style="text-align: right;">0.0481</td>
+<td style="text-align: right;">-0.0274</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Minimum scale <span class="math inline">\(\epsilon_-\)</span></td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maximum scale <span class="math inline">\(\epsilon_+\)</span></td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p><strong>Exercise.</strong> Assume that event 10 is always the one to produce the largest portfolio loss and therefore the capital measure. Compute an expression for <span class="math inline">\(\epsilon^3\)</span> (Unit C) in terms of <span class="math inline">\(\epsilon^1\)</span> (Unit A) and <span class="math inline">\(\epsilon^2\)</span> (Unit B) so that the capital equality constraint is maintained.</p>
+<p><strong>Solution.</strong> Plan capital is the difference between assets and plan premium (<a href="010_Introduction.html#eq-funding" class="quarto-xref">Equation&nbsp;<span>1.1</span></a>). Given the event 10 assumption, both scale linearly in <span class="math inline">\(\epsilon\)</span>, so <span class="math inline">\(Q\)</span> does as well. The requirement is <span class="math display">\[
+47.8 = \sum_{i} Q_P^i(1+\epsilon^i) = 2.1(1+\epsilon^1) + 1.3 (1+\epsilon^2) + 44.4(1+\epsilon^3)
+\]</span> therefore <span class="math display">\[
+\epsilon^3 = -\frac{2.1}{44.4}\epsilon^1 - \frac{1.3}{44.4}\epsilon^2 = -0.047297\epsilon^1 - 0.029279\epsilon^2.
+\]</span> </p>
+<p>A naive approach to optimization might take the linear approximation at face value and take the biggest and most advantageous change in scale parameters possible. Let’s see how this plays out with InsCo.</p>
+<ul>
+<li>The most advantageous first move is to reduce Unit A by 50%. This increases EVA by <span class="math inline">\((-0.2092) \cdot (-0.5) = 0.1046\)</span>. It also changes capital by <span class="math inline">\((2.1) \cdot (-0.5) = -1.05\)</span>.</li>
+<li>Now we need to increase overall writings to use up all available capital and get it back to the target. Unit B has a positive EVA/capital ratio and Unit C a negative, so Unit B has the most advantage. We would have to increase Unit B’s scale by <span class="math inline">\(1.05/1.3 = 0.808\)</span> to completely use the capital, but this is outside the constrained range. Scaling by the max allowed 50% adds <span class="math inline">\(1.3 \cdot 0.5 = 0.65\)</span> to the capital, bringing the net position to <span class="math inline">\(-1.05 + 0.65 = -0.4\)</span>. It also brings the EVA up by <span class="math inline">\(0.0625 \cdot 0.5 = 0.0313\)</span> to <span class="math inline">\(0.1358\)</span>.</li>
+<li>We need a further adjustment, and the only candidate left is Unit C. Here we need a scale change of <span class="math inline">\(0.4/44.4 = 0.0090\)</span>, which is well within the allowed range. (The formula from the previous exercise tells us the same thing.) That brings the change in capital back to zero but changes EVA by <span class="math inline">\((-1.2186) \cdot 0.0090 = -0.0110\)</span> for a net EVA of <span class="math inline">\(-1.2403\)</span> and an improvement of <span class="math inline">\(0.1249\)</span>. Adding these predicted changes to the original figures gives the results in <a href="#tbl-opt-linear-EVA" class="quarto-xref">Table&nbsp;<span>5.6</span></a>.</li>
+</ul>
+<div id="tbl-opt-linear-EVA" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-linear-EVA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.6: InsCo linear predictions for EVA and capital.
+</figcaption>
+<div aria-describedby="tbl-opt-linear-EVA-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Quantity</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scale change <span class="math inline">\(\epsilon^i\)</span></td>
+<td style="text-align: right;">-0.5</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.009</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan premium <span class="math inline">\(P_P\)</span></td>
+<td style="text-align: right;">6.9500</td>
+<td style="text-align: right;">28.0500</td>
+<td style="text-align: right;">19.7766</td>
+<td style="text-align: right;">54.7766</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required prem <span class="math inline">\(P_R\)</span></td>
+<td style="text-align: right;">7.0546</td>
+<td style="text-align: right;">27.9562</td>
+<td style="text-align: right;">21.0061</td>
+<td style="text-align: right;">56.0169</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EVA <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: right;">-0.1046</td>
+<td style="text-align: right;">0.0938</td>
+<td style="text-align: right;">-1.2295</td>
+<td style="text-align: right;">-1.2403</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required assets <span class="math inline">\(a\)</span></td>
+<td style="text-align: right;">8.0000</td>
+<td style="text-align: right;">30.0000</td>
+<td style="text-align: right;">64.5766</td>
+<td style="text-align: right;">102.5766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan capital <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: right;">1.0500</td>
+<td style="text-align: right;">1.9500</td>
+<td style="text-align: right;">44.8000</td>
+<td style="text-align: right;">47.8000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>Now, had these moves been limited to, say 2%, we might be satisfied to stop here. In a real application, such a schedule of scale changes would be scrutinized for other business factors and questions of implementation feasibility. Some targets would probably be modified; for example, the Unit C scale change would no doubt be rounded to 1%.</p>
+<p>However, with 50% scale changes, we need to be wary of nonlinear effects. Let us rerun the model at the new scales.</p>
+<p>Our starting point is the original, 10-event loss distribution from <a href="020_BusinessOperations.html#tbl-dupe-x" class="quarto-xref">Table&nbsp;<span>2.1</span></a>. We multiply the losses in each column <span class="math inline">\(i\)</span> by the scale factor <span class="math inline">\(1+\epsilon^i\)</span>, retabulate the portfolio total loss, and then sort on the portfolio loss. We apply the same asset metric—essentially the maximum loss—and the same Wang transform for pricing. We do <em>not</em> compute a new Wang parameter to obtain a 15% portfolio return. Rather, we use the same parameter because this represents the investors’ risk appetite. With a new loss distribution and new asset requirement, we do not expect the same required return. The new loss table is set out in <a href="#tbl-opt-scaled-losses" class="quarto-xref">Table&nbsp;<span>5.7</span></a>. The first column shows the original sorted event number <span class="math inline">\(j\)</span>, highlighting the reordering that has occurred with the change in volume by unit, see <a href="020_BusinessOperations.html#tbl-dupe-x" class="quarto-xref">Table&nbsp;<span>2.1</span></a>. Events 3, 4, 5, 7, and 8 all move and are therefore given a different weight by the Wang distortion. This extensive reshuffling accounts for the large (relative to EVA) change in required premium shown in <a href="#tbl-opt-rerun-1" class="quarto-xref">Table&nbsp;<span>5.8</span></a>.</p>
+<div id="tbl-opt-scaled-losses" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-scaled-losses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.7: InsCo losses after rescaling and re-sorting.
+</figcaption>
+<div aria-describedby="tbl-opt-scaled-losses-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(j\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(p\)</span></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+<th style="text-align: right;"><span class="math inline">\(S\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(g(S)\)</span></th>
+<th style="text-align: right;"><span class="math inline">\(q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">1.000</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">7.5</td>
+<td style="text-align: right;">10.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">18.0000</td>
+<td style="text-align: right;">0.9</td>
+<td style="text-align: right;">0.931</td>
+<td style="text-align: right;">0.069</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">7.5</td>
+<td style="text-align: right;">19.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">27.0000</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">0.851</td>
+<td style="text-align: right;">0.080</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">7</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">7.5</td>
+<td style="text-align: right;">24.0</td>
+<td style="text-align: right;">9.0811</td>
+<td style="text-align: right;">40.5811</td>
+<td style="text-align: right;">0.7</td>
+<td style="text-align: right;">0.766</td>
+<td style="text-align: right;">0.086</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">5</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">6.5</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">7.0631</td>
+<td style="text-align: right;">43.5631</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">0.675</td>
+<td style="text-align: right;">0.091</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">3</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">11.0991</td>
+<td style="text-align: right;">43.5991</td>
+<td style="text-align: right;">0.5</td>
+<td style="text-align: right;">0.579</td>
+<td style="text-align: right;">0.096</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">6</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">2.5</td>
+<td style="text-align: right;">40.5</td>
+<td style="text-align: right;">8.0721</td>
+<td style="text-align: right;">51.0721</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">0.479</td>
+<td style="text-align: right;">0.101</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">8</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">13.0</td>
+<td style="text-align: right;">28.5</td>
+<td style="text-align: right;">10.0901</td>
+<td style="text-align: right;">51.5901</td>
+<td style="text-align: right;">0.3</td>
+<td style="text-align: right;">0.373</td>
+<td style="text-align: right;">0.106</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">4</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">49.5</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">53.0000</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">0.261</td>
+<td style="text-align: right;">0.112</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">9</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">8.5</td>
+<td style="text-align: right;">12.0</td>
+<td style="text-align: right;">40.3604</td>
+<td style="text-align: right;">60.8604</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0.140</td>
+<td style="text-align: right;">0.121</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">10</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">8.0</td>
+<td style="text-align: right;">30.0</td>
+<td style="text-align: right;">64.5766</td>
+<td style="text-align: right;">102.5766</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">0.140</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-opt-rerun-1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-rerun-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.8: InsCo model rerun, EVA and capital solutions.
+</figcaption>
+<div aria-describedby="tbl-opt-rerun-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Quantity</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scale change <span class="math inline">\(\epsilon^i\)</span></td>
+<td style="text-align: right;">-0.5000</td>
+<td style="text-align: right;">0.5000</td>
+<td style="text-align: right;">0.0090</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan premium <span class="math inline">\(P_P\)</span></td>
+<td style="text-align: right;">6.9500</td>
+<td style="text-align: right;">28.0500</td>
+<td style="text-align: right;">19.7766</td>
+<td style="text-align: right;">54.7766</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required prem <span class="math inline">\(P_R\)</span></td>
+<td style="text-align: right;">6.8115</td>
+<td style="text-align: right;">28.6040</td>
+<td style="text-align: right;">20.8271</td>
+<td style="text-align: right;">56.2426</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EVA <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: right;">0.1385</td>
+<td style="text-align: right;">-0.5540</td>
+<td style="text-align: right;">-1.0505</td>
+<td style="text-align: right;">-1.4660</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required assets <span class="math inline">\(a\)</span></td>
+<td style="text-align: right;">8.0000</td>
+<td style="text-align: right;">30.0000</td>
+<td style="text-align: right;">64.5766</td>
+<td style="text-align: right;">102.5766</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan capital <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: right;">1.0500</td>
+<td style="text-align: right;">1.9500</td>
+<td style="text-align: right;">44.8000</td>
+<td style="text-align: right;">47.8000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EVA/capital ratio <span class="math inline">\(r=V/Q_P\)</span></td>
+<td style="text-align: right;">0.1319</td>
+<td style="text-align: right;">-0.2841</td>
+<td style="text-align: right;">-0.0234</td>
+<td style="text-align: right;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>The final EVA of <span class="math inline">\(-1.466\)</span> is not only not as good as the predicted <span class="math inline">\(-1.240\)</span>; it is <em>worse</em> than the original <span class="math inline">\(-1.365\)</span>. Such is the curse of nonlinearity. Studying the derivatives here, it seems we need to go backwards, increasing the scale of Unit A and decreasing Unit B.</p>
+<p>If we run the model with Unit B rescaled at many points throughout the <span class="math inline">\([-0.5, 0.5]\)</span> range, we obtain the results shown in <a href="#fig-opt-EVA-trace" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>. Nonlinearity is obvious. This is why most optimization algorithms take relatively small steps when updating parameters.</p>
+<div id="fig-opt-EVA-trace" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-opt-EVA-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/EVA-trace.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Figure&nbsp;5.4: EVA at –50% Unit A, various Unit B."><img src="img/EVA-trace.svg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-opt-EVA-trace-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: EVA at –50% Unit A, various Unit B.
+</figcaption>
+</figure>
+</div>
+<p>Applying the Nelder-Mead Simplex algorithm, we obtain the surprising result that the scale constraints are not binding at the optimal solution. Unit A is to be reduced by almost, but not quite, 50%. Unit B is to be reduced by almost 21%. Details are in <a href="#tbl-opt-solution" class="quarto-xref">Table&nbsp;<span>5.9</span></a>.</p>
+<div id="tbl-opt-solution" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.9: InsCo model rerun, EVA and capital solutions.
+</figcaption>
+<div aria-describedby="tbl-opt-solution-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Quantity</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scale <span class="math inline">\(\epsilon^i\)</span></td>
+<td style="text-align: right;">-0.478165</td>
+<td style="text-align: right;">-0.209790</td>
+<td style="text-align: right;">0.028758</td>
+<td style="text-align: right;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan premium <span class="math inline">\(P_P\)</span></td>
+<td style="text-align: right;">7.253507</td>
+<td style="text-align: right;">14.776927</td>
+<td style="text-align: right;">20.163665</td>
+<td style="text-align: right;">42.194098</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required prem <span class="math inline">\(P_R\)</span></td>
+<td style="text-align: right;">7.269164</td>
+<td style="text-align: right;">14.816395</td>
+<td style="text-align: right;">21.453658</td>
+<td style="text-align: right;">43.539217</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EVA <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: right;">-0.015658</td>
+<td style="text-align: right;">-0.039468</td>
+<td style="text-align: right;">-1.289993</td>
+<td style="text-align: right;">-1.345119</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required assets <span class="math inline">\(a\)</span></td>
+<td style="text-align: right;">8.349360</td>
+<td style="text-align: right;">15.804200</td>
+<td style="text-align: right;">65.840538</td>
+<td style="text-align: right;">89.994098</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan capital <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: right;">1.095854</td>
+<td style="text-align: right;">1.027273</td>
+<td style="text-align: right;">45.676874</td>
+<td style="text-align: right;">47.800000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EVA/capital ratio <span class="math inline">\(r=V/Q_P\)</span></td>
+<td style="text-align: right;">-0.014288</td>
+<td style="text-align: right;">-0.038420</td>
+<td style="text-align: right;">-0.028242</td>
+<td style="text-align: right;">-0.080950</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<p>A grid search shows the situation in the neighborhood of the solution. See <a href="#fig-opt-EVA-contour" class="quarto-xref">Figure&nbsp;<span>5.5</span></a>. The optimal point has an EVA value of <span class="math inline">\(-1.345\)</span>. The innermost contour represents an EVA level set of <span class="math inline">\(-1.350\)</span>. Parameters inside this contour get at least 75% of the way from the original EVA to the optimal EVA.</p>
+<div id="fig-opt-EVA-contour" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-opt-EVA-contour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/EVA-contour.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Figure&nbsp;5.5: Contours of EVA at various Unit A, Unit B."><img src="img/EVA-contour.svg" class="img-fluid figure-img" style="width:75.0%"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-opt-EVA-contour-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.5: Contours of EVA at various Unit A, Unit B.
+</figcaption>
+</figure>
+</div>
+<p>The solution suggests that Unit A and Unit B both need further reduction because of negative EVA. However, there is more going on here. Not only is there nonlinearity, there is discontinuity in first derivatives as evidenced by <a href="#fig-opt-EVA-trace" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>. If we were to change the Unit B scale ever so slightly, from <span class="math inline">\(-0.20979\)</span> to <span class="math inline">\(-0.209795\)</span>, we obtain dramatically different EVA allocations, <a href="#tbl-opt-solution-perturbed" class="quarto-xref">Table&nbsp;<span>5.10</span></a>.</p>
+<div id="tbl-opt-solution-perturbed" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-opt-solution-perturbed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;5.10: InsCo model rerun, EVA and capital solutions.
+</figcaption>
+<div aria-describedby="tbl-opt-solution-perturbed-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Quantity</strong></th>
+<th style="text-align: right;"><strong>Unit A</strong></th>
+<th style="text-align: right;"><strong>Unit B</strong></th>
+<th style="text-align: right;"><strong>Unit C</strong></th>
+<th style="text-align: right;"><strong>Portfolio</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Scale <span class="math inline">\(\epsilon^i\)</span></td>
+<td style="text-align: right;">-0.478165</td>
+<td style="text-align: right;">-0.209795</td>
+<td style="text-align: right;">0.028759</td>
+<td style="text-align: right;">-0.659201</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan premium <span class="math inline">\(P_P\)</span></td>
+<td style="text-align: right;">7.253507</td>
+<td style="text-align: right;">14.776834</td>
+<td style="text-align: right;">20.163668</td>
+<td style="text-align: right;">42.194008</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required prem <span class="math inline">\(P_R\)</span></td>
+<td style="text-align: right;">7.334042</td>
+<td style="text-align: right;">14.607535</td>
+<td style="text-align: right;">21.597550</td>
+<td style="text-align: right;">43.539127</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EVA <span class="math inline">\(V=P_P-P_R\)</span></td>
+<td style="text-align: right;">-0.080535</td>
+<td style="text-align: right;">0.169298</td>
+<td style="text-align: right;">-1.433882</td>
+<td style="text-align: right;">-1.345119</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Required assets <span class="math inline">\(a\)</span></td>
+<td style="text-align: right;">8.349360</td>
+<td style="text-align: right;">15.804100</td>
+<td style="text-align: right;">65.840548</td>
+<td style="text-align: right;">89.994008</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plan capital <span class="math inline">\(Q_P=a-P_P\)</span></td>
+<td style="text-align: right;">1.095854</td>
+<td style="text-align: right;">1.027267</td>
+<td style="text-align: right;">45.676880</td>
+<td style="text-align: right;">47.800000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EVA/capital ratio <span class="math inline">\(r=V/Q_P\)</span></td>
+<td style="text-align: right;">-0.073491</td>
+<td style="text-align: right;">0.164805</td>
+<td style="text-align: right;">-0.031392</td>
+<td style="text-align: right;">0.059922</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<!-- ![EVA at optimal Unit A, various Unit B.](img/EVA-trace-opt.svg){width="100%" #fig-opt-EVA-trace-opt} -->
+</section>
+<section id="summary" class="level3" data-number="5.5.3">
+<h3 data-number="5.5.3" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.5.3</span> Summary</h3>
+<p>The term “portfolio optimization” is quite ambitious. There are some questionable assumptions that have to be imposed on the problem to get to a solution. There are inherent nonlinearities and discontinuous derivatives. The uncertainties (see <a href="070_AdvancedTopics.html#sec-Uncertainty" class="quarto-xref"><span>Section 8.1</span></a>) in the inputs and the underlying model itself no doubt add breadth to the range of near-optimal solutions. One should approach the task with a healthy dose of humility.</p>
+<p>Perhaps the best that can be hoped for is to provide directions for portfolio improvement that are probably, approximately, correct.</p>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Friedman2008" class="csl-entry" role="listitem">
+Friedman, J, T Hastie, and R Tibshirani. 2008. <em><span class="nocase">The elements of statistical learning</span></em>. Springer.
+</div>
+<div id="ref-koenker2001quantile" class="csl-entry" role="listitem">
+Koenker, Roger, and Kevin F Hallock. 2001. <span>“Quantile Regression.”</span> <em>Journal of Economic Perspectives</em> 15 (4): 143–56.
+</div>
+<div id="ref-kovvali2022theory" class="csl-entry" role="listitem">
+Kovvali, Narayan. 2022. <em>Theory and Applications of Gaussian Quadrature Methods</em>. Springer Nature.
+</div>
+<div id="ref-PIR" class="csl-entry" role="listitem">
+Mildenhall, Stephen J, and John A Major. 2022. <em>Pricing Insurance Risk: Theory and Practice</em>. John Wiley &amp; Sons, Inc.
+</div>
+<div id="ref-PZGK2024online" class="csl-entry" role="listitem">
+Postek, Krzysztof, Alessandro Zocca, Joaquim Gromicho, and Jeffrey Kantor. 2024a. <span>“Companion Jupyter Book for <span class="nocase">“Hands-On Mathematical Optimization with Python’’</span>.”</span> GitHub.
+</div>
+<div id="ref-PZGK2024book" class="csl-entry" role="listitem">
+Postek, Krzysztof, Alessandro Zocca, Joaquim Gromicho, and Jeffrey Kantor. 2024b. <em><span class="nocase">Hands-On Mathematical Optimization with Python</span></em>. Cambridge University Press.
+</div>
+<div id="ref-wand1994kernel" class="csl-entry" role="listitem">
+Wand, Matt P, and M Chris Jones. 1994. <em>Kernel Smoothing</em>. CRC press.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cmm\.mynl\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./040_PricingAndAllocation.html" class="pagination-link" aria-label="Pricing and allocation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pricing and allocation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./060_SelectingSRM.html" class="pagination-link" aria-label="Selecting and calibrating an SRM">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">&lt;!-- file: "050 Applications" --&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="fu"># Applications of pricing and allocation {#sec-Applications}</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co">&lt;!-- Risk analysis is an outgrowth of capital adequacy. --&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a>*Performance assessment, new business pricing, and reinsurance decision-making are all essentially the same exercise as price allocation. Mergers and acquisitions, and portfolio optimization, must be approached differently.*</span>
+<span id="cb1-8"><a href="#cb1-8"></a></span>
+<span id="cb1-9"><a href="#cb1-9"></a>@tbl-events-with-RI summarizes the events affecting InsCo's three units of business as well as an available 35 excess of 65 stop loss reinsurance cover. This has ceded losses of zero in events 0 through 6 and 35 in event 7. It has an expected payout of 3.5 (loss on line 10%) and ceded premium of 6.5 (rate on line 18.6%). The expected net profit to the reinsurer is 3.0.</span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>In the last three rows of the table we see the expected loss, the plan premium, and the required premium as calculated by a Wang transform calibrated to achieve a 15% return on capital for the (gross) portfolio.</span>
+<span id="cb1-12"><a href="#cb1-12"></a></span>
+<span id="cb1-13"><a href="#cb1-13"></a>\footnotesize</span>
+<span id="cb1-14"><a href="#cb1-14"></a></span>
+<span id="cb1-15"><a href="#cb1-15"></a>| $k$ | $p$ | **Unit A** | **Unit B** | **Unit C** | **Gross** | **35 xs 65** | **Net** |</span>
+<span id="cb1-16"><a href="#cb1-16"></a>|:--------|--------:|--------:|--------:|--------:|--------:|--------:|--------:|</span>
+<span id="cb1-17"><a href="#cb1-17"></a>| 0 | 0.0 | 0 | 0 | 0 | 0 | 0 | 0 |</span>
+<span id="cb1-18"><a href="#cb1-18"></a>| 1 | 0.1 | 15 | 7 | 0 | 22 | 0 | 22 |</span>
+<span id="cb1-19"><a href="#cb1-19"></a>| 2 | 0.1 | 15 | 13 | 0 | 28 | 0 | 28 |</span>
+<span id="cb1-20"><a href="#cb1-20"></a>| 3 | 0.1 | 5 | 20 | 11 | 36 | 0 | 36 |</span>
+<span id="cb1-21"><a href="#cb1-21"></a>| 4 | 0.4 | 10 | 24 | 6 | 40 | 0 | 40 |</span>
+<span id="cb1-22"><a href="#cb1-22"></a>| 5 | 0.1 | 26 | 19 | 10 | 55 | 0 | 55 |</span>
+<span id="cb1-23"><a href="#cb1-23"></a>| 6 | 0.1 | 17 | 8 | 40 | 65 | 0 | 65 |</span>
+<span id="cb1-24"><a href="#cb1-24"></a>| 7 | 0.1 | 16 | 20 | 64 | 100 | 35 | 65 |</span>
+<span id="cb1-25"><a href="#cb1-25"></a>| $\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ |  | 13.400 | 18.300 | 14.900 | 46.600 | 3.500 | 43.100 |</span>
+<span id="cb1-26"><a href="#cb1-26"></a>| Plan |  | 13.900 | 18.700 | 19.600 | 52.200 | 6.500 | 45.700 |</span>
+<span id="cb1-27"><a href="#cb1-27"></a>| $\rho_{Wang}$ |  | 14.109 | 18.637 | 20.819 | 53.565 | 6.087 | 47.478 |</span>
+<span id="cb1-28"><a href="#cb1-28"></a></span>
+<span id="cb1-29"><a href="#cb1-29"></a>: Events with unit losses and statistics. {#tbl-events-with-RI}</span>
+<span id="cb1-30"><a href="#cb1-30"></a></span>
+<span id="cb1-31"><a href="#cb1-31"></a>\normalsize</span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="fu">## Performance assessment {#sec-Performance-Assessment}</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a></span>
+<span id="cb1-35"><a href="#cb1-35"></a>*Which units are performing at a satisfactory level?*</span>
+<span id="cb1-36"><a href="#cb1-36"></a></span>
+<span id="cb1-37"><a href="#cb1-37"></a>Performance assessment is a multiattribute question, involving:</span>
+<span id="cb1-38"><a href="#cb1-38"></a></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="ss">-   </span>recent and prospective growth</span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="ss">-   </span>expense control</span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="ss">-   </span>employee turnover</span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="ss">-   </span>customer retention</span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="ss">-   </span>competitive standing</span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="ss">-   </span>product and operational innovation</span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a>and other qualities. However, a key factor is profitability. The first question is always: Is this unit meeting a profit benchmark?</span>
+<span id="cb1-47"><a href="#cb1-47"></a></span>
+<span id="cb1-48"><a href="#cb1-48"></a>Recall we have a 15% return benchmark for the (gross) portfolio as a whole. @tbl-events-with-RI shows that additional premium of $53.565-52.2=1.365$ is required to meet this threshold. This is true independent of the choice of distortion function---it is a direct consequence of the 15% return on capital requirement. Here we assume a calibrated Wang transform is used to allocate the portfolio requirement down to the units.</span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-50"><a href="#cb1-50"></a>@tbl-prem-requirement shows that of the three units, only Unit B has a plan premium that exceeds the allocated target premium, and there, only by 0.063. Unit A has a deficit of 0.209, and Unit C has most of the portfolio deficit at 1.219. Putting these shortfalls in perspective, Unit C still has the highest gap measured in loss ratio (4.45%), but Unit A needs to increase its plan margin by the greatest factor (41.8%)</span>
+<span id="cb1-51"><a href="#cb1-51"></a></span>
+<span id="cb1-52"><a href="#cb1-52"></a>\footnotesize</span>
+<span id="cb1-53"><a href="#cb1-53"></a></span>
+<span id="cb1-54"><a href="#cb1-54"></a>| **Metric**     | **Unit A** | **Unit B** | **Unit C** | **Gross** |</span>
+<span id="cb1-55"><a href="#cb1-55"></a>|:---------------|-----------:|-----------:|-----------:|----------:|</span>
+<span id="cb1-56"><a href="#cb1-56"></a>| Plan Premium   |     13.900 |     18.700 |     19.600 |    52.200 |</span>
+<span id="cb1-57"><a href="#cb1-57"></a>| $\rho_{Wang}$  |     14.109 |     18.637 |     20.819 |    53.565 |</span>
+<span id="cb1-58"><a href="#cb1-58"></a>| $\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ |     13.400 |     18.300 |     14.900 |    46.600 |</span>
+<span id="cb1-59"><a href="#cb1-59"></a>| Plan margin    |      0.500 |      0.400 |      4.700 |     5.600 |</span>
+<span id="cb1-60"><a href="#cb1-60"></a>| Excess margin  |     -0.209 |      0.063 |     -1.219 |    -1.365 |</span>
+<span id="cb1-61"><a href="#cb1-61"></a>| \% of plan     |     -41.8% |      15.6% |     -25.9% |    -24.4% |</span>
+<span id="cb1-62"><a href="#cb1-62"></a>| Excess LR      |     -1.43% |      0.33% |     -4.45% |    -2.28% |</span>
+<span id="cb1-63"><a href="#cb1-63"></a></span>
+<span id="cb1-64"><a href="#cb1-64"></a>: Plan premium relative to target required premium. {#tbl-prem-requirement}</span>
+<span id="cb1-65"><a href="#cb1-65"></a></span>
+<span id="cb1-66"><a href="#cb1-66"></a>\normalsize</span>
+<span id="cb1-67"><a href="#cb1-67"></a></span>
+<span id="cb1-68"><a href="#cb1-68"></a>Note this analysis depends heavily on the fact that we have chosen the Wang transform to drive our SRM allocation. What if a different distortion function were used? And how do we decide which one to use? These questions are addressed in @sec-Advanced-Topics.</span>
+<span id="cb1-69"><a href="#cb1-69"></a></span>
+<span id="cb1-70"><a href="#cb1-70"></a><span class="fu">## Reinsurance decision-making {#sec-Reinsurance-decision-making}</span></span>
+<span id="cb1-71"><a href="#cb1-71"></a></span>
+<span id="cb1-72"><a href="#cb1-72"></a>Reinsurance serves as loss protection and a source of loss-bearing capital. @tbl-events-with-RI shows a 35 excess of 65 portfolio stop loss contract. We assume this is aggregate cover, so questions of reinstatement do not apply. Per-occurrence cover would need to be analyzed to see its impact on aggregate results.</span>
+<span id="cb1-73"><a href="#cb1-73"></a></span>
+<span id="cb1-74"><a href="#cb1-74"></a>Should this cover be purchased?</span>
+<span id="cb1-75"><a href="#cb1-75"></a></span>
+<span id="cb1-76"><a href="#cb1-76"></a>Reinsurance decisions must weigh several factors, including impact on capital requirements and underwriting constraints, counterparty credit risk, and price. First let us consider capital requirements.</span>
+<span id="cb1-77"><a href="#cb1-77"></a></span>
+<span id="cb1-78"><a href="#cb1-78"></a>Previously, we assumed a $\mathsf{TVaR}_{0.99}$ standard for required assets. For the gross portfolio, this led to $a=100$, full collateral in this example. For the net portfolio, it would lead to $a=65$ if full credit were to be allowed or if the same standard were applied to net losses.</span>
+<span id="cb1-79"><a href="#cb1-79"></a></span>
+<span id="cb1-80"><a href="#cb1-80"></a>**Exercise.** Apply the rate of return-driven pricing formula (@eq-P-nuL) to derive the required premium for the net portfolio based on a 15% required return. What might you conclude about the price of the reinsurance cover?</span>
+<span id="cb1-81"><a href="#cb1-81"></a></span>
+<span id="cb1-82"><a href="#cb1-82"></a>**Solution.** $$</span>
+<span id="cb1-83"><a href="#cb1-83"></a>P = \nu L + \delta a = (0.86956)(43.1) + (0.13043)(65) = 45.956</span>
+<span id="cb1-84"><a href="#cb1-84"></a>$$ where $L=43.1$ is the net expected loss per @tbl-events-with-RI, and $a=65$ is the required asset conditional on having stop loss reinsurance. For comparison, recall from the end of @sec-Pricing that $P(gross) = 0.86956\cdot46.6+0.13043\cdot100=53.565$ (consistent with plugging in values from the Gross column of @tbl-events-with-RI). This represents savings of 7.609, which is the maximum that InsCo should be willing to cede for the cover. Since the cover costs 6.5 (@tbl-events-with-RI), we might conclude that the price of the cover is advantageously low and it should be purchased (unless a better deal were available). \qed</span>
+<span id="cb1-85"><a href="#cb1-85"></a></span>
+<span id="cb1-86"><a href="#cb1-86"></a>Unfortunately, this line of thinking relies on the familiar CCoC assumption. The risk profile has changed between the gross and net portfolio, so there is no basis for assuming that the same rate of return is required. An alternative approach is to use the loss protection interpretation and view reinsurance as a source of capital. This is elaborated upon in @PIR.</span>
+<span id="cb1-87"><a href="#cb1-87"></a></span>
+<span id="cb1-88"><a href="#cb1-88"></a>Applying the same Wang transformation allocation to the reinsurance cash flows, @tbl-events-with-RI shows a target required premium of 6.087, which is 0.413 *lower* than the actual 6.5 ceded premium. We conclude the cover should *not* be purchased.</span>
+<span id="cb1-89"><a href="#cb1-89"></a></span>
+<span id="cb1-90"><a href="#cb1-90"></a>**Exercise.** Using the Wang allocation and assuming $a=65$, compute the return on capital for the net portfolio. Explain why the result is in this direction.</span>
+<span id="cb1-91"><a href="#cb1-91"></a></span>
+<span id="cb1-92"><a href="#cb1-92"></a>**Solution.** $$</span>
+<span id="cb1-93"><a href="#cb1-93"></a>\iota = \frac{M}{Q} = \frac{P-L}{a-P} = \frac{47.478-43.1}{65-47.478} = \frac{4.378}{17.522} = 25\%.</span>
+<span id="cb1-94"><a href="#cb1-94"></a>$$ All investment tranches $(Q_j^{Net},M_j^{Net})=(Q_j^{Gross},M_j^{Gross})$, $j=1,\dots,5$ are identical, but the last tranche $j=6$ has $\Delta X_j^{Net}=0 &lt; \Delta X_j^{Gross}$. Relative to gross, the net WACC is therefore skewed to the lower tranches, which have higher exceedance probabilities and therefore higher required returns. \qed</span>
+<span id="cb1-95"><a href="#cb1-95"></a></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="fu">## New business pricing</span></span>
+<span id="cb1-97"><a href="#cb1-97"></a></span>
+<span id="cb1-98"><a href="#cb1-98"></a>While underwriting involves many factors other than pricing, such as exposure guidelines and physical and financial standards reflecting moral hazard, etc., pricing is a key task in the onboarding of new business.</span>
+<span id="cb1-99"><a href="#cb1-99"></a></span>
+<span id="cb1-100"><a href="#cb1-100"></a>At first glance, this seems equivalent to the performance assessment task: calculating a required premium as a distorted loss expectation. It would seem there is not much to add to this discussion. Typically, however, proposed new business is not run through the full capital model directly because that would be inefficient in terms of computing resources and timeliness. Rather, a simplified or surrogate version of the capital model is used to extract key loss statistics.</span>
+<span id="cb1-101"><a href="#cb1-101"></a></span>
+<span id="cb1-102"><a href="#cb1-102"></a>Let's say for example we have a (relatively) simple cat model through which the portfolio has been run---once, and the results stored---and through which a new business prospect has just been run. Non-cat losses are represented by an independent lognormal variable calibrated on exposure characteristics. The resulting scatter plot is shown in @fig-newby-scatterplot-1.</span>
+<span id="cb1-103"><a href="#cb1-103"></a></span>
+<span id="cb1-104"><a href="#cb1-104"></a><span class="al">![Simulated losses from a surrogate model applied to the gross portfolio and a new business prospect.](img/plt-nb-1.jpg)</span>{#fig-newby-scatterplot-1 width="75%"}</span>
+<span id="cb1-105"><a href="#cb1-105"></a></span>
+<span id="cb1-106"><a href="#cb1-106"></a>The problem is to translate these results into a form suitable for SRM allocation pricing. One could use the calibrated Wang transform to sort these results by the portfolio loss and calculate distorted probabilities, but we have no guarantee that the surrogate model accurately reproduces the distribution of portfolio losses that the capital model uses. The solution is to extract the conditional expected new business losses for each portfolio loss in @tbl-events-with-RI. (See the discussion of $\kappa^i(X_k)$ in @sec-Complications).</span>
+<span id="cb1-107"><a href="#cb1-107"></a></span>
+<span id="cb1-108"><a href="#cb1-108"></a>This extraction can be done via local regression (LOWESS, LOESS, kernel smoothing; @Friedman2008). @fig-newby-scatterplot-2 shows the scatter plot of @fig-newby-scatterplot-1 with an estimate of the conditional mean loss curve and the specific event points. This leads to the augmented loss (@tbl-events-with-NB).</span>
+<span id="cb1-109"><a href="#cb1-109"></a></span>
+<span id="cb1-110"><a href="#cb1-110"></a><span class="al">![Estimating conditional expected losses using locally weighted regression (LOWESS).](img/plt-nb-2.jpg)</span>{#fig-newby-scatterplot-2 width="75%"}</span>
+<span id="cb1-111"><a href="#cb1-111"></a></span>
+<span id="cb1-112"><a href="#cb1-112"></a>\footnotesize</span>
+<span id="cb1-113"><a href="#cb1-113"></a></span>
+<span id="cb1-114"><a href="#cb1-114"></a>| $k$                         | $p$ |  $q$   | **Gross** | **New Business** |</span>
+<span id="cb1-115"><a href="#cb1-115"></a>|:----------------|:---:|:------:|----------:|------------:|</span>
+<span id="cb1-116"><a href="#cb1-116"></a>| 0                           | 0.0 | 0.0000 |         0 |     0.00000 |</span>
+<span id="cb1-117"><a href="#cb1-117"></a>| 1                           | 0.1 | 0.0522 |        22 |     0.02028 |</span>
+<span id="cb1-118"><a href="#cb1-118"></a>| 2                           | 0.1 | 0.0660 |        28 |     0.01965 |</span>
+<span id="cb1-119"><a href="#cb1-119"></a>| 3                           | 0.1 | 0.0748 |        36 |     0.01849 |</span>
+<span id="cb1-120"><a href="#cb1-120"></a>| 4                           | 0.4 | 0.3791 |        40 |     0.01855 |</span>
+<span id="cb1-121"><a href="#cb1-121"></a>| 5                           | 0.1 | 0.1190 |        55 |     0.02402 |</span>
+<span id="cb1-122"><a href="#cb1-122"></a>| 6                           | 0.1 | 0.1350 |        65 |     0.02910 |</span>
+<span id="cb1-123"><a href="#cb1-123"></a>| 7                           | 0.1 | 0.1739 |       100 |     0.06339 |</span>
+<span id="cb1-124"><a href="#cb1-124"></a>| $L=\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$            |     |        |    46.600 |     0.02491 |</span>
+<span id="cb1-125"><a href="#cb1-125"></a>| $P=\rho_{\mathsf{Wang}}(X)$ |     |        |    53.565 |     0.02858 |</span>
+<span id="cb1-126"><a href="#cb1-126"></a>| $M=P-L$                     |     |        |     6.965 |     0.00367 |</span>
+<span id="cb1-127"><a href="#cb1-127"></a></span>
+<span id="cb1-128"><a href="#cb1-128"></a>: Events with new business conditional expected losses. {#tbl-events-with-NB}</span>
+<span id="cb1-129"><a href="#cb1-129"></a></span>
+<span id="cb1-130"><a href="#cb1-130"></a>\normalsize</span>
+<span id="cb1-131"><a href="#cb1-131"></a></span>
+<span id="cb1-132"><a href="#cb1-132"></a>**Exercise.** Why is it reasonable to treat a small new business addition as if it were a unit within the portfolio, using the SRM allocation to calculate a reservation price?</span>
+<span id="cb1-133"><a href="#cb1-133"></a></span>
+<span id="cb1-134"><a href="#cb1-134"></a>**Solution**. Because it would have little or no impact on the sort order of portfolio losses. The distorted event probabilities $q$ are functions of the distorted exceedance probabilities $g(S)$, which are in turn functions of exceedance $S$, which in turn is crucially dependent on the sort order of portfolio event losses. In the simple example, adding the new business losses $X^{n}$ to portfolio losses $X$ did not change the sort order of $X+X^{n}$ compared to $X$. In general, with a realistically fine-grained simulation, there may indeed be changes in the sort order, but they will be small and not be material to the results. \qed</span>
+<span id="cb1-135"><a href="#cb1-135"></a></span>
+<span id="cb1-136"><a href="#cb1-136"></a><span class="fu">## Mergers and acquisitions</span></span>
+<span id="cb1-137"><a href="#cb1-137"></a></span>
+<span id="cb1-138"><a href="#cb1-138"></a>What do you need to consider in a merger or acquisition? In general, there are quite a few considerations, such as strategic fit, financial performance of the target company, cultural compatibility, synergies and cost savings, regulatory compliance, tax implications, valuation for the target company, and risk management.</span>
+<span id="cb1-139"><a href="#cb1-139"></a></span>
+<span id="cb1-140"><a href="#cb1-140"></a>While the finance department will no doubt have an opinion on valuation, the capital modeling team could also be tasked with an analysis of how the risk profile of the new portfolio fits with the existing portfolio. The same principles discussed previously still apply, but with a twist. Whereas it was reasonable to treat a new business policy as if it were already a (relatively small) unit within the portfolio, a sizeable acquisition requires a different approach.</span>
+<span id="cb1-141"><a href="#cb1-141"></a></span>
+<span id="cb1-142"><a href="#cb1-142"></a>Say instead of the loss distribution portrayed in @fig-newby-scatterplot-1, we had an acquisition opportunity with losses scaled up nearly 2,000 times larger on the $y$-axis at every point, having a mean loss of 48.35. We will focus on losses, with the acquired premiums to be compared to the required premium we will calculate.</span>
+<span id="cb1-143"><a href="#cb1-143"></a></span>
+<span id="cb1-144"><a href="#cb1-144"></a>Rather than the conditional mean loss of the acquired business (hereinafter $X^a$), we need the entire conditional distribution (or at least a representative sample). There are several technical approaches to this, such as quantile regression <span class="co">[</span><span class="ot">@koenker2001quantile</span><span class="co">]</span> or kernel smoothing <span class="co">[</span><span class="ot">@wand1994kernel</span><span class="co">]</span>. For our example, we will take what is possibly the simplest nontrivial approach.</span>
+<span id="cb1-145"><a href="#cb1-145"></a></span>
+<span id="cb1-146"><a href="#cb1-146"></a><span class="ss">1.  </span>Calculate the conditional mean $\bar{X^a} = \mathsf E<span class="co">[</span><span class="ot">X^a|X</span><span class="co">]</span>$ via LOWESS at every $X$ point in the scaled-up equivalent to @fig-newby-scatterplot-1, just as we did to obtain @fig-newby-scatterplot-2.</span>
+<span id="cb1-147"><a href="#cb1-147"></a><span class="ss">2.  </span>At each such $X$ point, compute the squared difference between $X^a$ and $\bar{X^a}$.</span>
+<span id="cb1-148"><a href="#cb1-148"></a><span class="ss">3.  </span>Use LOWESS again to compute the conditional mean square deviation, i.e. the variance, and its square root, the conditional standard deviation, $\sigma_a$.</span>
+<span id="cb1-149"><a href="#cb1-149"></a><span class="ss">4.  </span>Inspired by Gauss-Hermite quadrature <span class="co">[</span><span class="ot">@kovvali2022theory</span><span class="co">]</span>, we compute $\bar{X^a}$ plus or minus one standard deviation. This is depicted in @fig-acq-scatterplot-1.</span>
+<span id="cb1-150"><a href="#cb1-150"></a><span class="ss">5.  </span>Duplicate each row in @tbl-events-with-RI, inserting a new column for loss $X^a$ consisting of those $\bar X^a \pm \sigma_a$ points. Rescale each probability by half.</span>
+<span id="cb1-151"><a href="#cb1-151"></a><span class="ss">6.  </span>Insert a new column for merger losses $X^m=X+X^a$. Sort on $X^m$.</span>
+<span id="cb1-152"><a href="#cb1-152"></a><span class="ss">7.  </span>Compute $S$, $g(S)$, and $q$ as before, based on the same Wang transform SRM. This is shown in @tbl-events-with-AB.</span>
+<span id="cb1-153"><a href="#cb1-153"></a></span>
+<span id="cb1-154"><a href="#cb1-154"></a><span class="al">![Representing the conditional loss distribution using locally weighted regression (LOWESS): mean plus or minus one standard deviation.](img/plt-ab-1.jpg)</span>{#fig-acq-scatterplot-1 width="75%"}</span>
+<span id="cb1-155"><a href="#cb1-155"></a></span>
+<span id="cb1-156"><a href="#cb1-156"></a>\clearpage</span>
+<span id="cb1-157"><a href="#cb1-157"></a></span>
+<span id="cb1-158"><a href="#cb1-158"></a>\footnotesize</span>
+<span id="cb1-159"><a href="#cb1-159"></a></span>
+<span id="cb1-160"><a href="#cb1-160"></a>|                         $k$ |  $p$ |   $X$ |  $X^a$ |  $X^m$ |  $S$ | $g(S)$ |    $q$ |</span>
+<span id="cb1-161"><a href="#cb1-161"></a>|--------:|--------:|--------:|--------:|--------:|--------:|--------:|--------:|</span>
+<span id="cb1-162"><a href="#cb1-162"></a>|                           0 |    0 |     0 |      0 |      0 |    1 |      1 |      0 |</span>
+<span id="cb1-163"><a href="#cb1-163"></a>|                           1 | 0.05 |    22 |  29.37 |  51.37 | 0.95 | 0.9766 | 0.0234 |</span>
+<span id="cb1-164"><a href="#cb1-164"></a>|                           2 | 0.05 |    28 |  25.47 |  53.47 |  0.9 | 0.9478 | 0.0287 |</span>
+<span id="cb1-165"><a href="#cb1-165"></a>|                           3 | 0.05 |    36 |  21.55 |  57.55 | 0.85 | 0.9161 | 0.0318 |</span>
+<span id="cb1-166"><a href="#cb1-166"></a>|                           4 |  0.2 |    40 |  22.74 |  62.74 | 0.65 | 0.7667 | 0.1494 |</span>
+<span id="cb1-167"><a href="#cb1-167"></a>|                           5 | 0.05 |    22 |  49.35 |  71.35 |  0.6 | 0.7244 | 0.0423 |</span>
+<span id="cb1-168"><a href="#cb1-168"></a>|                           6 | 0.05 |    28 |  50.79 |  78.79 | 0.55 | 0.6802 | 0.0442 |</span>
+<span id="cb1-169"><a href="#cb1-169"></a>|                           7 | 0.05 |    55 |  30.83 |  85.83 |  0.5 | 0.6341 | 0.0461 |</span>
+<span id="cb1-170"><a href="#cb1-170"></a>|                           8 | 0.05 |    36 |  50.22 |  86.22 | 0.45 | 0.5859 | 0.0482 |</span>
+<span id="cb1-171"><a href="#cb1-171"></a>|                           9 |  0.2 |    40 |  49.27 |  89.27 | 0.25 | 0.3700 | 0.2159 |</span>
+<span id="cb1-172"><a href="#cb1-172"></a>|                          10 | 0.05 |    65 |  29.89 |  94.89 |  0.2 | 0.3089 | 0.0611 |</span>
+<span id="cb1-173"><a href="#cb1-173"></a>|                          11 | 0.05 |    55 |  62.38 | 117.38 | 0.15 | 0.2439 | 0.0650 |</span>
+<span id="cb1-174"><a href="#cb1-174"></a>|                          12 | 0.05 |   100 |  47.73 | 147.73 |  0.1 | 0.1739 | 0.0700 |</span>
+<span id="cb1-175"><a href="#cb1-175"></a>|                          13 | 0.05 |    65 |  83.06 | 148.06 | 0.05 | 0.0964 | 0.0775 |</span>
+<span id="cb1-176"><a href="#cb1-176"></a>|                          14 | 0.05 |   100 | 198.30 | 298.30 |    0 |      0 | 0.0964 |</span>
+<span id="cb1-177"><a href="#cb1-177"></a>|            $L=\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ |      | 46.60 |  48.35 |  94.95 |      |        |        |</span>
+<span id="cb1-178"><a href="#cb1-178"></a>| $P=\rho_{\mathsf{Wang}}(X)$ |      | 52.74 |  59.09 | 111.83 |      |        |        |</span>
+<span id="cb1-179"><a href="#cb1-179"></a></span>
+<span id="cb1-180"><a href="#cb1-180"></a>: Events with acquired business Gauss-Hermite two-point sampled conditional losses. {#tbl-events-with-AB}</span>
+<span id="cb1-181"><a href="#cb1-181"></a></span>
+<span id="cb1-182"><a href="#cb1-182"></a>\normalsize</span>
+<span id="cb1-183"><a href="#cb1-183"></a></span>
+<span id="cb1-184"><a href="#cb1-184"></a>The required premium split between our original portfolio $X$ (52.74) and the acquired $X^a$ (59.09) is irrelevant to this analysis! Recall the original portfolio required premium was 53.57. What is important is the difference between the new merger portfolio premium 111.83 and the original premium of 53.57, i.e., 58.26. This is what InsCo would require for premium from the new business to secure enough margin to satisfy investors.</span>
+<span id="cb1-185"><a href="#cb1-185"></a></span>
+<span id="cb1-186"><a href="#cb1-186"></a>**Exercise.** Explain the capital situation. What increment of assets is needed with the newly acquired business? What capital? What is the total return on capital for the combined business? Return on incremental capital? Explain why this is not the 15% return originally specified.</span>
+<span id="cb1-187"><a href="#cb1-187"></a></span>
+<span id="cb1-188"><a href="#cb1-188"></a>**Solution.** Using a 95% TVaR criterion, total assets of 298.30 are needed for the combined portfolio, which is an increase of 198.30 over the original 100. With required premium of 111.83, this corresponds to capital of 186.46 for the combined portfolio, an increase of 140.03 over the original 46.43 ($=100 - 53.57$) capital. Margin on the combined portfolio is 16.88, for a return of 9.06%. The margin has gone up by 9.92, corresponding to a return of 7.08% on incremental capital. More capital is backing more remote probability losses, requiring less margin and therefore lower returns on capital.</span>
+<span id="cb1-189"><a href="#cb1-189"></a></span>
+<span id="cb1-190"><a href="#cb1-190"></a><span class="fu">## Portfolio optimization {#sec-portfolio-optimization}</span></span>
+<span id="cb1-191"><a href="#cb1-191"></a></span>
+<span id="cb1-192"><a href="#cb1-192"></a>*If this is the best of possible worlds,*\</span>
+<span id="cb1-193"><a href="#cb1-193"></a>*what then are the others?*\</span>
+<span id="cb1-194"><a href="#cb1-194"></a>*- Voltaire,* "Candide"</span>
+<span id="cb1-195"><a href="#cb1-195"></a></span>
+<span id="cb1-196"><a href="#cb1-196"></a><span class="fu">### Theory</span></span>
+<span id="cb1-197"><a href="#cb1-197"></a></span>
+<span id="cb1-198"><a href="#cb1-198"></a>Portfolio management is an inverse problem to pricing. Rather than taking the portfolio as given and determining appropriate pricing, the problem becomes to take the pricing as given and determine the best (or at least a better) composition of the portfolio. This task is typically complicated, however, by constraints such as volume or risk measures.</span>
+<span id="cb1-199"><a href="#cb1-199"></a></span>
+<span id="cb1-200"><a href="#cb1-200"></a>The textbook approach to optimization (e.g., @PZGK2024book, available online at @PZGK2024online) starts with an objective function $f(x)$ where $x$ is typically a vector parameter. The problem is to find the value of $x$ that maximizes (or minimizes) $f(x)$. This is often complicated by the existence of multiple constraint functions $h_j(x)$ requiring $h_j(x) \le 0$ for $j=1,\dots,n$ and $h_j(x) = 0$ for $j=n+1,\dots,m$.</span>
+<span id="cb1-201"><a href="#cb1-201"></a></span>
+<span id="cb1-202"><a href="#cb1-202"></a>What should be our objective function? It is tempting to think it should be margin, the difference between plan premium and expected loss. However, if our revelations in @sec-Pricing-Allocation taught us anything, it is that modifying the portfolio will modify the risk and that being properly rewarded for risk goes beyond expected loss. We need to compare the (rescaled) plan premium to the (rescaled) required premium from the pricing functional.</span>
+<span id="cb1-203"><a href="#cb1-203"></a></span>
+<span id="cb1-204"><a href="#cb1-204"></a>We found at the end of @sec-Pricing that InsCo's economic value added (EVA) is $-1.6$. Our goal will be to make EVA as large (positive) as possible, or at the very least make it less negative.</span>
+<span id="cb1-205"><a href="#cb1-205"></a></span>
+<span id="cb1-206"><a href="#cb1-206"></a>For portfolio optimization, the particulars will likely look like:</span>
+<span id="cb1-207"><a href="#cb1-207"></a></span>
+<span id="cb1-208"><a href="#cb1-208"></a><span class="ss">-   </span>Objective function is economic value added.</span>
+<span id="cb1-209"><a href="#cb1-209"></a><span class="ss">-   </span>The parameters are scale factors, one for each unit.</span>
+<span id="cb1-210"><a href="#cb1-210"></a><span class="ss">-   </span>The primary constraint is to stay at the current capital.</span>
+<span id="cb1-211"><a href="#cb1-211"></a><span class="ss">-   </span>Secondary constraints are limits on growing or shrinking each unit.</span>
+<span id="cb1-212"><a href="#cb1-212"></a></span>
+<span id="cb1-213"><a href="#cb1-213"></a>Scale factors determine the volume of each unit. The current portfolio includes the random variable $X^i$ representing the losses from unit $i$. We now introduce the random variable $X^i(\epsilon)$ to represent its losses if the unit volume has changed by the factor $1+\epsilon$. The original portfolio loss variable is $X=\sum_i X^i(0)$ in this notation. If unit $i$ were to grow, say, 5%, its loss random variable would be represented as $X^i(0.05)$.</span>
+<span id="cb1-214"><a href="#cb1-214"></a></span>
+<span id="cb1-215"><a href="#cb1-215"></a>Let the portfolio loss random variable be $X(\epsilon^1,\dots)=\sum_i X^i(\epsilon^i)$ and denote the corresponding required assets by $a(\epsilon^1,\dots)$. For any particular $\epsilon$ values, the capital model can compute these.</span>
+<span id="cb1-216"><a href="#cb1-216"></a></span>
+<span id="cb1-217"><a href="#cb1-217"></a>For the InsCo example, we will assume the constraints are $-0.5 \le \epsilon \le 0.5$.</span>
+<span id="cb1-218"><a href="#cb1-218"></a></span>
+<span id="cb1-219"><a href="#cb1-219"></a>If unit losses scaled linearly, as they do in stock portfolios, then we would have $X^i(\epsilon)=(1+\epsilon) X^i(0)$. Unfortunately, this is usually not the case with insurance, although catastrophe cover in a limited geographic area comes close. However, a properly defined scale factor will give us scaling in planned premium.</span>
+<span id="cb1-220"><a href="#cb1-220"></a></span>
+<span id="cb1-221"><a href="#cb1-221"></a>There is a second source of nonlinearity here. As units grow or shrink, so do their losses in each event. Because the computation of the pricing SRM (and probably the capital measure as well) depends on the ordering of portfolio losses, that ordering may change, and so the measure will vary nonlinearly with the scale factors. For small changes in scale (i.e. $\epsilon$ close to 0), this reordering may not happen or may not make a material difference. Our approach *will* take this into account.</span>
+<span id="cb1-222"><a href="#cb1-222"></a></span>
+<span id="cb1-223"><a href="#cb1-223"></a>The primary capital constraint listed above needs elaboration. As the portfolio composition shifts, the asset requirement (specified by the capital risk measure $a(X)$) will change. So will the total plan premium. We interpret the constraint to mean that the portion of assets not supplied by premium, $Q=a-P$ (@eq-funding), be maintained at the current level. The constraint might have been simply not to exceed the current level, but we don't want to "leave money on the table" in the sense of holding more capital than we are currently using to support risk. So the constraint is an equality. In some other application, there could be a target capital different than the current level. Our approach is easily adaptable to that.</span>
+<span id="cb1-224"><a href="#cb1-224"></a></span>
+<span id="cb1-225"><a href="#cb1-225"></a>In a real application, there might be other constraints. For example, we might not want total portfolio margin to go down. We will keep the example here relatively simple.</span>
+<span id="cb1-226"><a href="#cb1-226"></a></span>
+<span id="cb1-227"><a href="#cb1-227"></a>If EVA and required assets scaled linearly, then the above would be a linear programming (LP) problem that could be solved with readily-available linear programming codes. Locally, that is to say with $\epsilon$ close to zero, this should be a good approximation. However, we want to handle bigger steps correctly, so we need a nonlinear optimization strategy. The Nelder-Mead Simplex algorithm is generally applicable, but its performance may suffer in comparison to methods that use first derivatives such as the conjugate gradient algorithm by Polak and Ribiere and the quasi-Newton method of Broyden, Fletcher, Goldfarb, and Shanno. <span class="co">&lt;!--# Would it be of value to add references for these algorithms? --&gt;</span> Other methods, such as the Newton conjugate gradient algorithm, use both first and second derivatives.</span>
+<span id="cb1-228"><a href="#cb1-228"></a></span>
+<span id="cb1-229"><a href="#cb1-229"></a>In Python, these and other methods are available in <span class="in">`scipy.optimize`</span>. In R, the same holds for <span class="in">`nloptr`</span>. Some of these implementations rely on FORTRAN codes written half a century ago!</span>
+<span id="cb1-230"><a href="#cb1-230"></a></span>
+<span id="cb1-231"><a href="#cb1-231"></a>If we treat losses as scaling linearly, then we can make use of first derivatives in our solution method. First derivatives are almost automatically provided when the objective---portfolio EVA---is evaluated. Second derivatives are impractical to compute here. If we do not wish to treat losses as scaling linearly, then we have a few options:</span>
+<span id="cb1-232"><a href="#cb1-232"></a></span>
+<span id="cb1-233"><a href="#cb1-233"></a><span class="ss">1.  </span>Use a method like Nelder-Mead that does not require derivatives.</span>
+<span id="cb1-234"><a href="#cb1-234"></a><span class="ss">2.  </span>Compute derivatives numerically by evaluating the objective at nearby points. This could be computationally inefficient.</span>
+<span id="cb1-235"><a href="#cb1-235"></a><span class="ss">3.  </span>Use a **proxy model**---a simpler version of the complete model that approximates it---to provide derivatives. This is essentially what we are doing when we assume linear scaling, but a more accurate nonlinear proxy might be available.</span>
+<span id="cb1-236"><a href="#cb1-236"></a></span>
+<span id="cb1-237"><a href="#cb1-237"></a>The overall solution strategy here is stepwise hill climbing:</span>
+<span id="cb1-238"><a href="#cb1-238"></a></span>
+<span id="cb1-239"><a href="#cb1-239"></a><span class="ss">1.  </span>Identify promising directions for scale changes.</span>
+<span id="cb1-240"><a href="#cb1-240"></a><span class="ss">2.  </span>Select new scale parameters satisfying the capital and scale constraints.</span>
+<span id="cb1-241"><a href="#cb1-241"></a><span class="ss">3.  </span>Rerun the model at the new scales.</span>
+<span id="cb1-242"><a href="#cb1-242"></a><span class="ss">4.  </span>Repeat until EVA improvement seems impossible.</span>
+<span id="cb1-243"><a href="#cb1-243"></a></span>
+<span id="cb1-244"><a href="#cb1-244"></a>With linear scaling, the important thing to remember is that allocated quantities (premium, assets, capital) are the same as marginal quantities. If a unit is scaled up by 1% ($\epsilon=0.01$), say, then the allocated quantity will go up by 1%.</span>
+<span id="cb1-245"><a href="#cb1-245"></a></span>
+<span id="cb1-246"><a href="#cb1-246"></a><span class="fu">### InsCo optimization {#sec-InsCo-opt}</span></span>
+<span id="cb1-247"><a href="#cb1-247"></a></span>
+<span id="cb1-248"><a href="#cb1-248"></a>The input data for InsCo is provided in @tbl-opt-marginals.</span>
+<span id="cb1-249"><a href="#cb1-249"></a></span>
+<span id="cb1-250"><a href="#cb1-250"></a>\footnotesize</span>
+<span id="cb1-251"><a href="#cb1-251"></a></span>
+<span id="cb1-252"><a href="#cb1-252"></a>| **Quantity**                | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |</span>
+<span id="cb1-253"><a href="#cb1-253"></a>|:--------------|--------------:|--------------:|--------------:|--------------:|</span>
+<span id="cb1-254"><a href="#cb1-254"></a>| Plan premium $P_P$          |    13.9000 |    18.7000 |    19.6000 |       52.2000 |</span>
+<span id="cb1-255"><a href="#cb1-255"></a>| Required prem $P_R$         |    14.1092 |    18.6375 |    20.8186 |       53.5652 |</span>
+<span id="cb1-256"><a href="#cb1-256"></a>| EVA $V=P_P-P_R$             |    -0.2092 |     0.0625 |    -1.2186 |       -1.3652 |</span>
+<span id="cb1-257"><a href="#cb1-257"></a>| Required assets $a$         |    16.0000 |    20.0000 |    64.0000 |      100.0000 |</span>
+<span id="cb1-258"><a href="#cb1-258"></a>| Plan capital $Q_P=a-P_P$    |     2.1000 |     1.3000 |    44.4000 |       47.8000 |</span>
+<span id="cb1-259"><a href="#cb1-259"></a>| EVA/capital ratio $r=V/Q_P$ |    -0.0996 |     0.0481 |    -0.0274 |               |</span>
+<span id="cb1-260"><a href="#cb1-260"></a>| Minimum scale $\epsilon_-$  |       -0.5 |       -0.5 |       -0.5 |               |</span>
+<span id="cb1-261"><a href="#cb1-261"></a>| Maximum scale $\epsilon_+$  |        0.5 |        0.5 |        0.5 |               |</span>
+<span id="cb1-262"><a href="#cb1-262"></a></span>
+<span id="cb1-263"><a href="#cb1-263"></a>: InsCo marginal EVA and capital. {#tbl-opt-marginals}</span>
+<span id="cb1-264"><a href="#cb1-264"></a></span>
+<span id="cb1-265"><a href="#cb1-265"></a>\normalsize</span>
+<span id="cb1-266"><a href="#cb1-266"></a></span>
+<span id="cb1-267"><a href="#cb1-267"></a>**Exercise.** Assume that event 10 is always the one to produce the largest portfolio loss and therefore the capital measure. Compute an expression for $\epsilon^3$ (Unit C) in terms of $\epsilon^1$ (Unit A) and $\epsilon^2$ (Unit B) so that the capital equality constraint is maintained.</span>
+<span id="cb1-268"><a href="#cb1-268"></a></span>
+<span id="cb1-269"><a href="#cb1-269"></a>**Solution.** Plan capital is the difference between assets and plan premium (@eq-funding). Given the event 10 assumption, both scale linearly in $\epsilon$, so $Q$ does as well. The requirement is $$</span>
+<span id="cb1-270"><a href="#cb1-270"></a>47.8 = \sum_{i} Q_P^i(1+\epsilon^i) = 2.1(1+\epsilon^1) + 1.3 (1+\epsilon^2) + 44.4(1+\epsilon^3)</span>
+<span id="cb1-271"><a href="#cb1-271"></a>$$ therefore $$</span>
+<span id="cb1-272"><a href="#cb1-272"></a>\epsilon^3 = -\frac{2.1}{44.4}\epsilon^1 - \frac{1.3}{44.4}\epsilon^2 = -0.047297\epsilon^1 - 0.029279\epsilon^2.</span>
+<span id="cb1-273"><a href="#cb1-273"></a>$$ \qed</span>
+<span id="cb1-274"><a href="#cb1-274"></a></span>
+<span id="cb1-275"><a href="#cb1-275"></a>A naive approach to optimization might take the linear approximation at face value and take the biggest and most advantageous change in scale parameters possible. Let's see how this plays out with InsCo.</span>
+<span id="cb1-276"><a href="#cb1-276"></a></span>
+<span id="cb1-277"><a href="#cb1-277"></a><span class="ss">-   </span>The most advantageous first move is to reduce Unit A by 50%. This increases EVA by $(-0.2092) \cdot (-0.5) = 0.1046$. It also changes capital by $(2.1) \cdot (-0.5) = -1.05$.</span>
+<span id="cb1-278"><a href="#cb1-278"></a><span class="ss">-   </span>Now we need to increase overall writings to use up all available capital and get it back to the target. Unit B has a positive EVA/capital ratio and Unit C a negative, so Unit B has the most advantage. We would have to increase Unit B's scale by $1.05/1.3 = 0.808$ to completely use the capital, but this is outside the constrained range. Scaling by the max allowed 50% adds $1.3 \cdot 0.5 = 0.65$ to the capital, bringing the net position to $-1.05 + 0.65 = -0.4$. It also brings the EVA up by $0.0625 \cdot 0.5 = 0.0313$ to $0.1358$.</span>
+<span id="cb1-279"><a href="#cb1-279"></a><span class="ss">-   </span>We need a further adjustment, and the only candidate left is Unit C. Here we need a scale change of $0.4/44.4 = 0.0090$, which is well within the allowed range. (The formula from the previous exercise tells us the same thing.) That brings the change in capital back to zero but changes EVA by $(-1.2186) \cdot 0.0090 = -0.0110$ for a net EVA of $-1.2403$ and an improvement of $0.1249$. Adding these predicted changes to the original figures gives the results in @tbl-opt-linear-EVA.</span>
+<span id="cb1-280"><a href="#cb1-280"></a></span>
+<span id="cb1-281"><a href="#cb1-281"></a>\footnotesize</span>
+<span id="cb1-282"><a href="#cb1-282"></a></span>
+<span id="cb1-283"><a href="#cb1-283"></a>| **Quantity**              | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |</span>
+<span id="cb1-284"><a href="#cb1-284"></a>|:--------------|--------------:|--------------:|--------------:|--------------:|</span>
+<span id="cb1-285"><a href="#cb1-285"></a>| Scale change $\epsilon^i$ |       -0.5 |        0.5 |      0.009 |               |</span>
+<span id="cb1-286"><a href="#cb1-286"></a>| Plan premium $P_P$        |     6.9500 |    28.0500 |    19.7766 |       54.7766 |</span>
+<span id="cb1-287"><a href="#cb1-287"></a>| Required prem $P_R$       |     7.0546 |    27.9562 |    21.0061 |       56.0169 |</span>
+<span id="cb1-288"><a href="#cb1-288"></a>| EVA $V=P_P-P_R$           |    -0.1046 |     0.0938 |    -1.2295 |       -1.2403 |</span>
+<span id="cb1-289"><a href="#cb1-289"></a>| Required assets $a$       |     8.0000 |    30.0000 |    64.5766 |      102.5766 |</span>
+<span id="cb1-290"><a href="#cb1-290"></a>| Plan capital $Q_P=a-P_P$  |     1.0500 |     1.9500 |    44.8000 |       47.8000 |</span>
+<span id="cb1-291"><a href="#cb1-291"></a></span>
+<span id="cb1-292"><a href="#cb1-292"></a>: InsCo linear predictions for EVA and capital. {#tbl-opt-linear-EVA}</span>
+<span id="cb1-293"><a href="#cb1-293"></a></span>
+<span id="cb1-294"><a href="#cb1-294"></a>\normalsize</span>
+<span id="cb1-295"><a href="#cb1-295"></a></span>
+<span id="cb1-296"><a href="#cb1-296"></a>Now, had these moves been limited to, say 2%, we might be satisfied to stop here. In a real application, such a schedule of scale changes would be scrutinized for other business factors and questions of implementation feasibility. Some targets would probably be modified; for example, the Unit C scale change would no doubt be rounded to 1%.</span>
+<span id="cb1-297"><a href="#cb1-297"></a></span>
+<span id="cb1-298"><a href="#cb1-298"></a>However, with 50% scale changes, we need to be wary of nonlinear effects. Let us rerun the model at the new scales.</span>
+<span id="cb1-299"><a href="#cb1-299"></a></span>
+<span id="cb1-300"><a href="#cb1-300"></a>Our starting point is the original, 10-event loss distribution from @tbl-dupe-x. We multiply the losses in each column $i$ by the scale factor $1+\epsilon^i$, retabulate the portfolio total loss, and then sort on the portfolio loss. We apply the same asset metric---essentially the maximum loss---and the same Wang transform for pricing. We do *not* compute a new Wang parameter to obtain a 15% portfolio return. Rather, we use the same parameter because this represents the investors' risk appetite. With a new loss distribution and new asset requirement, we do not expect the same required return. The new loss table is set out in @tbl-opt-scaled-losses. The first column shows the original sorted event number $j$, highlighting the reordering that has occurred with the change in volume by unit, see @tbl-dupe-x. Events 3, 4, 5, 7, and 8 all move and are therefore given a different weight by the Wang distortion. This extensive reshuffling accounts for the large (relative to EVA) change in required premium shown in @tbl-opt-rerun-1.</span>
+<span id="cb1-301"><a href="#cb1-301"></a></span>
+<span id="cb1-302"><a href="#cb1-302"></a>\footnotesize</span>
+<span id="cb1-303"><a href="#cb1-303"></a></span>
+<span id="cb1-304"><a href="#cb1-304"></a>| $j$ | $p$ | **Unit A** | **Unit B** | **Unit C** | **Portfolio** | $S$ | $g(S)$ |   $q$ |</span>
+<span id="cb1-305"><a href="#cb1-305"></a>|:------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|-------:|</span>
+<span id="cb1-306"><a href="#cb1-306"></a>|     |   0 |          0 |          0 |          0 |             0 | 1.0 |  1.000 | 0.000 |</span>
+<span id="cb1-307"><a href="#cb1-307"></a>|  1  | 0.1 |        7.5 |       10.5 |          0 |       18.0000 | 0.9 |  0.931 | 0.069 |</span>
+<span id="cb1-308"><a href="#cb1-308"></a>|  2  | 0.1 |        7.5 |       19.5 |          0 |       27.0000 | 0.8 |  0.851 | 0.080 |</span>
+<span id="cb1-309"><a href="#cb1-309"></a>|  7  | 0.1 |        7.5 |       24.0 |     9.0811 |       40.5811 | 0.7 |  0.766 | 0.086 |</span>
+<span id="cb1-310"><a href="#cb1-310"></a>|  5  | 0.1 |        6.5 |       30.0 |     7.0631 |       43.5631 | 0.6 |  0.675 | 0.091 |</span>
+<span id="cb1-311"><a href="#cb1-311"></a>|  3  | 0.1 |        2.5 |       30.0 |    11.0991 |       43.5991 | 0.5 |  0.579 | 0.096 |</span>
+<span id="cb1-312"><a href="#cb1-312"></a>|  6  | 0.1 |        2.5 |       40.5 |     8.0721 |       51.0721 | 0.4 |  0.479 | 0.101 |</span>
+<span id="cb1-313"><a href="#cb1-313"></a>|  8  | 0.1 |       13.0 |       28.5 |    10.0901 |       51.5901 | 0.3 |  0.373 | 0.106 |</span>
+<span id="cb1-314"><a href="#cb1-314"></a>|  4  | 0.1 |        3.5 |       49.5 |          0 |       53.0000 | 0.2 |  0.261 | 0.112 |</span>
+<span id="cb1-315"><a href="#cb1-315"></a>|  9  | 0.1 |        8.5 |       12.0 |    40.3604 |       60.8604 | 0.1 |  0.140 | 0.121 |</span>
+<span id="cb1-316"><a href="#cb1-316"></a>| 10  | 0.1 |        8.0 |       30.0 |    64.5766 |      102.5766 |   0 |  0.000 | 0.140 |</span>
+<span id="cb1-317"><a href="#cb1-317"></a></span>
+<span id="cb1-318"><a href="#cb1-318"></a>: InsCo losses after rescaling and re-sorting. {#tbl-opt-scaled-losses}</span>
+<span id="cb1-319"><a href="#cb1-319"></a></span>
+<span id="cb1-320"><a href="#cb1-320"></a>\normalsize</span>
+<span id="cb1-321"><a href="#cb1-321"></a></span>
+<span id="cb1-322"><a href="#cb1-322"></a>\footnotesize</span>
+<span id="cb1-323"><a href="#cb1-323"></a></span>
+<span id="cb1-324"><a href="#cb1-324"></a>| **Quantity**                | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |</span>
+<span id="cb1-325"><a href="#cb1-325"></a>|:--------------|--------------:|--------------:|--------------:|--------------:|</span>
+<span id="cb1-326"><a href="#cb1-326"></a>| Scale change $\epsilon^i$   |    -0.5000 |     0.5000 |     0.0090 |               |</span>
+<span id="cb1-327"><a href="#cb1-327"></a>| Plan premium $P_P$          |     6.9500 |    28.0500 |    19.7766 |       54.7766 |</span>
+<span id="cb1-328"><a href="#cb1-328"></a>| Required prem $P_R$         |     6.8115 |    28.6040 |    20.8271 |       56.2426 |</span>
+<span id="cb1-329"><a href="#cb1-329"></a>| EVA $V=P_P-P_R$             |     0.1385 |    -0.5540 |    -1.0505 |       -1.4660 |</span>
+<span id="cb1-330"><a href="#cb1-330"></a>| Required assets $a$         |     8.0000 |    30.0000 |    64.5766 |      102.5766 |</span>
+<span id="cb1-331"><a href="#cb1-331"></a>| Plan capital $Q_P=a-P_P$    |     1.0500 |     1.9500 |    44.8000 |       47.8000 |</span>
+<span id="cb1-332"><a href="#cb1-332"></a>| EVA/capital ratio $r=V/Q_P$ |     0.1319 |    -0.2841 |    -0.0234 |               |</span>
+<span id="cb1-333"><a href="#cb1-333"></a></span>
+<span id="cb1-334"><a href="#cb1-334"></a>: InsCo model rerun, EVA and capital solutions. {#tbl-opt-rerun-1}</span>
+<span id="cb1-335"><a href="#cb1-335"></a></span>
+<span id="cb1-336"><a href="#cb1-336"></a>\normalsize</span>
+<span id="cb1-337"><a href="#cb1-337"></a></span>
+<span id="cb1-338"><a href="#cb1-338"></a>The final EVA of $-1.466$ is not only not as good as the predicted $-1.240$; it is *worse* than the original $-1.365$. Such is the curse of nonlinearity. Studying the derivatives here, it seems we need to go backwards, increasing the scale of Unit A and decreasing Unit B.</span>
+<span id="cb1-339"><a href="#cb1-339"></a></span>
+<span id="cb1-340"><a href="#cb1-340"></a>If we run the model with Unit B rescaled at many points throughout the $<span class="co">[</span><span class="ot">-0.5, 0.5</span><span class="co">]</span>$ range, we obtain the results shown in @fig-opt-EVA-trace. Nonlinearity is obvious. This is why most optimization algorithms take relatively small steps when updating parameters.</span>
+<span id="cb1-341"><a href="#cb1-341"></a></span>
+<span id="cb1-342"><a href="#cb1-342"></a><span class="al">![EVA at –50% Unit A, various Unit B.](img/EVA-trace.svg)</span>{#fig-opt-EVA-trace width="75%"}</span>
+<span id="cb1-343"><a href="#cb1-343"></a></span>
+<span id="cb1-344"><a href="#cb1-344"></a>Applying the Nelder-Mead Simplex algorithm, we obtain the surprising result that the scale constraints are not binding at the optimal solution. Unit A is to be reduced by almost, but not quite, 50%. Unit B is to be reduced by almost 21%. Details are in @tbl-opt-solution.</span>
+<span id="cb1-345"><a href="#cb1-345"></a></span>
+<span id="cb1-346"><a href="#cb1-346"></a>\footnotesize</span>
+<span id="cb1-347"><a href="#cb1-347"></a></span>
+<span id="cb1-348"><a href="#cb1-348"></a>| **Quantity**                | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |</span>
+<span id="cb1-349"><a href="#cb1-349"></a>|:--------------|--------------:|--------------:|--------------:|--------------:|</span>
+<span id="cb1-350"><a href="#cb1-350"></a>| Scale $\epsilon^i$          |  -0.478165 |  -0.209790 |   0.028758 |               |</span>
+<span id="cb1-351"><a href="#cb1-351"></a>| Plan premium $P_P$          |   7.253507 |  14.776927 |  20.163665 |     42.194098 |</span>
+<span id="cb1-352"><a href="#cb1-352"></a>| Required prem $P_R$         |   7.269164 |  14.816395 |  21.453658 |     43.539217 |</span>
+<span id="cb1-353"><a href="#cb1-353"></a>| EVA $V=P_P-P_R$             |  -0.015658 |  -0.039468 |  -1.289993 |     -1.345119 |</span>
+<span id="cb1-354"><a href="#cb1-354"></a>| Required assets $a$         |   8.349360 |  15.804200 |  65.840538 |     89.994098 |</span>
+<span id="cb1-355"><a href="#cb1-355"></a>| Plan capital $Q_P=a-P_P$    |   1.095854 |   1.027273 |  45.676874 |     47.800000 |</span>
+<span id="cb1-356"><a href="#cb1-356"></a>| EVA/capital ratio $r=V/Q_P$ |  -0.014288 |  -0.038420 |  -0.028242 |     -0.080950 |</span>
+<span id="cb1-357"><a href="#cb1-357"></a></span>
+<span id="cb1-358"><a href="#cb1-358"></a>: InsCo model rerun, EVA and capital solutions. {#tbl-opt-solution}</span>
+<span id="cb1-359"><a href="#cb1-359"></a></span>
+<span id="cb1-360"><a href="#cb1-360"></a>\normalsize</span>
+<span id="cb1-361"><a href="#cb1-361"></a></span>
+<span id="cb1-362"><a href="#cb1-362"></a>A grid search shows the situation in the neighborhood of the solution. See @fig-opt-EVA-contour. The optimal point has an EVA value of $-1.345$. The innermost contour represents an EVA level set of $-1.350$. Parameters inside this contour get at least 75% of the way from the original EVA to the optimal EVA.</span>
+<span id="cb1-363"><a href="#cb1-363"></a></span>
+<span id="cb1-364"><a href="#cb1-364"></a><span class="al">![Contours of EVA at various Unit A, Unit B.](img/EVA-contour.svg)</span>{#fig-opt-EVA-contour width="75%"}</span>
+<span id="cb1-365"><a href="#cb1-365"></a></span>
+<span id="cb1-366"><a href="#cb1-366"></a>The solution suggests that Unit A and Unit B both need further reduction because of negative EVA. However, there is more going on here. Not only is there nonlinearity, there is discontinuity in first derivatives as evidenced by @fig-opt-EVA-trace. If we were to change the Unit B scale ever so slightly, from $-0.20979$ to $-0.209795$, we obtain dramatically different EVA allocations, @tbl-opt-solution-perturbed.</span>
+<span id="cb1-367"><a href="#cb1-367"></a></span>
+<span id="cb1-368"><a href="#cb1-368"></a>\footnotesize</span>
+<span id="cb1-369"><a href="#cb1-369"></a></span>
+<span id="cb1-370"><a href="#cb1-370"></a>| **Quantity**                | **Unit A** | **Unit B** | **Unit C** | **Portfolio** |</span>
+<span id="cb1-371"><a href="#cb1-371"></a>|:--------------|--------------:|--------------:|--------------:|--------------:|</span>
+<span id="cb1-372"><a href="#cb1-372"></a>| Scale $\epsilon^i$          |  -0.478165 |  -0.209795 |   0.028759 |     -0.659201 |</span>
+<span id="cb1-373"><a href="#cb1-373"></a>| Plan premium $P_P$          |   7.253507 |  14.776834 |  20.163668 |     42.194008 |</span>
+<span id="cb1-374"><a href="#cb1-374"></a>| Required prem $P_R$         |   7.334042 |  14.607535 |  21.597550 |     43.539127 |</span>
+<span id="cb1-375"><a href="#cb1-375"></a>| EVA $V=P_P-P_R$             |  -0.080535 |   0.169298 |  -1.433882 |     -1.345119 |</span>
+<span id="cb1-376"><a href="#cb1-376"></a>| Required assets $a$         |   8.349360 |  15.804100 |  65.840548 |     89.994008 |</span>
+<span id="cb1-377"><a href="#cb1-377"></a>| Plan capital $Q_P=a-P_P$    |   1.095854 |   1.027267 |  45.676880 |     47.800000 |</span>
+<span id="cb1-378"><a href="#cb1-378"></a>| EVA/capital ratio $r=V/Q_P$ |  -0.073491 |   0.164805 |  -0.031392 |      0.059922 |</span>
+<span id="cb1-379"><a href="#cb1-379"></a></span>
+<span id="cb1-380"><a href="#cb1-380"></a>: InsCo model rerun, EVA and capital solutions. {#tbl-opt-solution-perturbed}</span>
+<span id="cb1-381"><a href="#cb1-381"></a></span>
+<span id="cb1-382"><a href="#cb1-382"></a>\normalsize</span>
+<span id="cb1-383"><a href="#cb1-383"></a></span>
+<span id="cb1-384"><a href="#cb1-384"></a><span class="co">&lt;!-- ![EVA at optimal Unit A, various Unit B.](img/EVA-trace-opt.svg){width="100%" #fig-opt-EVA-trace-opt} --&gt;</span></span>
+<span id="cb1-385"><a href="#cb1-385"></a></span>
+<span id="cb1-386"><a href="#cb1-386"></a><span class="fu">### Summary</span></span>
+<span id="cb1-387"><a href="#cb1-387"></a></span>
+<span id="cb1-388"><a href="#cb1-388"></a>The term "portfolio optimization" is quite ambitious. There are some questionable assumptions that have to be imposed on the problem to get to a solution. There are inherent nonlinearities and discontinuous derivatives. The uncertainties (see @sec-Uncertainty) in the inputs and the underlying model itself no doubt add breadth to the range of near-optimal solutions. One should approach the task with a healthy dose of humility.</span>
+<span id="cb1-389"><a href="#cb1-389"></a></span>
+<span id="cb1-390"><a href="#cb1-390"></a>Perhaps the best that can be hoped for is to provide directions for portfolio improvement that are probably, approximately, correct.</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DRAFT - do not redistribute</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

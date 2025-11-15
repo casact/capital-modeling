@@ -1,0 +1,134 @@
+# render for pdf: quarto render --to pdf
+# render for website: quarto render --to html --output-dir ../docs
+
+project:
+  type: book
+  output-dir: ../docs
+  resources:
+    - CNAME   # make sure CNAME file is included
+
+book:
+  title: Introduction to Capital Modeling and Portfolio Management
+  author:
+    - name: John A. Major
+      roles: writing
+      corresponding: true
+    - name: Stephen J. Mildenhall
+      roles: writing
+      corresponding: true
+      orcid: 0000-0001-6956-0098
+      email: mynl@me.com
+  site-url: https://cmm.mynl.com
+  date: last-modified
+  chapters:
+    - dedication.qmd
+    - index.qmd
+    - 010_Introduction.qmd
+    - 020_BusinessOperations.qmd
+    - 030_CapitalAdequacy.qmd
+    - 040_PricingAndAllocation.qmd
+    - 050_Applications.qmd
+    - 060_SelectingSRM.qmd
+    - 065_Evaluation.qmd
+    - 070_AdvancedTopics.qmd
+    - 080_Calculations.qmd
+    - 090_EndMatter.qmd
+    - references.qmd
+  search: true
+  page-navigation: true
+  page-footer:
+    left: "DRAFT - do not redistribute"
+
+format:
+    pdf:
+        documentclass: scrbook
+        fontsize: 12pt
+        geometry: margin=1in
+        include-in-header: macros.tex
+        pdf-engine: lualatex
+        pdf-engine-opts:
+          - '-interaction=batchmode'
+          - '-synctex=1'
+          - '-recorder'
+          - '--shell-escape'
+        latex-longtable: false   # GPT says this will stop page breaks within tables
+        listings: true
+        keep-tex: false
+        code-overflow: wrap
+        colorlinks: true
+        link-citations: true
+        link-bibliography: true
+        toc: true
+        toc-depth: 2
+        toc-title: Contents
+        number-sections: true
+        fig-format: svg
+        dpi: 600   # only a fall back for raster
+        indexing: false
+    html:
+        citations-hover: true
+        code-copy: true
+        code-fold: true
+        code-line-numbers: true
+        code-overflow: wrap
+        code-tools: true
+        colorlinks: true
+        crossrefs-hover: false
+        css: styles.css
+        fig-align: center
+        fig-responsive: true
+        fontsize: 0.9em
+        footnotes-hover: true
+        lightbox: true
+        link-bibliography: true
+        link-citations: true
+        link-external-icon: true      # arrow in a box for external links
+        link-external-newwindow: true # open in separate window
+        number-sections: true
+        page-layout: article          # optimized body region;  full expands contents if nothing in margins
+        page-navigation: true
+        smooth-scroll: true
+        theme:  litera                
+        toc-depth: 3
+        toc-title: 'In this chapter:'
+        toc: true
+        include-in-header:
+          - text: |
+              <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+        fig-format: svg
+        dpi: 300   # only a fall back for raster
+        twitter-card: true
+        open-graph: true
+        cover-image: img/cover.png
+        cover-image-alt: "My Book: Pricing Multi-Period Insurance Risk"
+
+editor: visual
+
+bibliography:
+  - cmm.bib
+
+csl: style.csl
+
+references: references.qmd
+
+execute:
+  echo: true                  # can override cell by cell, set to false for production run; fenced
+  eval: true                  # explicitly control evaluation
+  cache: true
+  cache-type: jupyter         # project is notebook/python heavy
+  freeze: false               # while you are working on code you NEVER want freeze true = no updating
+  engine: jupyter             # environment, magics, !dir etc.
+  kernel: python3             # python kernel to use, sitting behind Jupyter
+  daemon: 36000               # keep kernel alive for a very long time...
+
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.4
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3

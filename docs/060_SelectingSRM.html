@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>6&nbsp; Selecting and calibrating an SRM – Introduction to Capital Modeling and Portfolio Management</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./065_Evaluation.html" rel="next">
+<link href="./050_Applications.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-01c78b5cd655e4cd89133cf59d535862.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-44a2bfbc4aea0d0866ad2a0ddca8a790.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<link rel="icon" href="./static/favicon.ico" type="image/x-icon">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="6&nbsp; Selecting and calibrating an SRM – Introduction to Capital Modeling and Portfolio Management">
+<meta property="og:description" content="">
+<meta property="og:site_name" content="Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:title" content="6&nbsp; Selecting and calibrating an SRM – Introduction to Capital Modeling and Portfolio Management">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./060_SelectingSRM.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction to Capital Modeling and Portfolio Management</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dedication.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Dedication</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./010_Introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./020_BusinessOperations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Business operations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./030_CapitalAdequacy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Capital adequacy and sources of risk</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./040_PricingAndAllocation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./050_Applications.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./060_SelectingSRM.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./065_Evaluation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Evaluating models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./070_AdvancedTopics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Advanced topics</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./080_Calculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Calculations with <code>Aggregate</code></span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./090_EndMatter.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Appendices</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bibliography</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">In this chapter:</h2>
+   
+  <ul>
+  <li><a href="#sec-envelope" id="toc-sec-envelope" class="nav-link active" data-scroll-target="#sec-envelope"><span class="header-section-number">6.1</span> The envelope of possibilities and the five representatives</a></li>
+  <li><a href="#required-premium-by-distortion" id="toc-required-premium-by-distortion" class="nav-link" data-scroll-target="#required-premium-by-distortion"><span class="header-section-number">6.2</span> Required premium by distortion</a></li>
+  <li><a href="#zeroing-in-on-a-distortion-function" id="toc-zeroing-in-on-a-distortion-function" class="nav-link" data-scroll-target="#zeroing-in-on-a-distortion-function"><span class="header-section-number">6.3</span> Zeroing in on a distortion function</a></li>
+  <li><a href="#embracing-the-range" id="toc-embracing-the-range" class="nav-link" data-scroll-target="#embracing-the-range"><span class="header-section-number">6.4</span> Embracing the range</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-Selecting-Calibrating" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Selecting and calibrating an SRM</span></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><em>Assume we have a can opener.</em><br>
+<em>- Unknown</em></p>
+<p>In <a href="010_Introduction.html" class="quarto-xref"><span>Chapter 1</span></a>, we saw that the overall portfolio profitability target—whether stated as total premium, margin, or return on capital—is typically given as an input. In <a href="040_PricingAndAllocation.html" class="quarto-xref"><span>Chapter 4</span></a>, we saw the crucial importance of the distortion function in determining how that profit requirement is distributed to portfolio units. This chapter discusses how to develop a suitable distortion function.</p>
+<section id="sec-envelope" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="sec-envelope"><span class="header-section-number">6.1</span> The envelope of possibilities and the five representatives</h2>
+<p>TVaR is an SRM. The distortion function corresponding to <span class="math inline">\(\mathsf{TVaR}_p\)</span> goes linearly from <span class="math inline">\(g(0)=0\)</span> to <span class="math inline">\(g(1-p)=1\)</span> and then stays at 1 for <span class="math inline">\(s&gt;1-p\)</span>, see <a href="040_PricingAndAllocation.html#fig-the5dists" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>. A weighted combination of SRMs with positive weights summing to one (i.e., a convex combination) is also an SRM. In particular, we call such a weighted sum of two TVaRs a <strong>bi-TVaR</strong>.</p>
+<p><strong>Exercise</strong>: Derive an explicit expression for the distortion function associated with the bi-TVaR <span class="math inline">\(\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}\)</span>.</p>
+<p>For any portfolio (i.e., loss random variable) <span class="math inline">\(X\)</span>, there are two extreme values at which SRMs can price it. At one extreme, <span class="math inline">\(\mathsf{TVaR}_0(X)=\mathsf E[X]\)</span> is the minimum possible price; at the other <span class="math inline">\(\mathsf{TVaR}_1(X)=\max(X)\)</span> is the maximum.</p>
+<p><strong>Exercise</strong>: Prove that for any price <span class="math inline">\(P\)</span> between <span class="math inline">\(\mathsf E[X]\)</span> and <span class="math inline">\(\max(X)\)</span>, there are infinitely many SRMS <span class="math inline">\(\rho\)</span> with <span class="math inline">\(\rho(X)=P\)</span>.</p>
+<p><strong>Solution</strong>: Because <span class="math inline">\(\mathsf{TVaR}_p(X)\)</span> is continuous in <span class="math inline">\(p\)</span>, the intermediate value theorem implies that there is a <span class="math inline">\(p^\star\)</span> with <span class="math inline">\(\mathsf{TVaR}_{p^\star}(X)=P\)</span>. Similarly, because <span class="math inline">\(\rho_\theta(X) \equiv \theta\mathsf{TVaR}_{0}+(1-\theta)\mathsf{TVaR}_{1}\)</span> is continuous in <span class="math inline">\(\theta\)</span>, there is a <span class="math inline">\(\theta^\star\)</span> with <span class="math inline">\(\rho_{\theta^\star}(X)=P\)</span>. The first is a TVaR and the second is a bi-TVaR, so they are distinct. Any convex combination of the two—and there are infinitely many of them—will also price <span class="math inline">\(X\)</span> as <span class="math inline">\(P\)</span>. </p>
+<p>There are more than that, however. The same logic applies to any bi-TVaR <span class="math inline">\(\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}\)</span> with <span class="math inline">\(p_0 &lt; p^\star &lt; p_1\)</span>; there is a <span class="math inline">\(\theta^\star\)</span> pricing it at <span class="math inline">\(P\)</span>. There are infinitely many of those. Combinations of those also work. Combinations of those combinations also work. If we pass to the limit and construct infinite combinations, we get SRMs with smooth curves for distortion functions like the Wang transform.</p>
+<p>So there are many, many SRMs <span class="math inline">\(\rho\)</span> that have <span class="math inline">\(\rho(X)=P\)</span>. But applied to a particular unit (via NA), they are unlikely to all give the same price to the unit. It would be useful to be able to explore the limits of high and low unit prices consistent with the given portfolio price. <span class="citation" data-cites="PIR">Mildenhall and Major (<a href="references.html#ref-PIR" role="doc-biblioref">2022</a>)</span> gives an in-depth theoretical explanation, with section 11.2 detailing the construction. Fortunately, the five representative distortions introduced in <a href="040_PricingAndAllocation.html#sec-5-distortions" class="quarto-xref"><span>Section 4.6</span></a> do a good job of spanning the space of possibilities from body- (volatility-)centric to tail- (extreme risk-)centric and so in this monograph, we will consider only them.</p>
+<p>A warning, however: unless one distortion <span class="math inline">\(g\)</span> dominates another <span class="math inline">\(h\)</span> in the sense that <span class="math inline">\(g(s) \ge h(s)\)</span> for all <span class="math inline">\(s\)</span> with strict inequality for some <span class="math inline">\(s\)</span>, then there are risks <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> such that <span class="math inline">\(\rho_g(X)&gt;\rho_g(Y)\)</span> and <span class="math inline">\(\rho_h(X)&lt;\rho_h(Y)\)</span>, i.e., <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> disagree about the relative price (riskiness) of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>. That is, it is not generally possible to put distortion functions in an unambiguous order by implied price across all risks.</p>
+<p><strong>Exercise.</strong> Verify that CCoC in <a href="040_PricingAndAllocation.html#tbl-the5qs" class="quarto-xref">Table&nbsp;<span>4.7</span></a> is the bi-TVaR between <span class="math inline">\(\mathsf{TVaR}_1\)</span> and <span class="math inline">\(\mathsf{TVaR}_0\)</span> with <span class="math inline">\(\theta=0.87\)</span>.</p>
+<p><strong>Solution.</strong> <a href="#tbl-bi-tvar" class="quarto-xref">Table&nbsp;<span>6.1</span></a> shows the <span class="math inline">\(q\)</span> values corresponding to <span class="math inline">\(\mathsf{TVaR}_0=\mathsf E[X]\)</span> and <span class="math inline">\(\mathsf{TVaR}_1=\max(X)\)</span>. The first consists of <span class="math inline">\(q=p\)</span>, and the second consists of <span class="math inline">\(q=1\)</span> for the top event only, zero elsewhere.</p>
+<!--
+
+|  $k$|  $p$  | **TVaR 0**| **TVaR 1**| **Blend**|
+|:----|:-----:|:-------:|:-------:|:-------:|
+|0    |   0   |    0    |   0   | 0.0000  |
+|1    | 0.1   |  0.1    |   0   | 0.0870  |
+|2    | 0.1   |  0.1    |   0   | 0.0870  |
+|3    | 0.1   |  0.1    |   0   | 0.0870  |
+|4    | 0.4   |  0.4    |   0   | 0.3478  |
+|5    | 0.1   |  0.1    |   0   | 0.0870  |
+|6    | 0.1   |  0.1    |   0   | 0.0870  |
+|7    | 0.1   |  0.1    |  1.0  | 0.2174  |
+
+Table: $q$ values for $\mathsf{TVaR}_0=E[X]$, $\mathsf{TVaR}_1=\max(X)$ and the $\theta=0.87$ blend.
+
+
+-->
+<div class="cell" data-execution_count="2">
+<div id="tbl-bi-tvar" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bi-tvar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.1: <span class="math inline">\(q\)</span> values for <span class="math inline">\(\mathsf{TVaR}_0=\mathsf E[X]\)</span>, <span class="math inline">\(\mathsf{TVaR}_1=\max(X)\)</span> and the <span class="math inline">\(\theta=0.87\)</span> blend.
+</figcaption>
+<div aria-describedby="tbl-bi-tvar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div class="greater-table">
+<style>
+    #TCNYOV6JDRBQO  {
+    border-collapse: collapse;
+    font-family: "Roboto", "Open Sans Condensed", "Arial", 'Segoe UI', sans-serif;
+    font-size: 1.0em;
+    width: auto;
+    
+    margin: 10px auto;
+    border: none;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    
+    
+    #TCNYOV6JDRBQO caption {
+        padding: 4px 10px 2px 10px;
+        font-size: 1.1em;
+        text-align: center;
+        font-weight: normal;
+        caption-side: top;
+    }
+    #TCNYOV6JDRBQO thead {
+        
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        font-size: 1.0em;
+        }
+    #TCNYOV6JDRBQO tbody {
+        
+        border-bottom: 1px solid #000;
+        }
+    #TCNYOV6JDRBQO th  {
+        vertical-align: bottom;
+        padding: 4px 10px 4px 10px;
+    }
+    #TCNYOV6JDRBQO td {
+        
+        padding: 2px 10px 2px 10px;
+        vertical-align: top;
+    }
+    
+    #TCNYOV6JDRBQO .grt-hrule-0 {
+        border-top: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-hrule-1 {
+        border-top: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-hrule-2 {
+        border-top: 0.0px solid #000;
+    }
+    
+    #TCNYOV6JDRBQO .grt-bhrule-0 {
+        border-bottom: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-bhrule-1 {
+        border-bottom: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-vrule-index {
+        border-left: 1px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-vrule-0 {
+        border-left: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-vrule-1 {
+        border-left: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-vrule-2 {
+        border-left: 0.0px solid #000;
+    }
+    #TCNYOV6JDRBQO .grt-left {
+        text-align: left;
+    }
+    #TCNYOV6JDRBQO .grt-center {
+        text-align: center;
+    }
+    #TCNYOV6JDRBQO .grt-right {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+    #TCNYOV6JDRBQO .grt-head {
+        font-family: "Times New Roman", 'Courier New';
+        font-size: 1.0em;
+    }
+    #TCNYOV6JDRBQO .grt-bold {
+        font-weight: bold;
+    }
+
+</style>
+
+<table id="TCNYOV6JDRBQO" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="grt-left" data-quarto-table-cell-role="th">\(k\)</th>
+<th class="grt-center grt-vrule-index" data-quarto-table-cell-role="th">\(p\)</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">\(S\)</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">\(\mathsf{TVaR}_0\)</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">\(\mathsf{TVaR}_1\)</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Blend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="grt-c-0 grt-left">0</td>
+<td class="grt-c-1 grt-right grt-vrule-index">0</td>
+<td class="grt-c-2 grt-right grt-vrule-0">1</td>
+<td class="grt-c-3 grt-right grt-vrule-0">0</td>
+<td class="grt-c-4 grt-right grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-vrule-0">0</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">1</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.9</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.087</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">2</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.8</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.087</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">3</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.7</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.087</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">4</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.4</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.3</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.4</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.348</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">5</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.2</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.087</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">6</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.087</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">7</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">0.1</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">0</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">0.1</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">1</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">0.217</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p>The final column, a <span class="math inline">\(1:0.15\)</span> blend of the previous two, matches the CCoC column in <a href="040_PricingAndAllocation.html#tbl-the5qs" class="quarto-xref">Table&nbsp;<span>4.7</span></a>. </p>
+</section>
+<section id="required-premium-by-distortion" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="required-premium-by-distortion"><span class="header-section-number">6.2</span> Required premium by distortion</h2>
+<p><a href="#tbl-3units" class="quarto-xref">Table&nbsp;<span>6.2</span></a> shows required premiums and loss ratios for each unit, by distortion function. Remember, <em>required</em> here means required to meet the internally specified 15% return on capital hurdle. Also shown are plan premiums and loss ratios.</p>
+<div class="cell" data-execution_count="3">
+<div id="tbl-3units" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-3units-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.2: Example units with pricing by distortion.
+</figcaption>
+<div aria-describedby="tbl-3units-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="greater-table">
+<style>
+    #TMOPI3XUUIL7X  {
+    border-collapse: collapse;
+    font-family: "Roboto", "Open Sans Condensed", "Arial", 'Segoe UI', sans-serif;
+    font-size: 1.0em;
+    width: auto;
+    
+    margin: 10px auto;
+    border: none;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    
+    
+    #TMOPI3XUUIL7X caption {
+        padding: 4px 10px 2px 10px;
+        font-size: 1.1em;
+        text-align: center;
+        font-weight: normal;
+        caption-side: top;
+    }
+    #TMOPI3XUUIL7X thead {
+        
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        font-size: 1.0em;
+        }
+    #TMOPI3XUUIL7X tbody {
+        
+        border-bottom: 1px solid #000;
+        }
+    #TMOPI3XUUIL7X th  {
+        vertical-align: bottom;
+        padding: 4px 10px 4px 10px;
+    }
+    #TMOPI3XUUIL7X td {
+        
+        padding: 2px 10px 2px 10px;
+        vertical-align: top;
+    }
+    
+    #TMOPI3XUUIL7X .grt-hrule-0 {
+        border-top: 0.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-hrule-1 {
+        border-top: 0.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-hrule-2 {
+        border-top: 0.0px solid #000;
+    }
+    
+    #TMOPI3XUUIL7X .grt-bhrule-0 {
+        border-bottom: 1.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-bhrule-1 {
+        border-bottom: 0.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-vrule-index {
+        border-left: 1px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-vrule-0 {
+        border-left: 1.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-vrule-1 {
+        border-left: 0.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-vrule-2 {
+        border-left: 0.0px solid #000;
+    }
+    #TMOPI3XUUIL7X .grt-left {
+        text-align: left;
+    }
+    #TMOPI3XUUIL7X .grt-center {
+        text-align: center;
+    }
+    #TMOPI3XUUIL7X .grt-right {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+    #TMOPI3XUUIL7X .grt-head {
+        font-family: "Times New Roman", 'Courier New';
+        font-size: 1.0em;
+    }
+    #TMOPI3XUUIL7X .grt-bold {
+        font-weight: bold;
+    }
+
+</style>
+
+<table id="TMOPI3XUUIL7X" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="grt-left" data-quarto-table-cell-role="th"></th>
+<th colspan="2" class="grt-center grt-bhrule-0 grt-vrule-index" data-quarto-table-cell-role="th">Unit A</th>
+<th colspan="2" class="grt-center grt-bhrule-0 grt-vrule-0" data-quarto-table-cell-role="th">Unit B</th>
+<th colspan="2" class="grt-center grt-bhrule-0 grt-vrule-0" data-quarto-table-cell-role="th">Unit C</th>
+<th colspan="2" class="grt-center grt-bhrule-0 grt-vrule-0" data-quarto-table-cell-role="th">Portfolio</th>
+</tr>
+<tr class="even">
+<th class="grt-left" data-quarto-table-cell-role="th">View</th>
+<th class="grt-center grt-vrule-index" data-quarto-table-cell-role="th">Premium</th>
+<th class="grt-center grt-vrule-1" data-quarto-table-cell-role="th">Loss ratio</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Premium</th>
+<th class="grt-center grt-vrule-1" data-quarto-table-cell-role="th">Loss ratio</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Premium</th>
+<th class="grt-center grt-vrule-1" data-quarto-table-cell-role="th">Loss ratio</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Premium</th>
+<th class="grt-center grt-vrule-1" data-quarto-table-cell-role="th">Loss ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="grt-c-0 grt-left">ccoc</td>
+<td class="grt-c-1 grt-right grt-vrule-index">13.739</td>
+<td class="grt-c-2 grt-right grt-vrule-1">97.5%</td>
+<td class="grt-c-3 grt-right grt-vrule-0">18.522</td>
+<td class="grt-c-4 grt-right grt-vrule-1">98.8%</td>
+<td class="grt-c-5 grt-right grt-vrule-0">21.304</td>
+<td class="grt-c-6 grt-right grt-vrule-1">69.9%</td>
+<td class="grt-c-7 grt-right grt-vrule-0">53.565</td>
+<td class="grt-c-8 grt-right grt-vrule-1">87.0%</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">dual</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">14.127</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-1">94.9%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">19.117</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-1">95.7%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">20.321</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-1">73.3%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">53.565</td>
+<td class="grt-c-8 grt-right grt-hrule-0 grt-vrule-1">87.0%</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">ph</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">14.060</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-1">95.3%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">18.349</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-1">99.7%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">21.156</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-1">70.4%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">53.565</td>
+<td class="grt-c-8 grt-right grt-hrule-0 grt-vrule-1">87.0%</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">tvar</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">13.783</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-1">97.2%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">20.412</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-1">89.7%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">19.371</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-1">76.9%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">53.565</td>
+<td class="grt-c-8 grt-right grt-hrule-0 grt-vrule-1">87.0%</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">wang</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">14.109</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-1">95.0%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">18.637</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-1">98.2%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">20.818</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-1">71.6%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">53.565</td>
+<td class="grt-c-8 grt-right grt-hrule-0 grt-vrule-1">87.0%</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">Plan</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">13.9</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-1">96.4%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">18.7</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-1">97.9%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">19.6</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-1">76.0%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">52.2</td>
+<td class="grt-c-8 grt-right grt-hrule-0 grt-vrule-1">89.3%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<!--
+
+|  $k$|  $p$  | **Unit A**| **Unit B**|  **Unit C**  | **Portfolio**|
+|:---------|:-----:|:-------:|:-------:|:-------:|:-------:|
+|0    |   0   |  0 |  0 |  0 |   0 |
+|1    | 0.1   | 15 |  7 |  0 |  22 |
+|2    | 0.1   | 15 | 13 |  0 |  28 |
+|3    | 0.1   |  5 | 20 | 11 |  36 |
+|4    | 0.4   | 10 | 24 |  6 |  40 |
+|5    | 0.1   | 26 | 19 | 10 |  55 |
+|6    | 0.1   | 17 |  8 | 40 |  65 |
+|7    | 0.1   | 16 | 20 | 64 | 100 |
+|     |       |    |    |    |      |
+|Plan Premium          | | 13.900 | 18.700 | 19.600 | 52.200 |
+|$\rho_{\mathsf{TVaR}}$| | 13.783 | 20.412 | 19.371 | 53.565 |
+|$\rho_{\mathsf{Dual}}$| | 14.127 | 19.117 | 20.322 | 53.565 |
+|$\rho_{\mathsf{Wang}}$| | 14.109 | 18.637 | 20.819 | 53.565 |
+|$\rho_{\mathsf{PH}}$  | | 14.060 | 18.349 | 21.156 | 53.565 |
+|$\rho_{\mathsf{CCoC}}$| | 13.739 | 18.522 | 21.304 | 53.565 |
+|$L=\mathsf E[X]$      | | 13.400 | 18.300 | 14.900 | 46.600 |
+|Plan Loss Ratio       | | 96.40%| 97.86%| 76.02%| 89.27%|
+|$LR_{\mathsf{TVaR}}$  | | 97.22%| 89.66%| 76.92%| 87.00%|
+|$LR_{\mathsf{Dual}}$  | | 94.86%| 95.73%| 73.32%| 87.00%|
+|$LR_{\mathsf{Wang}}$  | | 94.97%| 98.19%| 71.57%| 87.00%|
+|$LR_{\mathsf{PH}}$    | | 95.31%| 99.73%| 70.43%| 87.00%|
+|$LR_{\mathsf{CCoC}}$  | | 97.53%| 98.80%| 69.94%| 87.00%|
+
+Table: Example units with pricing by distortion.
+
+
+-->
+<p>Relative to model benchmarks, the entire portfolio is underpriced by <span class="math inline">\(53.565-52.2=1.365\)</span>. But which units need to do better, and by how much?</p>
+<!--
+|**Unit**|**Plan LR**| **Lowest LR**|**Highest LR**|**Cheapest Distortion**|
+|:----------|:-------:|:-------:|:-------:|:----------|
+| Unit A    |0.96403  | 0.94856 | 0.97532 |CCoC |
+| Unit B    |0.97861  | 0.89655 | 0.99731 |PH   |
+| Unit C    |0.76020  | 0.69939 | 0.76919 |TVaR |
+
+Table: Range of implied loss ratios and cheapest distortion by unit.
+
+![Range of implied loss ratios across distortions, and plan loss ratio (triangle) by unit.](img/plt35bars.png){width=75% #fig-35bars}
+
+@fig-35barsM converts from loss ratios to margin dollars.
+
+\pagebreak
+
+![Range of implied margins across distortions, and plan margin (triangle) by unit.](img/plt35barsMargin.png){width=75% #fig-35barsM}
+
+
+-->
+<div class="cell" data-execution_count="4">
+<div id="tbl-bestlr" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="4">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bestlr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;6.3: Range of implied loss ratios and cheapest distortion by unit.
+</figcaption>
+<div aria-describedby="tbl-bestlr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div class="greater-table">
+<style>
+    #T65FZX5VX3T2O  {
+    border-collapse: collapse;
+    font-family: "Roboto", "Open Sans Condensed", "Arial", 'Segoe UI', sans-serif;
+    font-size: 1.0em;
+    width: auto;
+    
+    margin: 10px auto;
+    border: none;
+    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    }
+    
+    
+    
+    #T65FZX5VX3T2O caption {
+        padding: 4px 10px 2px 10px;
+        font-size: 1.1em;
+        text-align: center;
+        font-weight: normal;
+        caption-side: top;
+    }
+    #T65FZX5VX3T2O thead {
+        
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        font-size: 1.0em;
+        }
+    #T65FZX5VX3T2O tbody {
+        
+        border-bottom: 1px solid #000;
+        }
+    #T65FZX5VX3T2O th  {
+        vertical-align: bottom;
+        padding: 4px 10px 4px 10px;
+    }
+    #T65FZX5VX3T2O td {
+        
+        padding: 2px 10px 2px 10px;
+        vertical-align: top;
+    }
+    
+    #T65FZX5VX3T2O .grt-hrule-0 {
+        border-top: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-hrule-1 {
+        border-top: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-hrule-2 {
+        border-top: 0.0px solid #000;
+    }
+    
+    #T65FZX5VX3T2O .grt-bhrule-0 {
+        border-bottom: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-bhrule-1 {
+        border-bottom: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-vrule-index {
+        border-left: 1px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-vrule-0 {
+        border-left: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-vrule-1 {
+        border-left: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-vrule-2 {
+        border-left: 0.0px solid #000;
+    }
+    #T65FZX5VX3T2O .grt-left {
+        text-align: left;
+    }
+    #T65FZX5VX3T2O .grt-center {
+        text-align: center;
+    }
+    #T65FZX5VX3T2O .grt-right {
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+    }
+    #T65FZX5VX3T2O .grt-head {
+        font-family: "Times New Roman", 'Courier New';
+        font-size: 1.0em;
+    }
+    #T65FZX5VX3T2O .grt-bold {
+        font-weight: bold;
+    }
+
+</style>
+
+<table id="T65FZX5VX3T2O" class="do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<thead>
+<tr class="header">
+<th class="grt-left" data-quarto-table-cell-role="th">Unit</th>
+<th class="grt-center grt-vrule-index" data-quarto-table-cell-role="th">ccoc</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">ph</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">wang</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">dual</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">tvar</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Plan</th>
+<th class="grt-center grt-vrule-0" data-quarto-table-cell-role="th">Cheapest</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="grt-c-0 grt-left">Unit A</td>
+<td class="grt-c-1 grt-right grt-vrule-index">97.5%</td>
+<td class="grt-c-2 grt-right grt-vrule-0">95.3%</td>
+<td class="grt-c-3 grt-right grt-vrule-0">95.0%</td>
+<td class="grt-c-4 grt-right grt-vrule-0">94.9%</td>
+<td class="grt-c-5 grt-right grt-vrule-0">97.2%</td>
+<td class="grt-c-6 grt-right grt-vrule-0">96.4%</td>
+<td class="grt-c-7 grt-right grt-vrule-0">ccoc</td>
+</tr>
+<tr class="even">
+<td class="grt-c-0 grt-left grt-hrule-0">Unit B</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">98.8%</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">99.7%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">98.2%</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">95.7%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">89.7%</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-0">97.9%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">ph</td>
+</tr>
+<tr class="odd">
+<td class="grt-c-0 grt-left grt-hrule-0">Unit C</td>
+<td class="grt-c-1 grt-right grt-hrule-0 grt-vrule-index">69.9%</td>
+<td class="grt-c-2 grt-right grt-hrule-0 grt-vrule-0">70.4%</td>
+<td class="grt-c-3 grt-right grt-hrule-0 grt-vrule-0">71.6%</td>
+<td class="grt-c-4 grt-right grt-hrule-0 grt-vrule-0">73.3%</td>
+<td class="grt-c-5 grt-right grt-hrule-0 grt-vrule-0">76.9%</td>
+<td class="grt-c-6 grt-right grt-hrule-0 grt-vrule-0">76.0%</td>
+<td class="grt-c-7 grt-right grt-hrule-0 grt-vrule-0">tvar</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</figure>
+</div>
+</div>
+<p><a href="#tbl-bestlr" class="quarto-xref">Table&nbsp;<span>6.3</span></a> shows the plan loss ratio, the range of target loss ratios generated by the five distortions, and which distortion suggests the lowest premium for each unit. A higher required loss ratio implies a lower margin and premium. Unit management may regard a lower premium as better because it makes it easier to sell policies in the marketplace. The table shows that for each unit there is at least one distortion whose pricing it can meet, because the plan loss ratio is no greater than the distortion indicated loss ratio. For example, Unit B’s management would be happy to target the PH-indicated 0.997 loss ratio instead of the current plan’s 0.979. However, there is no single distortion whose pricing all units can meet. How should the modeler proceed? A monograph with two authors can offer two paths.</p>
+<p>Before discussing the two paths, it is worthwhile reflecting on how a market distortion emerges. Insurance is fundamentally risk sharing. The market consists of individuals with different endowments, owning different risks, and understood to have their own risk appetites. Each individual can cede risk into the pool and assume risk from it as a shareholder or mutual company owner. Typically there are more of the former than the latter. We assume appetites for insurable, diversifiable risk are given by distortion risk measures. The appetite for investment risk, with its systematic components, may be different. The efficient insurance market solution is for everyone to pool their risks together, for maximal diversification benefit, and then to layer out the total risk to the individual offering the cheapest price for it in each layer. This corresponds to looking at the minimum of the individual distortion functions. <a href="040_PricingAndAllocation.html#fig-the5dists" class="quarto-xref">Figure&nbsp;<span>4.3</span></a> could correspond to a market of five individuals. In it, the TVaR individual assumes large risks (above about the 75th percentile, lower left) and CCoC the rest. TVaR is risk neutral in the tail, and equity financing is well known to be an effective solution for nicely diversifiable risk. This theoretical model is described in a famous paper <span class="citation" data-cites="Jouini2008b">Jouini et al. (<a href="references.html#ref-Jouini2008b" role="doc-biblioref">2008</a>)</span>. There are many steps between a simple model and reality, but it is a good picture to bear in mind for the rest of this chapter. Readers who work for brokers may be happy to learn the model implies an important role for them matching risk to its cheapest financing. Finally, notice the model implies the risk appetite that matters is that of <em>investors</em>, not management—despite management often talking about “their risk appetite.”</p>
+</section>
+<section id="zeroing-in-on-a-distortion-function" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="zeroing-in-on-a-distortion-function"><span class="header-section-number">6.3</span> Zeroing in on a distortion function</h2>
+<p>Path 1 holds there is a <em>best</em> distortion function that should be discoverable by the modeler. On this path, the modeler must avoid excessive naval gazing. Present the facts, being the range of indications from <a href="#tbl-3units" class="quarto-xref">Table&nbsp;<span>6.2</span></a> with relevant commentary, but recognize the decision is for unit and corporate management to negotiate. As always, <a href="#tbl-3units" class="quarto-xref">Table&nbsp;<span>6.2</span></a> hides many details and assumptions. What is the historical performance of each unit compared to prior plans? The growth prospects? The quality of the data and certainty in the simulations? Again, present facts and avoid selling against your model.</p>
+<p>In an ideal world, we choose our distortion based on first principles and recommend each unit meets the target specified by that principle. A core principle of modern finance and accounting is to calibrate models to market observables where possible. Is the distortion consistent with cat bond pricing for extreme events? What about InsCo’s capital structure? A discussion with the finance department might be in order, to ask: What is the structure of the capital supporting the business and what are the costs of the various components of capital? For example, InsCo may have a Baa-rated corporate bond with initial annual default probability between 1.5% and 2% and a valuation equating to a risk-neutral default probability between 2.5% and 4%. These correspond to the exceedance probability <span class="math inline">\(s\)</span> and distorted probability <span class="math inline">\(g(s)\)</span>, respectively, of a distortion function. Which calibrated distortions are consistent with these findings? A quick analysis reveals that the Dual and Wang distortions are the most likely candidates, with TVaR coming in a distant third place.</p>
+<!--
+
+JOHN: I really don't like this stuff. It is classic actuarial "well you could do this that and the other" with no theoretic basis. All readers should be able to make up similar things on their own. They don't need us to tell them.
+
+Some of the units would, no doubt, rather share the burden equally, whatever that means.
+
+For example, if all units could lower their plan loss ratio by 2.24 percentage points, then the portfolio as a whole would have a plan loss ratio consistent with the 15% return target.  Similarly, if each unit could increase its plan profit margin by 24%, this would also meet the 15% target.  These two sharing principles have very different implications for each unit, so a process of negotiation and compromise would be necessary to choose how that burden would be shared. Equal sharing also is not really fair to some units that are stellar performers (judged by historical or market comparisons) whereas others are not, leading to material cross-subsidies. Cross-subsidies would also continue from year to year if the same approach were used.
+
+@tbl-margin-error highlights this by measuring by how much the plan margin must increase to meet the indicated margin.  For example, referring to @tbl-3units, Unit B has a plan premium of 18.7 compared to a required 19.117 under the Dual distortion. $19.117-18.7=0.417$ is the amount by which premium, and therefore margin, must increase.  Plan margin is $18.7-18.3=0.4$, therefore plan margin must increase by $0.417/0.4=1.0425$ or 104%.
+
+This is calculated as
+$$
+(1/\mathsf{LR_{dist}}-1)/(1/\mathsf{LR_{plan}})-1.
+$$
+
+\footnotesize
+
+|**Distortion**  | **Unit A**| **Unit B**| **Unit C**  | **Variance**|
+|:---------------|------:|--------:|--------:|--------:|
+|TVaR     |-23%|428%|  -5% |4.349|
+|Dual     | 45%|104%|  15% |0.136|
+|Wang     | 42%|-16%|  26% |0.059|
+|PH       | 32%|-88%|  33% |0.321|
+|CCoC     |-32%|-45%|  36% |0.126|
+|Equal LR | 66%|110%|  13% |0.157|
+|Equal Margin| 24%|24%|24%| 0.000|
+
+
+Table: Percent error in margin by distortion by unit. {#tbl-margin-error}
+
+\normalsize
+
+The Wang distortion has the lowest variance of unit relative margin adjustments among the distortions.  It requires increased margin from Unit A and Unit C but not from Unit B.  The CCoC distortion has the next lowest variance; however, it achieves this by putting _all_ of the required extra margin on Unit C.  The Dual distortion is in third place, with extra margin required of all units.  However, for the Dual, Unit B has to more than double its margin.  The Dual is the closest to equalizing loss ratios as seen by comparing to the Equal LR results.  Equalizing relative margin, of course, provides zero variance, but does not resemble any of the distortions.
+
+![Distortion functions overlaid with target statistics from InsCo's previous bond debt.](img/pltFinBox.png){width=75% #fig-FinBox}
+
+Referring to @tbl-3units, we see that the Unit C's plan margin is an order of magnitude larger than that of the other units.  After consulting with senior management, we decide that something between Dual and Wang, best equalizing the percent margin increase in Unit A and Unit B, is the target.
+
+
+**Exercise.**  What distortion function $(1-\theta)\mathsf{Wang}+\theta\mathsf{Dual}$ will accomplish that?  Round $\theta$ to the nearest 0.01.  What are the resulting target premiums, margins, loss ratios, and percent margin change for each unit?
+
+**Solution.**
+\begin{align}
+(1-\theta)(42)+\theta(45)&=(1-\theta)(-16)+\theta(104) \\
+\theta(104+16-45+42) &=42+16 \\
+\implies \theta&=\frac{58}{117} = 0.4957 \rightarrow 0.5
+\end{align}
+
+The solution is an equal blend of Wang and Dual.  The resulting financial targets are shown in @tbl-50-50-wang-dual.
+
+\footnotesize
+
+|**Metric**  | **Non-Cat(A)**| **Non-Cat(B)**| **Cat**  |
+|:---------------|------:|--------:|--------:|--------:|--------:|
+|Target premium |14.118 |18.877 |20.570|
+|Margin         |0.7180 |0.5772 |5.6701|
+|Loss ratio     |0.9491 |0.9696 |0.7245|
+|Margin change  | 43.5% | 44.0% | 20.5%|
+
+Table: Results of 50-50 blend of Wang and Dual. {#tbl-50-50-wang-dual}
+
+\normalsize
+\qed
+
+So a principles-based approach is to be preferred, if only the principle could be found.  The approach we recommend is to use negotiation and compromise to _choose the principle and then stick with it_ in subsequent years.
+
+-->
+</section>
+<section id="embracing-the-range" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="embracing-the-range"><span class="header-section-number">6.4</span> Embracing the range</h2>
+<p>Path 2 holds that searching for a single best distortion is an unanswerable metaphysical quest, but it suggests there is much to learn from the range of indications. While no choice is correct, some are logically inconsistent and should be avoided.</p>
+<p>The choice of a distortion corresponds to a statement of risk appetite. The ordering CCoC, PH, Wang, Dual, and TVaR we use to show the five representative distortions ranks them from most concerned about tail (extreme VaR) losses to most concerned about attritional (near plan) losses. The CCoC, driven by the maximum loss is obviously the most tail-centric. Conversely, TVaR is the most attritional loss averse. This ranking corresponds to the heights of the distortion functions plotted in <a href="040_PricingAndAllocation.html#fig-the5dists" class="quarto-xref">Figure&nbsp;<span>4.3</span></a>; remember that left on the horizontal axis is extreme losses. How does management talk about risk, for example, in quarterly analyst calls for stock companies? Often, their statements reveal they understand their investors are more concerned with attritional volatility. After a large catastrophe event, the market expects all players to have large losses, whereas a miss on attritional volatility suggests management is not pricing correctly and can cause disquiet among investors. Managements prodded by their investors to be more concerned with volatility typically find targets driven by TVaR or the Dual distortion to better align with their intuitions.</p>
+<p>The range of implications across different distortions turns out to overlap with the range of the reinsurance pricing cycle, so these are not just academic considerations. For example, in <a href="080_Calculations.html#tbl-all-distortioun-re-pricing" class="quarto-xref">Table&nbsp;<span>9.10</span></a>, the model recommended maximum buy-price for reinsurance is 7.6 (a 46% loss ratio or higher) under CCoC but only 4.8 (73% loss ratio) under TVaR. Over a market cycle the loss ratio for catastrophe reinsurance can vary substantially, and whereas a CCoC view may recommend a buy in all markets, TVaR could be more circumspect. The authors have both worked with managements who have expressed exactly these concerns and who have disliked a CCoC-driven, industry-standard approach analysis as a consequence.</p>
+<p>Knowing the range of indications means you can determine whether a plan loss ratio is consistent with some risk appetite (it is within the range). For our simple model, <a href="#tbl-bestlr" class="quarto-xref">Table&nbsp;<span>6.3</span></a> shows they all are, but that is not always the case. A unit with plan outside the range can be criticized because it is inconsistent with <em>any</em> risk appetite; it should be investigated accordingly. A plan far outside the range needs especial scrutiny.</p>
+
+
+<!-- -->
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="list" style="display: none">
+<div id="ref-Jouini2008b" class="csl-entry" role="listitem">
+Jouini, E., W. Schachermayer, and N. Touzi. 2008. <span>“<span class="nocase">Optimal risk sharing for law invariant monetary utility functions</span>.”</span> <em>Mathematical Finance</em> 18 (2): 269–92. <a href="https://doi.org/10.1111/j.1467-9965.2007.00332.x">https://doi.org/10.1111/j.1467-9965.2007.00332.x</a>.
+</div>
+<div id="ref-PIR" class="csl-entry" role="listitem">
+Mildenhall, Stephen J, and John A Major. 2022. <em>Pricing Insurance Risk: Theory and Practice</em>. John Wiley &amp; Sons, Inc.
+</div>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/cmm\.mynl\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./050_Applications.html" class="pagination-link" aria-label="Applications of pricing and allocation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Applications of pricing and allocation</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./065_Evaluation.html" class="pagination-link" aria-label="Evaluating models">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Evaluating models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu"># Selecting and calibrating an SRM {#sec-Selecting-Calibrating}</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>*Assume we have a can opener.*\</span>
+<span id="cb1-4"><a href="#cb1-4"></a>*- Unknown*</span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a>In @sec-Introduction, we saw that the overall portfolio profitability target---whether stated as total premium, margin, or return on capital---is typically given as an input. In @sec-Pricing-Allocation, we saw the crucial importance of the distortion function in determining how that profit requirement is distributed to portfolio units. This chapter discusses how to develop a suitable distortion function.</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="fu">## The envelope of possibilities and the five representatives {#sec-envelope}</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a></span>
+<span id="cb1-10"><a href="#cb1-10"></a>TVaR is an SRM. The distortion function corresponding to $\mathsf{TVaR}_p$ goes linearly from $g(0)=0$ to $g(1-p)=1$ and then stays at 1 for $s&gt;1-p$, see @fig-the5dists. A weighted combination of SRMs with positive weights summing to one (i.e., a convex combination) is also an SRM. In particular, we call such a weighted sum of two TVaRs a **bi-TVaR**.</span>
+<span id="cb1-11"><a href="#cb1-11"></a></span>
+<span id="cb1-12"><a href="#cb1-12"></a>**Exercise**: Derive an explicit expression for the distortion function associated with the bi-TVaR $\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}$.</span>
+<span id="cb1-13"><a href="#cb1-13"></a></span>
+<span id="cb1-14"><a href="#cb1-14"></a>For any portfolio (i.e., loss random variable) $X$, there are two extreme values at which SRMs can price it. At one extreme, $\mathsf{TVaR}_0(X)=\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ is the minimum possible price; at the other $\mathsf{TVaR}_1(X)=\max(X)$ is the maximum.</span>
+<span id="cb1-15"><a href="#cb1-15"></a></span>
+<span id="cb1-16"><a href="#cb1-16"></a>**Exercise**: Prove that for any price $P$ between $\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ and $\max(X)$, there are infinitely many SRMS $\rho$ with $\rho(X)=P$.</span>
+<span id="cb1-17"><a href="#cb1-17"></a></span>
+<span id="cb1-18"><a href="#cb1-18"></a>**Solution**: Because $\mathsf{TVaR}_p(X)$ is continuous in $p$, the intermediate value theorem implies that there is a $p^\star$ with $\mathsf{TVaR}_{p^\star}(X)=P$. Similarly, because $\rho_\theta(X) \equiv \theta\mathsf{TVaR}_{0}+(1-\theta)\mathsf{TVaR}_{1}$ is continuous in $\theta$, there is a $\theta^\star$ with $\rho_{\theta^\star}(X)=P$. The first is a TVaR and the second is a bi-TVaR, so they are distinct. Any convex combination of the two---and there are infinitely many of them---will also price $X$ as $P$. \qed</span>
+<span id="cb1-19"><a href="#cb1-19"></a></span>
+<span id="cb1-20"><a href="#cb1-20"></a>There are more than that, however. The same logic applies to any bi-TVaR $\theta\mathsf{TVaR}_{p_0}+(1-\theta)\mathsf{TVaR}_{p_1}$ with $p_0 &lt; p^\star &lt; p_1$; there is a $\theta^\star$ pricing it at $P$. There are infinitely many of those. Combinations of those also work. Combinations of those combinations also work. If we pass to the limit and construct infinite combinations, we get SRMs with smooth curves for distortion functions like the Wang transform.</span>
+<span id="cb1-21"><a href="#cb1-21"></a></span>
+<span id="cb1-22"><a href="#cb1-22"></a>So there are many, many SRMs $\rho$ that have $\rho(X)=P$. But applied to a particular unit (via NA), they are unlikely to all give the same price to the unit. It would be useful to be able to explore the limits of high and low unit prices consistent with the given portfolio price. @PIR gives an in-depth theoretical explanation, with section 11.2 detailing the construction. Fortunately, the five representative distortions introduced in @sec-5-distortions do a good job of spanning the space of possibilities from body- (volatility-)centric to tail- (extreme risk-)centric and so in this monograph, we will consider only them.</span>
+<span id="cb1-23"><a href="#cb1-23"></a></span>
+<span id="cb1-24"><a href="#cb1-24"></a>A warning, however: unless one distortion $g$ dominates another $h$ in the sense that $g(s) \ge h(s)$ for all $s$ with strict inequality for some $s$, then there are risks $X$ and $Y$ such that $\rho_g(X)&gt;\rho_g(Y)$ and $\rho_h(X)&lt;\rho_h(Y)$, i.e., $g$ and $h$ disagree about the relative price (riskiness) of $X$ and $Y$. That is, it is not generally possible to put distortion functions in an unambiguous order by implied price across all risks.</span>
+<span id="cb1-25"><a href="#cb1-25"></a></span>
+<span id="cb1-26"><a href="#cb1-26"></a>**Exercise.** Verify that CCoC in @tbl-the5qs is the bi-TVaR between $\mathsf{TVaR}_1$ and $\mathsf{TVaR}_0$ with $\theta=0.87$.</span>
+<span id="cb1-27"><a href="#cb1-27"></a></span>
+<span id="cb1-28"><a href="#cb1-28"></a>**Solution.** @tbl-bi-tvar shows the $q$ values corresponding to $\mathsf{TVaR}_0=\mathsf E<span class="co">[</span><span class="ot">X</span><span class="co">]</span>$ and $\mathsf{TVaR}_1=\max(X)$. The first consists of $q=p$, and the second consists of $q=1$ for the top event only, zero elsewhere.</span>
+<span id="cb1-29"><a href="#cb1-29"></a></span>
+<span id="cb1-30"><a href="#cb1-30"></a></span>
+<span id="cb1-31"><a href="#cb1-31"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-32"><a href="#cb1-32"></a></span>
+<span id="cb1-33"><a href="#cb1-33"></a><span class="co">|  $k$|  $p$  | **TVaR 0**| **TVaR 1**| **Blend**|</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a><span class="co">|:----|:-----:|:-------:|:-------:|:-------:|</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a><span class="co">|0    |   0   |    0    |   0   | 0.0000  |</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="co">|1    | 0.1   |  0.1    |   0   | 0.0870  |</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a><span class="co">|2    | 0.1   |  0.1    |   0   | 0.0870  |</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a><span class="co">|3    | 0.1   |  0.1    |   0   | 0.0870  |</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a><span class="co">|4    | 0.4   |  0.4    |   0   | 0.3478  |</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a><span class="co">|5    | 0.1   |  0.1    |   0   | 0.0870  |</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a><span class="co">|6    | 0.1   |  0.1    |   0   | 0.0870  |</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a><span class="co">|7    | 0.1   |  0.1    |  1.0  | 0.2174  |</span></span>
+<span id="cb1-43"><a href="#cb1-43"></a></span>
+<span id="cb1-44"><a href="#cb1-44"></a><span class="co">Table: $q$ values for $\mathsf{TVaR}_0=E[X]$, $\mathsf{TVaR}_1=\max(X)$ and the $\theta=0.87$ blend.</span></span>
+<span id="cb1-45"><a href="#cb1-45"></a></span>
+<span id="cb1-46"><a href="#cb1-46"></a></span>
+<span id="cb1-47"><a href="#cb1-47"></a><span class="co">--&gt;</span></span>
+<span id="cb1-48"><a href="#cb1-48"></a></span>
+<span id="cb1-49"><a href="#cb1-49"></a></span>
+<span id="cb1-52"><a href="#cb1-52"></a><span class="in">```{python}</span></span>
+<span id="cb1-53"><a href="#cb1-53"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-54"><a href="#cb1-54"></a><span class="co">#| label: tbl-bi-tvar</span></span>
+<span id="cb1-55"><a href="#cb1-55"></a><span class="co">#| tbl-cap: "$q$ values for $\\mathsf{TVaR}_0=\\mathsf E[X]$, $\\mathsf{TVaR}_1=\\max(X)$ and the $\\theta=0.87$ blend."</span></span>
+<span id="cb1-56"><a href="#cb1-56"></a><span class="op">%</span>run prefob.py</span>
+<span id="cb1-57"><a href="#cb1-57"></a><span class="op">%</span>run <span class="op">-</span>i basic_example_script.py</span>
+<span id="cb1-58"><a href="#cb1-58"></a>exhibits[<span class="st">'tbl-bi-tvar'</span>]</span>
+<span id="cb1-59"><a href="#cb1-59"></a><span class="in">```</span></span>
+<span id="cb1-60"><a href="#cb1-60"></a></span>
+<span id="cb1-61"><a href="#cb1-61"></a>The final column, a $1:0.15$ blend of the previous two, matches the CCoC column in @tbl-the5qs. \qed</span>
+<span id="cb1-62"><a href="#cb1-62"></a></span>
+<span id="cb1-63"><a href="#cb1-63"></a><span class="fu">## Required premium by distortion</span></span>
+<span id="cb1-64"><a href="#cb1-64"></a></span>
+<span id="cb1-65"><a href="#cb1-65"></a>@tbl-3units shows required premiums and loss ratios for each unit, by distortion function. Remember, *required* here means required to meet the internally specified 15% return on capital hurdle. Also shown are plan premiums and loss ratios.</span>
+<span id="cb1-66"><a href="#cb1-66"></a></span>
+<span id="cb1-69"><a href="#cb1-69"></a><span class="in">```{python}</span></span>
+<span id="cb1-70"><a href="#cb1-70"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-71"><a href="#cb1-71"></a><span class="co">#| label: tbl-3units</span></span>
+<span id="cb1-72"><a href="#cb1-72"></a><span class="co">#| tbl-cap: "Example units with pricing by distortion."</span></span>
+<span id="cb1-73"><a href="#cb1-73"></a>exhibits[<span class="st">'tbl-3units'</span>]</span>
+<span id="cb1-74"><a href="#cb1-74"></a><span class="in">```</span></span>
+<span id="cb1-75"><a href="#cb1-75"></a></span>
+<span id="cb1-76"><a href="#cb1-76"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-77"><a href="#cb1-77"></a></span>
+<span id="cb1-78"><a href="#cb1-78"></a><span class="co">|  $k$|  $p$  | **Unit A**| **Unit B**|  **Unit C**  | **Portfolio**|</span></span>
+<span id="cb1-79"><a href="#cb1-79"></a><span class="co">|:---------|:-----:|:-------:|:-------:|:-------:|:-------:|</span></span>
+<span id="cb1-80"><a href="#cb1-80"></a><span class="co">|0    |   0   |  0 |  0 |  0 |   0 |</span></span>
+<span id="cb1-81"><a href="#cb1-81"></a><span class="co">|1    | 0.1   | 15 |  7 |  0 |  22 |</span></span>
+<span id="cb1-82"><a href="#cb1-82"></a><span class="co">|2    | 0.1   | 15 | 13 |  0 |  28 |</span></span>
+<span id="cb1-83"><a href="#cb1-83"></a><span class="co">|3    | 0.1   |  5 | 20 | 11 |  36 |</span></span>
+<span id="cb1-84"><a href="#cb1-84"></a><span class="co">|4    | 0.4   | 10 | 24 |  6 |  40 |</span></span>
+<span id="cb1-85"><a href="#cb1-85"></a><span class="co">|5    | 0.1   | 26 | 19 | 10 |  55 |</span></span>
+<span id="cb1-86"><a href="#cb1-86"></a><span class="co">|6    | 0.1   | 17 |  8 | 40 |  65 |</span></span>
+<span id="cb1-87"><a href="#cb1-87"></a><span class="co">|7    | 0.1   | 16 | 20 | 64 | 100 |</span></span>
+<span id="cb1-88"><a href="#cb1-88"></a><span class="co">|     |       |    |    |    |      |</span></span>
+<span id="cb1-89"><a href="#cb1-89"></a><span class="co">|Plan Premium          | | 13.900 | 18.700 | 19.600 | 52.200 |</span></span>
+<span id="cb1-90"><a href="#cb1-90"></a><span class="co">|$\rho_{\mathsf{TVaR}}$| | 13.783 | 20.412 | 19.371 | 53.565 |</span></span>
+<span id="cb1-91"><a href="#cb1-91"></a><span class="co">|$\rho_{\mathsf{Dual}}$| | 14.127 | 19.117 | 20.322 | 53.565 |</span></span>
+<span id="cb1-92"><a href="#cb1-92"></a><span class="co">|$\rho_{\mathsf{Wang}}$| | 14.109 | 18.637 | 20.819 | 53.565 |</span></span>
+<span id="cb1-93"><a href="#cb1-93"></a><span class="co">|$\rho_{\mathsf{PH}}$  | | 14.060 | 18.349 | 21.156 | 53.565 |</span></span>
+<span id="cb1-94"><a href="#cb1-94"></a><span class="co">|$\rho_{\mathsf{CCoC}}$| | 13.739 | 18.522 | 21.304 | 53.565 |</span></span>
+<span id="cb1-95"><a href="#cb1-95"></a><span class="co">|$L=\mathsf E[X]$      | | 13.400 | 18.300 | 14.900 | 46.600 |</span></span>
+<span id="cb1-96"><a href="#cb1-96"></a><span class="co">|Plan Loss Ratio       | | 96.40%| 97.86%| 76.02%| 89.27%|</span></span>
+<span id="cb1-97"><a href="#cb1-97"></a><span class="co">|$LR_{\mathsf{TVaR}}$  | | 97.22%| 89.66%| 76.92%| 87.00%|</span></span>
+<span id="cb1-98"><a href="#cb1-98"></a><span class="co">|$LR_{\mathsf{Dual}}$  | | 94.86%| 95.73%| 73.32%| 87.00%|</span></span>
+<span id="cb1-99"><a href="#cb1-99"></a><span class="co">|$LR_{\mathsf{Wang}}$  | | 94.97%| 98.19%| 71.57%| 87.00%|</span></span>
+<span id="cb1-100"><a href="#cb1-100"></a><span class="co">|$LR_{\mathsf{PH}}$    | | 95.31%| 99.73%| 70.43%| 87.00%|</span></span>
+<span id="cb1-101"><a href="#cb1-101"></a><span class="co">|$LR_{\mathsf{CCoC}}$  | | 97.53%| 98.80%| 69.94%| 87.00%|</span></span>
+<span id="cb1-102"><a href="#cb1-102"></a></span>
+<span id="cb1-103"><a href="#cb1-103"></a><span class="co">Table: Example units with pricing by distortion.</span></span>
+<span id="cb1-104"><a href="#cb1-104"></a></span>
+<span id="cb1-105"><a href="#cb1-105"></a></span>
+<span id="cb1-106"><a href="#cb1-106"></a><span class="co">--&gt;</span></span>
+<span id="cb1-107"><a href="#cb1-107"></a></span>
+<span id="cb1-108"><a href="#cb1-108"></a>Relative to model benchmarks, the entire portfolio is underpriced by $53.565-52.2=1.365$. But which units need to do better, and by how much?</span>
+<span id="cb1-109"><a href="#cb1-109"></a></span>
+<span id="cb1-110"><a href="#cb1-110"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-111"><a href="#cb1-111"></a><span class="co">|**Unit**|**Plan LR**| **Lowest LR**|**Highest LR**|**Cheapest Distortion**|</span></span>
+<span id="cb1-112"><a href="#cb1-112"></a><span class="co">|:----------|:-------:|:-------:|:-------:|:----------|</span></span>
+<span id="cb1-113"><a href="#cb1-113"></a><span class="co">| Unit A    |0.96403  | 0.94856 | 0.97532 |CCoC |</span></span>
+<span id="cb1-114"><a href="#cb1-114"></a><span class="co">| Unit B    |0.97861  | 0.89655 | 0.99731 |PH   |</span></span>
+<span id="cb1-115"><a href="#cb1-115"></a><span class="co">| Unit C    |0.76020  | 0.69939 | 0.76919 |TVaR |</span></span>
+<span id="cb1-116"><a href="#cb1-116"></a></span>
+<span id="cb1-117"><a href="#cb1-117"></a><span class="co">Table: Range of implied loss ratios and cheapest distortion by unit.</span></span>
+<span id="cb1-118"><a href="#cb1-118"></a></span>
+<span id="cb1-119"><a href="#cb1-119"></a><span class="co">![Range of implied loss ratios across distortions, and plan loss ratio (triangle) by unit.](img/plt35bars.png){width=75% #fig-35bars}</span></span>
+<span id="cb1-120"><a href="#cb1-120"></a></span>
+<span id="cb1-121"><a href="#cb1-121"></a><span class="co">@fig-35barsM converts from loss ratios to margin dollars.</span></span>
+<span id="cb1-122"><a href="#cb1-122"></a></span>
+<span id="cb1-123"><a href="#cb1-123"></a><span class="co">\pagebreak</span></span>
+<span id="cb1-124"><a href="#cb1-124"></a></span>
+<span id="cb1-125"><a href="#cb1-125"></a><span class="co">![Range of implied margins across distortions, and plan margin (triangle) by unit.](img/plt35barsMargin.png){width=75% #fig-35barsM}</span></span>
+<span id="cb1-126"><a href="#cb1-126"></a></span>
+<span id="cb1-127"><a href="#cb1-127"></a></span>
+<span id="cb1-128"><a href="#cb1-128"></a><span class="co">--&gt;</span></span>
+<span id="cb1-129"><a href="#cb1-129"></a></span>
+<span id="cb1-132"><a href="#cb1-132"></a><span class="in">```{python}</span></span>
+<span id="cb1-133"><a href="#cb1-133"></a><span class="co">#| echo: false</span></span>
+<span id="cb1-134"><a href="#cb1-134"></a><span class="co">#| label: tbl-bestlr</span></span>
+<span id="cb1-135"><a href="#cb1-135"></a><span class="co">#| tbl-cap: "Range of implied loss ratios and cheapest distortion by unit."</span></span>
+<span id="cb1-136"><a href="#cb1-136"></a>exhibits[<span class="st">'tbl-bestlr'</span>]</span>
+<span id="cb1-137"><a href="#cb1-137"></a><span class="in">```</span></span>
+<span id="cb1-138"><a href="#cb1-138"></a></span>
+<span id="cb1-139"><a href="#cb1-139"></a>@tbl-bestlr shows the plan loss ratio, the range of target loss ratios generated by the five distortions, and which distortion suggests the lowest premium for each unit. A higher required loss ratio implies a lower margin and premium. Unit management may regard a lower premium as better because it makes it easier to sell policies in the marketplace. The table shows that for each unit there is at least one distortion whose pricing it can meet, because the plan loss ratio is no greater than the distortion indicated loss ratio. For example, Unit B's management would be happy to target the PH-indicated 0.997 loss ratio instead of the current plan's 0.979. However, there is no single distortion whose pricing all units can meet. How should the modeler proceed? A monograph with two authors can offer two paths.</span>
+<span id="cb1-140"><a href="#cb1-140"></a></span>
+<span id="cb1-141"><a href="#cb1-141"></a>Before discussing the two paths, it is worthwhile reflecting on how a market distortion emerges. Insurance is fundamentally risk sharing. The market consists of individuals with different endowments, owning different risks, and understood to have their own risk appetites. Each individual can cede risk into the pool and assume risk from it as a shareholder or mutual company owner. Typically there are more of the former than the latter. We assume appetites for insurable, diversifiable risk are given by distortion risk measures. The appetite for investment risk, with its systematic components, may be different. The efficient insurance market solution is for everyone to pool their risks together, for maximal diversification benefit, and then to layer out the total risk to the individual offering the cheapest price for it in each layer. This corresponds to looking at the minimum of the individual distortion functions. @fig-the5dists could correspond to a market of five individuals. In it, the TVaR individual assumes large risks (above about the 75th percentile, lower left) and CCoC the rest. TVaR is risk neutral in the tail, and equity financing is well known to be an effective solution for nicely diversifiable risk. This theoretical model is described in a famous paper @Jouini2008b. There are many steps between a simple model and reality, but it is a good picture to bear in mind for the rest of this chapter. Readers who work for brokers may be happy to learn the model implies an important role for them matching risk to its cheapest financing. Finally, notice the model implies the risk appetite that matters is that of *investors*, not management---despite management often talking about "their risk appetite."</span>
+<span id="cb1-142"><a href="#cb1-142"></a></span>
+<span id="cb1-143"><a href="#cb1-143"></a><span class="fu">## Zeroing in on a distortion function</span></span>
+<span id="cb1-144"><a href="#cb1-144"></a></span>
+<span id="cb1-145"><a href="#cb1-145"></a>Path 1 holds there is a *best* distortion function that should be discoverable by the modeler. On this path, the modeler must avoid excessive naval gazing. Present the facts, being the range of indications from @tbl-3units with relevant commentary, but recognize the decision is for unit and corporate management to negotiate. As always, @tbl-3units hides many details and assumptions. What is the historical performance of each unit compared to prior plans? The growth prospects? The quality of the data and certainty in the simulations? Again, present facts and avoid selling against your model.</span>
+<span id="cb1-146"><a href="#cb1-146"></a></span>
+<span id="cb1-147"><a href="#cb1-147"></a>In an ideal world, we choose our distortion based on first principles and recommend each unit meets the target specified by that principle. A core principle of modern finance and accounting is to calibrate models to market observables where possible. Is the distortion consistent with cat bond pricing for extreme events? What about InsCo's capital structure? A discussion with the finance department might be in order, to ask: What is the structure of the capital supporting the business and what are the costs of the various components of capital? For example, InsCo may have a Baa-rated corporate bond with initial annual default probability between 1.5% and 2% and a valuation equating to a risk-neutral default probability between 2.5% and 4%. These correspond to the exceedance probability $s$ and distorted probability $g(s)$, respectively, of a distortion function. Which calibrated distortions are consistent with these findings? A quick analysis reveals that the Dual and Wang distortions are the most likely candidates, with TVaR coming in a distant third place.</span>
+<span id="cb1-148"><a href="#cb1-148"></a></span>
+<span id="cb1-149"><a href="#cb1-149"></a><span class="co">&lt;!--</span></span>
+<span id="cb1-150"><a href="#cb1-150"></a></span>
+<span id="cb1-151"><a href="#cb1-151"></a><span class="co">JOHN: I really don't like this stuff. It is classic actuarial "well you could do this that and the other" with no theoretic basis. All readers should be able to make up similar things on their own. They don't need us to tell them.</span></span>
+<span id="cb1-152"><a href="#cb1-152"></a></span>
+<span id="cb1-153"><a href="#cb1-153"></a><span class="co">Some of the units would, no doubt, rather share the burden equally, whatever that means.</span></span>
+<span id="cb1-154"><a href="#cb1-154"></a></span>
+<span id="cb1-155"><a href="#cb1-155"></a><span class="co">For example, if all units could lower their plan loss ratio by 2.24 percentage points, then the portfolio as a whole would have a plan loss ratio consistent with the 15% return target.  Similarly, if each unit could increase its plan profit margin by 24%, this would also meet the 15% target.  These two sharing principles have very different implications for each unit, so a process of negotiation and compromise would be necessary to choose how that burden would be shared. Equal sharing also is not really fair to some units that are stellar performers (judged by historical or market comparisons) whereas others are not, leading to material cross-subsidies. Cross-subsidies would also continue from year to year if the same approach were used.</span></span>
+<span id="cb1-156"><a href="#cb1-156"></a></span>
+<span id="cb1-157"><a href="#cb1-157"></a><span class="co">@tbl-margin-error highlights this by measuring by how much the plan margin must increase to meet the indicated margin.  For example, referring to @tbl-3units, Unit B has a plan premium of 18.7 compared to a required 19.117 under the Dual distortion. $19.117-18.7=0.417$ is the amount by which premium, and therefore margin, must increase.  Plan margin is $18.7-18.3=0.4$, therefore plan margin must increase by $0.417/0.4=1.0425$ or 104%.</span></span>
+<span id="cb1-158"><a href="#cb1-158"></a></span>
+<span id="cb1-159"><a href="#cb1-159"></a><span class="co">This is calculated as</span></span>
+<span id="cb1-160"><a href="#cb1-160"></a><span class="co">$$</span></span>
+<span id="cb1-161"><a href="#cb1-161"></a><span class="co">(1/\mathsf{LR_{dist}}-1)/(1/\mathsf{LR_{plan}})-1.</span></span>
+<span id="cb1-162"><a href="#cb1-162"></a><span class="co">$$</span></span>
+<span id="cb1-163"><a href="#cb1-163"></a></span>
+<span id="cb1-164"><a href="#cb1-164"></a><span class="co">\footnotesize</span></span>
+<span id="cb1-165"><a href="#cb1-165"></a></span>
+<span id="cb1-166"><a href="#cb1-166"></a><span class="co">|**Distortion**  | **Unit A**| **Unit B**| **Unit C**  | **Variance**|</span></span>
+<span id="cb1-167"><a href="#cb1-167"></a><span class="co">|:---------------|------:|--------:|--------:|--------:|</span></span>
+<span id="cb1-168"><a href="#cb1-168"></a><span class="co">|TVaR     |-23%|428%|  -5% |4.349|</span></span>
+<span id="cb1-169"><a href="#cb1-169"></a><span class="co">|Dual     | 45%|104%|  15% |0.136|</span></span>
+<span id="cb1-170"><a href="#cb1-170"></a><span class="co">|Wang     | 42%|-16%|  26% |0.059|</span></span>
+<span id="cb1-171"><a href="#cb1-171"></a><span class="co">|PH       | 32%|-88%|  33% |0.321|</span></span>
+<span id="cb1-172"><a href="#cb1-172"></a><span class="co">|CCoC     |-32%|-45%|  36% |0.126|</span></span>
+<span id="cb1-173"><a href="#cb1-173"></a><span class="co">|Equal LR | 66%|110%|  13% |0.157|</span></span>
+<span id="cb1-174"><a href="#cb1-174"></a><span class="co">|Equal Margin| 24%|24%|24%| 0.000|</span></span>
+<span id="cb1-175"><a href="#cb1-175"></a></span>
+<span id="cb1-176"><a href="#cb1-176"></a></span>
+<span id="cb1-177"><a href="#cb1-177"></a><span class="co">Table: Percent error in margin by distortion by unit. {#tbl-margin-error}</span></span>
+<span id="cb1-178"><a href="#cb1-178"></a></span>
+<span id="cb1-179"><a href="#cb1-179"></a><span class="co">\normalsize</span></span>
+<span id="cb1-180"><a href="#cb1-180"></a></span>
+<span id="cb1-181"><a href="#cb1-181"></a><span class="co">The Wang distortion has the lowest variance of unit relative margin adjustments among the distortions.  It requires increased margin from Unit A and Unit C but not from Unit B.  The CCoC distortion has the next lowest variance; however, it achieves this by putting _all_ of the required extra margin on Unit C.  The Dual distortion is in third place, with extra margin required of all units.  However, for the Dual, Unit B has to more than double its margin.  The Dual is the closest to equalizing loss ratios as seen by comparing to the Equal LR results.  Equalizing relative margin, of course, provides zero variance, but does not resemble any of the distortions.</span></span>
+<span id="cb1-182"><a href="#cb1-182"></a></span>
+<span id="cb1-183"><a href="#cb1-183"></a><span class="co">![Distortion functions overlaid with target statistics from InsCo's previous bond debt.](img/pltFinBox.png){width=75% #fig-FinBox}</span></span>
+<span id="cb1-184"><a href="#cb1-184"></a></span>
+<span id="cb1-185"><a href="#cb1-185"></a><span class="co">Referring to @tbl-3units, we see that the Unit C's plan margin is an order of magnitude larger than that of the other units.  After consulting with senior management, we decide that something between Dual and Wang, best equalizing the percent margin increase in Unit A and Unit B, is the target.</span></span>
+<span id="cb1-186"><a href="#cb1-186"></a></span>
+<span id="cb1-187"><a href="#cb1-187"></a></span>
+<span id="cb1-188"><a href="#cb1-188"></a><span class="co">**Exercise.**  What distortion function $(1-\theta)\mathsf{Wang}+\theta\mathsf{Dual}$ will accomplish that?  Round $\theta$ to the nearest 0.01.  What are the resulting target premiums, margins, loss ratios, and percent margin change for each unit?</span></span>
+<span id="cb1-189"><a href="#cb1-189"></a></span>
+<span id="cb1-190"><a href="#cb1-190"></a><span class="co">**Solution.**</span></span>
+<span id="cb1-191"><a href="#cb1-191"></a><span class="co">\begin{align}</span></span>
+<span id="cb1-192"><a href="#cb1-192"></a><span class="co">(1-\theta)(42)+\theta(45)&amp;=(1-\theta)(-16)+\theta(104) \\</span></span>
+<span id="cb1-193"><a href="#cb1-193"></a><span class="co">\theta(104+16-45+42) &amp;=42+16 \\</span></span>
+<span id="cb1-194"><a href="#cb1-194"></a><span class="co">\implies \theta&amp;=\frac{58}{117} = 0.4957 \rightarrow 0.5</span></span>
+<span id="cb1-195"><a href="#cb1-195"></a><span class="co">\end{align}</span></span>
+<span id="cb1-196"><a href="#cb1-196"></a></span>
+<span id="cb1-197"><a href="#cb1-197"></a><span class="co">The solution is an equal blend of Wang and Dual.  The resulting financial targets are shown in @tbl-50-50-wang-dual.</span></span>
+<span id="cb1-198"><a href="#cb1-198"></a></span>
+<span id="cb1-199"><a href="#cb1-199"></a><span class="co">\footnotesize</span></span>
+<span id="cb1-200"><a href="#cb1-200"></a></span>
+<span id="cb1-201"><a href="#cb1-201"></a><span class="co">|**Metric**  | **Non-Cat(A)**| **Non-Cat(B)**| **Cat**  |</span></span>
+<span id="cb1-202"><a href="#cb1-202"></a><span class="co">|:---------------|------:|--------:|--------:|--------:|--------:|</span></span>
+<span id="cb1-203"><a href="#cb1-203"></a><span class="co">|Target premium |14.118 |18.877 |20.570|</span></span>
+<span id="cb1-204"><a href="#cb1-204"></a><span class="co">|Margin         |0.7180 |0.5772 |5.6701|</span></span>
+<span id="cb1-205"><a href="#cb1-205"></a><span class="co">|Loss ratio     |0.9491 |0.9696 |0.7245|</span></span>
+<span id="cb1-206"><a href="#cb1-206"></a><span class="co">|Margin change  | 43.5% | 44.0% | 20.5%|</span></span>
+<span id="cb1-207"><a href="#cb1-207"></a></span>
+<span id="cb1-208"><a href="#cb1-208"></a><span class="co">Table: Results of 50-50 blend of Wang and Dual. {#tbl-50-50-wang-dual}</span></span>
+<span id="cb1-209"><a href="#cb1-209"></a></span>
+<span id="cb1-210"><a href="#cb1-210"></a><span class="co">\normalsize</span></span>
+<span id="cb1-211"><a href="#cb1-211"></a><span class="co">\qed</span></span>
+<span id="cb1-212"><a href="#cb1-212"></a></span>
+<span id="cb1-213"><a href="#cb1-213"></a><span class="co">So a principles-based approach is to be preferred, if only the principle could be found.  The approach we recommend is to use negotiation and compromise to _choose the principle and then stick with it_ in subsequent years.</span></span>
+<span id="cb1-214"><a href="#cb1-214"></a></span>
+<span id="cb1-215"><a href="#cb1-215"></a><span class="co">--&gt;</span></span>
+<span id="cb1-216"><a href="#cb1-216"></a></span>
+<span id="cb1-217"><a href="#cb1-217"></a><span class="fu">## Embracing the range</span></span>
+<span id="cb1-218"><a href="#cb1-218"></a></span>
+<span id="cb1-219"><a href="#cb1-219"></a>Path 2 holds that searching for a single best distortion is an unanswerable metaphysical quest, but it suggests there is much to learn from the range of indications. While no choice is correct, some are logically inconsistent and should be avoided.</span>
+<span id="cb1-220"><a href="#cb1-220"></a></span>
+<span id="cb1-221"><a href="#cb1-221"></a>The choice of a distortion corresponds to a statement of risk appetite. The ordering CCoC, PH, Wang, Dual, and TVaR we use to show the five representative distortions ranks them from most concerned about tail (extreme VaR) losses to most concerned about attritional (near plan) losses. The CCoC, driven by the maximum loss is obviously the most tail-centric. Conversely, TVaR is the most attritional loss averse. This ranking corresponds to the heights of the distortion functions plotted in @fig-the5dists; remember that left on the horizontal axis is extreme losses. How does management talk about risk, for example, in quarterly analyst calls for stock companies? Often, their statements reveal they understand their investors are more concerned with attritional volatility. After a large catastrophe event, the market expects all players to have large losses, whereas a miss on attritional volatility suggests management is not pricing correctly and can cause disquiet among investors. Managements prodded by their investors to be more concerned with volatility typically find targets driven by TVaR or the Dual distortion to better align with their intuitions.</span>
+<span id="cb1-222"><a href="#cb1-222"></a></span>
+<span id="cb1-223"><a href="#cb1-223"></a>The range of implications across different distortions turns out to overlap with the range of the reinsurance pricing cycle, so these are not just academic considerations. For example, in @tbl-all-distortioun-re-pricing, the model recommended maximum buy-price for reinsurance is 7.6 (a 46% loss ratio or higher) under CCoC but only 4.8 (73% loss ratio) under TVaR. Over a market cycle the loss ratio for catastrophe reinsurance can vary substantially, and whereas a CCoC view may recommend a buy in all markets, TVaR could be more circumspect. The authors have both worked with managements who have expressed exactly these concerns and who have disliked a CCoC-driven, industry-standard approach analysis as a consequence.</span>
+<span id="cb1-224"><a href="#cb1-224"></a></span>
+<span id="cb1-225"><a href="#cb1-225"></a>Knowing the range of indications means you can determine whether a plan loss ratio is consistent with some risk appetite (it is within the range). For our simple model, @tbl-bestlr shows they all are, but that is not always the case. A unit with plan outside the range can be criticized because it is inconsistent with *any* risk appetite; it should be investigated accordingly. A plan far outside the range needs especial scrutiny.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>DRAFT - do not redistribute</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
