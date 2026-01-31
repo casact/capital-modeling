@@ -43,7 +43,7 @@ Everything else is installed automatically by the setup script.
 
 On Windows:
 
-1. Open a Command Prompt.
+1. Open a Command ("DOS") Prompt. Ensure you have Git and Python installed and on the PATH, meaning if you type `git` or `python` you get to the respective programs.
 2. Create a folder where you want to keep the setup script, for example:
 
    ```cmd
@@ -59,8 +59,8 @@ On Windows:
 
 The first `curl` command downloads the latest setup.bat from the repo. The second line and runs it, which:
 
-* clones the project source into `%TEMP%\CMM` (type into Windows Explorer or `cd %TEMP%\CMM` to locate)
-* creates a Python virtual environment in `%TEMP%\CMM\venv` and activates it
+* clones the project source into `%TEMP%\CMM` (type into Windows Explorer or `cd %TEMP%\CMM` to locate). This requires git.
+* creates a Python virtual environment in `%TEMP%\CMM\venv` and activates it. This and the subsequent steps require Python.
 * installs all Python dependencies from requirements.txt
 * renders the monograph to HTML using Quarto
 * starts a local webserver on [http://localhost:9955](http://localhost:9955)
@@ -70,7 +70,7 @@ You do not need to know how Git works for this path. The working copy in `%TEMP%
 
 ## Quick start (Developer mode, working from a local clone)
 
-If you are comfortable with Git and want to edit the source directly:
+If you are comfortable with Git and want to edit the source directly, `cd` into your target directory and then run
 
 ```cmd
 git clone https://github.com/casact/capital-modeling.git
