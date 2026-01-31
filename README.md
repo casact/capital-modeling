@@ -2,7 +2,7 @@
 ## CAS Monograph Number 15
 ## John A. Major and Stephen J. Mildenhall
 
-![](source/img/cover.png){width=50%}
+<img src="source/img/cover.png" alt="Monograph 15 cover" width="50%">
 
 This repository contains the complete, reproducible source for the Capital Modeling and Portfolio Management monograph, recently published by the Casualty Actuarial Society.
 
